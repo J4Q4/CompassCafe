@@ -1,1 +1,55 @@
-/* Beninging of Stylesheet */
+/* Beninging of Being Fancy */
+
+/* Import Fonts */
+/* Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Navbar */
+.navbar {
+    background-color: transparent;
+    padding: 20px 50px;
+}
+
+/* Navbar Logo */
+.navbar-brand img {
+    position: relative;
+    width: 70px;
+    animation: navlogo-back 0.2s ease-out;
+}
+.navbar-brand img:hover {
+    animation: navlogo-hover 0.5s ease-in-out forwards;
+}
+
+@keyframes navlogo-hover {
+    0% {
+        top: 0px;
+    }
+    40% {
+        top: -8px;
+    }
+    70% {
+        top: -4px;
+    }
+    100% {
+        top: -6px;
+    }
+}
+@keyframes navlogo-back {
+    0% {
+        top: -6px;
+    }
+    100% {
+        top: 0px;
+    }
+}
+
+/* Navbar Text */
+.nav-link {
+    color: #000;
+    text-transform: uppercase;
+    font-family: "Open Sans";
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 16px;
+    margin-right: 20px;
+}

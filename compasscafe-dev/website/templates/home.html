@@ -7,6 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/website/static/css/styles.css">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://kit.fontawesome.com/999ca2bb93.js" crossorigin="anonymous">
     </script>
@@ -15,40 +18,49 @@
   <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-sm">
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
-                <img src="img_avatar1.png" alt="Logo" style="width:40px;" class="rounded-pill">
-              </a>
+                <img src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill">
+            </a>
             <!-- Collapse -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                <!-- Link 1 -->
+              <ul class="navbar-nav ms-auto">
+                <!-- Apply Page -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link" href="#">apply</a>
                 </li>
-                <!-- Link 2 -->
+                <!-- Menu Page -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                   <a class="nav-link" href="#">menu</a>
                 </li>
-                <!-- Link 3 -->
+                <!-- News Page -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link" href="#">news</a>
                 </li>
-                <!-- Link 4 - Dropdown -->
+                <!-- Contact Page -->
+                <li class="nav-item">
+                  <a class="nav-link" href="#">contact</a>
+                </li>
+                <!-- Account Page - Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
-                    <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Link</a></li>
-                    <li><a class="dropdown-item" href="#">Another link</a></li>
-                    <li><a class="dropdown-item" href="#">A third link</a></li>
-                    </ul>
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">account</a>
+                  <ul class="dropdown-menu">
+                    <!-- User Not Logged In -->
+                    <li><a class="dropdown-item" href="#">register</a></li>
+                    <li><a class="dropdown-item" href="#">login</a></li>
+                    <!-- Admin User -->
+                    <li><a class="dropdown-item" href="#">dashboard</a></li>
+                    <!-- Regular User-->
+                    <li><a class="dropdown-item" href="#">settings</a></li>
+                    <li><a class="dropdown-item" href="#">logout</a></li>
+                  </ul>
                 </li>
-                </ul>
+              </ul>
             </div>
             </div>
         </nav>
