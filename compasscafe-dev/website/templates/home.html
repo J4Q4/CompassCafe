@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://kit.fontawesome.com/999ca2bb93.js" crossorigin="anonymous">
     </script>
-    <title>Compass Cafe</title>
+    <title>Compass Café ✧₊⁺</title>
+  <link rel="icon" type="image/x-icon" href="/website/static/assets/img/LogoDesign-White.svg">
   </head>
   <body>
 
@@ -22,7 +23,10 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
-                <img src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill">
+              <div class="logo-container">
+                <img id="original-logo" src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill">
+                <img id="hover-logo" src="/static/assets/img/LogoSmile-White.svg" alt="Logo" class="rounded-pill">
+              </div>
             </a>
             <!-- Collapse -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">

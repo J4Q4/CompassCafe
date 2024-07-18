@@ -10,36 +10,59 @@
     padding: 20px 50px;
 }
 
+/* Change Icon on Hover */
+/* Hover Logo */
+#hover-logo {
+    opacity: 0;
+}
+.navbar-brand:hover #hover-logo {
+    opacity: 1;
+}
+/* Original Logo */
+.navbar-brand:hover #original-logo {
+    opacity: 0;
+}
+
 /* Navbar Logo */
-.navbar-brand img {
+.logo-container {
     position: relative;
     width: 70px;
+    height: 70px;
+}
+.logo-container img {
+    position: absolute;
+    width: 70px;
+}
+
+/* Navbar Hover Animations */
+.navbar-brand {
+    display: inline-block;
     animation: navlogo-back 0.2s ease-out;
 }
-.navbar-brand img:hover {
+.navbar-brand:hover {
     animation: navlogo-hover 0.5s ease-in-out forwards;
 }
 
 @keyframes navlogo-hover {
     0% {
-        top: 0px;
+        transform: translateY(0);
     }
     40% {
-        top: -8px;
+        transform: translateY(-8px);
     }
     70% {
-        top: -4px;
+        transform: translateY(-4px);
     }
     100% {
-        top: -6px;
+        transform: translateY(-6px);
     }
 }
 @keyframes navlogo-back {
     0% {
-        top: -6px;
+        transform: translateY(-6px);
     }
     100% {
-        top: 0px;
+        transform: translateY(0);
     }
 }
 
