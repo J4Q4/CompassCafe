@@ -148,10 +148,17 @@ footer {
     background-color: #232947;
     color: white;
 }
+.footer-left {
+    padding: 50px;
+}
 .footer-right {
     text-align: right;
-}
-footer .col {
     padding: 50px;
+}
+
+/* Footer Logo */
+#footer-logo {
+    width: 97.5vw;
+    margin-bottom: 50px;
 }
 /* ## End of Footer ## */
