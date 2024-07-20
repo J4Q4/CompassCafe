@@ -13,7 +13,8 @@
 }
 
 /* Notice */
-.smcnotice {
+#smcnotice {
+    display: block;
     background-color: #232947;
     text-align: center;
     padding: 10px;
@@ -22,19 +23,16 @@
     font-size: 13px;
     font-weight: 400;
     transition: 0.3s ease;
-}
-.smcnotice:hover {
-    background-color: #2a3155;
-}
-.smcnotice a {
-    color: #E1EBF8;
     text-decoration: none;
+    color: #E1EBF8;
 }
-.smcnotice:hover a {
+
+#smcnotice:hover {
+    background-color: #2a3155;
     color: #fff;
     transition: color 0.5s ease-in-out;
-} 
-
+    text-decoration: none;
+}
 
 /* ## Navbar ## */
 
@@ -275,8 +273,8 @@ body {
 }
 
 .lowerfooter-container {
-    border-top: white 1px solid;
-    border-bottom: white 1px solid;
+    border-top: rgb(79, 79, 79) 1px solid;
+    border-bottom: rgb(79, 79, 79) 1px solid;
 }
 
 /* ## End of Footer ## */
