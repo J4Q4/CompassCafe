@@ -34,8 +34,8 @@
         <!-- Logo -->
         <a class="navbar-brand" href="#">
           <div class="logo-container">
-            <img id="original-logo" src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill">
-            <img id="hover-logo" src="/static/assets/img/LogoSmile-White.svg" alt="Logo" class="rounded-pill">
+            <img id="original-logo" src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill" draggable="false">
+            <img id="hover-logo" src="/static/assets/img/LogoSmile-White.svg" alt="Logo" class="rounded-pill" draggable="false">
           </div>
         </a>
         
@@ -108,24 +108,65 @@
     <div class="container-fluid">{% block content %}{% endblock %}</div>
 
     
-    <!-- Footer -->
-    <footer class="container-fluid">
-        alg
-      <div class="row">
-        <div class="col footer-left">
-            Left
+    <!-- Footer Upper -->
+    <footer class="container-fluid footer-upper">
+      <div class="row row-upper">
+        <div class="col upperfooter-left">
+            <ul>
+                <li>
+                    <img src="/static/assets/img/LogoDesign.svg" width="60px" alt="Compass Logo" draggable="false">
+                </li>
+                <li id="footerleft-text">
+                    <h5>compass cafe</h5>
+                    <p>Sancta Maria college
+                    <br> 319 Te Irirangi Drive, Flat Bush, Auckland 2016
+                    <br> (09) 274 4061
+                    </p>
+                </li>
+            </ul>
+            
         </div>
-        <div class="col footer-right">
-            Right
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-            <img src="/static/assets/img/compasscafefooter.svg" alt="FooterLogo" id="footer-logo" draggable="false">
+        <div class="col upperfooter-right">
+            <ul>
+                <li><a class="footer-links" href="#">apply</a></li>
+                <li><a class="footer-links" href="#">menu</a></li>
+                <li><a class="footer-links" href="#">news</a></li>
+                <li><a class="footer-links" href="#">contact</a></li>
+                <li><a class="footer-links" href="#">account</a></li>
+            </ul>
+            <ul>
+              <li>
+                <a href="https://www.instagram.com/sanctamariacollege/" class="footer-socials">
+                  <img src="/static/assets/img/instagram.svg" href="" alt="Compass Logo" draggable="false">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/sanctamariacollege/" class="footer-socials">
+                  <img src="/static/assets/img/facebook.svg" alt="Compass Logo" draggable="false">
+                </a>
+              </li>
+            </ul>
         </div>
       </div>
     </footer>
-    <!-- End of Footer -->
+
+    <!-- Footer Lower -->
+    <footer class="container-fluid footer-lower">
+        <div class="row">
+            <div class="col">
+              <img src="/static/assets/img/compasscafefooter.svg" alt="FooterLogo" id="footer-logo" draggable="false">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col lowerfooter lowerfooter-left">
+              <img src="/static/assets/img/SMC-White.svg" width="70px" alt="SMCLogo" draggable="false">
+            </div>
+            <div class="col lowerfooter lowerfooter-right">
+              <p>Compass Cafe 2024</p>
+            </div>
+        </div>
+    </footer>
 
   </body>
 </html>
