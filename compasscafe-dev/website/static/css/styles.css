@@ -42,6 +42,8 @@
 .navbar {
     background-color: transparent;
     padding: 20px 50px;
+    position: absolute;
+    width: 100%;
 }
 
 /* Change Icon on Hover */
@@ -143,6 +145,12 @@ Move Margins to Match Logo */
     box-shadow: none;
 }
 
+/* Right Aligned Navbar */
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
 /* ## End of Navbar ## */
 
 
@@ -157,13 +165,9 @@ footer {
 }
 .footer-upper {
     background-image: linear-gradient(#232947, #1f2541);
+    margin-bottom: 711px;
 }
-.lower-overflow {
-    height: 711px;;
-    background-color: transparent;
-    overflow: hidden;
-    z-index: 0;
-}
+
 .footer-lower {
     background-color: #000;
     padding: 0;
@@ -220,10 +224,44 @@ footer {
     }
 }
 
+
+/* Footer Lower */
+body {
+    background-color: #000;
+}
+
+.container-middle {
+    background-color: #fafafa;
+}
+
 /* Lower Footer Logo */
 #footer-logo {
     width: 100%;
     margin: 100px 0;
+    animation: footerbanner-unhover 0.5s ease-in-out forwards;
+}
+@keyframes footerbanner-unhover {
+    0% {
+        transform: scale(0.98);
+        filter: brightness(0.4);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+#footer-logo:hover {
+    animation: footerbanner-hover 0.7s ease-in-out forwards;
+}
+@keyframes footerbanner-hover {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    100% {
+        transform: scale(0.98);
+        filter: brightness(0.4);
+    }
 }
 
 /* Lower Footer Break */
@@ -235,4 +273,16 @@ footer {
     align-items: center;
     justify-content: flex-end;
 }
+
+.lowerfooter-container {
+    border-top: white 1px solid;
+    border-bottom: white 1px solid;
+}
+
 /* ## End of Footer ## */
+
+
+/* ## TESTER ## */
+.blankspace-test p {
+    margin: 0;
+}
