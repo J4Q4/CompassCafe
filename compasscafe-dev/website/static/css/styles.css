@@ -158,10 +158,20 @@ footer {
 .footer-upper {
     background-image: linear-gradient(#232947, #1f2541);
 }
+.lower-overflow {
+    height: 711px;;
+    background-color: transparent;
+    overflow: hidden;
+    z-index: 0;
+}
 .footer-lower {
     background-color: #000;
     padding: 0;
     margin: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
 }
 .upperfooter-left {
     padding: 50px;
@@ -171,7 +181,7 @@ footer {
     padding: 50px;
 }
 
-.footer-upper  {
+.footer-upper {
     /* Upper Left */
     #footerleft-text {
         padding-left: 40px;
@@ -204,7 +214,6 @@ footer {
         width: 40px;
         transform: scale(1);
         transition: transform 0.2s ease-in-out;
-    
     }
     .upperfooter-right img:hover {
         transform: scale(1.15);
@@ -227,4 +236,3 @@ footer {
     justify-content: flex-end;
 }
 /* ## End of Footer ## */
-
