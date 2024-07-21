@@ -3,8 +3,10 @@
 /* Import Fonts */
 /* Open Sans */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+/* IBM Plex Mono */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-
+/* JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 
 /* Override Bootstrap's Default Padding */
@@ -104,8 +106,8 @@
 .nav-link {
     color: #000;
     text-transform: uppercase;
-    font-family: "Open Sans";
-    font-weight: 700;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
     text-decoration: none;
     font-size: 16px;
     margin-left: 40px;
@@ -181,6 +183,7 @@ footer {
 .upperfooter-right {
     text-align: right;
     padding: 50px;
+    text-transform: uppercase;
 }
 
 .footer-upper {
@@ -188,8 +191,17 @@ footer {
     #footerleft-text {
         padding-left: 40px;
     }
+    #footerleft-text h5 {
+        font-family: "Open Sans";
+        font-weight: 600;
+        text-transform: uppercase;
+        border-bottom: 1px solid #fff;
+        width: 150px;
+    }
     #footerleft-text p {
         color: #babdce;
+        font-family: "JetBrains Mono";
+        font-weight: 300;
     }
     .upperfooter-left ul {
         padding-left: 0;
@@ -206,10 +218,10 @@ footer {
     }
     .upperfooter-right ul li .footer-links {
         color: #fff;
-        font-family: "Open Sans";
-        font-weight: 600;
+        font-family: "JetBrains Mono";
+        font-weight: 300;
         text-decoration: none;
-        margin-left: 40px;
+        margin-left: 60px;
     }
     .upperfooter-right img {
         margin: 10px 0px 0px 20px;
@@ -268,8 +280,11 @@ body {
 }
 .lowerfooter-right {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: flex-end;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-transform: capitalize;
 }
 
 .lowerfooter-container {
@@ -283,4 +298,14 @@ body {
 /* ## TESTER ## */
 .blankspace-test p {
     margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Disable Browser's Native Scroll
+To Enable Lenis Smooth Scroll */
+html {
+    scroll-behavior: auto !important;
 }

@@ -137,12 +137,12 @@
             </ul>
             <ul>
               <li>
-                <a href="https://www.instagram.com/sanctamariacollege/" class="footer-socials">
+                <a href="https://www.instagram.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
                   <img src="/static/assets/img/instagram.svg" href="" alt="Compass Logo" draggable="false">
                 </a>
               </li>
               <li>
-                <a href="https://www.facebook.com/sanctamariacollege/" class="footer-socials">
+                <a href="https://www.facebook.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
                   <img src="/static/assets/img/facebook.svg" alt="Compass Logo" draggable="false">
                 </a>
               </li>
@@ -165,7 +165,7 @@
               <img src="/static/assets/img/SMC-White.svg" width="50px" alt="SMCLogo" draggable="false">
             </div>
             <div class="col lowerfooter lowerfooter-right">
-              <p>© COMPASS CAFE SMC | 2024
+              <p>© Compass Cafe SMC | 2024
             </div>
         </div>
               <br>
@@ -173,6 +173,14 @@
      </div>
     </footer>
     
+    <!-- Scroll Effects  |  DISABLE SMOOTH SCROLLING TO WORK -->
+    <!-- Scroll Object Animations Library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <!-- Scroll Object Animations Trigger -->
+    <script src="https://assets.codepen.io/16327/ScrollTrigger.min.js"></script>
+    <!-- Lenis Scroll Library-->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+    <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
 
   </body>
 </html>
