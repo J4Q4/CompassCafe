@@ -179,9 +179,27 @@ html {
     font-size: 16px;
     margin-left: 40px;
     transition: color 0.1s ease-out;
+    animation: nav-linkunhover 0.3s ease-in forwards;
+}
+@keyframes nav-linkunhover {
+    0% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 .nav-link:hover {
     color: #2c2c2c;
+    animation: nav-linkhover 0.5s ease-out forwards;
+}
+@keyframes nav-linkhover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-6px);
+    }
 }
 
 /* Removes Dropdown Arrow */
