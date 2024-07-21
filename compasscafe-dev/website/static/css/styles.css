@@ -11,11 +11,11 @@
 /* Color Palette Declarations */
 :root {
     /* Colours */
-    -main-white: #fafafa;
-    -main-beige: #faf5f1;
-    -main-lightblue1: #e1ebf8;
-    -main-lightblue2: #ccddf1;
-    -main-navy: #232947;
+    --main-white: #fafafa;
+    --main-beige: #faf5f1;
+    --main-lightblue1: #e1ebf8;
+    --main-lightblue2: #ccddf1;
+    --main-navy: #232947;
 
     /* Backgrounds */
     --bg-dark: url(/static/assets/img/noisebg-dark.png);
@@ -51,6 +51,8 @@ html {
     white-space: nowrap;
     width: 100%;
     position: relative;
+    display: block;
+    z-index: 500;
 }
 
 /* Pause Animation on Parent Hover */
@@ -111,6 +113,8 @@ html {
     padding: 20px 50px;
     position: absolute;
     width: 100%;
+    display: block;
+    z-index: 10000;
 }
 
 /* Change Icon on Hover */
@@ -362,7 +366,8 @@ footer {
 
 /* Footer Lower */
 body {
-    background-color: #000;
+    background-image: var(--bg-dark);
+    background-attachment: fixed;
 }
 
 .container-middle {
@@ -426,3 +431,29 @@ body {
     margin: 0;
 }
 
+
+/* ## HOME ## */
+.yuh {
+    background-color: var(--main-lightblue2);
+    height: calc(100vh - 40px);
+    h1 {
+        font-family: "JetBrains Mono";
+        font-weight: 800;
+        font-size: 300px;
+        color: var(--main-lightblue1);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+spline {
+    display: block;
+    z-index: 1;
+}
