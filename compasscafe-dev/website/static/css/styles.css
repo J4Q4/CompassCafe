@@ -8,6 +8,19 @@
 /* JetBrains Mono */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+/* Color Palette Declarations */
+:root {
+    /* Colours */
+    -main-white: #fafafa;
+    -main-beige: #faf5f1;
+    -main-lightblue1: #e1ebf8;
+    -main-lightblue2: #ccddf1;
+    -main-navy: #232947;
+
+    /* Backgrounds */
+    --bg-dark: url(/static/assets/img/noisebg-dark.png);
+    --bg-white: url(/static/assets/img/noisebg-white.png);
+}
 
 * {
     margin: 0;
@@ -19,6 +32,18 @@
 .container-fluid {
     padding: 0;
 }
+
+/* Remove Scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Disable Browser's Native Scroll
+To Enable Lenis Smooth Scroll */
+html {
+    scroll-behavior: auto !important;
+}
+
 
 /* Notice */
 .noticeinf {
@@ -232,7 +257,7 @@ footer {
 }
 
 .footer-lower {
-    background-color: #000;
+    background-image: var(--bg-dark);
     padding: 0;
     margin: 0;
     position: fixed;
@@ -323,7 +348,8 @@ body {
 }
 
 .container-middle {
-    background-color: #fafafa;
+    background-image: var(--bg-white);
+    background-attachment: fixed;
 }
 
 /* Lower Footer Logo */
@@ -377,18 +403,8 @@ body {
 /* ## End of Footer ## */
 
 
-/* ## TESTER ## */
+/* ## TEMPORARY FIX [BETWEEN BODY + FOOTER] ## */
 .blankspace-test p {
     margin: 0;
 }
 
-/* Remove Scrollbar */
-::-webkit-scrollbar {
-    display: none;
-}
-
-/* Disable Browser's Native Scroll
-To Enable Lenis Smooth Scroll */
-html {
-    scroll-behavior: auto !important;
-}
