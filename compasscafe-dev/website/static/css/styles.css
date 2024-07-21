@@ -9,32 +9,74 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Override Bootstrap's Default Padding */
 .container-fluid {
     padding: 0;
 }
 
 /* Notice */
-#smcnotice {
-    display: block;
+.noticeinf {
+    overflow-x: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+}
+
+/* Pause Animation on Parent Hover */
+.noticeinf:hover .noticeinf-conveyor ul {
+    animation-play-state: paused;
+}
+  
+.noticeinf-conveyor {
+    display: inline-block;
+    text-decoration: none;
+    color: #E1EBF8;
     background-color: #232947;
-    text-align: center;
-    padding: 10px;
+    border-top: #6c78b4 1px solid;
+    border-bottom: #6c78b4 1px solid;
+    transition: 0.1s ease-in-out;
+}
+  
+.noticeinf-conveyor ul {
+    display: flex;
+    padding: 10px 0;
+    margin: 0;
+    list-style-type: none;
+    animation: slide 30s infinite linear;
+}
+
+.noticeinf-conveyor ul li {
+    font-size: 20px;
+    flex: 0 0 auto;
+    margin: 0 20vw;
     font-family: "IBM Plex Mono", monospace;
     text-transform: capitalize;
     font-size: 13px;
     font-weight: 400;
     transition: 0.3s ease;
     text-decoration: none;
-    color: #E1EBF8;
+}
+  
+@keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+  
+.noticeinf:hover .noticeinf-conveyor {
+      background-color: #2a3155;
+      color: #fff;
 }
 
-#smcnotice:hover {
-    background-color: #2a3155;
-    color: #fff;
-    transition: color 0.5s ease-in-out;
-    text-decoration: none;
-}
 
 /* ## Navbar ## */
 
@@ -114,13 +156,30 @@
     transition: color 0.1s ease-out;
 }
 .nav-link:hover {
-    color: #fff;
+    color: #2c2c2c;
 }
 
 /* Removes Dropdown Arrow */
 .dropdown-toggle::after {
     content: none;
 }
+
+/* Hover Line Navbar */
+.nav-linkmain::after {
+    content: '';
+    width: 0;
+    height: 1px;
+    background-color: #000;
+    margin: auto;
+    display: block;
+}
+
+.nav-linkmain:hover::after {
+    width: 100%;
+    transition: all 0.5s;
+}
+
+/* End of Hover Line Navbar */
 
 
 /* Profile + Burger Alignments
@@ -166,6 +225,10 @@ footer {
 .footer-upper {
     background-image: linear-gradient(#232947, #1f2541);
     margin-bottom: 711px;
+    .row-upper {
+        border-top: #6c78b4 1px solid;
+        border-bottom: #6c78b4 1px solid;
+    }
 }
 
 .footer-lower {
@@ -211,9 +274,29 @@ footer {
         display: inline-block;
         vertical-align: top;
     }
+    /* Hover Line Navbar */
+    .footer-links::after {
+        content: '';
+        width: 0;
+        height: 1px;
+        background-color: #fff;
+        margin: auto;
+        display: block;
+    }
+
+    .footer-links:hover::after {
+        width: 100%;
+        transition: all 0.5s;
+    }
+
+/* End of Hover Line Navbar */
 
     /* Upper Right */
-    .upperfooter-right ul li {
+    .upperfooter-right .upperfooter-up ul li {
+        display: inline-block;
+        margin-left: 60px;
+    }
+    .upperfooter-right .upperfooter-down ul li {
         display: inline-block;
     }
     .upperfooter-right ul li .footer-links {
@@ -221,7 +304,6 @@ footer {
         font-family: "JetBrains Mono";
         font-weight: 300;
         text-decoration: none;
-        margin-left: 60px;
     }
     .upperfooter-right img {
         margin: 10px 0px 0px 20px;
@@ -300,6 +382,7 @@ body {
     margin: 0;
 }
 
+/* Remove Scrollbar */
 ::-webkit-scrollbar {
     display: none;
 }
