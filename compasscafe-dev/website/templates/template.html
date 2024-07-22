@@ -21,187 +21,188 @@
 
   </head>
   <body>
-
-    <!-- Notice -->
-    <div class="noticeinf">
-      <a class="noticeinf-conveyor" href="https://www.sanctamaria.school.nz/" target=”_blank”>
-        <ul>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-        </ul>
-      </a>
-      <a class="noticeinf-conveyor" href="https://www.sanctamaria.school.nz/" target=”_blank”>
-        <ul>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-        </ul>
-      </a>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm">
-      <div class="container-fluid d-flex align-items-center justify-content-between">
-
-        <!-- Logo -->
-        <a class="navbar-brand" href="#">
-          <div class="logo-container">
-            <img id="original-logo" src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill" draggable="false">
-            <img id="hover-logo" src="/static/assets/img/LogoSmile-White.svg" alt="Logo" class="rounded-pill" draggable="false">
-          </div>
+    <div class="container-fluid loadscreen">
+      <!-- Notice -->
+      <div class="noticeinf">
+        <a class="noticeinf-conveyor" href="https://www.sanctamaria.school.nz/" target=”_blank”>
+          <ul>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+          </ul>
         </a>
-        
-        <!-- Account Page - Dropdown -->
-        <div class="account-dropdown d-sm-none d-flex align-items-center">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-            <i class="fa-regular fa-user"></i>
+        <a class="noticeinf-conveyor" href="https://www.sanctamaria.school.nz/" target=”_blank”>
+          <ul>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+          </ul>
+        </a>
+      </div>
+
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-sm">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+
+          <!-- Logo -->
+          <a class="navbar-brand" href="/home">
+            <div class="logo-container">
+              <img id="original-logo" src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill" draggable="false">
+              <img id="hover-logo" src="/static/assets/img/LogoSmile-White.svg" alt="Logo" class="rounded-pill" draggable="false">
+            </div>
           </a>
-          <ul class="dropdown-menu">
-            <!-- User Not Logged In -->
-            <li><a class="dropdown-item" href="#">register</a></li>
-            <li><a class="dropdown-item" href="#">login</a></li>
-            <!-- Admin User -->
-            <li><a class="dropdown-item" href="#">dashboard</a></li>
-            <!-- Regular User-->
-            <li><a class="dropdown-item" href="#">settings</a></li>
-            <li><a class="dropdown-item" href="#">logout</a></li>
-          </ul>
+          
+          <!-- Account Page - Dropdown -->
+          <div class="account-dropdown d-sm-none d-flex align-items-center">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+              <i class="fa-regular fa-user"></i>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User Not Logged In -->
+              <li><a class="dropdown-item" href="/register">register</a></li>
+              <li><a class="dropdown-item" href="/dashboard">login</a></li>
+              <!-- Admin User -->
+              <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+              <!-- Regular User-->
+              <li><a class="dropdown-item" href="/setting">settings</a></li>
+              <li><a class="dropdown-item" href="/logout">logout</a></li>
+            </ul>
+          </div>
+          
+          <!-- Collapse -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <!-- Expandable Links -->
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <!-- Apply Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/apply">apply</a>
+              </li>
+              <!-- Menu Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/menu">menu</a>
+              </li>
+              <!-- News Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/news">news</a>
+              </li>
+              <!-- Contact Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/contact">contact</a>
+              </li>
+              <!-- Account Page - Dropdown (visible on larger screens) -->
+              <li class="nav-item dropdown d-none d-sm-block">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  <i class="fa-regular fa-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User Not Logged In -->
+                  <li><a class="dropdown-item" href="/register">register</a></li>
+                  <li><a class="dropdown-item" href="/login">login</a></li>
+                  <!-- Admin User -->
+                  <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+                  <!-- Regular User-->
+                  <li><a class="dropdown-item" href="/settings">settings</a></li>
+                  <li><a class="dropdown-item" href="/logout">logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- End of Expandable Links -->
         </div>
-        
-        <!-- Collapse -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <!-- Expandable Links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <!-- Apply Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="#">apply</a>
-            </li>
-            <!-- Menu Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="#">menu</a>
-            </li>
-            <!-- News Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="#">news</a>
-            </li>
-            <!-- Contact Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="#">contact</a>
-            </li>
-            <!-- Account Page - Dropdown (visible on larger screens) -->
-            <li class="nav-item dropdown d-none d-sm-block">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                <i class="fa-regular fa-user"></i>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- User Not Logged In -->
-                <li><a class="dropdown-item" href="#">register</a></li>
-                <li><a class="dropdown-item" href="#">login</a></li>
-                <!-- Admin User -->
-                <li><a class="dropdown-item" href="#">dashboard</a></li>
-                <!-- Regular User-->
-                <li><a class="dropdown-item" href="#">settings</a></li>
-                <li><a class="dropdown-item" href="#">logout</a></li>
+      </nav>
+      <!-- End of Navbar -->
+
+
+      <!-- Body Sections-->
+      <div class="container-fluid container-middle">
+        {% block content %}{% endblock %}
+      </div>
+
+      
+      <!-- Footer Upper -->
+      <footer class="container-fluid footer-upper">
+        <div class="row row-upper">
+          <div class="col upperfooter-left">
+              <ul>
+                  <li>
+                      <img src="/static/assets/img/LogoDesign.svg" width="60px" alt="Compass Logo" draggable="false">
+                  </li>
+                  <li id="footerleft-text">
+                      <h5>compass cafe</h5>
+                      <p>Sancta Maria college
+                      <br> 319 Te Irirangi Drive, Flat Bush, Auckland 2016
+                      <br> (09) 274 4061
+                      </p>
+                  </li>
               </ul>
-            </li>
-          </ul>
-        </div>
-        <!-- End of Expandable Links -->
-      </div>
-    </nav>
-    <!-- End of Navbar -->
-
-
-    <!-- Body Sections-->
-    <div class="container-fluid container-middle">
-      {% block content %}{% endblock %}
-    </div>
-
-    
-    <!-- Footer Upper -->
-    <footer class="container-fluid footer-upper">
-      <div class="row row-upper">
-        <div class="col upperfooter-left">
-            <ul>
+          </div>
+          <div class="col upperfooter-right">
+            <div class="row upperfooter-up">
+              <ul>
+                  <li><a class="footer-links" href="/apply">apply</a></li>
+                  <li><a class="footer-links" href="/menu">menu</a></li>
+                  <li><a class="footer-links" href="/news">news</a></li>
+                  <li><a class="footer-links" href="/contact">contact</a></li>
+                  <li><a class="footer-links" href="/account">account</a></li>
+              </ul>
+            </div>
+            <div class="row upperfooter-down">
+              <ul>
                 <li>
-                    <img src="/static/assets/img/LogoDesign.svg" width="60px" alt="Compass Logo" draggable="false">
+                  <a href="https://www.instagram.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
+                    <img src="/static/assets/img/instagram.svg" href="" alt="Compass Logo" draggable="false">
+                  </a>
                 </li>
-                <li id="footerleft-text">
-                    <h5>compass cafe</h5>
-                    <p>Sancta Maria college
-                    <br> 319 Te Irirangi Drive, Flat Bush, Auckland 2016
-                    <br> (09) 274 4061
-                    </p>
+                <li>
+                  <a href="https://www.facebook.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
+                    <img src="/static/assets/img/facebook.svg" alt="Compass Logo" draggable="false">
+                  </a>
                 </li>
-            </ul>
-        </div>
-        <div class="col upperfooter-right">
-          <div class="row upperfooter-up">
-            <ul>
-                <li><a class="footer-links" href="#">apply</a></li>
-                <li><a class="footer-links" href="#">menu</a></li>
-                <li><a class="footer-links" href="#">news</a></li>
-                <li><a class="footer-links" href="#">contact</a></li>
-                <li><a class="footer-links" href="#">account</a></li>
-            </ul>
-          </div>
-          <div class="row upperfooter-down">
-            <ul>
-              <li>
-                <a href="https://www.instagram.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
-                  <img src="/static/assets/img/instagram.svg" href="" alt="Compass Logo" draggable="false">
-                </a>
-              </li>
-              <li>
-                <a href="https://www.facebook.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
-                  <img src="/static/assets/img/facebook.svg" alt="Compass Logo" draggable="false">
-                </a>
-              </li>
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
+      </footer>
+
+      <!-- Footer Lower -->
+      <footer class="container-fluid lower-overflow">
+      <div class="container-fluid footer-lower">
+          <div class="row">
+              <div class="col">
+                <img src="/static/assets/img/compasscafefooter.svg" alt="FooterLogo" id="footer-logo" draggable="false">
+              </div>
+          </div>
+
+          <div class="row lowerfooter-container">
+              <div class="col lowerfooter lowerfooter-left">
+                <img src="/static/assets/img/SMC-White.svg" width="50px" alt="SMCLogo" draggable="false">
+              </div>
+              <div class="col lowerfooter lowerfooter-right">
+                <p>© Compass Cafe SMC | 2024
+              </div>
+          </div>
+                <br>
+                <br>
       </div>
-    </footer>
+      </footer>
+      
+      <!-- Scroll Effects  |  DISABLE SMOOTH SCROLLING TO WORK -->
+      <!-- Scroll Object Animations Library-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+      <!-- Scroll Object Animations Trigger -->
+      <script src="https://assets.codepen.io/16327/ScrollTrigger.min.js"></script>
+      <!-- Lenis Scroll Library-->
+      <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+      <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
 
-    <!-- Footer Lower -->
-    <footer class="container-fluid lower-overflow">
-    <div class="container-fluid footer-lower">
-        <div class="row">
-            <div class="col">
-              <img src="/static/assets/img/compasscafefooter.svg" alt="FooterLogo" id="footer-logo" draggable="false">
-            </div>
-        </div>
-
-        <div class="row lowerfooter-container">
-            <div class="col lowerfooter lowerfooter-left">
-              <img src="/static/assets/img/SMC-White.svg" width="50px" alt="SMCLogo" draggable="false">
-            </div>
-            <div class="col lowerfooter lowerfooter-right">
-              <p>© Compass Cafe SMC | 2024
-            </div>
-        </div>
-              <br>
-              <br>
-     </div>
-    </footer>
-    
-    <!-- Scroll Effects  |  DISABLE SMOOTH SCROLLING TO WORK -->
-    <!-- Scroll Object Animations Library-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-    <!-- Scroll Object Animations Trigger -->
-    <script src="https://assets.codepen.io/16327/ScrollTrigger.min.js"></script>
-    <!-- Lenis Scroll Library-->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
-    <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
-
-    <!-- Spline Viewer -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+      <!-- Spline Viewer -->
+      <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+    </div>
   </body>
 </html>

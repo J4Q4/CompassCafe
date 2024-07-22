@@ -6,6 +6,8 @@ from . import db
 views = Blueprint("views", __name__)
 
 
+## WEBPAGES ##
+
 # HOME ROUTE
 @views.route("/")
 @views.route("/home")
@@ -13,12 +15,42 @@ def home():
     return render_template("home.html", user=current_user)
 
 
-# BLOG POSTS ROUTE
-@views.route("/blog")
+# APPLY ROUTE
+@views.route("/apply")
 @login_required
-def blog():
-    posts = Post.query.all()
-    return render_template("blog.html", user=current_user, posts=posts)
+def apply():
+    return render_template("apply.html", user=current_user, posts=posts)
+
+# MENU ROUTE
+@views.route("/menu")
+def menu():
+    return render_template("menu.html", user=current_user, posts=posts)
+
+# NEWS ROUTE
+@views.route("/news")
+def news():
+    return render_template("news.html", user=current_user, posts=posts)
+
+# CONTACT ROUTE
+@views.route("/contact")
+@login_required
+def contact():
+    return render_template("contact.html", user=current_user, posts=posts)
+
+
+## ACTIONS ##
+
+# CREATE APPLICATIONS ROUTE
+# DELETE APPLICATIONS ROUTE
+# CREATE NEWS ROUTE
+# EDIT NEWS ROUTE
+# DELETE NEWS ROUTE
+
+
+
+
+
+
 
 
 # CREATE POSTS ROUTE

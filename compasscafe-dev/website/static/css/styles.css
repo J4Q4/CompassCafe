@@ -45,6 +45,13 @@ html {
 }
 
 
+/* Temporary Load Screen */
+/*
+.loadscreen {
+    
+}
+*/
+
 /* Notice */
 .noticeinf {
     overflow-x: hidden;
@@ -432,28 +439,34 @@ body {
 }
 
 
+
 /* ## HOME ## */
-.yuh {
+
+/* Hero Section */
+.hero-background {
     background-color: var(--main-lightblue2);
     height: calc(100vh - 40px);
-    h1 {
-        font-family: "JetBrains Mono";
-        font-weight: 800;
-        font-size: 300px;
-        color: var(--main-lightblue1);
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+    display: block;
+    z-index: 0;
+    position: relative;
+    #hero-title {
+        width: 1000px;
+        margin: 0 auto;
+        display: block;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        z-index: 1;
+        position: absolute;
     }
 }
 
-spline {
+.hero3dviewer {
+    top: 0;
+    height: 100%;
+    width: 100%;
     display: block;
-    z-index: 1;
+    z-index: 2;
+    position: relative;
 }
