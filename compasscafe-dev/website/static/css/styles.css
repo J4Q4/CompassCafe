@@ -44,13 +44,27 @@ html {
     scroll-behavior: auto !important;
 }
 
-
 /* Temporary Load Screen */
-/*
 .loadscreen {
-    
+    display: block;
+    width: 100%;
+    height: calc(100% + 500px);
+    background-color: #fafafa;
+    z-index: 100000000;
+    position: fixed;
+    animation: preload 0.8s ease-out forwards;
+    animation-delay: 0.2s;
 }
-*/
+@keyframes preload {
+    0% {
+        transform: translateY(0);
+        border-bottom: 500px solid #232947;
+    }
+    100% {
+        transform: translateY(-100%);
+        border-bottom: 50px solid #232947;
+    }
+}
 
 /* Notice */
 .noticeinf {
@@ -60,6 +74,9 @@ html {
     position: relative;
     display: block;
     z-index: 500;
+    background-color: #232947;
+    border-top: #6c78b4 1px solid;
+    border-bottom: #6c78b4 1px solid
 }
 
 /* Pause Animation on Parent Hover */
@@ -71,9 +88,6 @@ html {
     display: inline-block;
     text-decoration: none;
     color: #E1EBF8;
-    background-color: #232947;
-    border-top: #6c78b4 1px solid;
-    border-bottom: #6c78b4 1px solid;
     transition: 0.1s ease-in-out;
 }
   
@@ -88,7 +102,7 @@ html {
 .noticeinf-conveyor ul li {
     font-size: 20px;
     flex: 0 0 auto;
-    margin: 0 20vw;
+    margin: 0 5vw;
     font-family: "IBM Plex Mono", monospace;
     text-transform: capitalize;
     font-size: 13px;
@@ -106,7 +120,7 @@ html {
     }
 }
   
-.noticeinf:hover .noticeinf-conveyor {
+.noticeinf:hover {
       background-color: #2a3155;
       color: #fff;
 }
@@ -375,6 +389,7 @@ footer {
 body {
     background-image: var(--bg-dark);
     background-attachment: fixed;
+    overflow: hidden;
 }
 
 .container-middle {
@@ -437,6 +452,11 @@ body {
 .blankspace-test p {
     margin: 0;
 }
+.whitespace-test {
+    background-color: white;
+    padding: 100px 350px;
+    margin: 0;
+}
 
 
 
@@ -450,7 +470,7 @@ body {
     z-index: 0;
     position: relative;
     #hero-title {
-        width: 1000px;
+        width: 60vw;
         margin: 0 auto;
         display: block;
         position: absolute;
