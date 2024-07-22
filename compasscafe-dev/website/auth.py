@@ -8,6 +8,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 auth = Blueprint("auth", __name__)
 
 
+## USER AUTHENTICATION  WEBPAGES ##
+
+# LOGIN ROUTE
+
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -28,7 +32,9 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-@auth.route("/signup", methods=['GET', 'POST'])
+# REGISTER ROUTE
+
+@auth.route("/register", methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
         email = request.form.get("email")
@@ -60,8 +66,10 @@ def sign_up():
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 
-    return render_template("signup.html", user=current_user)
+    return render_template("register.html", user=current_user)
 
+
+# LOGOUT ROUTE
 
 @auth.route("/logout")
 @login_required
