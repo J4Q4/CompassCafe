@@ -49,7 +49,7 @@ html {
     display: block;
     width: 100%;
     height: calc(100% + 500px);
-    background-color: #fafafa;
+    background-color: var(--main-white);
     z-index: 100000000;
     position: fixed;
     animation: preload 0.8s ease-out forwards;
@@ -58,11 +58,11 @@ html {
 @keyframes preload {
     0% {
         transform: translateY(0);
-        border-bottom: 500px solid #232947;
+        border-bottom: 500px solid var(--main-navy);
     }
     100% {
         transform: translateY(-100%);
-        border-bottom: 50px solid #232947;
+        border-bottom: 50px solid var(--main-navy);
     }
 }
 
@@ -74,7 +74,7 @@ html {
     position: relative;
     display: block;
     z-index: 500;
-    background-color: #232947;
+    background-color: var(--main-navy);
     border-top: #6c78b4 1px solid;
     border-bottom: #6c78b4 1px solid
 }
@@ -87,7 +87,7 @@ html {
 .noticeinf-conveyor {
     display: inline-block;
     text-decoration: none;
-    color: #E1EBF8;
+    color: var(--main-lightblue1);
     transition: 0.1s ease-in-out;
 }
   
@@ -291,7 +291,7 @@ footer {
     }
 }
 .footer-upper {
-    background-image: linear-gradient(#232947, #1f2541);
+    background-image: linear-gradient(var(--main-navy), #1f2541);
     margin-bottom: 711px;
     .row-upper {
         border-top: #6c78b4 1px solid;
