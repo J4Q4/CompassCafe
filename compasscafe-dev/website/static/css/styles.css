@@ -45,6 +45,10 @@ html {
     scroll-behavior: auto !important;
 }
 
+body {
+    
+}
+
 /* Temporary Load Screen */
 .loadscreen {
     display: block;
