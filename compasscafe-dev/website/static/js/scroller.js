@@ -1,4 +1,4 @@
-// Lenis Scroll //
+// Lenis Button Scroll //
 const lenis = new Lenis ({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -12,5 +12,23 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 
+// Reset Scroll Button //
+// Recall jump to top button
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
 
+// Show button after scrolling 100px 
+let resetButton = document.getElementById("resetButton");
 
+// Button Animation
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 100) {
+        resetButton.classList.add("show-button");
+    } else {
+        resetButton.classList.remove("show-button");
+    }
+});

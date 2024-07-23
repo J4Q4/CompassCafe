@@ -46,7 +46,16 @@ html {
 }
 
 body {
-    
+    cursor: url(/static/assets/img/cursor-point.png), auto;
+}
+a:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+select:hover,
+textarea:hover {
+    cursor: url('/static/assets/img/cursor-ok.png'), pointer;
 }
 
 /* Temporary Load Screen */
@@ -57,7 +66,7 @@ body {
     background-color: var(--main-white);
     z-index: 100000000;
     position: fixed;
-    animation: preload 0.8s ease-out forwards;
+    animation: preload 0.6s ease-out forwards;
     animation-delay: 0.2s;
 }
 @keyframes preload {
@@ -71,6 +80,36 @@ body {
     }
 }
 
+
+/* Top Btn */
+#resetButton {
+    /* Button Correction */
+    position: fixed;
+    z-index: 99;
+    border: none;
+    outline: none;
+    /* Button Style */
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    /* Button Position */
+    left: 50%;
+    bottom: -60px; /* Transitioner */
+    transform: translateX(-50%);
+    transition: bottom 0.5s ease-in-out, 
+    background-color 0.2s ease-in-out;
+}
+#resetButton.show-button {
+    bottom: 70px;
+}
+#resetButton:hover {
+    background-color: #212121;
+}
+
+
 /* Notice */
 .noticeinf {
     overflow-x: hidden;
@@ -81,7 +120,8 @@ body {
     z-index: 500;
     background-color: var(--main-navy);
     border-top: #6c78b4 1px solid;
-    border-bottom: #6c78b4 1px solid
+    border-bottom: #6c78b4 1px solid;
+    transition: all 0.3s ease-out;
 }
 
 /* Pause Animation on Parent Hover */
@@ -101,7 +141,7 @@ body {
     padding: 10px 0;
     margin: 0;
     list-style-type: none;
-    animation: slide 30s infinite linear;
+    animation: slide 60s infinite linear;
 }
 
 .noticeinf-conveyor ul li {
@@ -112,8 +152,6 @@ body {
     text-transform: capitalize;
     font-size: 13px;
     font-weight: 400;
-    transition: 0.3s ease;
-    text-decoration: none;
 }
   
 @keyframes slide {
@@ -297,7 +335,7 @@ footer {
 }
 .footer-upper {
     background-image: linear-gradient(var(--main-navy), #1f2541);
-    margin-bottom: 711px;
+    margin-bottom: 100vh;
     .row-upper {
         border-top: #6c78b4 1px solid;
         border-bottom: #6c78b4 1px solid;
@@ -403,9 +441,14 @@ body {
 }
 
 /* Lower Footer Logo */
+.lowerfooter-upper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #footer-logo {
-    width: 100%;
-    margin: 100px 0;
+    width: 80%;
+    margin: 80px 0;
     animation: footerbanner-unhover 0.5s ease-in-out forwards;
 }
 @keyframes footerbanner-unhover {
@@ -480,7 +523,7 @@ body {
     display: block;
     z-index: 0;
     position: relative;
-    #hero-title {
+    #hero-title1 {
         width: 60vw;
         margin: 0 auto;
         display: block;
@@ -491,12 +534,25 @@ body {
         z-index: 1;
         position: absolute;
     }
+    #hero-title2 {
+        width: 60vw;
+        margin: 0 auto;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        position: absolute;
+        pointer-events: none;
+    }
 }
 
 .hero3dviewer {
     top: 0;
     height: 100%;
-    width: 100%;
+    width: 120%;
+    transform: translateX(-9%);
     display: block;
     z-index: 2;
     position: relative;
