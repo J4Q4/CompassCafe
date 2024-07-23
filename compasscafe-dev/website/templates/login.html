@@ -3,19 +3,22 @@
 
 <!-- Blank Space -->
 <section class="blankspace-test">
-  <section class="whitespace-test">
-    <div class="row">
+  <section class="beigespace-test">
+    <div class="row user-inui user-loginui">
       <div class="col">
         <form method="POST">
-          <h3 align="center">Login</h3>
+          <h3>Hello!</h3>
+          <h6>Log in to your account.</h6>
+          <br>
           <div class="form-group">
               <label for="email">School Email</label>
               <input 
                   type="text" 
-                  id="email" 
+                  id="email"
                   name="email" 
                   class="form-control" 
-                  placeholder="School Email [Required]" />
+                  placeholder="School Email [Required]"
+                  autocomplete="off" />
               <br />
               <label for="password">Password</label>
               <input 
@@ -23,17 +26,21 @@
                   id="password" 
                   name="password" 
                   class="form-control" 
-                  placeholder="Password [Required]" />
+                  placeholder="Password [Required]"
+                  autocomplete="off" />
               <br />
-              <div align="center">
-                  <button class="btn btn-primary" type="submit">Login</button>
-                  <a class="btn btn-secondary" href="/signup">No Account?</a>
+              <div class="user-inuibtn" align="center">
+                  <button class="btn btn-primary" type="submit">Log In</button>
               </div>
+              <br>
+              <div class="user-inuibtn" align="center">
+                <a class="btn btn-secondary" href="/signup">No Account? Sign Up</a>
+            </div>
           </div>
         </form>
       </div>
-      <div class="col">
-        image banner
+      <div class="col user-inui-img">
+        <img src="/static/assets/media/tp.jpeg" alt="Log In Image" id="user-inui-img"/>
       </div>
     </div>
   </section>

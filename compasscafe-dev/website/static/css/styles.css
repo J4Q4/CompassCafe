@@ -454,9 +454,15 @@ body {
 }
 .whitespace-test {
     background-color: white;
-    padding: 100px 350px;
+    padding: 100px 250px;
     margin: 0;
 }
+.beigespace-test {
+    background-color: var(--main-white);
+    padding: 100px 250px;
+    margin: 0;
+}
+
 
 
 
@@ -489,4 +495,100 @@ body {
     display: block;
     z-index: 2;
     position: relative;
+}
+
+/* ## END OF HOME ## */
+
+
+/* ## USER LOGIN / SIGN UP ## */
+.user-loginui {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 650px;
+    margin: 80px auto;
+    overflow: hidden;
+    form {
+        padding: 100px;
+    }
+}
+.user-signupui {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin: 80px auto;
+    overflow: hidden;
+    form {
+        padding: 100px;
+    }
+    col {
+        margin: 0;
+    }
+}
+
+.user-inuibtn button, .user-inuibtn a {
+    width: 100%;
+}
+
+input[type=text], input[type=number], input[type=email], input[type=password] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #fff;
+    font-family: "IBM Plex Mono";
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus {
+    border: 1px solid #acacac;
+}
+
+.form-control:focus {
+    border-color: inherit;
+    box-shadow: none;
+  }
+
+.btn-primary {
+    background-color: #000;
+    border: none;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+}
+.btn-primary:hover {
+    background-color: #323232;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    border: 1px solid #000;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    color: #000;
+
+}
+.btn-secondary:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.user-inui h3 {
+    font-family: "Open Sans";
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 150px;
+}
+.user-inui .col {
+    padding: 0;
+}
+
+#user-inui-img {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+}
+
+.user-inui-img {
+    display: flex;
+    justify-content: center;
 }

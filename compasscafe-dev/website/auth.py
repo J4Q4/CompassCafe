@@ -32,7 +32,7 @@ def login():
     return render_template("login.html", user=current_user)
 
 
-# REGISTER ROUTE
+# SIGN UP ROUTE
 
 @auth.route("/signup", methods=['GET', 'POST'])
 def sign_up():

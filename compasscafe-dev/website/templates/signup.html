@@ -3,11 +3,13 @@
 
 <!-- Blank Space -->
 <section class="blankspace-test">
-  <section class="whitespace-test">
-    <div class="row">
+  <section class="beigespace-test">
+    <div class="row user-inui user-signupui">
       <div class="col">
         <form method="POST">
-          <h3 align="center">Sign Up</h3>
+          <h3>Welcome!</h3>
+          <h6>Create an account.</h6>
+          <br>
           <div class="form-group">
               <label for="email">School Email</label>
               <input
@@ -16,16 +18,20 @@
                   name="email"
                   class="form-control"
                   placeholder="School Email"
+                  Required
               />
               <br/>
               <label for="username">School ID</label>
               <input
-                  type="text"
+                  type="number"
                   id="username"
                   name="username"
                   class="form-control"
-                  placeholder="School ID"
-              />
+                  placeholder="00000"
+                  min="10000"
+                  max="99999"
+                  Required
+              /> <!-- 5 digits school ID -->
               <br/>
               <label for="password1">Password</label>
               <input
@@ -34,6 +40,7 @@
                   name="password1"
                   class="form-control"
                   placeholder="Password"
+                  Required
               />
               <br/>
               <label for="password2">Confirm Password</label>
@@ -43,17 +50,21 @@
                   name="password2"
                   class="form-control"
                   placeholder="Confirm Password"
+                  Required
               />
               <br/>
-              <div align="center">
+              <div class="user-inuibtn" align="center">
                   <button class="btn btn-primary" type="submit">Sign Up</button>
-                  <a class="btn btn-secondary" href="/login">Existing Account?</a>
               </div>
+            </br>
+            <div class="user-inuibtn" align="center">
+              <a class="btn btn-secondary" href="/login">Existing Account? Log In</a>
+            </div>
           </div>
         </form>
       </div>
-      <div class="col">
-        image banner
+      <div class="col user-inui-img">
+        <img src="/static/assets/media/tp.jpeg" alt="Sign Up Image" id="user-inui-img"/>
       </div>
   </section
 </section>
