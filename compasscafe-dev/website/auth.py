@@ -19,15 +19,19 @@ def login():
         password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+        if user and check_password_hash(user.password, password):
+            # Admin User Login
+            if email == 'admin@sanctamaria.school.nz' and password == 'password':
+                user.is_staff = True
+                db.session.commit()  # Save the changes to the database
+                flash('Logged in as admin!', category='success')
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Logged in successfully!', category='success')
+
+            login_user(user, remember=True)
+            return redirect(url_for('views.home'))
         else:
-            flash('Email does not exist.', category='error')
+            flash('Incorrect email or password.', category='error')
 
     return render_template("login.html", user=current_user)
 
@@ -38,27 +42,27 @@ def login():
 def sign_up():
     if request.method == 'POST':
         email = request.form.get("email")
-        username = request.form.get("username")
+        schoolid = request.form.get("schoolid")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
         email_exists = User.query.filter_by(email=email).first()
-        username_exists = User.query.filter_by(username=username).first()
+        schoolid_exists = User.query.filter_by(schoolid=schoolid).first()
 
         if email_exists:
             flash('Email is already in use.', category='error')
-        elif username_exists:
-            flash('Username is already in use.', category='error')
+        elif schoolid_exists:
+            flash('School ID is already in use.', category='error')
         elif password1 != password2:
             flash('Passwords don\'t match!', category='error')
-        elif len(username) < 2:
-            flash('Username is too short.', category='error')
+        elif schoolid and len(schoolid) < 5:
+            flash('School ID is too short.', category='error')
         elif len(password1) < 8:
-            flash('Password mustbe at least 8 characters.', category='error')
+            flash('Password must be at least 8 characters.', category='error')
         elif len(email) < 4:
             flash('Email is invalid', category='error')
         else:
-            new_user = User(email=email, username=username, password=generate_password_hash(
+            new_user = User(email=email, schoolid=schoolid, password=generate_password_hash(
                 password1, method='scrypt:32768:8:1'))
             db.session.add(new_user)
             db.session.commit()

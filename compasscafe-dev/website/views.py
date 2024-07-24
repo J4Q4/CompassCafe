@@ -37,6 +37,18 @@ def news():
 def contact():
     return render_template("contact.html", user=current_user, posts=posts)
 
+# SETTINGS ROUTE
+@views.route("/settings")
+@login_required
+def settings():
+    return render_template("settings.html", user=current_user, posts=posts)
+
+# DASHBOARD ROUTE
+@views.route("/dashboard")
+@login_required
+def dashboard():
+    return render_template("dashboard.html", user=current_user, posts=posts)
+
 
 ## ACTIONS ##
 

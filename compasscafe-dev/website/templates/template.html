@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>✧ Compass Café - {% block title %}{% endblock %}</title>
+    <title>&#x2727; Compass Café - {% block title %}{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="/static/assets/img/favicon.ico">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -54,6 +54,7 @@
         </ul>
       </a>
     </div>
+    <!-- Notice End -->
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm">
@@ -114,14 +115,19 @@
                 <i class="fa-regular fa-user"></i>
               </a>
               <ul class="dropdown-menu">
-                <!-- User Not Logged In -->
-                <li><a class="dropdown-item" href="/signup">sign up</a></li>
-                <li><a class="dropdown-item" href="/login">login</a></li>
-                <!-- Admin User -->
+                <!-- Admin User-->
+                {% if user.is_authenticated and user.is_staff %}
                 <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-                <!-- Regular User-->
+                {% endif %}
+                {% if user.is_authenticated %}
+                <!-- Regular User -->
                 <li><a class="dropdown-item" href="/settings">settings</a></li>
                 <li><a class="dropdown-item" href="/logout">logout</a></li>
+                {% else %}
+                <!-- User Not Logged In -->
+                <li><a class="dropdown-item" href="/login">login</a></li>
+                <li><a class="dropdown-item" href="/signup">sign up</a></li>
+                {% endif %}
               </ul>
             </li>
           </ul>
@@ -130,6 +136,26 @@
       </div>
     </nav>
     <!-- End of Navbar -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %} {% if category =='error' %}
+    <!--Error Pop-up Message-->
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    {% else %}
+    <!--Success Pop-up Message-->
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
 
 
     <!-- Body Sections-->
