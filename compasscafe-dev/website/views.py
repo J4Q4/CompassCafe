@@ -14,7 +14,6 @@ views = Blueprint("views", __name__)
 def home():
     return render_template("home.html", user=current_user)
 
-
 # APPLY ROUTE
 @views.route("/apply")
 @login_required
@@ -47,6 +46,9 @@ def settings():
 @views.route("/dashboard")
 @login_required
 def dashboard():
+    if not current_user.is_staff:
+        flash('You do not have permission to access this page.', category='error')
+        return redirect(url_for('views.home'))
     return render_template("dashboard.html", user=current_user, posts=posts)
 
 
