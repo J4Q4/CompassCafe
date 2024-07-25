@@ -7,8 +7,87 @@
     <br>
     <br>
     <br>
-  <p>Dashboard</p>
+    <h1>Admin Dashboard</h1>
+
+    <!-- Edit User Status -->
+    {% if edit_user_id %}
+    <h2>Edit User</h2>
+    <form method="POST" action="{{ url_for('views.dashboard', edit_user_id=edit_user_id) }}">
+        {{ edit_form.hidden_tag() }}
+        <!-- Email Input-->
+        <p>
+            {{ edit_form.email.label }}<br>
+            {{ edit_form.email(size=32) }}
+        </p>
+        <!-- Password Input -->
+        <p>
+          {{ edit_form.password.label }}<br>
+          {{ edit_form.password(size=32) }}<br>
+        </p>
+        <!-- Confirm Password Input -->
+        <p>
+          {{ edit_form.confirm_password.label }}<br>
+          {{ edit_form.confirm_password(size=32, id="confirm_password") }}
+        </p>
+        <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+        <!-- Admin Status Boolean -->
+        <p>
+            {{ edit_form.is_staff.label }}<br>
+            {{ edit_form.is_staff() }}
+        </p>
+        <!-- Submit Buttons -->
+        <a>{{ edit_form.submit() }}</a>
+        <a href="{{ url_for('views.dashboard') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+    {% endif %}
+
+    <!-- User List with Interactables -->
+    <h2>Users</h2>
+    <table>
+        <tr>
+            <th>Email</th>
+            <th>Is Staff</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>
+              {% if user.is_staff %}
+              <i class="fas fa-check"></i>
+              {% else %}
+              <i class="fas fa-times"></i>
+              {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('views.dashboard', edit_user_id=user.id) }}">Edit</a>
+                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                    <button type="submit">
+                      <i class="fa-solid fa-x"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
 </section>
 <!-- End of Blank Space -->
+
+<!-- Toggle Password Visibility -->
+<script>
+  function togglePassword() {
+      var passwordField = document.getElementById("password");
+      var confirmPasswordField = document.getElementById("confirm_password");
+      var showPassword = document.getElementById("showPassword");
+      if (showPassword.checked) {
+          passwordField.type = "text";
+          confirmPasswordField.type = "text";
+      } else {
+          passwordField.type = "password";
+          confirmPasswordField.type = "password";
+      }
+  }
+  </script>
 
 {% endblock %}

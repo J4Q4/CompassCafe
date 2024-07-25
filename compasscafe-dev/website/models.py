@@ -1,6 +1,11 @@
+# Authentication and Database Models
 from sqlalchemy.sql import func
 from flask_login import UserMixin
 from . import db
+# User Admin Handling
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import DataRequired, Email, EqualTo, Optional
 
 ## DATABASE ENTRY CLASSES ##
 
@@ -17,6 +22,18 @@ class User(db.Model, UserMixin):
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     is_staff = db.Column(db.Boolean, default=False)
 
+
+#Configure User
+
+class EditUser(FlaskForm):
+    email = StringField('Change Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email"})
+    password = PasswordField('Change Password', render_kw={"placeholder": "Enter New Password"})
+    confirm_password = PasswordField('Confirm Password', validators=[Optional(), EqualTo('password', message='Passwords must match')], render_kw={"placeholder": "Re-Enter New password"})
+    is_staff = BooleanField('Is Staff')
+    submit = SubmitField('Update User', render_kw={"class": "btn btn-primary"})
+
+
+# USER ACTIONS
 
 # User's Post
 class Post(db.Model):

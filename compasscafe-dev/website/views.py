@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
-from .models import Post, User, Like, Comment
+from .models import Post, User, Like, Comment, EditUser
+from werkzeug.security import generate_password_hash
 from . import db
 
 views = Blueprint("views", __name__)
@@ -42,14 +43,72 @@ def contact():
 def settings():
     return render_template("settings.html", user=current_user, posts=posts)
 
+
+
+
+## ADMIN ROUTES ##
+
 # DASHBOARD ROUTE
-@views.route("/dashboard")
+@views.route("/dashboard", methods=['GET', 'POST'])
 @login_required
 def dashboard():
     if not current_user.is_staff:
         flash('You do not have permission to access this page.', category='error')
         return redirect(url_for('views.home'))
-    return render_template("dashboard.html", user=current_user, posts=posts)
+
+    users = User.query.all()
+
+    # EDIT USER ROUTE
+    edit_user_id = request.args.get('edit_user_id')
+    edit_form = EditUser()
+    if edit_user_id:
+        user = User.query.get_or_404(edit_user_id)
+
+        # Admin Config Lock
+        if user.email == 'admin@sanctamaria.school.nz':
+            flash('This user cannot be edited.', category='error')
+            return redirect(url_for('views.dashboard'))
+        
+        if request.method == 'POST':
+            if edit_form.validate_on_submit():
+                # Update User Email
+                user.email = edit_form.email.data
+                user.is_staff = edit_form.is_staff.data
+                # Update User Password
+                if edit_form.password.data == edit_form.confirm_password.data:
+                    user.password = generate_password_hash(edit_form.password.data)
+                db.session.commit()
+                flash('User configuration successful!', category='success')
+                return redirect(url_for('views.dashboard'))
+            else:
+                flash('Passwords do not match!', category='error')
+        else:
+            edit_form = EditUser(obj=user)
+
+    return render_template("dashboard.html", user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id)
+
+
+# DELETE USER ROUTE
+@views.route('/dashboard/delete_user/<int:user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    if not current_user.is_staff:
+        flash('Access denied!', 'danger')
+        return redirect(url_for('views.home'))
+    
+    user = User.query.get_or_404(user_id)
+    
+    # Admin Config Lock
+    if user.email == 'admin@sanctamaria.school.nz':
+        flash('This user cannot be deleted.', category='error')
+        return redirect(url_for('views.dashboard'))
+
+    db.session.delete(user)
+    db.session.commit()
+    flash('User deleted successfully!', 'success')
+    return redirect(url_for('views.dashboard'))
+
+
 
 
 ## ACTIONS ##
