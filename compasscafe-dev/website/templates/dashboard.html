@@ -2,7 +2,7 @@
 {% block content %}
 
 <!-- Blank Space -->
-<section class="blankspace-test">
+<section class="beigespace-test">
     <br>
     <br>
     <br>
@@ -11,65 +11,76 @@
 
     <!-- Edit User Status -->
     {% if edit_user_id %}
-    <h2>Edit User</h2>
-    <form method="POST" action="{{ url_for('views.dashboard', edit_user_id=edit_user_id) }}">
-        {{ edit_form.hidden_tag() }}
-        <!-- Email Input-->
-        <p>
-            {{ edit_form.email.label }}<br>
-            {{ edit_form.email(size=32) }}
-        </p>
-        <!-- Password Input -->
-        <p>
-          {{ edit_form.password.label }}<br>
-          {{ edit_form.password(size=32) }}<br>
-        </p>
-        <!-- Confirm Password Input -->
-        <p>
-          {{ edit_form.confirm_password.label }}<br>
-          {{ edit_form.confirm_password(size=32, id="confirm_password") }}
-        </p>
-        <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
-        <!-- Admin Status Boolean -->
-        <p>
-            {{ edit_form.is_staff.label }}<br>
-            {{ edit_form.is_staff() }}
-        </p>
-        <!-- Submit Buttons -->
-        <a>{{ edit_form.submit() }}</a>
-        <a href="{{ url_for('views.dashboard') }}" class="btn btn-secondary">Cancel</a>
-    </form>
+    <div class="dashboarduser-table">
+        <h2>Edit User</h2>
+        <form method="POST" action="{{ url_for('views.dashboard', edit_user_id=edit_user_id) }}">
+            {{ edit_form.hidden_tag() }}
+            <!-- Email Input-->
+            <p>
+                {{ edit_form.email.label }}<br>
+                {{ edit_form.email(size=32) }}
+            </p>
+            <!-- Password Input -->
+            <p>
+            {{ edit_form.password.label }}<br>
+            {{ edit_form.password(size=32) }}<br>
+            </p>
+            <!-- Confirm Password Input -->
+            <p>
+            {{ edit_form.confirm_password.label }}<br>
+            {{ edit_form.confirm_password(size=32, id="confirm_password") }}
+            </p>
+            <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+            <!-- Admin Status Boolean -->
+            <p>
+                {{ edit_form.is_staff() }} Admin Privelleges
+            </p>
+            <!-- Submit Buttons -->
+            <a>{{ edit_form.submit() }}</a>
+            <a href="{{ url_for('views.dashboard') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    <br>
     {% endif %}
 
     <!-- User List with Interactables -->
     <h2>Users</h2>
-    <table>
-        <tr>
-            <th>Email</th>
-            <th>Is Staff</th>
-            <th>Actions</th>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.email }}</td>
-            <td>
-              {% if user.is_staff %}
-              <i class="fas fa-check"></i>
-              {% else %}
-              <i class="fas fa-times"></i>
-              {% endif %}
-            </td>
-            <td>
-                <a href="{{ url_for('views.dashboard', edit_user_id=user.id) }}">Edit</a>
-                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
-                    <button type="submit">
-                      <i class="fa-solid fa-x"></i>
-                    </button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="dashboarduser-table">
+        <table>
+            <tr class="dashboarduser-header">
+                <th>Email</th>
+                <th>Admin</th>
+                <th>Configure</th>
+                <th>Delete</th>
+            </tr>
+            {% for user in users %}
+            <tr id="classdashboard-list">
+                <td id="emailconfig">{{ user.email }}</td>
+                <td id="configicon">
+                {% if user.is_staff %}
+                <i class="fas fa-check"></i>
+                {% else %}
+                <i class="fas fa-times"></i>
+                {% endif %}
+                </td>
+                <td id="configicon">
+                    <a id="edituser_dash" href="{{ url_for('views.dashboard', edit_user_id=user.id) }}">
+                        <button class="dashboarduseredit" type="submit">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </a>
+                </td>
+                <td id="configicon">
+                    <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                        <button class="dashboarduseredit" type="submit">
+                        <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 
 </section>
 <!-- End of Blank Space -->

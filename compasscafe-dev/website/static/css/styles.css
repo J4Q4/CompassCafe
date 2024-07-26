@@ -49,6 +49,7 @@ body {
     cursor: url(/static/assets/img/cursor-point.png), auto;
 }
 a:hover,
+i:hover,
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
@@ -663,7 +664,6 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
     justify-content: center;
 }
 
-
 /* Alert Dismissable */
 .alert-dismissible {
     position: fixed;
@@ -671,7 +671,67 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
     z-index: 100000;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 30px;
+    bottom: 10px;
     font-family: "JetBrains Mono";
     font-size: 14px;
+    background-color: #1b1b1b;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+
+
+
+h1 {
+    font-family: "JetBrains Mono";
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+table, th, td {
+    padding: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "Open Sans";
+}
+
+#classdashboard-list {
+    border-bottom: 1px solid #ddd;
+}
+
+.dashboarduser-header {
+    background-color: #f4f4f4;
+}
+
+.dashboarduser-table {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 50px;
+}
+#emailconfig {
+    font-family: "JetBrains Mono";
+}
+#configicon {
+    text-align: center;
+}
+
+.dashboarduseredit {
+    border: 0;
+    background-color: transparent;
+}
+
+#edituser_dash {
+    text-decoration: none;
+}
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+.alert-dismissible .fa-times {
+    color: #fff;
+    padding: 10px;
+    background-color: transparent;
+    border: 0;
+    transform: scale(1.5) translateX(4px);
 }
