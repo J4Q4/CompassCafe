@@ -77,6 +77,9 @@ def dashboard():
                 # Update User Password
                 if edit_form.password.data == edit_form.confirm_password.data:
                     user.password = generate_password_hash(edit_form.password.data)
+                elif edit_form.password.data or edit_form.confirm_password.data:
+                    flash('Please confirm password!', category='error')
+                    return render_template("dashboard.html", user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id)
                 db.session.commit()
                 flash('User configuration successful!', category='success')
                 return redirect(url_for('views.dashboard'))

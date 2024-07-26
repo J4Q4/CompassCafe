@@ -26,10 +26,14 @@ class User(db.Model, UserMixin):
 #Configure User
 
 class EditUser(FlaskForm):
-    email = StringField('Change Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email"})
+    email = StringField('Change Email', validators=[
+        DataRequired(), Email()], render_kw={"placeholder": "Email"})
     password = PasswordField('Change Password', render_kw={"placeholder": "Enter New Password"})
-    confirm_password = PasswordField('Confirm Password', validators=[Optional(), EqualTo('password', message='Passwords must match')], render_kw={"placeholder": "Re-Enter New password"})
-    is_staff = BooleanField('Is Staff')
+    confirm_password = PasswordField(
+        'Confirm Password', validators=[
+            Optional(), EqualTo('password', message='Passwords must match')], 
+        render_kw={"placeholder": "Re-Enter New password"})
+    is_staff = BooleanField()
     submit = SubmitField('Update User', render_kw={"class": "btn btn-primary"})
 
 
