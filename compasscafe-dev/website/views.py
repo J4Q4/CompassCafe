@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
-from .models import Post, User, Like, Comment, EditUser
+from .models import Post, User, Like, Comment, EditUser, FilterForm
 from werkzeug.security import generate_password_hash
 from . import db
 
@@ -56,7 +56,16 @@ def dashboard():
         flash('You do not have permission to access this page.', category='error')
         return redirect(url_for('views.home'))
 
-    users = User.query.all()
+    filter_form = FilterForm()
+    query = User.query
+
+    if filter_form.validate_on_submit():
+        if filter_form.email.data:
+            query = query.filter(User.email.contains(filter_form.email.data))
+        if filter_form.is_staff.data:
+            query = query.filter_by(is_staff=True)
+
+    users = query.all()
 
     # EDIT USER ROUTE
     edit_user_id = request.args.get('edit_user_id')
@@ -88,7 +97,7 @@ def dashboard():
         else:
             edit_form = EditUser(obj=user)
 
-    return render_template("dashboard.html", user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id)
+    return render_template("dashboard.html", user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, filter_form=filter_form)
 
 
 # DELETE USER ROUTE

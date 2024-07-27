@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
     is_staff = db.Column(db.Boolean, default=False)
 
 
-#Configure User
+# Configure User
 
 class EditUser(FlaskForm):
     email = StringField('Change Email', validators=[
@@ -35,6 +35,13 @@ class EditUser(FlaskForm):
         render_kw={"placeholder": "Re-Enter New password"})
     is_staff = BooleanField()
     submit = SubmitField('Update User', render_kw={"class": "btn btn-primary"})
+
+
+# Filter User
+class FilterForm(FlaskForm):
+    email = StringField('Email', validators=[Optional()], render_kw={"placeholder": "Email"})
+    is_staff = BooleanField('Admin')
+    submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
 
 
 # USER ACTIONS

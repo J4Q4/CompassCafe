@@ -11,20 +11,18 @@
     <div class="container-fluid dashboard-containermaster">
         <div class="dashboard-col col-md-3">
             <div class="dashboarduser-table dash-menu1 dash-sides">
-                <ul>
-                    <li>admin@sanctamaria.school.nz</li>
-                </ul>
+                {{ user.email }}
             </div>
             <div class="dashboarduser-table dash-menu1 dash-sides">
                 <ul>
-                    <h6>User Settings</h3>
-                    <li><a href="#">profile</a></li>
-                    <li><a href="#">interface</a></li>
-                    <br>
                     <h6>Admin Settings</h3>
                     <li><a href="#">users</a></li>
                     <li><a href="#">applications</a></li>
                     <li><a href="#">contacts</a></li>
+                    <br>
+                    <h6>User Settings</h3>
+                    <li><a href="#">profile</a></li>
+                    <li><a href="#">interface</a></li>
                 </ul>
             </div>
             <div class="dashboarduser-table dash-menu2 dash-sides">
@@ -39,7 +37,9 @@
             <div class="dashboarduser-table dash-menu1 dash-hello">
                 <h2>Hello! 👋</h2>
                 <p><strong>Welcome to the admin dashboard.</strong>
-                <br>Here you can manage users, applications, and contacts.</p>
+                <br>Here you can manage users, applications, and contacts.
+                <br>STOOPID.</P>
+                <img src="/static/assets/media/stoopid.png" alt="stoopid" draggable="false">
             </div>
             <!-- Edit User Status -->
             {% if edit_user_id %}
@@ -77,10 +77,50 @@
             <br>
             {% endif %}
 
+
+
+
             <!-- User List with Interactables -->
             <div class="dashboarduser-table">
-                <h3>Users</h3>
-                <br>
+
+
+                <!-- Filter Users -->
+                <div id="sortbuttons">
+                    <h3>Users</h3>
+                    <ul class="buttonclass">
+                        <li>
+                            <button class="btn btn-secondary">Sort</button>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ url_for('views.dashboard') }}">
+                                {{ filter_form.hidden_tag() }}
+                                <button id="filterPopBTN" class="btn btn-secondary" type="button">Filter</button>
+                
+                                <div id="myPopup" class="filterpopup">
+                                    <div class="popup-content">
+                                        <ul>
+                                        <li>
+                                            <p>Email</p>
+                                            {{ filter_form.email(size=32) }}
+                                        </li>
+                                        <br>
+                                        <li>
+                                            {{ filter_form.is_staff() }} Admin
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <a>{{ filter_form.submit() }}</a>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+
                 <table>
                     <tr class="dashboarduser-header">
                         <th>Email</th>
@@ -89,7 +129,7 @@
                         <th>Delete</th>
                     </tr>
                     {% for user in users %}
-                    <tr id="classdashboard-list">
+                    <tr id="dashboard-list">
                         <td id="emailconfig">{{ user.email }}</td>
                         <td id="configicon">
                         {% if user.is_staff %}
