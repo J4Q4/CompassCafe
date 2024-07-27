@@ -50,10 +50,12 @@ body {
 }
 a:hover,
 i:hover,
-button:hover,
+button[type="submit"]:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
+input[type="number"]:hover,
+input[type="text"]:hover,
 select:hover,
 textarea:hover {
     cursor: url('/static/assets/img/cursor-ok.png'), pointer;
@@ -142,7 +144,7 @@ textarea:hover {
     padding: 10px 0;
     margin: 0;
     list-style-type: none;
-    animation: slide 60s infinite linear;
+    animation: slide 40s infinite linear;
 }
 
 .noticeinf-conveyor ul li {
@@ -433,7 +435,7 @@ footer {
 body {
     background-image: var(--bg-dark);
     background-attachment: fixed;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .container-middle {
@@ -508,7 +510,7 @@ body {
 }
 .beigespace-test {
     background-color: var(--main-white);
-    padding: 100px 250px;
+    padding: 100px 150px;
     margin: 0;
 }
 
@@ -694,19 +696,76 @@ table, th, td {
     width: 100%;
     font-family: "Open Sans";
 }
+table {
+    border-style: solid;
+    border-color: black;
+    border-collapse: collapse;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
 #classdashboard-list {
     border-bottom: 1px solid #ddd;
 }
 
 .dashboarduser-header {
-    background-color: #f4f4f4;
+    border-bottom: 2px solid #cbcbcb;
 }
 
 .dashboarduser-table {
-    border: 1px solid #ddd;
+    border: 2px solid #fafafa;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
     border-radius: 10px;
     padding: 50px;
+    width: 100%;
+    transform: scale(1);
+    transition: all 0.3s ease-out;
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    h2 {
+        font-family: "JetBrains Mono";
+        text-transform: uppercase;
+        font-weight: 800;
+    }
+}
+.dashboarduser-table:hover {
+    border: 2px solid #ddd;
+    transform: scale(1.01);
+}
+.dashboard-col .dash-hello {
+    background-color: var(--main-lightblue1);
+}
+.dash-menu1 {
+    margin-bottom: 30px;
+}
+.dash-sides {
+    transform: scale(1);
+}
+.dash-sides:hover {
+    transform: scale(1.03);
+}
+.dash-sides h6 {
+    font-family: "JetBrains Mono";
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 18px;
+}
+.dash-sides ul li a {
+    font-family: "Open Sans";
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dash-sides ul li {
+    transform: translateX(0px);
+    transition: all 0.3s ease-out;
+}
+.dash-sides ul li:hover {
+    transform: translateX(10px);
 }
 #emailconfig {
     font-family: "JetBrains Mono";
@@ -734,4 +793,15 @@ table, th, td {
     background-color: transparent;
     border: 0;
     transform: scale(1.5) translateX(4px);
+}
+
+.col-md-3 {
+    padding-right: 15px;
+}
+.col-md-9 {
+    padding-left: 15px;
+}
+
+.dashboard-containermaster {
+    display: flex;
 }
