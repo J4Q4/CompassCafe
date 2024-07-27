@@ -52,6 +52,12 @@ html {
 body {
     cursor: url(/static/assets/img/cursor-point.png), auto;
 }
+
+html, body {
+    overflow-y: hidden;
+    height: 100%;
+}
+
 a:hover,
 i:hover,
 button[type="submit"]:hover,
@@ -91,6 +97,12 @@ textarea:hover {
         border-bottom: 50px solid var(--main-navy);
     }
 }
+/* NO SCROLL ON LOAD */
+html.noscroll, body.noscroll {
+    overflow-y: visible;
+    height: auto;
+}
+
 .preload-fadein {
     animation: preload-fadein 0.8s ease-out forwards;
     opacity: 0;

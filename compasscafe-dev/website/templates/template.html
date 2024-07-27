@@ -248,7 +248,8 @@
       $(window).on('load', function () {
       setTimeout(function() {
         $('#loadscreen').addClass('loadtrigger');
-      }, 2000);
+        $('html, body').addClass('noscroll');
+      }, 3000); //3s Delay to fully load Spline
       });
     </script>
     {% else %} <!-- If Other Webpage -->

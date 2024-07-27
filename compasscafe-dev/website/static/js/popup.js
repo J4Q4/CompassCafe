@@ -45,13 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         var splineViewer = document.querySelector('spline-viewer');
         if (splineViewer) {
+            // Find Hidden Root [ Shadow DOM ]
             var shadowRoot = splineViewer.shadowRoot;
             if (shadowRoot) {
                 var logo = shadowRoot.querySelector('a#logo');
+                // Hide Watermark
                 if (logo) {
                     logo.style.display = 'none';
                 }
             }
         }
-    }, 2000); // 2s Delay [ Give Load Time - Loadscreen ]
+    }, 3300); // 3s Delay [ Give Load Time - Loadscreen ]
 });
