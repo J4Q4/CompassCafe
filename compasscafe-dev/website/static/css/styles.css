@@ -69,13 +69,15 @@ textarea:hover {
 }
 
 /* Temporary Load Screen */
-.loadscreen {
+#loadscreen{
     display: block;
     width: 100%;
     height: calc(100% + 500px);
     background-color: var(--main-white);
     z-index: 100000000;
     position: fixed;
+}
+#loadscreen.loadtrigger {
     animation: preload 0.6s ease-out forwards;
     animation-delay: 0.2s;
 }
@@ -87,6 +89,21 @@ textarea:hover {
     100% {
         transform: translateY(-100%);
         border-bottom: 50px solid var(--main-navy);
+    }
+}
+.preload-fadein {
+    animation: preload-fadein 0.8s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.6s;
+}
+@keyframes preload-fadein {
+    0% {
+        transform: translateY(5%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
@@ -561,8 +578,7 @@ body {
 .hero3dviewer {
     top: 0;
     height: 100%;
-    width: 120%;
-    transform: translateX(-9%);
+    width: 100vw;
     display: block;
     z-index: 2;
     position: relative;
@@ -587,6 +603,7 @@ body {
     background-color: #fff;
     border: 1px solid #000;
     border-radius: 10px;
+    height: 900px;
     margin: 80px auto;
     overflow: hidden;
     form {
@@ -668,11 +685,6 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
     display: flex;
 }
 
-.user-inui-img {
-    display: flex;
-    justify-content: center;
-}
-
 /* Alert Dismissable */
 .alert-dismissible {
     position: fixed;
@@ -709,10 +721,6 @@ table {
     overflow: hidden;
 }
 
-#dashboard-list {
-    border-bottom: 1px solid #ddd;
-}
-
 .dashboarduser-header {
     border-bottom: 2px solid #cbcbcb;
 }
@@ -730,29 +738,14 @@ table {
         padding-left: 0;
     }
     h2 {
-        font-family: "JetBrains Mono";
+        font-family: "Bungee";
         text-transform: uppercase;
-        font-weight: 800;
+        font-size: 40px;
     }
 }
 .dashboarduser-table:hover {
     border: 2px solid #ddd;
     transform: scale(1.01);
-}
-.dashboard-col {
-    animation: dashboard-colreload 0.8s ease-out forwards;
-    opacity: 0;
-    animation-delay: 0.6s;
-}
-@keyframes dashboard-colreload {
-    0% {
-        transform: translateY(5%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 .dashboard-col .dash-hello {
     background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
@@ -800,8 +793,17 @@ table {
     transform: translateX(0);
     transition: transform 0.3s ease-out;
 }
-#dashboard-list:hover #emailconfig {
-    transform: translateX(10px);
+
+#dashboard-list {
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease-out;
+}
+
+#dashboard-list:hover {
+    background-color: #ededed;
+    #emailconfig {
+        transform: translateX(10px);
+    }
 }
 
 .dashboarduseredit {

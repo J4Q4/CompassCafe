@@ -21,7 +21,7 @@
 
   </head>
   <body>
-    <div class="container-fluid loadscreen"></div>
+    <div class="container-fluid" id="loadscreen"></div>
 
     <button onclick="scrollToTop()" id="resetButton" title="Go to top">
       <i class="fa fa-angle-up"></i>
@@ -241,6 +241,23 @@
 
     <!-- Dashboard Popup -->
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+
+    <!-- Load Screen -->
+    {% if request.path == '/home' %} <!-- If Home Webpage -->
+    <script>
+      $(window).on('load', function () {
+      setTimeout(function() {
+        $('#loadscreen').addClass('loadtrigger');
+      }, 2000);
+      });
+    </script>
+    {% else %} <!-- If Other Webpage -->
+    <script>
+      $(window).on('load', function () {
+      $('#loadscreen').addClass('loadtrigger');
+      });
+    </script>
+    {% endif %}
 
   </body>
 </html>

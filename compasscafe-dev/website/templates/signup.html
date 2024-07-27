@@ -4,69 +4,79 @@
 <!-- Blank Space -->
 <section class="blankspace-test">
   <section class="beigespace-test">
-    <div class="row user-inui user-signupui">
-      <div class="col">
-        <form method="POST">
-          <h1>Welcome!</h1>
-          <h6>Create an account.</h6>
-          <br>
-          <div class="form-group">
-              <label for="email">School Email</label>
-              <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  class="form-control"
-                  placeholder="School Email"
-                  Required
-              />
-              <br/>
-              <label for="username">School ID</label>
-              <input
-                  type="number"
-                  id="schoolid"
-                  name="schoolid"
-                  class="form-control"
-                  placeholder="00000"
-                  min="10000"
-                  max="99999"
-              /> <!-- 5 digits school ID -->
-              <br/>
-              <label for="password1">Password</label>
-              <input
-                  type="password"
-                  id="password1"
-                  name="password1"
-                  class="form-control"
-                  placeholder="Password"
-                  Required
-              />
-              <br/>
-              <label for="password2">Confirm Password</label>
-              <input
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  class="form-control"
-                  placeholder="Confirm Password"
-                  Required
-              />
-              <br/>
+    <div class="preload-fadein">
+      <div class="row user-inui user-signupui">
+        <div class="col">
+          <form method="POST">
+            <h1>Welcome!</h1>
+            <h6>Create an account.</h6>
+            <br>
+            <div class="form-group">
+                <label for="email">School Email</label>
+                <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    class="form-control"
+                    placeholder="School Email"
+                    Required
+                />
+                <br/>
+                <label for="username">School ID</label>
+                <input
+                    type="number"
+                    id="schoolid"
+                    name="schoolid"
+                    class="form-control"
+                    placeholder="00000"
+                    min="10000"
+                    max="99999"
+                /> <!-- 5 digits school ID -->
+                <br/>
+                <label for="password1">Password</label>
+                <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    class="form-control"
+                    placeholder="Password"
+                    Required
+                />
+                <br/>
+                <label for="password2">Confirm Password</label>
+                <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    class="form-control"
+                    placeholder="Confirm Password"
+                    Required
+                />
+                <br/>
+                <div class="user-inuibtn" align="center">
+                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                </div>
+              </br>
               <div class="user-inuibtn" align="center">
-                  <button class="btn btn-primary" type="submit">Sign Up</button>
+                <a class="btn btn-secondary" href="/login">Existing Account? Log In</a>
               </div>
-            </br>
-            <div class="user-inuibtn" align="center">
-              <a class="btn btn-secondary" href="/login">Existing Account? Log In</a>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
+        <div class="col user-inui-img">
+          <img src="/static/assets/media/filler.png" alt="Sign Up Image" id="user-inui-img"/>
+        </div>
       </div>
-      <div class="col user-inui-img">
-        <img src="/static/assets/media/filler.png" alt="Sign Up Image" id="user-inui-img"/>
-      </div>
-  </section
+    </div>
+  </section>
 </section>
 <!-- End of Blank Space -->
 
+
 {% endblock %}
+
+
+
+
+
+

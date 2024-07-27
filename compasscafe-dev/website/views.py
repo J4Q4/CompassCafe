@@ -56,8 +56,9 @@ def dashboard():
         flash('You do not have permission to access this page.', category='error')
         return redirect(url_for('views.home'))
 
-    filter_form = FilterForm()
     query = User.query
+
+    filter_form = FilterForm()
 
     if filter_form.validate_on_submit():
         if filter_form.email.data:

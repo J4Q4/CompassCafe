@@ -1,6 +1,21 @@
-// Dashboard Popup //
+// Toggle Password Visibility //
+function togglePassword() {
+    var passwordField = document.getElementById("password");
+    var confirmPasswordField = document.getElementById("confirm_password");
+    var showPassword = document.getElementById("showPassword");
+    if (showPassword.checked) {
+        passwordField.type = "text";
+        confirmPasswordField.type = "text";
+    } else {
+        passwordField.type = "password";
+        confirmPasswordField.type = "password";
+    }
+}
+
+
+// Dashboard Popup Filter //
 document.addEventListener('DOMContentLoaded', (event) => {
-    const popup = document.getElementById("myPopup");
+    const popup = document.getElementById("filterjsPopup");
     const btn = document.getElementById("filterPopBTN");
 
     // Declare Show Popup
@@ -25,3 +40,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
+// Hide Spline Watermark //
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var splineViewer = document.querySelector('spline-viewer');
+        if (splineViewer) {
+            var shadowRoot = splineViewer.shadowRoot;
+            if (shadowRoot) {
+                var logo = shadowRoot.querySelector('a#logo');
+                if (logo) {
+                    logo.style.display = 'none';
+                }
+            }
+        }
+    }, 2000); // 2s Delay [ Give Load Time - Loadscreen ]
+});
