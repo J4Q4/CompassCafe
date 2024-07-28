@@ -115,7 +115,11 @@ html.noscroll, body.noscroll {
 .preload-fadein {
     animation: preload-fadein 0.8s ease-out forwards;
     opacity: 0;
-    animation-delay: 0.6s;
+    animation-delay: 0.8s;
+}
+
+.initiate {
+    animation-play-state: running;
 }
 @keyframes preload-fadein {
     0% {

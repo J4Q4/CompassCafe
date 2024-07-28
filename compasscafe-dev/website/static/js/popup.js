@@ -13,31 +13,56 @@ function togglePassword() {
 }
 
 
-// Dashboard Popup Filter //
-document.addEventListener('DOMContentLoaded', (event) => {
-    const popup = document.getElementById("filterjsPopup");
-    const btn = document.getElementById("filterPopBTN");
 
-    // Declare Show Popup
-    function showPopup() {
-        popup.classList.add("dash-popupjs");
-    }
 
+document.addEventListener('DOMContentLoaded', () => {
+    
     // Show Popup
-    btn.onclick = function() {
+    function togglePopup(popup) {
         if (popup.classList.contains("dash-popupjs")) {
             popup.classList.remove("dash-popupjs");
         } else {
-            showPopup();
+            popup.classList.add("dash-popupjs");
         }
     }
+
     // Click out of Range – Close Popup
-    window.onclick = function(event) {
-        if (event.target !== btn && event.target !== popup && !popup.contains(event.target)) {
-            popup.classList.remove("dash-popupjs");
-        }
+    function closePopup(popup) {
+        popup.classList.remove("dash-popupjs");
     }
+
+    
+    // Sort Popup
+    const sortPopup = document.getElementById("sortjsPopup");
+    const sortBtn = document.getElementById("sortPopBTN");
+
+    sortBtn.addEventListener('click', () => {
+        togglePopup(sortPopup);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target != sortBtn && !sortPopup.contains(event.target)) {
+            closePopup(sortPopup);
+        }
+    });
+
+    // Filter Popup
+    const filterPopup = document.getElementById("filterjsPopup");
+    const filterBtn = document.getElementById("filterPopBTN");
+
+    filterBtn.addEventListener('click', () => {
+        togglePopup(filterPopup);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target != filterBtn && !filterPopup.contains(event.target)) {
+            closePopup(filterPopup);
+        }
+    });
+
 });
+
+
 
 
 // Hide Spline Watermark //

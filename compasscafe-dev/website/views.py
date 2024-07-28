@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
 from flask_login import login_required, current_user
-from .models import Post, User, Like, Comment, EditUser, FilterForm
+from .models import Post, User, Like, Comment, EditUser, FilterForm, SortForm
 from werkzeug.security import generate_password_hash
 from . import db
 
@@ -58,13 +58,32 @@ def dashboard():
 
     query = User.query
 
+    sort_by = request.args.get('sort_by', 'email_asc')
+    sort_form = SortForm(data={'sort_by': sort_by})
     filter_form = FilterForm()
+    
+    
+    # SORT USER [ INVERTED ASC/DESC TO MAKE SENSE ]
+    if request.args.get('sort_by'):
+        sort_by = request.args.get('sort_by')
+        if sort_by == 'email_asc':
+            query = query.order_by(User.email.desc())
+        elif sort_by == 'email_desc':
+            query = query.order_by(User.email.asc())
+        elif sort_by == 'is_staff_asc':
+            query = query.order_by(User.is_staff.desc())
+        elif sort_by == 'is_staff_desc':
+            query = query.order_by(User.is_staff.asc())
 
+    # FILTER USER
     if filter_form.validate_on_submit():
         if filter_form.email.data:
             query = query.filter(User.email.contains(filter_form.email.data))
-        if filter_form.is_staff.data:
+        if filter_form.is_staff_true.data and not filter_form.is_staff_false.data:
             query = query.filter_by(is_staff=True)
+        elif filter_form.is_staff_false.data and not filter_form.is_staff_true.data:
+            query = query.filter_by(is_staff=False)
+            
 
     users = query.all()
 
@@ -98,7 +117,9 @@ def dashboard():
         else:
             edit_form = EditUser(obj=user)
 
-    return render_template("dashboard.html", user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, filter_form=filter_form)
+    return render_template("dashboard.html",
+                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, 
+                           filter_form=filter_form, sort_form=sort_form)
 
 
 # DELETE USER ROUTE

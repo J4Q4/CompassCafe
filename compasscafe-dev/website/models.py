@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from . import db
 # User Admin Handling
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, Optional
 
 ## DATABASE ENTRY CLASSES ##
@@ -38,10 +38,28 @@ class EditUser(FlaskForm):
 
 
 # Filter User
+
 class FilterForm(FlaskForm):
     email = StringField('Email', validators=[Optional()], render_kw={"placeholder": "Email"})
-    is_staff = BooleanField('Admin')
+    is_staff_true = BooleanField('Is Admin')
+    is_staff_false = BooleanField('Not Admin')
     submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
+
+
+# Sort User
+
+class SortForm(FlaskForm):
+    sort_by = SelectField(
+        'Sort By',
+        choices=[
+            ('email_asc', 'Email (Ascending)'),
+            ('email_desc', 'Email (Descending)'),
+            ('is_staff_asc', 'Admin Status (Ascending)'),
+            ('is_staff_desc', 'Admin Status (Descending)')
+        ],
+        validators=[Optional()]
+    )
+    submit = SubmitField('Sort', render_kw={"class": "btn btn-secondary"})
 
 
 # USER ACTIONS

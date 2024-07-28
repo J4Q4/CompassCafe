@@ -84,35 +84,49 @@
                 <div class="dashboarduser-table">
 
 
-                    <!-- Filter Users -->
+                    <!-- User Views -->
                     <div id="sortbuttons">
                         <h3>Users</h3>
                         <ul class="buttonclass">
+                            <!-- Sort User -->
                             <li>
-                                <button class="btn btn-secondary" type="button">Sort</button>
+                                <form method="GET" action="{{ url_for('views.dashboard') }}">
+                                    {{ sort_form.hidden_tag() }}
+                                    <button id="sortPopBTN" class="btn btn-secondary" type="button">Sort</button> <!-- Pop Up Filter Button -->
+
+                                    <div id="sortjsPopup" class="filterpopup">
+                                        <label for="sort_by">Sort By:</label>
+                                        {{ sort_form.sort_by() }}
+                                        <button type="submit" class="btn btn-secondary">{{ sort_form.submit.label }}</button> <!-- Submit Filter Button -->
+                                    </div>
+                                </form>
                             </li>
+                            <!-- Filter User -->
                             <li>
                                 <form method="POST" action="{{ url_for('views.dashboard') }}">
                                     {{ filter_form.hidden_tag() }}
-                                    <button id="filterPopBTN" class="btn btn-secondary" type="button">Filter</button>
+                                    <button id="filterPopBTN" class="btn btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
                     
                                     <div id="filterjsPopup" class="filterpopup">
                                         <div class="popup-content">
                                             <ul>
-                                            <li>
-                                                <p>Email</p>
-                                                {{ filter_form.email(size=32) }}
-                                            </li>
-                                            <br>
-                                            <li>
-                                                {{ filter_form.is_staff() }} Admin
-                                            </li>
-                                            <br>
-                                            <li>
-                                                <a>{{ filter_form.submit() }}</a>
-                                                </button>
-                                            </li>
-                                        </ul>
+                                                <li>
+                                                    <p>Email</p>
+                                                    {{ filter_form.email(size=32) }}
+                                                </li>
+                                                <br>
+                                                <li>
+                                                    {{ filter_form.is_staff_true() }} Is Admin
+                                                </li>
+                                                <br>
+                                                <li>
+                                                    {{ filter_form.is_staff_false() }} Not Admin
+                                                </li>
+                                                <br>
+                                                <li> 
+                                                    <a>{{ filter_form.submit() }}</a> <!-- Submit Filter Button -->
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </form>
