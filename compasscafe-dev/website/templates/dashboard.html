@@ -95,9 +95,18 @@
                                     <button id="sortPopBTN" class="btn btn-secondary" type="button">Sort</button> <!-- Pop Up Filter Button -->
 
                                     <div id="sortjsPopup" class="filterpopup">
-                                        <label for="sort_by">Sort By:</label>
-                                        {{ sort_form.sort_by() }}
-                                        <button type="submit" class="btn btn-secondary">{{ sort_form.submit.label }}</button> <!-- Submit Filter Button -->
+                                        <div class="popup-content">
+                                            <ul>
+                                                <li>
+                                                    <p>Sort By</p>
+                                                    {{ sort_form.sort_by() }}
+                                                </li>
+                                                <br>
+                                                <li>
+                                                    <a>{{ sort_form.submit() }}</a> <!-- Submit Filter Button -->
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </form>
                             </li>

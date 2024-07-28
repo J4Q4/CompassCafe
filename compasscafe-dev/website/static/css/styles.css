@@ -115,10 +115,10 @@ html.noscroll, body.noscroll {
 .preload-fadein {
     animation: preload-fadein 0.8s ease-out forwards;
     opacity: 0;
-    animation-delay: 0.8s;
 }
 
-.initiate {
+.preload-fadein.initiate {
+    animation-delay: 0.9s;
     animation-play-state: running;
 }
 @keyframes preload-fadein {
@@ -779,6 +779,7 @@ table {
         height: 130%;
         bottom: 0;
         right: 50px;
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
     }
 }
 
@@ -891,6 +892,16 @@ table {
         input[type="checkbox"] {
             transform: scale(1.4);
             margin-right: 5px;
+        }
+        input[type="select"] {
+            padding: 20px;
+        }
+        select {
+            padding: 15px;
+            border: #000 1px solid;
+            border-radius: 5px;
+            width: 100%;
+            font-family: "JetBrains Mono";
         }
     }
 }

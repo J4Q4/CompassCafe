@@ -50,7 +50,6 @@ class FilterForm(FlaskForm):
 
 class SortForm(FlaskForm):
     sort_by = SelectField(
-        'Sort By',
         choices=[
             ('email_asc', 'Email (Ascending)'),
             ('email_desc', 'Email (Descending)'),
@@ -59,7 +58,7 @@ class SortForm(FlaskForm):
         ],
         validators=[Optional()]
     )
-    submit = SubmitField('Sort', render_kw={"class": "btn btn-secondary"})
+    submit = SubmitField('Sort', render_kw={"class": "btn btn-primary"})
 
 
 # USER ACTIONS

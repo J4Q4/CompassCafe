@@ -63,13 +63,14 @@ def dashboard():
     filter_form = FilterForm()
     
     
-    # SORT USER [ INVERTED ASC/DESC TO MAKE SENSE ]
+    # SORT USER
     if request.args.get('sort_by'):
         sort_by = request.args.get('sort_by')
         if sort_by == 'email_asc':
-            query = query.order_by(User.email.desc())
-        elif sort_by == 'email_desc':
             query = query.order_by(User.email.asc())
+        elif sort_by == 'email_desc':
+            query = query.order_by(User.email.desc())
+        # STAFF - [ INVERTED ASC/DESC TO MAKE SENSE ]
         elif sort_by == 'is_staff_asc':
             query = query.order_by(User.is_staff.desc())
         elif sort_by == 'is_staff_desc':
