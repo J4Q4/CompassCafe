@@ -1,2 +1,3 @@
 .myenv/
 /compasscafe-dev/website/__pycache__
+.DS_Store
