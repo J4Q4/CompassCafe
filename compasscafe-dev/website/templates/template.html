@@ -21,7 +21,9 @@
 
   </head>
   <body>
-    <div class="container-fluid" id="loadscreen"></div>
+    <div class="container-fluid" id="loadscreen">
+      <img src="/static/assets/img/LogoDesign-White.svg" alt="Compass Logo" id="loadscreen-logo" draggable="false">
+    </div>
 
     <button onclick="scrollToTop()" id="resetButton" title="Go to top">
       <i class="fa fa-angle-up"></i>
@@ -243,19 +245,20 @@
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 
     <!-- Load Screen -->
-    {% if request.path == '/home' %} <!-- If Home Webpage -->
+    {% if request.path == '/home' or request.path == '/' %} <!-- If Home Webpage -->
     <script>
-      $(window).on('load', function () {
+      window.addEventListener('load', function () {
       setTimeout(function() {
-        $('#loadscreen').addClass('loadtrigger');
-        $('html, body').addClass('noscroll');
+      document.getElementById('loadscreen').classList.add('loadtrigger');
+      document.documentElement.classList.add('noscroll');
       }, 3000); //3s Delay to fully load Spline
       });
     </script>
     {% else %} <!-- If Other Webpage -->
     <script>
-      $(window).on('load', function () {
-      $('#loadscreen').addClass('loadtrigger');
+      window.addEventListener('load', function () {
+      document.getElementById('loadscreen').classList.add('loadtrigger');
+      document.documentElement.classList.add('noscroll');
       });
     </script>
     {% endif %}

@@ -82,9 +82,17 @@ textarea:hover {
     background-color: var(--main-white);
     z-index: 100000000;
     position: fixed;
+    img {
+        width: 10rem;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 250%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+    }
 }
 #loadscreen.loadtrigger {
-    animation: preload 0.6s ease-out forwards;
+    animation: preload 1.5s cubic-bezier(0.5, 0.1, 0.1, 1.0) forwards;
     animation-delay: 0.2s;
 }
 @keyframes preload {
@@ -97,6 +105,7 @@ textarea:hover {
         border-bottom: 50px solid var(--main-navy);
     }
 }
+
 /* NO SCROLL ON LOAD */
 html.noscroll, body.noscroll {
     overflow-y: visible;
@@ -763,7 +772,7 @@ table {
     background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
     img {
         position: absolute;
-        width: 400px;
+        height: 130%;
         bottom: 0;
         right: 50px;
     }
