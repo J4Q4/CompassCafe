@@ -29,10 +29,6 @@
     box-sizing: border-box;
 }
 
-p {
-    margin: 0;
-}
-
 /* Override Bootstrap's Default Padding */
 .container-fluid {
     padding: 0;
@@ -599,6 +595,18 @@ body {
         pointer-events: none;
     }
 }
+#hero-wave {
+    width: 200vw;
+    animation: herowave-move 8s infinite linear reverse;
+}
+@keyframes herowave-move {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
+}
 
 .hero3dviewer {
     top: 0;
@@ -937,4 +945,11 @@ table {
     }
 }
 
-
+#progressBar {
+    width: 0;
+    background-color: var(--main-navy);
+    text-align: center;
+    color: #fff;
+    transition: width 0.5s cubic-bezier(0.6, 0.8, 1.0, 0.8);
+    font-family: "JetBrains Mono";
+}

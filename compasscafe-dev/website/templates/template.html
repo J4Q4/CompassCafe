@@ -22,6 +22,7 @@
   </head>
   <body>
     <div class="container-fluid" id="loadscreen">
+      <div id="progressBar">0%</div>
       <img src="/static/assets/img/LogoDesign-White.svg" alt="Compass Logo" id="loadscreen-logo" draggable="false">
     </div>
 
@@ -260,6 +261,16 @@
       document.getElementById('loadscreen').classList.add('loadtrigger');
       document.documentElement.classList.add('noscroll');
       document.querySelector('.preload-fadein').classList.add('initiate');
+      
+      var progressBar = document.getElementById('progressBar');
+      var progress = 0;
+      var interval = setInterval(function() {
+        progress += 10;
+        progressBar.style.width = progress + '%';
+        if (progress >= 100) {
+        clearInterval(interval);
+        }
+      }, 300);
       });
     </script>
     {% endif %}

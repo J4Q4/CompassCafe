@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 // Hide Spline Watermark //
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
@@ -84,3 +85,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
+// Preload Progress Bar //
+document.addEventListener('DOMContentLoaded', function() {
+    var progressBar = document.getElementById('progressBar');
+    var progress = 0;
+    var interval = setInterval(function() {
+        progress += 10;
+        // Visuals //
+        progressBar.style.width = progress + '%';
+        progressBar.innerText = progress + '%';
+        if (progress >= 100) {
+            clearInterval(interval);
+        }
+    }, 300); // Progress Length //
+  });

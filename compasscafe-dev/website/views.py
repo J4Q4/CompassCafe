@@ -91,9 +91,10 @@ def dashboard():
     # EDIT USER ROUTE
     edit_user_id = request.args.get('edit_user_id')
     edit_form = EditUser()
+    sort_form = SortForm()
     if edit_user_id:
         user = User.query.get_or_404(edit_user_id)
-
+    
         # Admin Config Lock
         if user.email == 'admin@sanctamaria.school.nz':
             flash('This user cannot be edited.', category='error')
@@ -109,7 +110,9 @@ def dashboard():
                     user.password = generate_password_hash(edit_form.password.data)
                 elif edit_form.password.data or edit_form.confirm_password.data:
                     flash('Please confirm password!', category='error')
-                    return render_template("dashboard.html", user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id)
+                    return render_template("dashboard.html",
+                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, 
+                           filter_form=filter_form, sort_form=sort_form)
                 db.session.commit()
                 flash('User configuration successful!', category='success')
                 return redirect(url_for('views.dashboard'))
