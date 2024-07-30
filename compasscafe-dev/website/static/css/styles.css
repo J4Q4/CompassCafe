@@ -80,9 +80,10 @@ textarea:hover {
     position: fixed;
     img {
         width: 10rem;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 250%);
+        position: relative;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -80%);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 50%;
     }

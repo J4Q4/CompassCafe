@@ -1,0 +1,45 @@
+{% extends "template.html" %}{% block title %}Submit an Application{% endblock %}
+{% block content %}
+
+<section class="beigespace-test">
+    <div class="preload-fadein">
+        <h1 align="center">Submit an Application</h1>
+        <form method="POST" action="{{ url_for('views.create_dutydate') }}">
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" id="firstname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="lastname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="date_duty">Duty Date and Time</label>
+                <input type="date" name="date_duty" id="date_duty" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="yearlevel">Year Level</label>
+                <select name="yearlevel" id="yearlevel" class="form-control" required>
+                    <option value="" disabled selected>Year Level</option>
+                    <option value="13">Year 13</option>
+                    <option value="12">Year 12</option>
+                    <option value="11">Year 11</option>
+                    <option value="≤10">Year 10 and Below</option>
+                </select>
+            </div>
+            <br/>
+            <div align="center">
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
+        </form>
+        <br/>
+        <div align="center">
+            <a href="/apply">
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </a>
+        </div>
+        <br/>
+    </div>
+</section>
+
+{% endblock %}

@@ -20,8 +20,8 @@ def login():
 
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
-            # Admin User Login
-            if email == 'admin@sanctamaria.school.nz' and check_password_hash('hashed_password', password):
+            # Original Admin User Login
+            if email == 'admin@sanctamaria.school.nz':
                 user.is_staff = True
                 db.session.commit()  # Save the changes to the database
                 flash('Logged in as admin!', category='success')

@@ -1,33 +1,115 @@
 {% extends "template.html" %}{% block title %}Apply{% endblock %}
 {% block content %}
 
-<!-- Blank Space -->
-<!-- Blank Space -->
 <section class="beigespace-test">
   <div class="preload-fadein">
-    yuh
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    apply
+    <h1 align="center">Applications</h1>
+        <div class="row">
+        <div class="col col-md-4">
+            <div id="posts">
+                {% for post in posts %}
+                <div class="card border-dark">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
+                        {% if user.id == post.author %}
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/apply/delete-duty/{{ post.id }}" class="dropdown-item">Delete</a></li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>First Name: {{ post.firstname }}</p>
+                            <p>Last Name: {{ post.lastname }}</p>
+                            <p>Duty Date: {{ post.date_duty.strftime('%Y / %m / %d') if post.date_duty else 'N/A' }}</p>
+                            <p>Year Level: {{ post.yearlevel }}</p>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                {% endfor %}
+            </div>
+            <br/>
+            <div align="center">
+                <a href="/apply/submit_duty"><button type="button" class="btn btn-primary btn-lg">Submit an Application</button></a>
+            </div>
+            <br/>
+        </div>
+        <div class="col col-md-8">
+            <div class="dashboarduser-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>WEEK A</th>
+                            <th>MON</th>
+                            <th>TUE</th>
+                            <th>WED</th>
+                            <th>THU</th>
+                            <th>FRI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Interval</strong></td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lunch</strong></td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="dashboarduser-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>WEEK A</th>
+                            <th>MON</th>
+                            <th>TUE</th>
+                            <th>WED</th>
+                            <th>THU</th>
+                            <th>FRI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Interval</strong></td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lunch</strong></td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                            <td> ha</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
   </div>
 </section>
-<!-- End of Blank Space -->
-<!-- End of Blank Space -->
+
+  
 
 {% endblock %}

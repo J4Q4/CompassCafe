@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from . import db
 # User Admin Handling
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DateField
 from wtforms.validators import DataRequired, Email, EqualTo, Optional
 
 ## DATABASE ENTRY CLASSES ##
@@ -62,6 +62,19 @@ class SortForm(FlaskForm):
 
 
 # USER ACTIONS
+
+# User's Application
+class Apply(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    firstname = db.Column(db.String(150), nullable=False)
+    lastname = db.Column(db.String(150), nullable=False)
+    date_duty = db.Column(db.DateTime, nullable=True)
+    yearlevel = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(150), db.ForeignKey('user.email', ondelete='CASCADE'), nullable=False)
+    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User', foreign_keys=[author], backref='applications', lazy=True)
+
 
 # User's Post
 class Post(db.Model):
