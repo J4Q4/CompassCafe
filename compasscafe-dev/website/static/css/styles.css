@@ -45,16 +45,38 @@ html {
     scroll-behavior: auto !important;
 }
 
+
+
+
+/* Custom Cursor */
 body {
     cursor: url(/static/assets/img/cursor-point.png), auto;
 }
-
-html, body {
-    overflow-y: hidden;
-    height: 100%;
+a:hover,
+i:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="number"]:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="checkbox"]:hover,
+input[type="date"]:hover,
+input[type="dropdown"]:hover,
+select:hover,
+textarea:hover,
+.btn-group button:hover,
+.show-button:hover,
+form #filterPopBTN, #sortPopBTN:hover {
+    cursor: url('/static/assets/img/cursor-ok.png'), pointer;
 }
 
-/* Temporary Load Screen */
+
+
+
+/* Pre-load Screen */
 #loadscreen{
     display: block;
     width: 100%;
@@ -88,6 +110,11 @@ html, body {
 }
 
 /* NO SCROLL ON LOAD */
+html, body {
+    overflow-y: hidden;
+    height: 100%;
+}
+/* Add Class to Scroll */
 html.noscroll, body.noscroll {
     overflow-y: visible;
     height: auto;
@@ -113,8 +140,20 @@ html.noscroll, body.noscroll {
     }
 }
 
+#progressBar {
+    width: 0;
+    background-color: var(--main-navy);
+    text-align: center;
+    color: #fff;
+    transition: width 0.5s cubic-bezier(0.6, 0.8, 1.0, 0.8);
+    font-family: "JetBrains Mono";
+}
+/* End of Pre-load Screen */
 
-/* Top Btn */
+
+
+
+/* Scroll to Top Btn */
 #resetButton {
     /* Button Correction */
     position: fixed;
@@ -138,7 +177,6 @@ html.noscroll, body.noscroll {
 #resetButton.show-button {
     bottom: 70px;
 }
-
 #resetButton:hover {
     background-color: #212121;
 }
@@ -148,7 +186,9 @@ html.noscroll, body.noscroll {
 }
 
 
-/* Notice */
+
+
+/* Notice Marquee Header */
 .noticeinf {
     overflow-x: hidden;
     white-space: nowrap;
@@ -173,7 +213,6 @@ html.noscroll, body.noscroll {
     color: var(--main-lightblue1);
     transition: 0.1s ease-in-out;
 }
-  
 .noticeinf-conveyor ul {
     display: flex;
     padding: 10px 0;
@@ -181,7 +220,6 @@ html.noscroll, body.noscroll {
     list-style-type: none;
     animation: slide 40s infinite linear;
 }
-
 .noticeinf-conveyor ul li {
     font-size: 20px;
     flex: 0 0 auto;
@@ -191,7 +229,6 @@ html.noscroll, body.noscroll {
     font-size: 13px;
     font-weight: 400;
 }
-  
 @keyframes slide {
     0% {
       transform: translateX(0);
@@ -200,11 +237,13 @@ html.noscroll, body.noscroll {
       transform: translateX(-100%);
     }
 }
-  
 .noticeinf:hover {
       background-color: #2a3155;
       color: #fff;
 }
+/* End of Notice Marquee Header */
+
+
 
 
 /* ## Navbar ## */
@@ -226,7 +265,6 @@ html.noscroll, body.noscroll {
 .navbar-brand, .account-dropdown, .navbar-toggler {
     pointer-events: auto;
 }
-
 
 /* Change Icon on Hover */
 /* Hover Logo */
@@ -260,7 +298,6 @@ html.noscroll, body.noscroll {
 .navbar-brand:hover {
     animation: navlogo-hover 0.5s ease-in-out forwards;
 }
-
 @keyframes navlogo-hover {
     0% {
         transform: translateY(0);
@@ -388,7 +425,6 @@ footer {
         border-bottom: #6c78b4 1px solid;
     }
 }
-
 .footer-lower {
     background-image: var(--bg-dark);
     padding: 0;
@@ -447,7 +483,6 @@ footer {
         transition: all 0.5s;
     }
 
-/* End of Hover Line Navbar */
 
     /* Upper Right */
     .upperfooter-right .upperfooter-up ul li {
@@ -476,6 +511,7 @@ footer {
 
 
 /* Footer Lower */
+/* Fixed Footer Scroll Reveal */
 body {
     background-image: var(--bg-dark);
     background-attachment: fixed;
@@ -534,16 +570,16 @@ body {
     font-weight: 300;
     text-transform: capitalize;
 }
-
 .lowerfooter-container {
     border-top: rgb(79, 79, 79) 1px solid;
     border-bottom: rgb(79, 79, 79) 1px solid;
 }
-
 /* ## End of Footer ## */
 
 
-/* ## TEMPORARY FIX [BETWEEN BODY + FOOTER] ## */
+
+
+/* ## Cover Fixed Footer with Container ## */
 .blankspace-test p {
     margin: 0;
 }
@@ -619,6 +655,8 @@ body {
 /* ## END OF HOME ## */
 
 
+
+
 /* ## USER LOGIN / SIGN UP ## */
 .user-loginui {
     background-color: #fff;
@@ -659,7 +697,13 @@ label {
 
 }
 
-input[type=text], input[type=number], input[type=email], input[type=password], input[type=date], #apply-dropdown {
+/* Input Fields */
+input[type=text], 
+input[type=number], 
+input[type=email], 
+input[type=password], 
+input[type=date], 
+#apply-dropdown {
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #000;
@@ -667,16 +711,19 @@ input[type=text], input[type=number], input[type=email], input[type=password], i
     background-color: #fff;
     font-family: "JetBrains Mono";
 }
-
-input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, #apply-dropdown:focus {
+input[type=text]:focus, 
+input[type=number]:focus, 
+input[type=email]:focus, 
+input[type=password]:focus, 
+#apply-dropdown:focus {
     border: 1px solid #acacac;
 }
-
 .form-control:focus {
     border-color: inherit;
     box-shadow: none;
   }
 
+/* Submit Button */
 .btn-primary {
     background-color: #000;
     border: none;
@@ -693,23 +740,25 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
     font-family: "JetBrains Mono";
     font-weight: 300;
     color: #000;
-
 }
 .btn-secondary:hover {
     background-color: #000;
     color: #fff;
 }
+/* End of Submit Button */
 
-.user-inui h1 {
+
+/* User UI Header */
+h1 {
     font-family: "Bungee";
     font-weight: 600;
     text-transform: uppercase;
-    width: 150px;
 }
 .user-inui .col {
     padding: 0;
 }
 
+/* Temporary User Login / Signup Image */
 #user-inui-img {
     width: 100%;
     height: auto;
@@ -717,7 +766,8 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
     display: flex;
 }
 
-/* Alert Dismissable */
+
+/* Flash Pop-up Alerts */
 .alert-dismissible {
     position: fixed;
     display: block;
@@ -731,16 +781,19 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input
     color: #fff;
     padding: 10px 20px;
 }
-
-
-
-
-h1 {
-    font-family: "JetBrains Mono";
-    text-transform: uppercase;
-    font-weight: 800;
+.alert-dismissible .fa-times {
+    color: #fff;
+    padding: 10px;
+    background-color: transparent;
+    border: 0;
+    transform: scale(1.5) translateX(4px);
 }
 
+
+
+
+/* Spreadsheet User Interface */
+/* Global */
 table, th, td {
     padding: 20px;
     border-collapse: collapse;
@@ -753,10 +806,10 @@ table {
     overflow: hidden;
 }
 
+/* Dashboard User Interface */
 .dashboarduser-header {
     border-bottom: 2px solid #cbcbcb;
 }
-
 .dashboarduser-table {
     border: 2px solid #fafafa;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
@@ -852,14 +905,6 @@ table {
     box-shadow: none;
 }
 
-.alert-dismissible .fa-times {
-    color: #fff;
-    padding: 10px;
-    background-color: transparent;
-    border: 0;
-    transform: scale(1.5) translateX(4px);
-}
-
 .col-md-3 {
     padding-right: 15px;
 }
@@ -872,10 +917,7 @@ table {
 }
 
 
-
-
 /* DASHBOARD USER FILTER */
-
 #sortbuttons {
     .buttonclass {
         list-style-type: none;
@@ -943,15 +985,9 @@ table {
         transform: translateY(0);
     }
 }
+/* End of Dashboard */
 
-#progressBar {
-    width: 0;
-    background-color: var(--main-navy);
-    text-align: center;
-    color: #fff;
-    transition: width 0.5s cubic-bezier(0.6, 0.8, 1.0, 0.8);
-    font-family: "JetBrains Mono";
-}
+
 
 
 /* APPLY TABLE */
