@@ -4,42 +4,54 @@
 <section class="beigespace-test">
   <div class="preload-fadein">
     <h1 align="center">Applications</h1>
+
         <div class="row">
         <div class="col col-md-4">
             <div id="posts">
+                {% if not user.is_staff %}
+                <h3>Your Applications</h3>
+                {% else %}
+                <h3>All Applications</h3>
+                {% endif %}
                 {% for post in posts %}
-                <div class="card border-dark">
-                    <div class="card-header d-flex justify-content-between align-items-center">
+                {% if user.id == post.author or user.is_staff %}
+                <div class="card card-apply">
+                    <div class="card-body">
                         <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
-                        {% if user.id == post.author %}
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"></button>
+                        {% if user.id == post.author or user.is_staff %}
+                        <div class="btn-group" id="apply-delete">
+                            <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-bs-toggle="dropdown"></button>
                             <ul class="dropdown-menu">
-                                <li><a href="/apply/delete-duty/{{ post.id }}" class="dropdown-item">Delete</a></li>
+                                <li><a href="/apply/delete-apply/{{ post.id }}" class="dropdown-item">Delete</a></li>
                             </ul>
                         </div>
                         {% endif %}
-                    </div>
-                    <div class="card-body">
                         <div class="card-text">
-                            <p>First Name: {{ post.firstname }}</p>
-                            <p>Last Name: {{ post.lastname }}</p>
-                            <p>Duty Date: {{ post.date_duty.strftime('%Y / %m / %d') if post.date_duty else 'N/A' }}</p>
-                            <p>Year Level: {{ post.yearlevel }}</p>
+                            <p><strong>First Name:</strong> {{ post.firstname }}
+                            <br><strong>Last Name:</strong> {{ post.lastname }}</p>
+                            <p><strong>Duty Date:</strong> 
+                                <br><strong>Selected Day:</strong> {{ post.date_day }}
+                                <br><strong>Selected Week:</strong> {{ post.date_duty }}
+                            </p>
+                            <p><strong>Year Level:</strong> {{ post.yearlevel }}</p>
                         </div>
                     </div>
                 </div>
                 <br/>
+                {% endif %}
                 {% endfor %}
             </div>
+            {% if not user.is_staff %}
             <br/>
             <div align="center">
                 <a href="/apply/submit_duty"><button type="button" class="btn btn-primary btn-lg">Submit an Application</button></a>
             </div>
             <br/>
+            {% endif %}
         </div>
         <div class="col col-md-8">
             <div class="dashboarduser-table">
+                <h3>Barista Roster</h3>
                 <table class="table">
                     <thead>
                         <tr>
@@ -53,21 +65,55 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Interval</strong></td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
+                        <!-- WEEK A2 : LUNCH -->
                         <tr>
                             <td><strong>Lunch</strong></td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
+                            <td> </td>
+                            <td> [USER 1A] </td> <!-- Week A2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 5A] </td> <!-- Week A2: Thursday -->
+                            <td> </td>
                         </tr>
+                        <tr>
+                            <td> 1:30 - 2:10 </td>
+                            <td> </td>
+                            <td> [USER 2A] </td> <!-- Week A2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 6A] </td> <!-- Week A2: Thursday -->
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> [USER 3A] </td> <!-- Week A2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 7A] </td> <!-- Week A2: Thursday -->
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> [USER 4A] </td> <!-- Week A2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 8A] </td> <!-- Week A2: Thursday -->
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <!-- END OF WEEK A2 : LUNCH -->
                     </tbody>
                 </table>
             </div>
@@ -76,7 +122,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>WEEK A</th>
+                            <th>WEEK B</th>
                             <th>MON</th>
                             <th>TUE</th>
                             <th>WED</th>
@@ -85,22 +131,56 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- WEEK B2 -->
                         <tr>
-                            <td><strong>Interval</strong></td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td><strong>Lunch</strong></td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
-                            <td> ha</td>
+                            <td> </td>
+                            <td> [User 1B] </td> <!-- Week B2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 5B] </td> <!-- Week B2: Thursday -->
+                            <td> </td>
                         </tr>
+                        <tr>
+                            <td> 1:30 - 2:10 </td>
+                            <td> </td>
+                            <td> [USER 2B] </td> <!-- Week B2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 6B] </td> <!-- Week B2: Thursday -->
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> [USER 3B] </td> <!-- Week B2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 7B] </td> <!-- Week B2: Thursday -->
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td> </td>
+                            <td> </td>
+                            <td> [USER 4B] </td> <!-- Week B2: Tuesday -->
+                            <td> </td>
+                            <td> [USER 8B] </td> <!-- Week B2: Thursday -->
+                            <td> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <!-- END OF WEEK A2 -->
                     </tbody>
                 </table>
             </div>

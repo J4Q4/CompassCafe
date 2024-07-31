@@ -1,8 +1,7 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
 from flask_login import login_required, current_user
 from .models import Post, User, Like, Comment, EditUser, FilterForm, SortForm, Apply
 from werkzeug.security import generate_password_hash
-from datetime import datetime
 from . import db
 
 views = Blueprint("views", __name__)
@@ -17,28 +16,28 @@ def home():
     return render_template("home.html", user=current_user)
 
 
-
 # MENU ROUTE
 @views.route("/menu")
 def menu():
     return render_template("menu.html", user=current_user, posts=posts)
 
 # NEWS ROUTE
+
+
 @views.route("/news")
 def news():
     return render_template("news.html", user=current_user, posts=posts)
 
 # SETTINGS ROUTE
+
+
 @views.route("/settings")
 @login_required
 def settings():
     return render_template("settings.html", user=current_user, posts=posts)
 
 
-
 ## ACTIONS ##
-
-
 
 
 # DELETE APPLICATIONS ROUTE
@@ -62,8 +61,7 @@ def dashboard():
     sort_by = request.args.get('sort_by', 'email_asc')
     sort_form = SortForm(data={'sort_by': sort_by})
     filter_form = FilterForm()
-    
-    
+
     # SORT USER
     if request.args.get('sort_by'):
         sort_by = request.args.get('sort_by')
@@ -85,7 +83,6 @@ def dashboard():
             query = query.filter_by(is_staff=True)
         elif filter_form.is_staff_false.data and not filter_form.is_staff_true.data:
             query = query.filter_by(is_staff=False)
-            
 
     users = query.all()
 
@@ -95,36 +92,38 @@ def dashboard():
     sort_form = SortForm()
     if edit_user_id:
         user = User.query.get_or_404(edit_user_id)
-    
+
         # Admin Config Lock
         if user.email == 'admin@sanctamaria.school.nz':
             flash('This user cannot be edited.', category='error')
             return redirect(url_for('views.dashboard'))
-        
+
         # User Email
         if request.method == 'POST':
             if edit_form.validate_on_submit():
-                
+
                 # Existing User Email
-                existing_user = User.query.filter_by(email=edit_form.email.data).first()
+                existing_user = User.query.filter_by(
+                    email=edit_form.email.data).first()
                 if existing_user and existing_user.id != user.id:
                     flash('Email is already in use.', category='error')
                     return render_template("dashboard.html",
-                                        user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, 
-                                        filter_form=filter_form, sort_form=sort_form)
-                
+                                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
+                                           filter_form=filter_form, sort_form=sort_form)
+
                 # Update User Email
                 user.email = edit_form.email.data
                 user.is_staff = edit_form.is_staff.data
-                
+
                 # User Password
                 if edit_form.password.data == edit_form.confirm_password.data:
-                    user.password = generate_password_hash(edit_form.password.data)
+                    user.password = generate_password_hash(
+                        edit_form.password.data)
                 elif edit_form.password.data or edit_form.confirm_password.data:
                     flash('Please confirm password!', category='error')
                     return render_template("dashboard.html",
-                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, 
-                           filter_form=filter_form, sort_form=sort_form)
+                                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
+                                           filter_form=filter_form, sort_form=sort_form)
                 db.session.commit()
                 flash('User configuration successful!', category='success')
                 return redirect(url_for('views.dashboard'))
@@ -134,7 +133,7 @@ def dashboard():
             edit_form = EditUser(obj=user)
 
     return render_template("dashboard.html",
-                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id, 
+                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
                            filter_form=filter_form, sort_form=sort_form)
 
 
@@ -145,9 +144,9 @@ def delete_user(user_id):
     if not current_user.is_staff:
         flash('Access denied!', 'danger')
         return redirect(url_for('views.home'))
-    
+
     user = User.query.get_or_404(user_id)
-    
+
     # Admin Config Lock
     if user.email == 'admin@sanctamaria.school.nz':
         flash('This user cannot be deleted.', category='error')
@@ -159,12 +158,6 @@ def delete_user(user_id):
     return redirect(url_for('views.dashboard'))
 
 
-
-
-
-
-
-
 # APPLY ROUTE
 @views.route("/apply")
 @login_required
@@ -172,7 +165,9 @@ def apply():
     posts = Apply.query.all()
     return render_template("apply.html", user=current_user, posts=posts)
 
+
 # CREATE APPLICATIONS ROUTE
+
 @views.route("/apply/submit_duty", methods=['GET', 'POST'])
 @login_required
 def create_dutydate():
@@ -180,48 +175,53 @@ def create_dutydate():
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
         date_duty = request.form.get('date_duty')
+        date_day = request.form.get('date_day')
         yearlevel = request.form.get('yearlevel')
-        
+
+        # Year Level Validation
         if not firstname or not lastname or not yearlevel:
-            flash('First name, last name, and year level are required', category='error')
+            flash('Full name, date and year level required.', category='error')
         elif yearlevel in ['≤10']:
-            flash('Year 10 students or below are not allowed to apply for duty.', category='error')
+            flash('Year 10 students or below are unable to apply for duty.',
+                  category='error')
         else:
-            # Convert date_duty to a datetime object if provided
-            date_duty = datetime.strptime(date_duty, '%Y-%m-%d') if date_duty else None
-            
+            # Formatting User Apply Input
             post = Apply(
-                firstname=firstname, 
-                lastname=lastname, 
-                date_duty=date_duty, 
-                yearlevel=yearlevel,
-                email=current_user.email,
-                author=current_user.id
+                firstname=firstname, lastname=lastname,
+                date_duty=date_duty, date_day=date_day,
+                yearlevel=yearlevel, email=current_user.email, author=current_user.id,
             )
             db.session.add(post)
             db.session.commit()
             flash('Successfully applied!', category='success')
+
+            # Store Selected Duty Date
+            session['selected_duty_day'] = date_day
+            session['selected_duty_week'] = date_duty
+
+            # Redirect to the 'apply' route
             return redirect(url_for('views.apply'))
-    
+
     return render_template('submitduty.html', user=current_user)
 
+
 # DELETE APPLICATIONS
-@views.route("/apply/delete-duty/<id>")
+
+@views.route("/apply/delete-apply/<id>")
 @login_required
 def delete_duty(id):
     application = Apply.query.filter_by(id=id).first()
     if not application:
         flash('Application does not exist.', category='error')
-    elif application.author != current_user.id:
-        flash('You do not have permission to delete this application.', category='error')
+    elif current_user.id != application.author and not current_user.is_staff:
+        flash('You do not have permission to delete this application.',
+              category='error')
     else:
         db.session.delete(application)
         db.session.commit()
         flash('Application deleted.', category='success')
         return redirect(url_for('views.apply'))
     return redirect(url_for('views.apply'))
-
-
 
 
 # CREATE POSTS ROUTE

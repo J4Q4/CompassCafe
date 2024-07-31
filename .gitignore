@@ -1,3 +1,4 @@
-.myenv/
+.myenv
+.WINenv
 /compasscafe-dev/website/__pycache__
 .DS_Store

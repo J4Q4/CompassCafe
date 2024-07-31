@@ -28,10 +28,11 @@ class User(db.Model, UserMixin):
 class EditUser(FlaskForm):
     email = StringField('Change Email', validators=[
         DataRequired(), Email()], render_kw={"placeholder": "Email"})
-    password = PasswordField('Change Password', render_kw={"placeholder": "Enter New Password"})
+    password = PasswordField('Change Password', render_kw={
+                             "placeholder": "Enter New Password"})
     confirm_password = PasswordField(
         'Confirm Password', validators=[
-            Optional(), EqualTo('password', message='Passwords must match')], 
+            Optional(), EqualTo('password', message='Passwords must match')],
         render_kw={"placeholder": "Re-Enter New password"})
     is_staff = BooleanField()
     submit = SubmitField('Update User', render_kw={"class": "btn btn-primary"})
@@ -40,7 +41,8 @@ class EditUser(FlaskForm):
 # Filter User
 
 class FilterForm(FlaskForm):
-    email = StringField('Email', validators=[Optional()], render_kw={"placeholder": "Email"})
+    email = StringField('Email', validators=[Optional()], render_kw={
+                        "placeholder": "Email"})
     is_staff_true = BooleanField('Is Admin')
     is_staff_false = BooleanField('Not Admin')
     submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
@@ -65,15 +67,23 @@ class SortForm(FlaskForm):
 
 # User's Application
 class Apply(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    # Visible Inputs
     firstname = db.Column(db.String(150), nullable=False)
     lastname = db.Column(db.String(150), nullable=False)
-    date_duty = db.Column(db.DateTime, nullable=True)
+    # Week A or B
+    date_duty = db.Column(db.String(50), nullable=True)
+    # Tuesday or Thursday Lunchtimes
+    date_day = db.Column(db.String(50), nullable=True)
     yearlevel = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(150), db.ForeignKey('user.email', ondelete='CASCADE'), nullable=False)
+    # Non-visible Inputs
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), db.ForeignKey(
+        'user.email', ondelete='CASCADE'), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    user = db.relationship('User', foreign_keys=[author], backref='applications', lazy=True)
+    author = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User', foreign_keys=[
+                           author], backref='applications')
 
 
 # User's Post

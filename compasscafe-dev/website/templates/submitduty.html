@@ -13,13 +13,29 @@
                 <label for="lastname">Last Name</label>
                 <input type="text" name="lastname" id="lastname" class="form-control" required>
             </div>
+            <br>
+
             <div class="form-group">
-                <label for="date_duty">Duty Date and Time</label>
-                <input type="date" name="date_duty" id="date_duty" class="form-control">
+                <label for="date_duty">Duty Week</label>
+                <select name="date_duty" id="apply-dropdown" class="form-control" required>
+                    <option value="" disabled selected>Choose a Week</option>
+                    <option value="Week A">Week A</option>
+                    <option value="Week B">Week B</option>
+                </select>
             </div>
+            
+            <div class="form-group">
+                <label for="date_day">Duty Day</label>
+                <select name="date_day" id="apply-dropdown" class="form-control" required>
+                    <option value="" disabled selected>Choose a Day</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Thursday">Thursday</option>
+                </select>
+            </div>
+            <br>
             <div class="form-group">
                 <label for="yearlevel">Year Level</label>
-                <select name="yearlevel" id="yearlevel" class="form-control" required>
+                <select name="yearlevel" id="apply-dropdown" class="form-control" required>
                     <option value="" disabled selected>Year Level</option>
                     <option value="13">Year 13</option>
                     <option value="12">Year 12</option>
@@ -28,6 +44,7 @@
                 </select>
             </div>
             <br/>
+
             <div align="center">
                 <button type="submit" class="btn btn-primary">Apply</button>
             </div>

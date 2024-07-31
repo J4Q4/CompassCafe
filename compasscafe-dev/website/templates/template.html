@@ -56,8 +56,8 @@
     <!-- Notice End -->
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm">
-      <div class="container-fluid d-flex align-items-center justify-content-between">
+    <nav class="navbar navbar-expand-sm home-navbar" id="nav-home">
+      <div class="container-fluid d-flex align-items-center justify-content-between nav-container">
 
         <!-- Logo -->
         <a class="navbar-brand" href="/home">
@@ -69,18 +69,23 @@
         
         <!-- Account Page - Dropdown -->
         <div class="account-dropdown d-sm-none d-flex align-items-center">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  id="nav-acctoggle">
             <i class="fa-regular fa-user"></i>
           </a>
           <ul class="dropdown-menu">
-            <!-- User Not Logged In -->
-            <li><a class="dropdown-item" href="/signup">sign up</a></li>
-            <li><a class="dropdown-item" href="/dashboard">login</a></li>
-            <!-- Admin User -->
+            <!-- Admin User-->
+            {% if user.is_authenticated and user.is_staff %}
             <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-            <!-- Regular User-->
-            <li><a class="dropdown-item" href="/setting">settings</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <!-- Regular User -->
+            <li><a class="dropdown-item" href="/settings">settings</a></li>
             <li><a class="dropdown-item" href="/logout">logout</a></li>
+            {% else %}
+            <!-- User Not Logged In -->
+            <li><a class="dropdown-item" href="/login">login</a></li>
+            <li><a class="dropdown-item" href="/signup">sign up</a></li>
+            {% endif %}
           </ul>
         </div>
         
@@ -106,7 +111,7 @@
             </li>
             <!-- Account Page - Dropdown (visible on larger screens) -->
             <li class="nav-item dropdown d-none d-sm-block">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  id="nav-acctoggle">
                 <i class="fa-regular fa-user"></i>
               </a>
               <ul class="dropdown-menu">

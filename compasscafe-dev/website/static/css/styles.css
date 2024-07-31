@@ -54,22 +54,6 @@ html, body {
     height: 100%;
 }
 
-a:hover,
-i:hover,
-button[type="submit"]:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="number"]:hover,
-input[type="text"]:hover,
-input[type="email"]:hover,
-input[type="password"]:hover,
-input[type="checkbox"]:hover,
-select:hover,
-textarea:hover {
-    cursor: url('/static/assets/img/cursor-ok.png'), pointer;
-}
-
 /* Temporary Load Screen */
 #loadscreen{
     display: block;
@@ -154,8 +138,13 @@ html.noscroll, body.noscroll {
 #resetButton.show-button {
     bottom: 70px;
 }
+
 #resetButton:hover {
     background-color: #212121;
+}
+#resetButton i {
+    font-size: 20px;
+    transform: translateY(-1px);
 }
 
 
@@ -228,7 +217,16 @@ html.noscroll, body.noscroll {
     width: 100%;
     display: block;
     z-index: 10000;
+    pointer-events: none;
 }
+
+.navbar .nav-container .navbar-nav * {
+    pointer-events: auto;
+}
+.navbar-brand, .account-dropdown, .navbar-toggler {
+    pointer-events: auto;
+}
+
 
 /* Change Icon on Hover */
 /* Hover Logo */
@@ -320,8 +318,8 @@ html.noscroll, body.noscroll {
 }
 
 /* Removes Dropdown Arrow */
-.dropdown-toggle::after {
-    content: none;
+#nav-acctoggle::after {
+    content: none !important;
 }
 
 /* Hover Line Navbar */
@@ -598,7 +596,7 @@ body {
 }
 #hero-wave {
     width: 200vw;
-    animation: herowave-move 8s infinite linear reverse;
+    animation: herowave-move 6.9s infinite linear reverse;
 }
 @keyframes herowave-move {
     0% {
@@ -661,7 +659,7 @@ label {
 
 }
 
-input[type=text], input[type=number], input[type=email], input[type=password] {
+input[type=text], input[type=number], input[type=email], input[type=password], input[type=date], #apply-dropdown {
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #000;
@@ -670,7 +668,7 @@ input[type=text], input[type=number], input[type=email], input[type=password] {
     font-family: "JetBrains Mono";
 }
 
-input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, #apply-dropdown:focus {
     border: 1px solid #acacac;
 }
 
@@ -953,4 +951,30 @@ table {
     color: #fff;
     transition: width 0.5s cubic-bezier(0.6, 0.8, 1.0, 0.8);
     font-family: "JetBrains Mono";
+}
+
+
+/* APPLY TABLE */
+.table {
+    table-layout: fixed;
+    width: 100%;
+}
+.table th, .table td {
+    text-align: center;
+}
+
+#apply-delete {
+    float: right;
+}
+
+/* Set individual table grid height */
+.table tr {
+    height: 40px;
+}
+
+.card-apply {
+    padding: 20px;
+    .card-body {
+        text-transform: capitalize;
+    }
 }
