@@ -244,7 +244,7 @@ def accept_application(post_id):
 
     post.status = 'accepted'
     db.session.commit()
-    flash('Application accepted!', category='success')
+    flash('Barista added!', category='success')
 
     return redirect(url_for('views.apply'))
 
