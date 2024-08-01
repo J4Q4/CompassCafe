@@ -184,7 +184,7 @@ def apply():
     post_pending = Apply.query.filter_by(status='pending').all()
 
     # DISPLAY DATE UNDER WEEKDAY
-    today = datetime.now()
+    today = datetime.now().date()
     weekDateA = get_week_dates(today)
     weekDateB = get_week_dates(today, weeks_offset=1)
     weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
@@ -192,13 +192,11 @@ def apply():
                   for tabledate in range(5)}
     datesWeekB = {weekday[tabledate]: weekDateB[tabledate]
                   for tabledate in range(5)}
-    datetoday = datetime.now().date()
-    datetoday = today
 
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
                            weekDateA=weekDateA, weekDateB=weekDateB,
-                           datesWeekA=datesWeekA, datesWeekB=datesWeekB, datetoday=datetoday)
+                           datesWeekA=datesWeekA, datesWeekB=datesWeekB, today=today)
 
 
 # CREATE APPLICATIONS ROUTE
