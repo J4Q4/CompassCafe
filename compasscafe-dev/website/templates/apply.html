@@ -11,7 +11,7 @@
     <br>
 
         <div class="row">
-        <div class="col col-md-4">
+        <div class="col col-md-3">
             <div id="posts">
                 {% if not user.is_staff %}
                 <h3>Your Applications</h3>
@@ -21,7 +21,7 @@
 
                 {% for post in post_pending %}
                 {% if user.id == post.author or user.is_staff %}
-                <div class="card card-apply">
+                <div class="dashboarduser-table">
                     <div class="card-body">
                         <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
                         {% if user.id == post.author or user.is_staff %}
@@ -55,7 +55,7 @@
             <br/>
             {% endif %}
         </div>
-        <div class="col col-md-8">
+        <div class="col col-md-9">
             <div class="dashboarduser-table">
                 <ul id="apply-barista">
                     <li>
@@ -105,14 +105,16 @@
                                     <!-- To Delete if Barista: Accepted Application -->
                                     {% for application in post_accept %}
                                         {% if application.firstname == week_a.tuesday[applylvl].firstname and application.lastname == week_a.tuesday[applylvl].lastname %}
-                                            <div>
-                                                <!-- Barista Delete Button -->
-                                                <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                                    <button class="dashboarduseredit" type="submit">
-                                                        <i class="fa fa-times" title='Remove'></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            {% if user.is_staff %}    
+                                            <!-- Barista Delete Button -->
+                                                <div>
+                                                    <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
+                                                        <button class="dashboarduseredit" type="submit">
+                                                            <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
@@ -125,14 +127,16 @@
                                     <!-- To Delete if Barista: Accepted Application -->
                                     {% for application in post_accept %}
                                         {% if application.firstname == week_a.thursday[applylvl].firstname and application.lastname == week_a.thursday[applylvl].lastname %}
-                                            <div>
-                                                <!-- Barista Delete Button -->
-                                                <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                                    <button class="dashboarduseredit" type="submit">
-                                                        <i class="fa fa-times" title='Remove'></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            {% if user.is_staff %}    
+                                            <!-- Barista Delete Button -->
+                                                <div>
+                                                    <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
+                                                        <button class="dashboarduseredit" type="submit">
+                                                            <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
@@ -186,14 +190,16 @@
                                     <!-- To Delete if Barista: Accepted Application -->
                                     {% for application in post_accept %}
                                         {% if application.firstname == week_b.tuesday[applylvl].firstname and application.lastname == week_b.tuesday[applylvl].lastname %}
-                                            <div>
-                                                <!-- Barista Delete Button -->
-                                                <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                                    <button class="dashboarduseredit" type="submit">
-                                                        <i class="fa fa-times" title='Remove'></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            {% if user.is_staff %}    
+                                            <!-- Barista Delete Button -->
+                                                <div>
+                                                    <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
+                                                        <button class="dashboarduseredit" type="submit">
+                                                            <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
@@ -206,14 +212,16 @@
                                     <!-- To Delete if Barista: Accepted Application -->
                                     {% for application in post_accept %}
                                         {% if application.firstname == week_b.thursday[applylvl].firstname and application.lastname == week_b.thursday[applylvl].lastname %}
-                                            <div>
-                                                <!-- Barista Delete Button -->
-                                                <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                                    <button class="dashboarduseredit" type="submit">
-                                                        <i class="fa fa-times" title='Remove'></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            {% if user.is_staff %}    
+                                            <!-- Barista Delete Button -->
+                                                <div>
+                                                    <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
+                                                        <button class="dashboarduseredit" type="submit">
+                                                            <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}

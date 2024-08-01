@@ -569,6 +569,10 @@ body {
     font-family: "JetBrains Mono";
     font-weight: 300;
     text-transform: capitalize;
+    p {
+        margin-bottom: 0;
+        text-align: right;
+    }
 }
 .lowerfooter-container {
     border-top: rgb(79, 79, 79) 1px solid;
@@ -708,13 +712,13 @@ input[type=text],
 input[type=number], 
 input[type=email], 
 input[type=password], 
-input[type=date], 
 #apply-dropdown {
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #000;
     border-radius: 4px;
     background-color: #fff;
+    color: #000;
     font-family: "JetBrains Mono";
 }
 input[type=text]:focus, 

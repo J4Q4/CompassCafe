@@ -116,14 +116,15 @@ def dashboard():
                 user.is_staff = edit_form.is_staff.data
 
                 # User Password
-                if edit_form.password.data == edit_form.confirm_password.data:
-                    user.password = generate_password_hash(
-                        edit_form.password.data)
-                elif edit_form.password.data or edit_form.confirm_password.data:
-                    flash('Please confirm password!', category='error')
-                    return render_template("dashboard.html",
-                                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
-                                           filter_form=filter_form, sort_form=sort_form)
+                if edit_form.password.data or edit_form.confirm_password.data:
+                    if edit_form.password.data == edit_form.confirm_password.data:
+                        user.password = generate_password_hash(
+                            edit_form.password.data)
+                    elif edit_form.password.data or edit_form.confirm_password.data:
+                        flash('Please confirm password!', category='error')
+                        return render_template("dashboard.html",
+                                               user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
+                                               filter_form=filter_form, sort_form=sort_form)
                 db.session.commit()
                 flash('User configuration successful!', category='success')
                 return redirect(url_for('views.dashboard'))
