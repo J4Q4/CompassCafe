@@ -920,9 +920,13 @@ table {
 
 .col-md-3 {
     padding-right: 15px;
+    position: relative;
+    z-index: 1000;
 }
 .col-md-9 {
     padding-left: 15px;
+    position: relative;
+    z-index: 950;
 }
 
 .dashboard-containermaster {
