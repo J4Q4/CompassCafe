@@ -192,11 +192,13 @@ def apply():
                   for tabledate in range(5)}
     datesWeekB = {weekday[tabledate]: weekDateB[tabledate]
                   for tabledate in range(5)}
+    datetoday = datetime.now().date()
+    datetoday = today
 
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
                            weekDateA=weekDateA, weekDateB=weekDateB,
-                           datesWeekA=datesWeekA, datesWeekB=datesWeekB)
+                           datesWeekA=datesWeekA, datesWeekB=datesWeekB, datetoday=datetoday)
 
 
 # CREATE APPLICATIONS ROUTE

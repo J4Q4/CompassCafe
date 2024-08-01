@@ -79,11 +79,31 @@
                             <th>FRI</th>
                         </tr>
                         <tr>
-                            <td><strong>{{ datesWeekA['Monday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekA['Tuesday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekA['Wednesday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekA['Thursday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekA['Friday'].strftime('%d %B') }}</strong></td>
+                            <td>
+                                <strong class="{% if datesWeekA['Monday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekA['Monday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekA['Tuesday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekA['Tuesday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekA['Wednesday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekA['Wednesday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekA['Thursday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekA['Thursday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekA['Friday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekA['Friday'].strftime('%d %B') }}</strong>
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
@@ -179,11 +199,31 @@
                             <th>FRI</th>
                         </tr>
                         <tr>
-                            <td><strong>{{ datesWeekB['Monday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekB['Tuesday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekB['Wednesday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekB['Thursday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ datesWeekB['Friday'].strftime('%d %B') }}</strong></td>
+                            <td>
+                                <strong class="{% if datesWeekB['Monday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekB['Monday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekB['Tuesday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekB['Tuesday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekB['Wednesday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekB['Wednesday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekB['Thursday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekB['Thursday'].strftime('%d %B') }}</strong>
+                            </td>
+                            <td>
+                                <strong class="{% if datesWeekA['Friday'] == datetoday %}
+                                datetoday-selected
+                                {% endif %}">{{ datesWeekB['Friday'].strftime('%d %B') }}</strong>
+                            </td>
                         </tr>
                     </thead>
                     <tbody>

@@ -1044,3 +1044,11 @@ table {
         text-transform: capitalize;
     }
 }
+
+/* Apply Schedule Calendar Today */
+.datetoday-selected {
+    background-color: var(--main-lightblue2) !important;
+    color: var(--main-navy) !important;
+    padding: 5px 20px;
+    border-radius: 15px;
+}
