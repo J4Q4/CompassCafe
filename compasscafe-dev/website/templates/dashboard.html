@@ -156,22 +156,22 @@
                             <td id="emailconfig">{{ user.email }}</td>
                             <td id="configicon">
                             {% if user.is_staff %}
-                            <i class="fas fa-check"></i>
+                            <i class="fas fa-check" title='Admin User'></i>
                             {% else %}
-                            <i class="fas fa-times"></i>
+                            <i class="fas fa-times" title='Regular User'></i>
                             {% endif %}
                             </td>
                             <td id="configicon">
                                 <a id="edituser_dash" href="{{ url_for('views.dashboard', edit_user_id=user.id) }}">
                                     <button class="dashboarduseredit" type="submit">
-                                        <i class="fa fa-pencil"></i>
+                                        <i class="fa fa-pencil"  title='Edit User'></i>
                                     </button>
                                 </a>
                             </td>
                             <td id="configicon">
                                 <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
                                     <button class="dashboarduseredit" type="submit">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-trash"  title='Delete User'></i>
                                     </button>
                                 </form>
                             </td>

@@ -250,20 +250,19 @@ def accept_application(post_id):
 
 # DELETE ACCEPTED APPLICATIONS
 
-@views.route("/apply/delete-duty/<id>")
+@views.route("/apply/delete-duty/<id>", methods=['POST'])
 @login_required
-def delete_accept (id):
+def delete_accept(id):
     application = Apply.query.filter_by(id=id).first()
     if not application:
-        flash('Application does not exist.', category='error')
+        flash('Barista does not exist.', category='error')
     elif current_user.id != application.author and not current_user.is_staff:
-        flash('You do not have permission to delete this application.',
+        flash('You do not have permission to delete this.',
               category='error')
     else:
         db.session.delete(application)
         db.session.commit()
-        flash('Application deleted.', category='success')
-        return redirect(url_for('views.apply'))
+        flash('Barista removed.', category='success')
     return redirect(url_for('views.apply'))
 
 
