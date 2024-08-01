@@ -10,6 +10,7 @@ views = Blueprint("views", __name__)
 ## WEBPAGES ##
 
 # HOME ROUTE
+
 @views.route("/")
 @views.route("/home")
 def home():
@@ -17,19 +18,20 @@ def home():
 
 
 # MENU ROUTE
+
 @views.route("/menu")
 def menu():
     return render_template("menu.html", user=current_user, posts=posts)
 
-# NEWS ROUTE
 
+# NEWS ROUTE
 
 @views.route("/news")
 def news():
     return render_template("news.html", user=current_user, posts=posts)
 
-# SETTINGS ROUTE
 
+# SETTINGS ROUTE
 
 @views.route("/settings")
 @login_required
@@ -40,15 +42,10 @@ def settings():
 ## ACTIONS ##
 
 
-# DELETE APPLICATIONS ROUTE
-# CREATE NEWS ROUTE
-# EDIT NEWS ROUTE
-# DELETE NEWS ROUTE
-
-
 ## ADMIN ROUTES ##
 
 # DASHBOARD ROUTE
+
 @views.route("/dashboard", methods=['GET', 'POST'])
 @login_required
 def dashboard():
@@ -63,6 +60,7 @@ def dashboard():
     filter_form = FilterForm()
 
     # SORT USER
+
     if request.args.get('sort_by'):
         sort_by = request.args.get('sort_by')
         if sort_by == 'email_asc':
@@ -87,6 +85,7 @@ def dashboard():
     users = query.all()
 
     # EDIT USER ROUTE
+
     edit_user_id = request.args.get('edit_user_id')
     edit_form = EditUser()
     sort_form = SortForm()
@@ -112,6 +111,7 @@ def dashboard():
                                            filter_form=filter_form, sort_form=sort_form)
 
                 # Update User Email
+
                 user.email = edit_form.email.data
                 user.is_staff = edit_form.is_staff.data
 
@@ -138,6 +138,7 @@ def dashboard():
 
 
 # DELETE USER ROUTE
+
 @views.route('/dashboard/delete_user/<int:user_id>', methods=['POST'])
 @login_required
 def delete_user(user_id):
@@ -159,11 +160,14 @@ def delete_user(user_id):
 
 
 # APPLY ROUTE
+
 @views.route("/apply")
 @login_required
 def apply():
     posts = Apply.query.all()
-    return render_template("apply.html", user=current_user, posts=posts)
+    post_accept = Apply.query.filter_by(status='accepted').all()
+    post_pending = Apply.query.filter_by(status='pending').all()
+    return render_template("apply.html", user=current_user, posts=posts, post_accept=post_accept, post_pending=post_pending)
 
 
 # CREATE APPLICATIONS ROUTE
@@ -177,6 +181,7 @@ def create_dutydate():
         date_duty = request.form.get('date_duty')
         date_day = request.form.get('date_day')
         yearlevel = request.form.get('yearlevel')
+        school_id = request.form.get('school_id')
 
         # Year Level Validation
         if not firstname or not lastname or not yearlevel:
@@ -190,6 +195,7 @@ def create_dutydate():
                 firstname=firstname, lastname=lastname,
                 date_duty=date_duty, date_day=date_day,
                 yearlevel=yearlevel, email=current_user.email, author=current_user.id,
+                schoolid=current_user.schoolid
             )
             db.session.add(post)
             db.session.commit()
@@ -205,7 +211,7 @@ def create_dutydate():
     return render_template('submitduty.html', user=current_user)
 
 
-# DELETE APPLICATIONS
+# DELETE PENDING APPLICATIONS
 
 @views.route("/apply/delete-apply/<id>")
 @login_required
@@ -224,7 +230,45 @@ def delete_duty(id):
     return redirect(url_for('views.apply'))
 
 
+# ACCEPT APPLICATIONS
+
+@views.route("/apply/accept-apply/<int:post_id>", methods=['GET', 'POST'])
+@login_required
+def accept_application(post_id):
+    post = Apply.query.get_or_404(post_id)
+
+    if not current_user.is_staff:
+        flash('You do not have permission to do this.', category='error')
+        return redirect(url_for('views.apply'))
+
+    post.status = 'accepted'
+    db.session.commit()
+    flash('Application accepted!', category='success')
+
+    return redirect(url_for('views.apply'))
+
+
+# DELETE ACCEPTED APPLICATIONS
+
+@views.route("/apply/delete-duty/<id>")
+@login_required
+def delete_accept (id):
+    application = Apply.query.filter_by(id=id).first()
+    if not application:
+        flash('Application does not exist.', category='error')
+    elif current_user.id != application.author and not current_user.is_staff:
+        flash('You do not have permission to delete this application.',
+              category='error')
+    else:
+        db.session.delete(application)
+        db.session.commit()
+        flash('Application deleted.', category='success')
+        return redirect(url_for('views.apply'))
+    return redirect(url_for('views.apply'))
+
+
 # CREATE POSTS ROUTE
+
 @views.route("/create_post", methods=['GET', 'POST'])
 @login_required
 def create_post():
@@ -242,6 +286,7 @@ def create_post():
 
 
 # USER POSTS ROUTE
+
 @views.route("/posts/<username>")
 @login_required
 def posts(username):
@@ -254,6 +299,7 @@ def posts(username):
 
 
 # DELETE POST
+
 @views.route("/delete-post/<id>")
 @login_required
 def delete_post(id):
@@ -270,6 +316,7 @@ def delete_post(id):
 
 
 # LIKE POST
+
 @views.route("/like-post/<post_id>", methods=['POST'])
 @login_required
 def like(post_id):
@@ -291,6 +338,7 @@ def like(post_id):
 
 
 # CREATE COMMENT
+
 @views.route("/create-comment/<post_id>", methods=["POST"])
 @login_required
 def create_comment(post_id):
@@ -310,6 +358,7 @@ def create_comment(post_id):
 
 
 # DELETE COMMENT
+
 @views.route("/delete-comment/<comment_id>")
 @login_required
 def delete_comment(comment_id):

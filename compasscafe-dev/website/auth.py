@@ -23,7 +23,7 @@ def login():
             # Original Admin User Login
             if email == 'admin@sanctamaria.school.nz':
                 user.is_staff = True
-                db.session.commit()  # Save the changes to the database
+                db.session.commit()
                 flash('Logged in as admin!', category='success')
             else:
                 flash('Logged in successfully!', category='success')
@@ -68,6 +68,12 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
+
+            if email == 'admin@sanctamaria.school.nz':
+                new_user.is_staff = True
+                db.session.commit()
+                flash('Registered as admin!', category='success')
+
             return redirect(url_for('views.home'))
 
     return render_template("signup.html", user=current_user)

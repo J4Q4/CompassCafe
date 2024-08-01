@@ -2,8 +2,13 @@
 {% block content %}
 
 <section class="beigespace-test">
+    <br>
+    <br>
+    <br>
+    <br>
   <div class="preload-fadein">
-    <h1 align="center">Applications</h1>
+    <h1>Applications</h1>
+    <br>
 
         <div class="row">
         <div class="col col-md-4">
@@ -13,7 +18,8 @@
                 {% else %}
                 <h3>All Applications</h3>
                 {% endif %}
-                {% for post in posts %}
+
+                {% for post in post_pending %}
                 {% if user.id == post.author or user.is_staff %}
                 <div class="card card-apply">
                     <div class="card-body">
@@ -23,16 +29,16 @@
                             <button type="button" class="btn btn-primary dropdown-toggle btn-lg" data-bs-toggle="dropdown"></button>
                             <ul class="dropdown-menu">
                                 <li><a href="/apply/delete-apply/{{ post.id }}" class="dropdown-item">Delete</a></li>
+                                {% if user.is_staff %}
+                                <li><a href="/apply/accept-apply/{{ post.id }}" class="dropdown-item">Accept</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                         {% endif %}
                         <div class="card-text">
-                            <p><strong>First Name:</strong> {{ post.firstname }}
-                            <br><strong>Last Name:</strong> {{ post.lastname }}</p>
-                            <p><strong>Duty Date:</strong> 
-                                <br><strong>Selected Day:</strong> {{ post.date_day }}
-                                <br><strong>Selected Week:</strong> {{ post.date_duty }}
-                            </p>
+                            <p>{{ post.schoolid }}</p>
+                            <p><strong>{{ post.firstname }} {{ post.lastname }}</strong></p>
+                            <p><strong>{{ post.date_day }}, {{ post.date_duty }}</strong></p>
                             <p><strong>Year Level:</strong> {{ post.yearlevel }}</p>
                         </div>
                     </div>
@@ -52,10 +58,11 @@
         <div class="col col-md-8">
             <div class="dashboarduser-table">
                 <h3>Barista Roster</h3>
+                <h6>Week A</h6>
+                <p>Lunch : 11:00 AM - 11:25 AM</p>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>WEEK A</th>
                             <th>MON</th>
                             <th>TUE</th>
                             <th>WED</th>
@@ -64,65 +71,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <!-- WEEK A2 : LUNCH -->
-                        <tr>
-                            <td><strong>Lunch</strong></td>
-                            <td> </td>
-                            <td> [USER 1A] </td> <!-- Week A2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 5A] </td> <!-- Week A2: Thursday -->
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td> 1:30 - 2:10 </td>
-                            <td> </td>
-                            <td> [USER 2A] </td> <!-- Week A2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 6A] </td> <!-- Week A2: Thursday -->
-                            <td> </td>
-                        </tr>
+                        <!-- Store Varied Applications : WEEK A -->
+                        {% set week_a = {'tuesday': [], 'thursday': []} %}
+                        {% for post in post_accept %}
+                            {% if post.date_duty == 'Week A' %}
+                                {% set day = post.date_day.lower() %}
+                                {% if day in week_a %}
+                                    {% set _ = week_a[day].append(post) %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                
+                        <!-- Check Number of Applications -->
+                        <!-- Set Max to the Most Entries for either Tuesday or Thursday -->
+                        {% set max_entries = week_a.tuesday|length if week_a.tuesday|length > week_a.thursday|length else week_a.thursday|length %}
+                
+                        <!-- Update Rows on Number of Applications -->
+                        {% for applylvl in range(max_entries) %}
                         <tr>
                             <td> </td>
+                            <td>
+                                {% if applylvl < week_a.tuesday|length %}
+                                    <p>{{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}</p>
+                                {% endif %}
+                            </td>
                             <td> </td>
-                            <td> [USER 3A] </td> <!-- Week A2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 7A] </td> <!-- Week A2: Thursday -->
+                            <td>
+                                {% if applylvl < week_a.thursday|length %}
+                                    <p>{{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}</p>
+                                {% endif %}
+                            </td>
                             <td> </td>
                         </tr>
-                        <tr>
-                            <td> </td>
-                            <td> </td>
-                            <td> [USER 4A] </td> <!-- Week A2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 8A] </td> <!-- Week A2: Thursday -->
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <!-- END OF WEEK A2 : LUNCH -->
+                        {% endfor %}
                     </tbody>
                 </table>
-            </div>
+                
+            </div>            
             <br>
             <div class="dashboarduser-table">
+                <h3>Barista Roster</h3>
+                <h6>Week B</h6>
+                <p>Lunch : 11:00 AM - 11:25 AM</p>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>WEEK B</th>
                             <th>MON</th>
                             <th>TUE</th>
                             <th>WED</th>
@@ -131,56 +124,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- WEEK B2 -->
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Lunch</strong></td>
-                            <td> </td>
-                            <td> [User 1B] </td> <!-- Week B2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 5B] </td> <!-- Week B2: Thursday -->
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td> 1:30 - 2:10 </td>
-                            <td> </td>
-                            <td> [USER 2B] </td> <!-- Week B2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 6B] </td> <!-- Week B2: Thursday -->
-                            <td> </td>
-                        </tr>
+                        <!-- Store Varied Applications : WEEK B -->
+                        {% set week_b = {'tuesday': [], 'thursday': []} %}
+                        {% for post in post_accept %}
+                            {% if post.date_duty == 'Week B' %}
+                                {% set day = post.date_day.lower() %}
+                                {% if day in week_b %}
+                                    {% set _ = week_b[day].append(post) %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                
+                        <!-- Check Number of Applications -->
+                        <!-- Set Max to the Most Entries for either Tuesday or Thursday -->
+                        {% set max_entries = week_b.tuesday|length if week_b.tuesday|length > week_b.thursday|length else week_b.thursday|length %}
+                
+                        <!-- Update Rows on Number of Applications -->
+                        {% for applylvl in range(max_entries) %}
                         <tr>
                             <td> </td>
+                            <td>
+                                {% if applylvl < week_b.tuesday|length %}
+                                    <p>{{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}</p>
+                                {% endif %}
+                            </td>
                             <td> </td>
-                            <td> [USER 3B] </td> <!-- Week B2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 7B] </td> <!-- Week B2: Thursday -->
+                            <td>
+                                {% if applylvl < week_b.thursday|length %}
+                                    <p>{{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}</p>
+                                {% endif %}
+                            </td>
                             <td> </td>
                         </tr>
-                        <tr>
-                            <td> </td>
-                            <td> </td>
-                            <td> [USER 4B] </td> <!-- Week B2: Tuesday -->
-                            <td> </td>
-                            <td> [USER 8B] </td> <!-- Week B2: Thursday -->
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <!-- END OF WEEK A2 -->
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

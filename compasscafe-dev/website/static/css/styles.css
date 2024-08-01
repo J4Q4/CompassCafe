@@ -683,6 +683,12 @@ body {
         margin: 0;
     }
 }
+/* Targeting WebKit browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
 
 .user-inuibtn button, .user-inuibtn a {
     width: 100%;
@@ -991,11 +997,16 @@ table {
 
 
 /* APPLY TABLE */
+#posts h3 {
+    font-family: "JetBrains Mono";
+}
+
 .table {
     table-layout: fixed;
     width: 100%;
 }
 .table th, .table td {
+    background-color: transparent;
     text-align: center;
 }
 

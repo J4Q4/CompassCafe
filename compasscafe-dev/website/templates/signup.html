@@ -29,8 +29,7 @@
                     name="schoolid"
                     class="form-control"
                     placeholder="00000"
-                    min="10000"
-                    max="99999"
+                    data-maxlength="5" oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))"
                     Required
                 /> <!-- 5 digits school ID -->
                 <br/>

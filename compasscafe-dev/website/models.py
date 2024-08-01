@@ -77,6 +77,7 @@ class Apply(db.Model):
     yearlevel = db.Column(db.String(50), nullable=False)
     # Non-visible Inputs
     id = db.Column(db.Integer, primary_key=True)
+    schoolid = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(150), db.ForeignKey(
         'user.email', ondelete='CASCADE'), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
@@ -84,6 +85,8 @@ class Apply(db.Model):
         'user.id', ondelete='CASCADE'), nullable=False)
     user = db.relationship('User', foreign_keys=[
                            author], backref='applications')
+    # Visibility
+    status = db.Column(db.String(50), default='pending')
 
 
 # User's Post
