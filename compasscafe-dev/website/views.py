@@ -163,10 +163,11 @@ def delete_user(user_id):
 
 # WEEK DATES
 
-def get_week_dates(start_date):
+def get_week_dates(start_date, weeks_offset=0):
     dates = []
-    # Beninging of the Week
-    start_of_week = start_date - timedelta(days=start_date.weekday())
+    # Beginning of the Week
+    start_of_week = start_date - \
+        timedelta(days=start_date.weekday()) + timedelta(weeks=weeks_offset)
     for tabledate in range(5):
         day_date = start_of_week + timedelta(days=tabledate)
         dates.append(day_date)
@@ -184,12 +185,18 @@ def apply():
 
     # DISPLAY DATE UNDER WEEKDAY
     today = datetime.now()
-    week_dates = get_week_dates(today)
+    weekDateA = get_week_dates(today)
+    weekDateB = get_week_dates(today, weeks_offset=1)
     weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    dates_data = {weekday[tabledate]: week_dates[tabledate]
+    datesWeekA = {weekday[tabledate]: weekDateA[tabledate]
+                  for tabledate in range(5)}
+    datesWeekB = {weekday[tabledate]: weekDateB[tabledate]
                   for tabledate in range(5)}
 
-    return render_template("apply.html", user=current_user, posts=posts, post_accept=post_accept, post_pending=post_pending, dates=dates_data)
+    return render_template("apply.html", user=current_user, posts=posts,
+                           post_accept=post_accept, post_pending=post_pending,
+                           weekDateA=weekDateA, weekDateB=weekDateB,
+                           datesWeekA=datesWeekA, datesWeekB=datesWeekB)
 
 
 # CREATE APPLICATIONS ROUTE
@@ -259,13 +266,27 @@ def delete_duty(id):
 def accept_application(post_id):
     post = Apply.query.get_or_404(post_id)
 
+    # User is not Staff
     if not current_user.is_staff:
         flash('You do not have permission to do this.', category='error')
         return redirect(url_for('views.apply'))
 
-    post.status = 'accepted'
-    db.session.commit()
-    flash('Barista added!', category='success')
+    # Week Day Categories
+    # Week A or Week B
+    week = post.date_duty
+    # Tuesday or Thursday
+    day = post.date_day
+
+    # Maximum of 4 Baristas on Given Date
+    accepted_count = Apply.query.filter_by(
+        status='accepted', date_duty=week, date_day=day).count()
+    if accepted_count >= 4:
+        flash(f'{day}, {week} is full: 4 baristas max.', category='error')
+
+    else:
+        post.status = 'accepted'
+        db.session.commit()
+        flash('Barista added!', category='success')
 
     return redirect(url_for('views.apply'))
 
@@ -286,6 +307,9 @@ def delete_accept(id):
         db.session.commit()
         flash('Barista removed.', category='success')
     return redirect(url_for('views.apply'))
+
+
+# BLOG APP TEMPLATES
 
 
 # CREATE POSTS ROUTE

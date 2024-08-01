@@ -18,6 +18,7 @@
                 {% else %}
                 <h3>All Applications</h3>
                 {% endif %}
+                <br>
 
                 {% for post in post_pending %}
                 {% if user.id == post.author or user.is_staff %}
@@ -49,8 +50,10 @@
             </div>
             {% if not user.is_staff %}
             <br/>
-            <div align="center">
-                <a href="/apply/submit_duty"><button type="button" class="btn btn-primary btn-lg">Submit an Application</button></a>
+            <div>
+                <a href="/apply/submit_duty"><button type="button" class="btn btn-primary btn-lg">
+                    <i class="fa fa-plus" aria-hidden="true"></i> New Application
+                </button></a>
             </div>
             <br/>
             {% endif %}
@@ -76,11 +79,11 @@
                             <th>FRI</th>
                         </tr>
                         <tr>
-                            <td><strong>{{ dates['Monday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ dates['Tuesday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ dates['Wednesday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ dates['Thursday'].strftime('%d %B') }}</strong></td>
-                            <td><strong>{{ dates['Friday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekA['Monday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekA['Tuesday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekA['Wednesday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekA['Thursday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekA['Friday'].strftime('%d %B') }}</strong></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,6 +177,13 @@
                             <th>WED</th>
                             <th>THU</th>
                             <th>FRI</th>
+                        </tr>
+                        <tr>
+                            <td><strong>{{ datesWeekB['Monday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekB['Tuesday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekB['Wednesday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekB['Thursday'].strftime('%d %B') }}</strong></td>
+                            <td><strong>{{ datesWeekB['Friday'].strftime('%d %B') }}</strong></td>
                         </tr>
                     </thead>
                     <tbody>

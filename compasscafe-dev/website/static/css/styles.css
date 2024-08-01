@@ -1039,4 +1039,8 @@ table {
     #week-desc {
         text-align: right;
     }
+    h3 {
+        font-family: "JetBrains Mono";
+        text-transform: capitalize;
+    }
 }
