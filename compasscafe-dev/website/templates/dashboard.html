@@ -98,17 +98,24 @@
                                             <ul>
                                                 <li>
                                                     <label>Sort By</label><br>
-                                                    {{ sort_form.sort_by() }}
+                                                    <select name="sort_by" id="sort_by" class="form-control">
+                                                        <option value="">None</option>
+                                                        <option value="email_asc" {% if request.args.get('sort_by') == 'email_asc' %}selected{% endif %}>Email (Ascending)</option>
+                                                        <option value="email_desc" {% if request.args.get('sort_by') == 'email_desc' %}selected{% endif %}>Email (Descending)</option>
+                                                        <option value="is_staff_asc" {% if request.args.get('sort_by') == 'is_staff_asc' %}selected{% endif %}>Admin Status (Ascending)</option>
+                                                        <option value="is_staff_desc" {% if request.args.get('sort_by') == 'is_staff_desc' %}selected{% endif %}>Admin Status (Descending)</option>
+                                                    </select>
                                                 </li>
                                                 <br>
                                                 <li>
-                                                    <a>{{ sort_form.submit() }}</a> <!-- Submit Filter Button -->
+                                                    <button type="submit" class="btn btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Filter Button -->
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </form>
                             </li>
+
                             <!-- Filter User -->
                             <li>
                                 <form method="POST" action="{{ url_for('views.dashboard') }}">
