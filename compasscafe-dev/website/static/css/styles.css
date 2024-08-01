@@ -1004,7 +1004,7 @@ table {
 
 
 /* APPLY TABLE */
-#posts h3 {
+#posts h3, .dashboarduser-table h3 {
     font-family: "JetBrains Mono";
 }
 

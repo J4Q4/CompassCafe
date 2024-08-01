@@ -210,7 +210,6 @@ def create_dutydate():
         date_duty = request.form.get('date_duty')
         date_day = request.form.get('date_day')
         yearlevel = request.form.get('yearlevel')
-        school_id = request.form.get('school_id')
 
         # Year Level Validation
         if not firstname or not lastname or not yearlevel:
@@ -237,7 +236,21 @@ def create_dutydate():
             # Redirect to the 'apply' route
             return redirect(url_for('views.apply'))
 
-    return render_template('submitduty.html', user=current_user)
+    # DISPLAY DATE UNDER WEEKDAY
+    today = datetime.now().date()
+    weekDateA = get_week_dates(today)
+    weekDateB = get_week_dates(today, weeks_offset=1)
+    weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    datesWeekA = {weekday[tabledate]: weekDateA[tabledate]
+                  for tabledate in range(5)}
+    datesWeekB = {weekday[tabledate]: weekDateB[tabledate]
+                  for tabledate in range(5)}
+    post_accept = Apply.query.filter_by(status='accepted').all()
+
+    return render_template('submitduty.html', user=current_user,
+                           weekDateA=weekDateA, weekDateB=weekDateB,
+                           datesWeekA=datesWeekA, datesWeekB=datesWeekB,
+                           today=today, post_accept=post_accept)
 
 
 # DELETE PENDING APPLICATIONS

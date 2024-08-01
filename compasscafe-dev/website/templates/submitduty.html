@@ -1,62 +1,78 @@
 {% extends "template.html" %}{% block title %}Submit an Application{% endblock %}
-{% block content %}
 
+{% block content %}
 <section class="beigespace-test">
     <div class="preload-fadein">
-        <h1 align="center">Submit an Application</h1>
-        <form method="POST" action="{{ url_for('views.create_dutydate') }}">
-            <div class="form-group">
-                <label for="firstname">First Name</label>
-                <input type="text" name="firstname" id="firstname" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="lastname">Last Name</label>
-                <input type="text" name="lastname" id="lastname" class="form-control" required>
-            </div>
-            <br>
+        <br>
+        <br>
+        <h1>Join Our Team!</h1>
+        <br>
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="dashboarduser-table">
+                    <h3>Submit an Application</h3>
+                    <p>Fill in the form to proceed.</p>
+                    <br>
+                    <form method="POST" action="{{ url_for('views.create_dutydate') }}">
+                        <div class="form-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text" name="firstname" id="firstname" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" name="lastname" id="lastname" class="form-control" required>
+                        </div>
+                        <br>
 
-            <div class="form-group">
-                <label for="date_duty">Duty Week</label>
-                <select name="date_duty" id="apply-dropdown" class="form-control" required>
-                    <option value="" disabled selected>Choose a Week</option>
-                    <option value="Week A">Week A</option>
-                    <option value="Week B">Week B</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="date_day">Duty Day</label>
-                <select name="date_day" id="apply-dropdown" class="form-control" required>
-                    <option value="" disabled selected>Choose a Day</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Thursday">Thursday</option>
-                </select>
-            </div>
-            <br>
-            <div class="form-group">
-                <label for="yearlevel">Year Level</label>
-                <select name="yearlevel" id="apply-dropdown" class="form-control" required>
-                    <option value="" disabled selected>Year Level</option>
-                    <option value="13">Year 13</option>
-                    <option value="12">Year 12</option>
-                    <option value="11">Year 11</option>
-                    <option value="≤10">Year 10 and Below</option>
-                </select>
-            </div>
-            <br/>
+                        <div class="form-group">
+                            <label for="date_duty">Duty Week</label>
+                            <select name="date_duty" id="apply-dropdown" class="form-control" required>
+                                <option value="" disabled selected>Choose a Week</option>
+                                <option value="Week A">Week A</option>
+                                <option value="Week B">Week B</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date_day">Duty Day</label>
+                            <select name="date_day" id="apply-dropdown" class="form-control" required>
+                                <option value="" disabled selected>Choose a Day</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Thursday">Thursday</option>
+                            </select>
+                            <p><strong>Please note:</strong> Max of 4 baristas per day.</p>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="yearlevel">Year Level</label>
+                            <select name="yearlevel" id="apply-dropdown" class="form-control" required>
+                                <option value="" disabled selected>Year Level</option>
+                                <option value="13">Year 13</option>
+                                <option value="12">Year 12</option>
+                                <option value="11">Year 11</option>
+                                <option value="≤10">Year 10 and Below</option>
+                            </select>
+                        </div>
+                        <br/>
 
-            <div align="center">
-                <button type="submit" class="btn btn-primary">Apply</button>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </div>
+                        <br/>
+                        <div>
+                            <a href="/apply">
+                                <button type="button" class="btn btn-secondary">Cancel</button>
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
-        <br/>
-        <div align="center">
-            <a href="/apply">
-                <button type="button" class="btn btn-secondary">Cancel</button>
-            </a>
+            <div class="col col-md-8">
+
+                {% include 'applytable.html' %}
+
+            </div>
         </div>
-        <br/>
     </div>
 </section>
-
 {% endblock %}
