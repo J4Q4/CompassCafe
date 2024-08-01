@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for,
 from flask_login import login_required, current_user
 from .models import Post, User, Like, Comment, EditUser, FilterForm, SortForm, Apply
 from werkzeug.security import generate_password_hash
+from datetime import datetime, timedelta
 from . import db
 
 views = Blueprint("views", __name__)
@@ -160,6 +161,18 @@ def delete_user(user_id):
     return redirect(url_for('views.dashboard'))
 
 
+# WEEK DATES
+
+def get_week_dates(start_date):
+    dates = []
+    # Beninging of the Week
+    start_of_week = start_date - timedelta(days=start_date.weekday())
+    for tabledate in range(5):
+        day_date = start_of_week + timedelta(days=tabledate)
+        dates.append(day_date)
+    return dates
+
+
 # APPLY ROUTE
 
 @views.route("/apply")
@@ -168,7 +181,15 @@ def apply():
     posts = Apply.query.all()
     post_accept = Apply.query.filter_by(status='accepted').all()
     post_pending = Apply.query.filter_by(status='pending').all()
-    return render_template("apply.html", user=current_user, posts=posts, post_accept=post_accept, post_pending=post_pending)
+
+    # DISPLAY DATE UNDER WEEKDAY
+    today = datetime.now()
+    week_dates = get_week_dates(today)
+    weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    dates_data = {weekday[tabledate]: week_dates[tabledate]
+                  for tabledate in range(5)}
+
+    return render_template("apply.html", user=current_user, posts=posts, post_accept=post_accept, post_pending=post_pending, dates=dates_data)
 
 
 # CREATE APPLICATIONS ROUTE
