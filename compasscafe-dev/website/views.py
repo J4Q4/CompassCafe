@@ -204,6 +204,10 @@ def apply():
 @views.route("/apply/submit_duty", methods=['GET', 'POST'])
 @login_required
 def create_dutydate():
+    if current_user.is_staff:
+        flash('You cannot apply as admin.', category='error')
+        return redirect(url_for('views.apply'))
+
     if request.method == "POST":
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
@@ -218,23 +222,31 @@ def create_dutydate():
             flash('Year 10 students or below are unable to apply for duty.',
                   category='error')
         else:
-            # Formatting User Apply Input
-            post = Apply(
-                firstname=firstname, lastname=lastname,
-                date_duty=date_duty, date_day=date_day,
-                yearlevel=yearlevel, email=current_user.email, author=current_user.id,
-                schoolid=current_user.schoolid
-            )
-            db.session.add(post)
-            db.session.commit()
-            flash('Successfully applied!', category='success')
+            # Max Baristas on Given Date for Application Purposes
+            current_count = Apply.query.filter_by(
+                status='accepted', date_duty=date_duty, date_day=date_day).count()
+            if current_count >= 4:
+                flash(f'{date_day}, {
+                      date_duty} is full: 4 baristas max.', category='error')
 
-            # Store Selected Duty Date
-            session['selected_duty_day'] = date_day
-            session['selected_duty_week'] = date_duty
+            else:
+                # Formatting User Apply Input
+                post = Apply(
+                    firstname=firstname, lastname=lastname,
+                    date_duty=date_duty, date_day=date_day,
+                    yearlevel=yearlevel, email=current_user.email, author=current_user.id,
+                    schoolid=current_user.schoolid
+                )
+                db.session.add(post)
+                db.session.commit()
+                flash('Successfully applied!', category='success')
 
-            # Redirect to the 'apply' route
-            return redirect(url_for('views.apply'))
+                # Store Selected Duty Date
+                session['selected_duty_day'] = date_day
+                session['selected_duty_week'] = date_duty
+
+                # Redirect to the 'apply' route
+                return redirect(url_for('views.apply'))
 
     # DISPLAY DATE UNDER WEEKDAY
     today = datetime.now().date()
