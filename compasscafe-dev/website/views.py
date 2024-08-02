@@ -3,9 +3,17 @@ from flask_login import login_required, current_user
 from .models import Post, User, Like, Comment, EditUser, FilterForm, SortForm, Apply
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
+from werkzeug.exceptions import HTTPException
 from . import db
 
 views = Blueprint("views", __name__)
+
+
+@views.errorhandler(HTTPException)
+def handle_exception(e):
+    if e.code == 404:
+        return render_template('404.html', user=current_user), 404
+    return e.description, e.code
 
 
 ## WEBPAGES ##
