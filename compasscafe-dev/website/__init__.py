@@ -23,7 +23,7 @@ def create_app():
     # 404 Page Not Found
     @app.errorhandler(404)
     def not_found(error):
-        return render_template('404.html', user=current_user), 404
+        return render_template('404.html', user=current_user, is_404=True), 404
 
     with app.app_context():
         db.create_all()

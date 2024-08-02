@@ -145,7 +145,7 @@ html.noscroll, body.noscroll {
     background-color: var(--main-navy);
     text-align: center;
     color: #fff;
-    transition: width 0.5s cubic-bezier(0.6, 0.8, 1.0, 0.8);
+    transition: width 1s cubic-bezier(0.6, 0.8, 1.0, 0.8);
     font-family: "JetBrains Mono";
 }
 /* End of Pre-load Screen */
@@ -583,24 +583,6 @@ body {
 
 
 
-/* ## Cover Fixed Footer with Container ## */
-.blankspace-test p {
-    margin: 0;
-}
-.whitespace-test {
-    background-color: white;
-    padding: 100px 250px;
-    margin: 0;
-}
-.beigespace-test {
-    background-color: var(--main-white);
-    padding: 100px 150px;
-    margin: 0;
-}
-
-
-
-
 /* ## HOME ## */
 
 /* Hero Section */
@@ -734,26 +716,107 @@ input[type=password]:focus,
   }
 
 /* Submit Button */
+/* Primary Button */
 .btn-primary {
-    background-color: #000;
-    border: none;
+    background-color: var(--main-lightblue2);
+    border: 2px solid #000;
+    color: #000;
     font-family: "JetBrains Mono";
     font-weight: 300;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transform: translateY(0);
+    animation: btnprimary-unhover .2s ease-in-out;
+}
+@keyframes btnprimary-unhover {
+    0% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 .btn-primary:hover {
-    background-color: #323232;
+    background-color: var(--main-lightblue1);
+    color: #000;
+    border: 2px solid #000;
+    animation: btnprimary-hover .4s ease-in-out forwards;
+}
+@keyframes btnprimary-hover {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 #000;
+    }
+    40% {
+        transform: translateY(-8px);
+        box-shadow: 0 5px 0 #000;
+    }
+    70% {
+        transform: translateY(-4px);
+        
+    }
+    100% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
 }
 
+.btn-primary:active {
+    background-color: var(--main-white) !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
+
+/* Secondary Button */
 .btn-secondary {
-    background-color: #fff;
-    border: 1px solid #000;
+    background-color: var(--main-white);
+    border: 2px solid #000;
+    color: #000;
     font-family: "JetBrains Mono";
     font-weight: 300;
-    color: #000;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transform: translateY(0);
+    animation: btnsecondary-unhover .2s ease-in-out;
+}
+@keyframes btnsecondary-unhover {
+    0% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 .btn-secondary:hover {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--main-beige);
+    color: #000;
+    border: 2px solid #000;
+    animation: btnprimary-hover .4s ease-in-out forwards;
+}
+@keyframes btnsecondary-hover {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 #000;
+    }
+    40% {
+        transform: translateY(-8px);
+        box-shadow: 0 5px 0 #000;
+    }
+    70% {
+        transform: translateY(-4px);
+        
+    }
+    100% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+}
+.btn-primary:active {
+    background-color: var(--main-white) !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
 }
 /* End of Submit Button */
 
@@ -1048,6 +1111,9 @@ table {
         text-transform: capitalize;
     }
 }
+#btn-applysubmit {
+    width: 100%;
+}
 
 /* Apply Schedule Calendar Today */
 .datetoday-selected {
@@ -1057,15 +1123,80 @@ table {
     border-radius: 15px;
 }
 
+
+
+/* ## 404 PAGE NOT FOUND ## */
 #contain404 {
     position: relative;
+    margin-bottom: 150px;
     height: 75vh;
+    h1 {
+        color: var(--main-white);
+        text-shadow: 6px 0 var(--main-navy), -6px 0 var(--main-navy), 0 6px var(--main-navy), 0 -6px var(--main-navy),
+               3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
+        filter: drop-shadow(0 15px 0 var(--main-navy));
+        letter-spacing: 5px;
+    }
+    strong {
+        font-family: "Open Sans";
+        font-weight: 600;
+    }
+    p {
+        font-family: "JetBrains Mono";
+        font-weight: 300
+    }
 }
-
-#div404 {
+#error404_contents {
+    transform: translateY(-30px);
+    animation: hover404 4s ease-in-out infinite;
+}
+@keyframes hover404 {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+#brokeglass_contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    spline-viewer {
+        height: 800px;
+        width: 100%;
+    }
+}
+.text-error404 {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    transform: translate(-50%, -50%); /* Center the div */
+    text-align: center; /* Optional: center text inside the div */
+}
+
+
+
+
+/* ## Cover Fixed Footer with Container ## */
+.blankspace-test p {
+    margin: 0;
+}
+.whitespace-test {
+    background-color: white;
+    padding: 100px 250px;
+    margin: 0;
+}
+.beigespace-test {
+    background-color: var(--main-white);
+    padding: 100px 150px;
+    margin: 0;
+}
+.bluespace-test {
+    background-color: var(--main-lightblue2);
+    padding: 100px 150px;
+    margin: 0;
 }

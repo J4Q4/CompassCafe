@@ -1,12 +1,20 @@
-{% extends "template.html" %}<title>&#x2727; Error</title>
+{% extends "template.html" %}{% block title %}Error{% endblock %}
 {% block content %}
-<section class="beigespace-test">
+<section class="bluespace-test">
     <div class="preload-fadein" id="contain404">
-        <div  id="div404">
-            <h1 style="font-size: 150px;">404</h1>
-            <p style="font-size: 30px"><strong>Womp Womp! 😥</strong></p>
-            <p style="font-size: 20px;">Seems the page you're looking for doesn't exist.</p>
-            <p><a href="/home" class="btn btn-primary">Go to Home</a></p>
+        <div id="div404" class="row">
+            <div class="col-md-5" id="error404_contents">
+                <div class="text-error404">
+                    <h1 style="font-size: 150px;">404</h1>
+                    <p style="font-size: 30px"><strong>Womp Womp! 😥</strong></p>
+                    <p style="font-size: 20px;">Seems the page you're looking for doesn't exist.</p>
+                    <br>
+                    <button class="btn-primary" href="/home" type="button">Go to Home</button>
+                </div>
+            </div>
+            <div class="col-md-7" id="brokeglass_contents">
+                <spline-viewer url="https://prod.spline.design/SMJkRw74aYivCdiA/scene.splinecode"></spline-viewer>
+            </div>
         </div>
     </div>
 </section>

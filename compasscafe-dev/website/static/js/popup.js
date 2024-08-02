@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-    }, 3300); // 3s Delay [ Give Load Time - Loadscreen ]
+    }, 500); // 0.5s Delay [ Give Load Time - Loadscreen ]
 });
 
 
@@ -99,5 +99,5 @@ document.addEventListener('DOMContentLoaded', function() {
         if (progress >= 100) {
             clearInterval(interval);
         }
-    }, 300); // Progress Length //
+    }, 100); // Progress Length //
   });

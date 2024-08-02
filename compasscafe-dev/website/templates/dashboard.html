@@ -70,7 +70,7 @@
                         <!-- Submit Buttons -->
                         <br>
                         <a>{{ edit_form.submit() }}</a>
-                        <a href="{{ url_for('views.dashboard') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ url_for('views.dashboard') }}" class="btn-secondary">Cancel</a>
                     </form>
                 </div>
                 <br>
@@ -91,7 +91,7 @@
                             <li>
                                 <form method="GET" action="{{ url_for('views.dashboard') }}">
                                     {{ sort_form.hidden_tag() }}
-                                    <button id="sortPopBTN" class="btn btn-secondary" type="button">Sort</button> <!-- Pop Up Filter Button -->
+                                    <button id="sortPopBTN" class="btn-secondary" type="button">Sort</button> <!-- Pop Up Filter Button -->
 
                                     <div id="sortjsPopup" class="filterpopup">
                                         <div class="popup-content">
@@ -108,7 +108,7 @@
                                                 </li>
                                                 <br>
                                                 <li>
-                                                    <button type="submit" class="btn btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Filter Button -->
+                                                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Filter Button -->
                                                 </li>
                                             </ul>
                                         </div>
@@ -120,7 +120,7 @@
                             <li>
                                 <form method="POST" action="{{ url_for('views.dashboard') }}">
                                     {{ filter_form.hidden_tag() }}
-                                    <button id="filterPopBTN" class="btn btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
+                                    <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
                     
                                     <div id="filterjsPopup" class="filterpopup">
                                         <div class="popup-content">

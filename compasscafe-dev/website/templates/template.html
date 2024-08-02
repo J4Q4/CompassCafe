@@ -253,8 +253,17 @@
       setTimeout(function() {
       document.getElementById('loadscreen').classList.add('loadtrigger');
       document.documentElement.classList.add('noscroll');
-      }, 3000); //3s Delay to fully load Spline
+      }, 2500); //2.5s Delay to fully load Spline
       });
+    </script>
+    {% elif is_404 %} <!-- Non-Existent -->
+    <script>
+      window.addEventListener('load', function () {
+        setTimeout(function() {
+        document.getElementById('loadscreen').classList.add('loadtrigger');
+        document.documentElement.classList.add('noscroll');
+        }, 2500); //2.5s Delay to fully load Spline
+        });
     </script>
     {% else %} <!-- If Other Webpage -->
     <script>

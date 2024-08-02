@@ -9,6 +9,7 @@ from . import db
 views = Blueprint("views", __name__)
 
 
+# 404 PAGE NOT FOUND
 @views.errorhandler(HTTPException)
 def handle_exception(e):
     if e.code == 404:
