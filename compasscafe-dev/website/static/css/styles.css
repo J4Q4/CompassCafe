@@ -331,7 +331,7 @@ html.noscroll, body.noscroll {
     font-size: 16px;
     margin-left: 40px;
     transition: color 0.1s ease-out;
-    animation: nav-linkunhover 0.3s ease-in forwards;
+    animation: nav-linkunhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
 @keyframes nav-linkunhover {
     0% {
@@ -343,7 +343,7 @@ html.noscroll, body.noscroll {
 }
 .nav-link:hover {
     color: #2c2c2c;
-    animation: nav-linkhover 0.5s ease-out forwards;
+    animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
 @keyframes nav-linkhover {
     0% {
@@ -443,6 +443,25 @@ Move Margins to Match Logo */
     padding:0;
     text-align: right;
     list-style-type: none;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-transform: uppercase;
+    li {
+        line-height: 40px;
+        
+    }
+    li a::after {
+        content: '';
+        width: 0;
+        height: 1px;
+        background-color: #000;
+        margin: auto;
+        display: block;
+    }
+    li a:hover::after {
+        width: 100%;
+        transition: all 0.5s;
+    }
 }
 
 #sideCredits {
@@ -728,6 +747,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .user-inuibtn button, .user-inuibtn a {
     width: 100%;
+    text-decoration: none;
 }
 
 label {
