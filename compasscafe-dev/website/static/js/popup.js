@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
-    }, 500); // 0.5s Delay [ Give Load Time - Loadscreen ]
+    }, 2500); // 2s Delay to Hide Watermark
 });
 
 
@@ -99,5 +99,5 @@ document.addEventListener('DOMContentLoaded', function() {
         if (progress >= 100) {
             clearInterval(interval);
         }
-    }, 100); // Progress Length //
+    }, 300); // Progress Length //
   });

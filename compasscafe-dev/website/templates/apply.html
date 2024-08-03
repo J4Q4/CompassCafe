@@ -27,6 +27,7 @@
                         <div class="btn-group" id="apply-delete">
                             <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
                             <ul class="dropdown-menu">
+                                <h6 class="dropdown-header">User Actions</h6>
                                 <li><a href="/apply/delete-apply/{{ post.id }}" class="dropdown-item">Delete</a></li>
                                 {% if user.is_staff %}
                                 <li><a href="/apply/accept-apply/{{ post.id }}" class="dropdown-item">Accept</a></li>
