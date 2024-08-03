@@ -903,6 +903,8 @@ h1 {
     font-family: "Bungee";
     font-weight: 600;
     text-transform: uppercase;
+    text-shadow: 2px 5px var(--main-lightblue2);
+    filter: drop-shadow(2px 5px 0 var(--main-beige));
 }
 .user-inui .col {
     padding: 0;
@@ -1227,20 +1229,51 @@ table {
     }
 }
 #error404_contents {
-    transform: translateY(-30px);
+    transform: translateY(0px);
     animation: hover404 4s ease-in-out infinite;
+    h1, p {
+        transform: translateY(0px);
+        animation: hovercontent404 4s ease-in-out infinite;
+    }
+    h1 {
+        transform: translateY(0px);
+        animation: hovertitle404 4s ease-in-out infinite;
+    }
+}
+@keyframes hovertitle404 {
+    0% {
+        transform: translateY(-16px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-16px);
+    }
+}
+@keyframes hovercontent404 {
+    0% {
+        transform: translateY(-8px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-8px);
+    }
 }
 @keyframes hover404 {
     0% {
-        transform: translateY(0px);
+        transform: translateY(-20px);
     }
     50% {
-        transform: translateY(-30px);
-    }
-    100% {
         transform: translateY(0px);
     }
+    100% {
+        transform: translateY(-20px);
+    }
 }
+
 #brokeglass_contents {
     display: flex;
     justify-content: center;

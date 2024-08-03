@@ -190,18 +190,11 @@ def apply_whichweek(date):
     return week_number % 2 == 0
 
 
-# APPLY ROUTE
-
-@views.route("/apply")
-@login_required
-def apply():
-    posts = Apply.query.all()
-    post_accept = Apply.query.filter_by(status='accepted').all()
-    post_pending = Apply.query.filter_by(status='pending').all()
-
-    # DISPLAY DATE UNDER WEEKDAY
-    today = datetime.now().date()
-    WeekANow = apply_whichweek(today)
+# WEEK DEFITION DICTIONARY FOR EASY USE
+def determine_week(today):
+    current_week = today.isocalendar()[1]
+    WeekANow = (current_week % 2 == 0)
+    WeekBNow = not WeekANow
 
     if WeekANow:
         weekDateA = get_week_dates(today)
@@ -216,10 +209,28 @@ def apply():
     datesWeekB = {weekday[tabledate]: weekDateB[tabledate]
                   for tabledate in range(5)}
 
+    return WeekANow, WeekBNow, weekDateA, weekDateB, datesWeekA, datesWeekB
+
+
+# APPLY ROUTE
+
+@views.route("/apply")
+@login_required
+def apply():
+    posts = Apply.query.all()
+    post_accept = Apply.query.filter_by(status='accepted').all()
+    post_pending = Apply.query.filter_by(status='pending').all()
+
+    # DISPLAY DATE UNDER WEEKDAY
+    today = datetime.now().date()
+    WeekANow, WeekBNow, weekDateA, weekDateB, datesWeekA, datesWeekB = determine_week(
+        today)
+
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
                            weekDateA=weekDateA, weekDateB=weekDateB,
-                           datesWeekA=datesWeekA, datesWeekB=datesWeekB, today=today)
+                           datesWeekA=datesWeekA, datesWeekB=datesWeekB, today=today,
+                           WeekANow=WeekANow, WeekBNow=WeekBNow)
 
 
 # CREATE APPLICATIONS ROUTE
@@ -273,19 +284,15 @@ def create_dutydate():
 
     # DISPLAY DATE UNDER WEEKDAY
     today = datetime.now().date()
-    weekDateA = get_week_dates(today)
-    weekDateB = get_week_dates(today, weeks_offset=1)
-    weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    datesWeekA = {weekday[tabledate]: weekDateA[tabledate]
-                  for tabledate in range(5)}
-    datesWeekB = {weekday[tabledate]: weekDateB[tabledate]
-                  for tabledate in range(5)}
+    WeekANow, WeekBNow, weekDateA, weekDateB, datesWeekA, datesWeekB = determine_week(
+        today)
     post_accept = Apply.query.filter_by(status='accepted').all()
 
     return render_template('submitduty.html', user=current_user,
                            weekDateA=weekDateA, weekDateB=weekDateB,
                            datesWeekA=datesWeekA, datesWeekB=datesWeekB,
-                           today=today, post_accept=post_accept)
+                           today=today, WeekANow=WeekANow, WeekBNow=WeekBNow,
+                           post_accept=post_accept)
 
 
 # DELETE PENDING APPLICATIONS

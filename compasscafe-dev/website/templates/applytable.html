@@ -5,7 +5,7 @@
         </li>
         <li id="week-desc">
             <h6><strong class="
-                {% if weekDateA[0] <= today <= weekDateA[-1] %}
+                {% if WeekANow %}
                 datetoday-selected
                 {% endif %}
                 ">Week A</strong>
@@ -128,8 +128,9 @@
             <h3>Barista Roster</h3>
         </li>
         <li id="week-desc">
-            <h6><strong class="
-                {% if weekDateB[0] <= today <= weekDateB[-1] %}
+            <h6>
+                <strong class="
+                {% if WeekBNow %}
                 datetoday-selected
                 {% endif %}
                 ">Week B</strong>
