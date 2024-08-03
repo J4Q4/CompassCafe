@@ -79,37 +79,3 @@ class Apply(db.Model):
                            author], backref='applications')
     # Visibility
     status = db.Column(db.String(50), default='pending')
-
-
-# User's Post
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.Text, nullable=False)
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    author = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete='CASCADE'), nullable=False)
-    likes = db.relationship('Like', backref='post', passive_deletes=True)
-    comments = db.relationship('Comment', backref='post', passive_deletes=True)
-
-
-# User's Likes
-
-class Like(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    author = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete='CASCADE'), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey(
-        'post.id', ondelete='CASCADE'), nullable=False)
-
-
-# User's Comments
-
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.Text, nullable=False)
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    author = db.Column(db.Integer, db.ForeignKey(
-        'user.id', ondelete='CASCADE'), nullable=False)
-    post_id = db.Column(db.Integer, db.ForeignKey(
-        'post.id', ondelete='CASCADE'), nullable=False)

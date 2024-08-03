@@ -4,7 +4,12 @@
             <h3>Barista Roster</h3>
         </li>
         <li id="week-desc">
-            <h6><strong>Week A</strong></h6>
+            <h6><strong class="
+                {% if weekDateA[0] <= today <= weekDateA[-1] %}
+                datetoday-selected
+                {% endif %}
+                ">Week A</strong>
+            </h6>
             <p>Lunch : 11:00 AM - 11:25 AM</p>
         </li>
     </ul>
@@ -115,8 +120,7 @@
             {% endfor %}
         </tbody>
     </table>
-    
-</div>            
+</div>
 <br>
 <div class="dashboarduser-table">
     <ul id="apply-barista">
@@ -124,7 +128,12 @@
             <h3>Barista Roster</h3>
         </li>
         <li id="week-desc">
-            <h6><strong>Week B</strong></h6>
+            <h6><strong class="
+                {% if weekDateB[0] <= today <= weekDateB[-1] %}
+                datetoday-selected
+                {% endif %}
+                ">Week B</strong>
+            </h6>
             <p>Lunch : 11:00 AM - 11:25 AM</p>
         </li>
     </ul>

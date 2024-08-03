@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, jsonify, session
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from flask_login import login_required, current_user
-from .models import Post, User, Like, Comment, EditUser, FilterForm, SortForm, Apply
+from .models import User, EditUser, FilterForm, SortForm, Apply
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 from werkzeug.exceptions import HTTPException
@@ -31,14 +31,14 @@ def home():
 
 @views.route("/menu")
 def menu():
-    return render_template("menu.html", user=current_user, posts=posts)
+    return render_template("menu.html", user=current_user)
 
 
 # NEWS ROUTE
 
 @views.route("/news")
 def news():
-    return render_template("news.html", user=current_user, posts=posts)
+    return render_template("news.html", user=current_user)
 
 
 # SETTINGS ROUTE
@@ -46,7 +46,7 @@ def news():
 @views.route("/settings")
 @login_required
 def settings():
-    return render_template("settings.html", user=current_user, posts=posts)
+    return render_template("settings.html", user=current_user)
 
 
 ## ACTIONS ##
@@ -174,13 +174,20 @@ def delete_user(user_id):
 
 def get_week_dates(start_date, weeks_offset=0):
     dates = []
-    # Beginning of the Week
+    # Beninging of the Week
     start_of_week = start_date - \
         timedelta(days=start_date.weekday()) + timedelta(weeks=weeks_offset)
     for tabledate in range(5):
         day_date = start_of_week + timedelta(days=tabledate)
         dates.append(day_date)
     return dates
+
+
+# DETERMINE WEEK - A or B
+
+def apply_whichweek(date):
+    week_number = date.isocalendar()[1]
+    return week_number % 2 == 0
 
 
 # APPLY ROUTE
@@ -194,8 +201,15 @@ def apply():
 
     # DISPLAY DATE UNDER WEEKDAY
     today = datetime.now().date()
-    weekDateA = get_week_dates(today)
-    weekDateB = get_week_dates(today, weeks_offset=1)
+    WeekANow = apply_whichweek(today)
+
+    if WeekANow:
+        weekDateA = get_week_dates(today)
+        weekDateB = get_week_dates(today, weeks_offset=1)
+    else:
+        weekDateA = get_week_dates(today, weeks_offset=1)
+        weekDateB = get_week_dates(today)
+
     weekday = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     datesWeekA = {weekday[tabledate]: weekDateA[tabledate]
                   for tabledate in range(5)}
@@ -341,112 +355,3 @@ def delete_accept(id):
         db.session.commit()
         flash('Barista removed.', category='success')
     return redirect(url_for('views.apply'))
-
-
-# BLOG APP TEMPLATES
-
-
-# CREATE POSTS ROUTE
-
-@views.route("/create_post", methods=['GET', 'POST'])
-@login_required
-def create_post():
-    if request.method == "POST":
-        text = request.form.get('text')
-        if not text:
-            flash('Post cannot be empty', category='error')
-        else:
-            post = Post(text=text, author=current_user.id)
-            db.session.add(post)
-            db.session.commit()
-            flash('Post created!', category='success')
-            return redirect(url_for('views.blog'))
-    return render_template('create_post.html', user=current_user)
-
-
-# USER POSTS ROUTE
-
-@views.route("/posts/<username>")
-@login_required
-def posts(username):
-    user = User.query.filter_by(username=username).first()
-    if not user:
-        flash('No user with that username exists.', category='error')
-        return redirect(url_for('views.home'))
-    posts = Post.query.filter_by(author=user.id).all()
-    return render_template("posts.html", user=current_user, posts=posts, username=username)
-
-
-# DELETE POST
-
-@views.route("/delete-post/<id>")
-@login_required
-def delete_post(id):
-    post = Post.query.filter_by(id=id).first()
-    if not post:
-        flash('Post does not exist.', category='error')
-    elif post.author != current_user.id:
-        flash('You do not have permission to delete this post.', category='error')
-    else:
-        db.session.delete(post)
-        db.session.commit()
-        flash('Post deleted.', category='success')
-        return redirect(url_for('views.blog'))
-
-
-# LIKE POST
-
-@views.route("/like-post/<post_id>", methods=['POST'])
-@login_required
-def like(post_id):
-    post = Post.query.filter_by(id=post_id).first()
-    like = Like.query.filter_by(
-        author=current_user.id, post_id=post_id).first()
-
-    if not post:
-        return jsonify({'error': 'Post does not exist.'}, 400)
-    elif like:
-        db.session.delete(like)
-        db.session.commit()
-    else:
-        like = Like(author=current_user.id, post_id=post_id)
-        db.session.add(like)
-        db.session.commit()
-
-    return jsonify({"likes": len(post.likes), "liked": current_user.id in map(lambda x: x.author, post.likes)})
-
-
-# CREATE COMMENT
-
-@views.route("/create-comment/<post_id>", methods=["POST"])
-@login_required
-def create_comment(post_id):
-    text = request.form.get('text')
-    if not text:
-        flash('Comment cannot be empty', category='error')
-    else:
-        post = Post.query.filter_by(id=post_id)
-        if post:
-            comment = Comment(
-                text=text, author=current_user.id, post_id=post_id)
-            db.session.add(comment)
-            db.session.commit()
-        else:
-            flash('Post does not exist', category="error")
-    return redirect(url_for('views.blog'))
-
-
-# DELETE COMMENT
-
-@views.route("/delete-comment/<comment_id>")
-@login_required
-def delete_comment(comment_id):
-    comment = Comment.query.filter_by(id=comment_id).first()
-    if not comment:
-        flash('Comment does not exist', category='error')
-    elif current_user.id != comment.author and current_user.id != comment.post.author:
-        flash('You do not have permission to delete this comment.', category='error')
-    else:
-        db.session.delete(comment)
-        db.session.commit()
-    return redirect(url_for('views.blog'))
