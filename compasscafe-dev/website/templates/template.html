@@ -67,28 +67,6 @@
           </div>
         </a>
         
-        <!-- Account Page - Dropdown -->
-        <div class="account-dropdown d-sm-none d-flex align-items-center">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  id="nav-acctoggle">
-            <i class="fa-regular fa-user"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <!-- Admin User-->
-            {% if user.is_authenticated and user.is_staff %}
-            <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <!-- Regular User -->
-            <li><a class="dropdown-item" href="/settings">settings</a></li>
-            <li><a class="dropdown-item" href="/logout">logout</a></li>
-            {% else %}
-            <!-- User Not Logged In -->
-            <li><a class="dropdown-item" href="/login">login</a></li>
-            <li><a class="dropdown-item" href="/signup">sign up</a></li>
-            {% endif %}
-          </ul>
-        </div>
-        
         <!-- Collapse -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -109,26 +87,40 @@
             <li class="nav-item">
               <a class="nav-link nav-linkmain" href="/news">news</a>
             </li>
-            <!-- Account Page - Dropdown (visible on larger screens) -->
-            <li class="nav-item dropdown d-none d-sm-block">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"  id="nav-acctoggle">
+            <!-- Account Page - Dropdown [Big Screen] -->
+            <li class="nav-item">
+              <input type="checkbox" id="openSide">
+              <label for="openSide" class="sideToggle nav-link">
                 <i class="fa-regular fa-user"></i>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- Admin User-->
-                {% if user.is_authenticated and user.is_staff %}
-                <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-                {% endif %}
-                {% if user.is_authenticated %}
-                <!-- Regular User -->
-                <li><a class="dropdown-item" href="/settings">settings</a></li>
-                <li><a class="dropdown-item" href="/logout">logout</a></li>
-                {% else %}
-                <!-- User Not Logged In -->
-                <li><a class="dropdown-item" href="/login">login</a></li>
-                <li><a class="dropdown-item" href="/signup">sign up</a></li>
-                {% endif %}
-              </ul>
+              </label>
+              <div id="sideMenu">
+                <ul class="sideMenu-contents">
+                  <li>
+                    <label for="openSide" class="sideToggle">
+                      <i class="fa fa-times"></i>
+                    </label>
+                  </li>
+                  <br>
+                  <!-- Admin User-->
+                  <h6>Account</h6>
+                  {% if user.is_authenticated and user.is_staff %}
+                  <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+                  {% endif %}
+                  {% if user.is_authenticated %}
+                  <!-- Regular User -->
+                  <li><a class="dropdown-item" href="/settings">settings</a></li>
+                  <li><a class="dropdown-item" href="/login">quick sign in</a></li>
+                  <li><a class="dropdown-item" href="/logout">logout</a></li>
+                  {% else %}
+                  <!-- User Not Logged In -->
+                  <li><a class="dropdown-item" href="/login">login</a></li>
+                  <li><a class="dropdown-item" href="/signup">sign up</a></li>
+                  {% endif %}
+                  <li id="sideCredits">
+                    <p>© Compass Cafe SMC | 2024</p>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>

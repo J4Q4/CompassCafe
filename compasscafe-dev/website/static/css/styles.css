@@ -354,10 +354,8 @@ html.noscroll, body.noscroll {
     }
 }
 
-/* Removes Dropdown Arrow */
-#nav-acctoggle::after {
-    content: none !important;
-}
+
+
 
 /* Hover Line Navbar */
 .nav-linkmain::after {
@@ -405,7 +403,59 @@ Move Margins to Match Logo */
     justify-content: flex-end;
     width: 100%;
 }
+
+
+
+
+/* ## Navbar Side Menu ## */
+.sideToggle {
+    font-size: 16px;
+}
+#sideMenu {
+    height: 100%;
+    padding: 70px 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 350px;
+    transform: translateX(350px);
+    transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: var(--main-lightblue1);
+    border-left: var(--main-lightblue2) 1px solid;
+    i {
+        font-size: 32px;
+        transform: rotate(0);
+        transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    i:hover {
+        transform: rotate(90deg);
+    }
+}
+.nav-item input[type="checkbox"]:checked ~ #sideMenu {
+    transform: translateX(0);
+}
+.nav-item input[type=checkbox] {
+    display: none;
+}
+
+.sideMenu-contents{
+    margin:0;
+    padding:0;
+    text-align: right;
+    list-style-type: none;
+}
+
+#sideCredits {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 50px 25px 0;
+}
+/* ## End of Navbar Side Menu ## */
+
 /* ## End of Navbar ## */
+
+
 
 
 /* ## Footer ## */
