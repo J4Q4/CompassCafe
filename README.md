@@ -9,7 +9,7 @@ Sancta Maria College  •  **Compass Cafe Project**
 - ☕ register barista duty during lunchtimes.
 - 🙃 for what ever reason, the **responsiveness doesn't work on opera browsers**;
   - everywhere it does i.e. chrome, edge... etc.
-  - **but then again,** no one uses opera on chrome.
+  - **but then again,** no one uses opera on mobile or tablet devices.
 
 ## Possible Future Updates
 - 💳 [optional] digital points.
