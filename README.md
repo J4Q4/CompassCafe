@@ -8,7 +8,8 @@ Sancta Maria College  •  **Compass Cafe Project**
 - 😭🙏 cbf doing this ngl
 - ☕ register barista duty during lunchtimes
 - 🙃 for what ever reason, the **responsiveness doesn't work on opera browsers**;
-  everywhere it does i.e. chrome, edge... etc.
+ - everywhere it does i.e. chrome, edge... etc.
 
 ## Possible Future Updates
-- 💳 [optional] digital points + stamp cards
+- 💳 [optional] digital points
+- stamp cards
