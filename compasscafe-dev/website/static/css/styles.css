@@ -69,7 +69,9 @@ select:hover,
 textarea:hover,
 .btn-group button:hover,
 .show-button:hover,
-form #filterPopBTN, #sortPopBTN:hover {
+#sideMenu i:hover,
+form #filterPopBTN,
+#sortPopBTN:hover {
     cursor: url('/static/assets/img/cursor-ok.png'), pointer;
 }
 
@@ -417,18 +419,24 @@ Move Margins to Match Logo */
     position: fixed;
     right: 0;
     top: 0;
-    width: 350px;
-    transform: translateX(350px);
+    width: 400px;
+    transform: translateX(400px);
     transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-    background-color: var(--main-lightblue1);
+    background-color: var(--main-navy);
     border-left: var(--main-lightblue2) 1px solid;
+    color: var(--main-beige);
+    z-index: 1000;
     i {
         font-size: 32px;
         transform: rotate(0);
         transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        color: #fff;
     }
     i:hover {
         transform: rotate(90deg);
+    }
+    h6 {
+        color: #fff;
     }
 }
 .nav-item input[type="checkbox"]:checked ~ #sideMenu {
@@ -438,6 +446,9 @@ Move Margins to Match Logo */
     display: none;
 }
 
+
+
+
 .sideMenu-contents{
     margin:0;
     padding:0;
@@ -446,21 +457,40 @@ Move Margins to Match Logo */
     font-family: "JetBrains Mono";
     font-weight: 300;
     text-transform: uppercase;
-    li {
+    .sideNav {
         line-height: 40px;
-        
+        background-color: transparent;
+        transition: background-color 0.5s;
+        position: relative;
+        overflow-x: hidden;
+        a {
+            transform: translateX(0px);
+            transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
     }
-    li a::after {
+    .sideNav:hover {
+        background-color: #404a7c;
+        width: 100%;
+        a {
+            transform: translateX(-20px);
+        }
+    }
+    h3 {
+        font-family: "Bungee";
+        text-shadow: 0 4px var(--main-lightblue2);
+    }
+    .sideNav::before {
         content: '';
-        width: 0;
-        height: 1px;
-        background-color: #000;
+        width: 0px;
+        height: 100%;
+        background-color: var(--main-beige);
         margin: auto;
         display: block;
+        position: absolute;
     }
-    li a:hover::after {
-        width: 100%;
-        transition: all 0.5s;
+    .sideNav:hover::before {
+        width: 4px;
+        transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 }
 
@@ -469,6 +499,27 @@ Move Margins to Match Logo */
     right: 0;
     bottom: 0;
     padding: 0 50px 25px 0;
+}
+
+/* Darken on Side Menu */
+.darkened-SideScreen {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+.nav-item input[type="checkbox"]:checked ~ .darkened-SideScreen {
+    opacity: 1;
+    visibility: visible;
+}
+.sideHeader {
+    position: relative;
 }
 /* ## End of Navbar Side Menu ## */
 
@@ -1011,6 +1062,12 @@ h1 {
     background-color: transparent;
     border: 0;
     transform: scale(1.5) translateX(4px);
+}
+.alert-success {
+    border: 1px solid var(--main-lightblue1);
+}
+.alert-danger {
+    border: 1px solid var(--main-beige);
 }
 
 
