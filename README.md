@@ -1,5 +1,7 @@
 # Compass Cafe
 
+**‼ THIS IS A SCHOOL ASSESSMENT (NOT TO BE TAKEN FOR REAL)**
+
 Sancta Maria College  •  **Compass Cafe Project**
 
 ![Compass Cafe Github Banner](https://github.com/J4Q4/Compass-Cafe/blob/main/extras/githubbanner.png)
