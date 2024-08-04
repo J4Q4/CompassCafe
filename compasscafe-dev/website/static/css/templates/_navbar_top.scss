@@ -1,0 +1,221 @@
+/* Notice Marquee Header */
+.noticeinf {
+    overflow-x: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+    display: block;
+    z-index: 500;
+    background-color: var(--main-navy);
+    border-top: #6c78b4 1px solid;
+    border-bottom: #6c78b4 1px solid;
+    transition: all 0.3s ease-out;
+}
+
+/* Pause Animation on Parent Hover */
+.noticeinf:hover .noticeinf-conveyor ul {
+    animation-play-state: paused;
+}
+
+.noticeinf-conveyor {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--main-lightblue1);
+    transition: 0.1s ease-in-out;
+}
+.noticeinf-conveyor ul {
+    display: flex;
+    padding: 10px 0;
+    margin: 0;
+    list-style-type: none;
+    animation: slide 40s infinite linear;
+}
+.noticeinf-conveyor ul li {
+    font-size: 20px;
+    flex: 0 0 auto;
+    margin: 0 5vw;
+    font-family: "JetBrains Mono";
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 400;
+}
+@keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+}
+.noticeinf:hover {
+      background-color: #2a3155;
+      color: #fff;
+}
+/* End of Notice Marquee Header */
+
+
+
+
+/* ## Navbar ## */
+
+/* Navbar Body */
+.navbar {
+    background-color: transparent;
+    padding: 20px 50px;
+    position: absolute;
+    width: 100%;
+    display: block;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.nav-item {
+    pointer-events: auto;
+    list-style-type: none;
+}
+
+.navbar .nav-container .navbar-nav * {
+    pointer-events: auto;
+}
+.navbar-brand, .account-dropdown, .navbar-toggler {
+    pointer-events: auto;
+}
+
+/* Change Icon on Hover */
+/* Hover Logo */
+#hover-logo {
+    opacity: 0;
+}
+.navbar-brand:hover #hover-logo {
+    opacity: 1;
+}
+/* Original Logo */
+.navbar-brand:hover #original-logo {
+    opacity: 0;
+}
+
+/* Navbar Logo */
+.logo-container {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+.logo-container img {
+    position: absolute;
+    width: 70px;
+}
+
+/* Navbar Hover Animations */
+.navbar-brand {
+    display: inline-block;
+    animation: navlogo-back 0.2s ease-out;
+}
+.navbar-brand:hover {
+    animation: navlogo-hover 0.5s ease-in-out forwards;
+}
+@keyframes navlogo-hover {
+    0% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    70% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(-6px);
+    }
+}
+@keyframes navlogo-back {
+    0% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Navbar Text */
+.nav-link {
+    color: #000;
+    text-transform: uppercase;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 40px;
+    transition: color 0.1s ease-out;
+    animation: nav-linkunhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+@keyframes nav-linkunhover {
+    0% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.nav-link:hover {
+    color: #2c2c2c;
+    animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+@keyframes nav-linkhover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Hover Line Navbar */
+.nav-linkmain::after {
+    content: '';
+    width: 0;
+    height: 1px;
+    background-color: #000;
+    margin: auto;
+    display: block;
+}
+
+.nav-linkmain:hover::after {
+    width: 100%;
+    transition: all 0.5s;
+}
+
+/* End of Hover Line Navbar */
+
+
+/* Profile + Burger Alignments
+Move Margins to Match Logo */
+@media (max-width: 575.98px) {
+    .sideToggle-sm {
+        position: absolute;
+        right: 4rem;
+        top: 50px;
+        .fa-user {
+            font-size: 20px;
+        }
+    }
+
+    .navbar-toggler {
+        margin-right: 4rem;
+    }
+}
+
+/* Hamburger */
+.navbar-toggler {
+    border: 0;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Right Aligned Navbar */
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+/* End of Navbar */

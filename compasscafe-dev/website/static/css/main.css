@@ -1,0 +1,1463 @@
+/* TABLE OF CONTENTS */
+/* ASSETS */
+/* Custom Cursor */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+body {
+  cursor: url("/static/assets/img/cursor-point.png"), auto;
+}
+
+a:hover,
+i:hover,
+button[type=submit]:hover,
+input[type=submit]:hover,
+input[type=button]:hover,
+input[type=reset]:hover,
+input[type=number]:hover,
+input[type=text]:hover,
+input[type=email]:hover,
+input[type=password]:hover,
+input[type=checkbox]:hover,
+input[type=date]:hover,
+input[type=dropdown]:hover,
+select:hover,
+textarea:hover,
+.btn-group button:hover,
+.show-button:hover,
+#sideMenu i:hover,
+form #filterPopBTN,
+#sortPopBTN:hover {
+  cursor: url("/static/assets/img/cursor-ok.png"), pointer;
+}
+
+/* Pre-load Screen */
+#loadscreen {
+  display: block;
+  width: 100%;
+  height: calc(100% + 500px);
+  background-color: var(--main-white);
+  z-index: 100000000;
+  position: fixed;
+}
+#loadscreen img {
+  width: 10rem;
+  position: relative;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -80%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+#loadscreen.loadtrigger {
+  animation: preload 1.5s cubic-bezier(0.5, 0.1, 0.1, 1) forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes preload {
+  0% {
+    transform: translateY(0);
+    border-bottom: 500px solid var(--main-navy);
+  }
+  100% {
+    transform: translateY(-100%);
+    border-bottom: 50px solid var(--main-navy);
+  }
+}
+/* REMOVED FUNCTIONALITY */
+/* NO SCROLL ON LOAD */
+/* html, body {
+    overflow-y: hidden;
+    height: 100%;
+}
+ Add Class to Scroll 
+html.noscroll, body.noscroll {
+    overflow-y: visible;
+    height: auto;
+} */
+.preload-fadein {
+  animation: preload-fadein 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.preload-fadein.initiate {
+  animation-delay: 0.9s;
+  animation-play-state: running;
+}
+
+@keyframes preload-fadein {
+  0% {
+    transform: translateY(5%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+#progressBar {
+  width: 0;
+  background-color: var(--main-navy);
+  text-align: center;
+  color: #fff;
+  transition: width 1.2s cubic-bezier(0.6, 0.8, 1, 0.8);
+  font-family: "JetBrains Mono";
+}
+
+/* End of Pre-load Screen */
+/* Import Fonts */
+/* Open Sans */
+/* JetBrains Mono */
+/* Bungee */
+/* Scroll to Top Btn */
+#resetButton {
+  /* Button Correction */
+  position: fixed;
+  z-index: 99;
+  border: none;
+  outline: none;
+  /* Button Style */
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  /* Button Position */
+  left: 50%;
+  bottom: -60px; /* Transitioner */
+  transform: translateX(-50%);
+  transition: bottom 0.5s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+#resetButton.show-button {
+  bottom: 70px;
+}
+
+#resetButton:hover {
+  background-color: #212121;
+}
+
+#resetButton i {
+  font-size: 20px;
+  transform: translateY(-1px);
+}
+
+/* End of Scroll to Top Btn */
+/* Submit Button */
+/* Primary Button */
+.btn-primary {
+  background-color: var(--main-lightblue2);
+  border: 2px solid #000;
+  color: #000;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transform: translateY(0);
+  animation: btnprimary-unhover 0.2s ease-in-out;
+}
+
+@keyframes btnprimary-unhover {
+  0% {
+    transform: translateY(-6px);
+    box-shadow: 0 5px 0 #000;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.btn-primary:hover {
+  background-color: var(--main-lightblue1);
+  color: #000;
+  border: 2px solid #000;
+  animation: btnprimary-hover 0.4s ease-in-out forwards;
+}
+
+@keyframes btnprimary-hover {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 #000;
+  }
+  40% {
+    transform: translateY(-8px);
+    box-shadow: 0 5px 0 #000;
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(-6px);
+    box-shadow: 0 5px 0 #000;
+  }
+}
+.btn-primary:active {
+  background-color: var(--main-white) !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background-color: var(--main-white);
+  border: 2px solid #000;
+  color: #000;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transform: translateY(0);
+  animation: btnsecondary-unhover 0.2s ease-in-out;
+}
+
+@keyframes btnsecondary-unhover {
+  0% {
+    transform: translateY(-6px);
+    box-shadow: 0 5px 0 #000;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.btn-secondary:hover {
+  background-color: var(--main-beige);
+  color: #000;
+  border: 2px solid #000;
+  animation: btnprimary-hover 0.4s ease-in-out forwards;
+}
+
+@keyframes btnsecondary-hover {
+  0% {
+    transform: translateY(0);
+    box-shadow: 0 0 0 #000;
+  }
+  40% {
+    transform: translateY(-8px);
+    box-shadow: 0 5px 0 #000;
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(-6px);
+    box-shadow: 0 5px 0 #000;
+  }
+}
+.btn-primary:active {
+  background-color: var(--main-white) !important;
+  color: #000 !important;
+  border: 2px solid #000 !important;
+}
+
+/* End of Submit Button */
+/* Targeting WebKit browsers */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Input Fields */
+input[type=text],
+input[type=number],
+input[type=email],
+input[type=password],
+#apply-dropdown {
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+  font-family: "JetBrains Mono";
+}
+
+input[type=text]:focus,
+input[type=number]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+#apply-dropdown:focus {
+  border: 1px solid #acacac;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  box-shadow: none;
+}
+
+/* End of Inputs */
+/* Flash Pop-up Alerts */
+.alert-dismissible {
+  position: fixed;
+  display: block;
+  z-index: 100000;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  font-family: "JetBrains Mono";
+  font-size: 14px;
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.alert-dismissible .fa-times {
+  color: #fff;
+  padding: 10px;
+  background-color: transparent;
+  border: 0;
+  transform: scale(1.5) translateX(4px);
+}
+
+.alert-success {
+  border: 1px solid var(--main-lightblue1);
+}
+
+.alert-danger {
+  border: 1px solid var(--main-beige);
+}
+
+/* End of Flashes */
+/* Dropdown Menu : GENERAL */
+.dropdown-menu {
+  animation: dropdown-anim 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  border-radius: 15px;
+  border: 2px solid var(--main-white);
+  transition: border 0.3s ease-in-out;
+  position: absolute !important;
+  top: 0 !important;
+  z-index: 1000; /* Ensure dropdown menu is on top */
+  overflow: hidden; /* Prevent overflow issues */
+}
+
+.dropdown-menu:hover {
+  border: 2px solid #ddd;
+}
+
+@keyframes dropdown-anim {
+  0% {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(50px);
+    opacity: 1;
+  }
+}
+/* Dropdown Items */
+.dropdown-menu li {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Black Block on Hover */
+.dropdown-menu li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0px;
+  background-color: #000;
+  transition: all 0.1s ease-out;
+}
+
+.dropdown-menu li:hover::before {
+  display: block;
+  width: 4px;
+}
+
+/* Dropdown Actions */
+.dropdown-menu li a {
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  text-transform: capitalize;
+  color: #000;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  transform: translateX(0);
+  transition: all 0.3s ease-out;
+}
+
+.dropdown-menu li:hover {
+  background-color: #ddd;
+}
+.dropdown-menu li:hover a {
+  transform: translateX(10px);
+  background-color: #ddd;
+}
+
+/* End of Dropdown Menu : GENERAL */
+/* DASHBOARD USER FILTER */
+#sortbuttons .buttonclass {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+#sortbuttons .buttonclass li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.popup-content ul {
+  padding: 20px;
+}
+.popup-content ul li {
+  margin-bottom: 20px;
+}
+.popup-content ul li input {
+  margin: 0;
+}
+.popup-content ul li input[type=checkbox] {
+  transform: scale(1.4);
+  margin-right: 5px;
+}
+.popup-content ul li input[type=select] {
+  padding: 20px;
+}
+.popup-content ul li select {
+  padding: 15px;
+  border: #000 1px solid;
+  border-radius: 5px;
+  width: 100%;
+  font-family: "JetBrains Mono";
+}
+
+.dash-filter input[type=checkbox] {
+  transform: scale(1.4);
+}
+
+.filterpopup {
+  display: none;
+  position: absolute;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+  z-index: 10000;
+}
+
+.dash-popupjs {
+  display: block;
+  background-color: var(--main-white);
+  transform: translateY(0);
+  animation: dash-popupanim 0.3s ease-out;
+}
+
+@keyframes dash-popupanim {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* End of Dashboard Popup */
+/* Spreadsheet User Interface */
+/* Global */
+table, th, td {
+  padding: 20px;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "Open Sans";
+}
+
+table {
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Color Palette Declarations */
+:root {
+  /* Colours */
+  --main-white: #fafafa;
+  --main-beige: #faf5f1;
+  --main-lightblue1: #e1ebf8;
+  --main-lightblue2: #ccddf1;
+  --main-navy: #232947;
+  /* Backgrounds */
+  --bg-dark: url(/static/assets/img/noisebg-dark.png);
+  --bg-white: url(/static/assets/img/noisebg-white.png);
+}
+
+/* TEMPLATE */
+/* Notice Marquee Header */
+.noticeinf {
+  overflow-x: hidden;
+  white-space: nowrap;
+  width: 100%;
+  position: relative;
+  display: block;
+  z-index: 500;
+  background-color: var(--main-navy);
+  border-top: #6c78b4 1px solid;
+  border-bottom: #6c78b4 1px solid;
+  transition: all 0.3s ease-out;
+}
+
+/* Pause Animation on Parent Hover */
+.noticeinf:hover .noticeinf-conveyor ul {
+  animation-play-state: paused;
+}
+
+.noticeinf-conveyor {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--main-lightblue1);
+  transition: 0.1s ease-in-out;
+}
+
+.noticeinf-conveyor ul {
+  display: flex;
+  padding: 10px 0;
+  margin: 0;
+  list-style-type: none;
+  animation: slide 40s infinite linear;
+}
+
+.noticeinf-conveyor ul li {
+  font-size: 20px;
+  flex: 0 0 auto;
+  margin: 0 5vw;
+  font-family: "JetBrains Mono";
+  text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.noticeinf:hover {
+  background-color: #2a3155;
+  color: #fff;
+}
+
+/* End of Notice Marquee Header */
+/* ## Navbar ## */
+/* Navbar Body */
+.navbar {
+  background-color: transparent;
+  padding: 20px 50px;
+  position: absolute;
+  width: 100%;
+  display: block;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.nav-item {
+  pointer-events: auto;
+  list-style-type: none;
+}
+
+.navbar .nav-container .navbar-nav * {
+  pointer-events: auto;
+}
+
+.navbar-brand, .account-dropdown, .navbar-toggler {
+  pointer-events: auto;
+}
+
+/* Change Icon on Hover */
+/* Hover Logo */
+#hover-logo {
+  opacity: 0;
+}
+
+.navbar-brand:hover #hover-logo {
+  opacity: 1;
+}
+
+/* Original Logo */
+.navbar-brand:hover #original-logo {
+  opacity: 0;
+}
+
+/* Navbar Logo */
+.logo-container {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.logo-container img {
+  position: absolute;
+  width: 70px;
+}
+
+/* Navbar Hover Animations */
+.navbar-brand {
+  display: inline-block;
+  animation: navlogo-back 0.2s ease-out;
+}
+
+.navbar-brand:hover {
+  animation: navlogo-hover 0.5s ease-in-out forwards;
+}
+
+@keyframes navlogo-hover {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-8px);
+  }
+  70% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes navlogo-back {
+  0% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* Navbar Text */
+.nav-link {
+  color: #000;
+  text-transform: uppercase;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  text-decoration: none;
+  font-size: 16px;
+  margin-left: 40px;
+  transition: color 0.1s ease-out;
+  animation: nav-linkunhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+@keyframes nav-linkunhover {
+  0% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.nav-link:hover {
+  color: #2c2c2c;
+  animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+@keyframes nav-linkhover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+/* Hover Line Navbar */
+.nav-linkmain::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  background-color: #000;
+  margin: auto;
+  display: block;
+}
+
+.nav-linkmain:hover::after {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+/* End of Hover Line Navbar */
+/* Profile + Burger Alignments
+Move Margins to Match Logo */
+@media (max-width: 575.98px) {
+  .sideToggle-sm {
+    position: absolute;
+    right: 4rem;
+    top: 50px;
+  }
+  .sideToggle-sm .fa-user {
+    font-size: 20px;
+  }
+  .navbar-toggler {
+    margin-right: 4rem;
+  }
+}
+/* Hamburger */
+.navbar-toggler {
+  border: 0;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Right Aligned Navbar */
+.navbar-nav {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* End of Navbar */
+/* ## Navbar Side Menu ## */
+/* BUTTON */
+.sideToggle {
+  font-size: 16px;
+}
+
+#sideMenu {
+  height: 100%;
+  padding: 70px 50px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 400px;
+  transform: translateX(400px);
+  transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: var(--main-navy);
+  border-left: var(--main-lightblue2) 1px solid;
+  color: var(--main-beige);
+  z-index: 1000;
+}
+#sideMenu i {
+  font-size: 32px;
+  transform: rotate(0);
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  color: #fff;
+}
+#sideMenu i:hover {
+  transform: rotate(90deg);
+}
+#sideMenu h6 {
+  color: #fff;
+}
+
+.nav-item input[type=checkbox]:checked ~ #sideMenu {
+  transform: translateX(0);
+}
+
+.nav-item input[type=checkbox] {
+  display: none;
+}
+
+/* CONTENTS */
+.sideMenu-contents {
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  list-style-type: none;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.sideMenu-contents .sideNav {
+  line-height: 40px;
+  background-color: transparent;
+  transition: background-color 0.5s;
+  position: relative;
+  overflow-x: hidden;
+}
+.sideMenu-contents .sideNav a {
+  transform: translateX(0px);
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.sideMenu-contents .sideNav:hover {
+  background-color: #404a7c;
+  width: 100%;
+}
+.sideMenu-contents .sideNav:hover a {
+  transform: translateX(-20px);
+}
+.sideMenu-contents h3 {
+  font-family: "Bungee";
+  text-shadow: 0 4px #000;
+}
+.sideMenu-contents .sideNav::before {
+  content: "";
+  width: 0px;
+  height: 100%;
+  background-color: var(--main-beige);
+  margin: auto;
+  display: block;
+  position: absolute;
+}
+.sideMenu-contents .sideNav:hover::before {
+  width: 4px;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#sideCredits {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0 50px 25px 0;
+}
+
+/* Darken on Side Menu */
+.darkened-SideScreen {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}
+
+.nav-item input[type=checkbox]:checked ~ .darkened-SideScreen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sideHeader {
+  position: relative;
+}
+
+/* ## End of Navbar Side Menu ## */
+/* ## Footer ## */
+/* Upper Footer */
+footer {
+  color: #fff;
+}
+footer .row {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-upper {
+  background-image: linear-gradient(var(--main-navy), #1f2541);
+  margin-bottom: 100vh;
+}
+.footer-upper .row-upper {
+  border-top: #6c78b4 1px solid;
+  border-bottom: #6c78b4 1px solid;
+}
+
+.footer-lower {
+  background-image: var(--bg-dark);
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.upperfooter-left {
+  padding: 50px;
+}
+
+.upperfooter-right {
+  text-align: right;
+  padding: 50px;
+  text-transform: uppercase;
+}
+
+.footer-upper {
+  /* Upper Left */
+  /* Hover Line Navbar */
+  /* Upper Right */
+}
+.footer-upper #footerleft-text {
+  padding-left: 40px;
+}
+.footer-upper #footerleft-text h5 {
+  font-family: "Open Sans";
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid #fff;
+  width: 150px;
+}
+.footer-upper #footerleft-text p {
+  color: #babdce;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+}
+.footer-upper .upperfooter-left ul {
+  padding-left: 0;
+  align-items: center;
+}
+.footer-upper .upperfooter-left ul li {
+  display: inline-block;
+  vertical-align: top;
+}
+.footer-upper .footer-links::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  background-color: #fff;
+  margin: auto;
+  display: block;
+}
+.footer-upper .footer-links:hover::after {
+  width: 100%;
+  transition: all 0.5s;
+}
+.footer-upper .upperfooter-right .upperfooter-up ul li {
+  display: inline-block;
+  margin-left: 60px;
+}
+.footer-upper .upperfooter-right .upperfooter-down ul li {
+  display: inline-block;
+}
+.footer-upper .upperfooter-right ul li .footer-links {
+  color: #fff;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  text-decoration: none;
+}
+.footer-upper .upperfooter-right img {
+  margin: 10px 0px 0px 20px;
+  width: 40px;
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+}
+.footer-upper .upperfooter-right img:hover {
+  transform: scale(1.15);
+}
+
+/* Footer Lower */
+/* Fixed Footer Scroll Reveal */
+body {
+  background-image: var(--bg-dark);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+.container-middle {
+  background-image: var(--bg-white);
+  background-attachment: fixed;
+}
+
+/* Lower Footer Logo */
+.lowerfooter-upper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#footer-logo {
+  width: 80%;
+  margin: 80px 0;
+  animation: footerbanner-unhover 0.5s ease-in-out forwards;
+}
+
+@keyframes footerbanner-unhover {
+  0% {
+    transform: scale(0.98);
+    filter: brightness(0.4);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+#footer-logo:hover {
+  animation: footerbanner-hover 0.7s ease-in-out forwards;
+}
+
+@keyframes footerbanner-hover {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    transform: scale(0.98);
+    filter: brightness(0.4);
+  }
+}
+/* Lower Footer Break */
+.lowerfooter {
+  padding: 20px 50px;
+}
+
+.lowerfooter-right {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  text-transform: capitalize;
+}
+.lowerfooter-right p {
+  margin-bottom: 0;
+  text-align: right;
+}
+
+.lowerfooter-container {
+  border-top: rgb(79, 79, 79) 1px solid;
+  border-bottom: rgb(79, 79, 79) 1px solid;
+}
+
+/* ## End of Footer ## */
+/* Beninging of Being Fancy */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Override Bootstrap's Default Padding */
+.container-fluid {
+  padding: 0;
+}
+
+/* REMOVED FUNCTIONALITY */
+/* Remove Scrollbar */
+/* ::-webkit-scrollbar {
+    display: none;
+} */
+/* Disable Browser's Native Scroll
+To Enable Lenis Smooth Scroll */
+/* html {
+    scroll-behavior: auto !important;
+} */
+/* ## Cover Fixed Footer with Container ## */
+/* User UI Header */
+h1 {
+  font-family: "Bungee";
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 2px 5px var(--main-lightblue2);
+  filter: drop-shadow(2px 5px 0 var(--main-beige));
+}
+
+.blankspace-test p {
+  margin: 0;
+}
+
+.whitespace-test {
+  background-color: #fff;
+  margin: 0;
+  width: 100%;
+}
+
+.beigespace-test {
+  background-color: var(--main-white);
+  padding: 100px 150px;
+  margin: 0;
+}
+@media screen and (max-width: 768px) {
+  .beigespace-test {
+    padding: 100px 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .beigespace-test {
+    padding: 100px 0;
+  }
+}
+
+.bluespace-test {
+  background-color: var(--main-lightblue2);
+  padding: 100px 150px;
+  margin: 0;
+}
+
+/* PAGES */
+/* Home */
+/* ## HOME ## */
+/* Hero Section */
+.hero-background {
+  background-color: var(--main-lightblue2);
+  height: calc(100vh - 40px);
+  display: block;
+  z-index: 0;
+  position: relative;
+}
+.hero-background #hero-title1 {
+  width: 60vw;
+  margin: 0 auto;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  position: absolute;
+}
+.hero-background #hero-title2 {
+  width: 60vw;
+  margin: 0 auto;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  position: absolute;
+  pointer-events: none;
+}
+
+#hero-wave {
+  width: 200vw;
+  animation: herowave-move 6.9s infinite linear reverse;
+}
+
+@keyframes herowave-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+.hero3dviewer {
+  top: 0;
+  height: 100%;
+  width: 100vw;
+  display: block;
+  z-index: 2;
+  position: relative;
+}
+
+/* ## END OF HOME ## */
+/* Error */
+/* ## 404 PAGE NOT FOUND ## */
+#contain404 {
+  position: relative;
+  margin-bottom: 150px;
+  height: 75vh;
+}
+#contain404 h1 {
+  color: var(--main-white);
+  text-shadow: 6px 0 var(--main-navy), -6px 0 var(--main-navy), 0 6px var(--main-navy), 0 -6px var(--main-navy), 3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
+  filter: drop-shadow(0 15px 0 var(--main-navy));
+  letter-spacing: 5px;
+}
+#contain404 strong {
+  font-family: "Open Sans";
+  font-weight: 600;
+}
+#contain404 p {
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+}
+
+#error404_contents {
+  transform: translateY(0px);
+  animation: hover404 4s ease-in-out infinite;
+}
+#error404_contents h1, #error404_contents p {
+  transform: translateY(0px);
+  animation: hovercontent404 4s ease-in-out infinite;
+}
+#error404_contents h1 {
+  transform: translateY(0px);
+  animation: hovertitle404 4s ease-in-out infinite;
+}
+
+@keyframes hovertitle404 {
+  0% {
+    transform: translateY(-16px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-16px);
+  }
+}
+@keyframes hovercontent404 {
+  0% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes hover404 {
+  0% {
+    transform: translateY(-20px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+#brokeglass_contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#brokeglass_contents spline-viewer {
+  height: 800px;
+  width: 100%;
+}
+
+.text-error404 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the div */
+  text-align: center; /* Optional: center text inside the div */
+}
+
+/* End of 404 */
+/* Apply */
+/* APPLY TABLE */
+#posts h3, .dashboarduser-table h3 {
+  font-family: "JetBrains Mono";
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table th, .table td {
+  background-color: transparent;
+  text-align: center;
+}
+
+#apply-delete {
+  float: right;
+}
+
+/* Set individual table grid height */
+.table tr {
+  height: 40px;
+}
+
+.card-apply {
+  padding: 20px;
+}
+.card-apply .card-body {
+  text-transform: capitalize;
+}
+
+#apply-barista {
+  display: flex;
+  justify-content: space-between;
+}
+#apply-barista #week-desc {
+  text-align: right;
+}
+#apply-barista h3 {
+  font-family: "JetBrains Mono";
+  text-transform: capitalize;
+}
+
+#btn-applysubmit {
+  width: 100%;
+}
+
+/* Apply Schedule Calendar Today */
+.datetoday-selected {
+  background-color: var(--main-lightblue2) !important;
+  color: var(--main-navy) !important;
+  padding: 5px 20px;
+  border-radius: 15px;
+}
+
+/* End of Apply Table */
+/* Dashboard */
+/* Dashboard User Interface */
+.dashboarduser-header {
+  border-bottom: 2px solid #cbcbcb;
+}
+
+.dashboarduseredit {
+  color: #000;
+}
+
+.dashboarduser-table {
+  border: 2px solid var(--main-white);
+  background-color: var(--main-white);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 50px;
+  width: 100%;
+  transform: scale(1);
+  transition: all 0.3s ease-out;
+}
+.dashboarduser-table ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.dashboarduser-table h2 {
+  font-family: "Bungee";
+  text-transform: uppercase;
+  font-size: 40px;
+}
+
+.dashboarduser-table:hover {
+  border: 2px solid #ddd;
+  transform: scale(1.01);
+}
+
+.dashboard-col .dash-hello {
+  background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
+}
+.dashboard-col .dash-hello img {
+  position: absolute;
+  height: 130%;
+  bottom: 0;
+  right: 50px;
+  filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
+}
+
+.dash-menu1 {
+  margin-bottom: 30px;
+}
+
+.dash-sides {
+  transform: scale(1);
+}
+
+.dash-sides:hover {
+  transform: scale(1.03);
+}
+
+.dash-sides h6 {
+  font-family: "JetBrains Mono";
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.dash-sides ul li a {
+  font-family: "Open Sans";
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.dash-sides ul li {
+  transform: translateX(0px);
+  transition: all 0.3s ease-out;
+}
+
+.dash-sides ul li:hover {
+  transform: translateX(10px);
+}
+
+#configicon {
+  text-align: center;
+}
+
+#emailconfig {
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+}
+
+#dashboard-list {
+  border-bottom: 1px solid #ddd;
+  transition: all 0.3s ease-out;
+}
+
+#dashboard-list:hover {
+  background-color: #ededed;
+}
+#dashboard-list:hover #emailconfig {
+  transform: translateX(10px);
+}
+
+.dashboarduseredit {
+  border: 0;
+  background-color: transparent;
+}
+
+#edituser_dash {
+  text-decoration: none;
+}
+
+.btn-close:focus {
+  box-shadow: none;
+}
+
+.col-md-3 {
+  padding-right: 15px;
+  position: relative;
+  z-index: 1000;
+}
+
+.col-md-9 {
+  padding-left: 15px;
+  position: relative;
+  z-index: 950;
+}
+
+.dashboard-containermaster {
+  display: flex;
+}
+
+/* End of Dashboard User Interface */
+/* Login & Signup */
+/* ## USER LOGIN / SIGN UP ## */
+.user-loginui {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  height: 650px;
+  margin: 80px auto;
+  overflow: hidden;
+}
+.user-loginui form {
+  padding: 100px;
+}
+
+.user-signupui {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  height: 900px;
+  margin: 80px auto;
+  overflow: hidden;
+}
+.user-signupui form {
+  padding: 100px;
+}
+.user-signupui col {
+  margin: 0;
+}
+
+.user-inuibtn button, .user-inuibtn a {
+  width: 100%;
+  text-decoration: none;
+}
+
+label {
+  font-family: "Open Sans";
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
+}
+
+.user-inui .col {
+  padding: 0;
+}
+
+/* Temporary User Login / Signup Image */
+.user-inui-img {
+  background-image: url(/static/assets/media/filler.png);
+  background-position: center;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+}
+
+/* ## END OF USER LOGIN / SIGN UP ## *//*# sourceMappingURL=main.css.map */

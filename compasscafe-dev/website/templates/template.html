@@ -17,10 +17,12 @@
     <!--Popper JS -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <!-- Personalised CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
   </head>
   <body>
+
+    <!-- Load Screen -->
     <div class="container-fluid" id="loadscreen">
       <div id="progressBar">0%</div>
       <img src="/static/assets/img/LogoDesign-White.svg" alt="Compass Logo" id="loadscreen-logo" draggable="false">
@@ -67,6 +69,47 @@
           </div>
         </a>
         
+        <!-- Account Page - Dropdown [Small Screen] -->
+        <li class="nav-item">
+          <input type="checkbox" id="openSide-sm">
+            <label for="openSide-sm" class="sideToggle nav-link sideToggle-sm">
+              <i class="fa-regular fa-user d-sm-none"></i>
+            </label>
+            <div id="sideMenu">
+              <ul class="sideMenu-contents">
+                <li>
+                  <label for="openSide-sm" class="sideToggle">
+                    <i class="fa fa-times"></i>
+                  </label>
+                </li>
+                <br>
+                <!-- Admin User-->
+                <h3 class="sideHeader sideText">Account</h3>
+                <br>
+                {% if user.is_authenticated %}
+                <!-- User Logged In -->
+                {% if user.is_staff %}
+                <li class="sideNav sideText"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+                {% else %}
+                <li class="sideNav sideText"><a class="dropdown-item" href="/settings">settings</a></li>
+                {% endif %}
+                <li class="sideNav sideText"><a class="dropdown-item" href="/login">quick login</a></li>
+                <li class="sideNav sideText"><a class="dropdown-item" href="/logout">logout</a></li>
+                {% else %}
+                <!-- User Not Logged In -->
+                <li class="sideNav sideText"><a class="dropdown-item" href="/login">login</a></li>
+                <li class="sideNav sideText"><a class="dropdown-item" href="/signup">sign up</a></li>
+                {% endif %}
+                <li class="sideNav sideText"><a class="dropdown-item" href="/contact">contact</a></li>
+                <li id="sideCredits">
+                  <p class="sideHeader sideText">© Compass Cafe SMC | 2024</p>
+                </li>
+              </ul>
+            </div>
+            <!-- Darkened Screen -->
+            <div class="darkened-SideScreen"></div>
+          </li>
+
         <!-- Collapse -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
@@ -87,48 +130,49 @@
             <li class="nav-item">
               <a class="nav-link nav-linkmain" href="/news">news</a>
             </li>
+
             <!-- Account Page - Dropdown [Big Screen] -->
-            <li class="nav-item">
-              <input type="checkbox" id="openSide">
-              <label for="openSide" class="sideToggle nav-link">
+            <li class="nav-item d-none d-sm-block">
+              <input type="checkbox" id="openSide-md">
+              <label for="openSide-md" class="sideToggle1 nav-link">
                 <i class="fa-regular fa-user"></i>
               </label>
               <div id="sideMenu">
                 <ul class="sideMenu-contents">
                   <li>
-                    <label for="openSide" class="sideToggle">
+                    <label for="openSide-md" class="sideToggle1">
                       <i class="fa fa-times"></i>
                     </label>
                   </li>
                   <br>
                   <!-- Admin User-->
-                  <h3 class="sideHeader sideText">Account</h3>
+                  <h3 class="sideHeader sideText1">Account</h3>
                   <br>
                   {% if user.is_authenticated %}
                   <!-- User Logged In -->
                   {% if user.is_staff %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
                   {% else %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/settings">settings</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/settings">settings</a></li>
                   {% endif %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/login">quick login</a></li>
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/logout">logout</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/login">quick login</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/logout">logout</a></li>
                   {% else %}
                   <!-- User Not Logged In -->
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/login">login</a></li>
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/signup">sign up</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/login">login</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/signup">sign up</a></li>
                   {% endif %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/contact">contact</a></li>
+                  <li class="sideNav sideText1"><a class="dropdown-item" href="/contact">contact</a></li>
                   <li id="sideCredits">
-                    <p class="sideHeader sideText">© Compass Cafe SMC | 2024</p>
+                    <p class="sideHeader sideText1">© Compass Cafe SMC | 2024</p>
                   </li>
                 </ul>
               </div>
               <!-- Darkened Screen -->
-              <div class="darkened-SideScreen">
-
-              </div>
+              <div class="darkened-SideScreen"></div>
             </li>
+            <!-- End of Account Page - Dropdown [Big Screen] -->
+             
           </ul>
         </div>
         <!-- End of Expandable Links -->

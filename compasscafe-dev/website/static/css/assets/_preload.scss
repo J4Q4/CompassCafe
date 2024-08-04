@@ -1,0 +1,74 @@
+/* Pre-load Screen */
+#loadscreen{
+    display: block;
+    width: 100%;
+    height: calc(100% + 500px);
+    background-color: var(--main-white);
+    z-index: 100000000;
+    position: fixed;
+    img {
+        width: 10rem;
+        position: relative;
+        left: 50vw;
+        top: 50vh;
+        transform: translate(-50%, -80%);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+    }
+}
+#loadscreen.loadtrigger {
+    animation: preload 1.5s cubic-bezier(0.5, 0.1, 0.1, 1.0) forwards;
+    animation-delay: 0.2s;
+}
+@keyframes preload {
+    0% {
+        transform: translateY(0);
+        border-bottom: 500px solid var(--main-navy);
+    }
+    100% {
+        transform: translateY(-100%);
+        border-bottom: 50px solid var(--main-navy);
+    }
+}
+
+/* REMOVED FUNCTIONALITY */
+/* NO SCROLL ON LOAD */
+/* html, body {
+    overflow-y: hidden;
+    height: 100%;
+}
+ Add Class to Scroll 
+html.noscroll, body.noscroll {
+    overflow-y: visible;
+    height: auto;
+} */
+
+.preload-fadein {
+    animation: preload-fadein 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.preload-fadein.initiate {
+    animation-delay: 0.9s;
+    animation-play-state: running;
+}
+@keyframes preload-fadein {
+    0% {
+        transform: translateY(5%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#progressBar {
+    width: 0;
+    background-color: var(--main-navy);
+    text-align: center;
+    color: #fff;
+    transition: width 1.2s cubic-bezier(0.6, 0.8, 1.0, 0.8);
+    font-family: "JetBrains Mono";
+}
+/* End of Pre-load Screen */

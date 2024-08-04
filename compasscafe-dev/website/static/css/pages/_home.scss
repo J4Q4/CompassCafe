@@ -1,0 +1,57 @@
+/* ## HOME ## */
+
+/* Hero Section */
+.hero-background {
+    background-color: var(--main-lightblue2);
+    height: calc(100vh - 40px);
+    display: block;
+    z-index: 0;
+    position: relative;
+    #hero-title1 {
+        width: 60vw;
+        margin: 0 auto;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        position: absolute;
+    }
+    #hero-title2 {
+        width: 60vw;
+        margin: 0 auto;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        position: absolute;
+        pointer-events: none;
+    }
+}
+
+#hero-wave {
+    width: 200vw;
+    animation: herowave-move 6.9s infinite linear reverse;
+}
+@keyframes herowave-move {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100vw);
+    }
+}
+
+.hero3dviewer {
+    top: 0;
+    height: 100%;
+    width: 100vw;
+    display: block;
+    z-index: 2;
+    position: relative;
+}
+
+/* ## END OF HOME ## */

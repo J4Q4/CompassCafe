@@ -1,0 +1,59 @@
+/* Beninging of Being Fancy */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Override Bootstrap's Default Padding */
+.container-fluid {
+    padding: 0;
+}
+
+/* REMOVED FUNCTIONALITY */
+/* Remove Scrollbar */
+/* ::-webkit-scrollbar {
+    display: none;
+} */
+
+/* Disable Browser's Native Scroll
+To Enable Lenis Smooth Scroll */
+/* html {
+    scroll-behavior: auto !important;
+} */
+
+
+/* ## Cover Fixed Footer with Container ## */
+/* User UI Header */
+h1 {
+    font-family: "Bungee";
+    font-weight: 600;
+    text-transform: uppercase;
+    text-shadow: 2px 5px var(--main-lightblue2);
+    filter: drop-shadow(2px 5px 0 var(--main-beige));
+}
+
+.blankspace-test p {
+    margin: 0;
+}
+.whitespace-test {
+    background-color: #fff;
+    margin: 0;
+    width: 100%;
+}
+.beigespace-test {
+    @media screen and (max-width: 768px) {
+        padding: 100px 20px;
+        }
+    @media screen and (min-width: 768px) {
+        padding: 100px 0;
+    }
+    background-color: var(--main-white);
+    padding: 100px 150px;
+    margin: 0;
+}
+.bluespace-test {
+    background-color: var(--main-lightblue2);
+    padding: 100px 150px;
+    margin: 0;
+}

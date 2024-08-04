@@ -1,0 +1,138 @@
+/* Scroll to Top Btn */
+#resetButton {
+    /* Button Correction */
+    position: fixed;
+    z-index: 99;
+    border: none;
+    outline: none;
+    /* Button Style */
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 40px;
+    /* Button Position */
+    left: 50%;
+    bottom: -60px; /* Transitioner */
+    transform: translateX(-50%);
+    transition: bottom 0.5s ease-in-out, 
+    background-color 0.2s ease-in-out;
+}
+#resetButton.show-button {
+    bottom: 70px;
+}
+#resetButton:hover {
+    background-color: #212121;
+}
+#resetButton i {
+    font-size: 20px;
+    transform: translateY(-1px);
+}
+/* End of Scroll to Top Btn */
+
+
+/* Submit Button */
+/* Primary Button */
+.btn-primary {
+    background-color: var(--main-lightblue2);
+    border: 2px solid #000;
+    color: #000;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transform: translateY(0);
+    animation: btnprimary-unhover .2s ease-in-out;
+}
+@keyframes btnprimary-unhover {
+    0% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.btn-primary:hover {
+    background-color: var(--main-lightblue1);
+    color: #000;
+    border: 2px solid #000;
+    animation: btnprimary-hover .4s ease-in-out forwards;
+}
+@keyframes btnprimary-hover {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 #000;
+    }
+    40% {
+        transform: translateY(-8px);
+        box-shadow: 0 5px 0 #000;
+    }
+    70% {
+        transform: translateY(-4px);
+        
+    }
+    100% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+}
+
+.btn-primary:active {
+    background-color: var(--main-white) !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: var(--main-white);
+    border: 2px solid #000;
+    color: #000;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transform: translateY(0);
+    animation: btnsecondary-unhover .2s ease-in-out;
+}
+@keyframes btnsecondary-unhover {
+    0% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+.btn-secondary:hover {
+    background-color: var(--main-beige);
+    color: #000;
+    border: 2px solid #000;
+    animation: btnprimary-hover .4s ease-in-out forwards;
+}
+@keyframes btnsecondary-hover {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 #000;
+    }
+    40% {
+        transform: translateY(-8px);
+        box-shadow: 0 5px 0 #000;
+    }
+    70% {
+        transform: translateY(-4px);
+        
+    }
+    100% {
+        transform: translateY(-6px);
+        box-shadow: 0 5px 0 #000;
+    }
+}
+.btn-primary:active {
+    background-color: var(--main-white) !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+}
+/* End of Submit Button */

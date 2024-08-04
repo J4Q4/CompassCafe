@@ -106,6 +106,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // GSAP Onclick Animation - Sidebar Stagger //
+document.querySelector('.sideToggle1')
+.addEventListener('click', function() {
+gsap.fromTo(".sideText1", 
+    { // From
+        right: '-150px', 
+        opacity: 0 
+    },
+    { // To
+        right: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        stagger: 0.2, 
+        ease: 'back' 
+    }
+);
+});
+// GSAP Onclick Animation - Sidebar Stagger //
 document.querySelector('.sideToggle')
 .addEventListener('click', function() {
 gsap.fromTo(".sideText", 

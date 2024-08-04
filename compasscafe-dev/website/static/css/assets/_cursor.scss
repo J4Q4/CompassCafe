@@ -1,0 +1,26 @@
+/* Custom Cursor */
+body {
+    cursor: url('/static/assets/img/cursor-point.png'), auto;
+}
+a:hover,
+i:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="number"]:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="checkbox"]:hover,
+input[type="date"]:hover,
+input[type="dropdown"]:hover,
+select:hover,
+textarea:hover,
+.btn-group button:hover,
+.show-button:hover,
+#sideMenu i:hover,
+form #filterPopBTN,
+#sortPopBTN:hover {
+    cursor: url('/static/assets/img/cursor-ok.png'), pointer;
+}

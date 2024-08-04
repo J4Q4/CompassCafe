@@ -1,0 +1,84 @@
+/* ## 404 PAGE NOT FOUND ## */
+#contain404 {
+    position: relative;
+    margin-bottom: 150px;
+    height: 75vh;
+    h1 {
+        color: var(--main-white);
+        text-shadow: 6px 0 var(--main-navy), -6px 0 var(--main-navy), 0 6px var(--main-navy), 0 -6px var(--main-navy),
+               3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
+        filter: drop-shadow(0 15px 0 var(--main-navy));
+        letter-spacing: 5px;
+    }
+    strong {
+        font-family: "Open Sans";
+        font-weight: 600;
+    }
+    p {
+        font-family: "JetBrains Mono";
+        font-weight: 300
+    }
+}
+#error404_contents {
+    transform: translateY(0px);
+    animation: hover404 4s ease-in-out infinite;
+    h1, p {
+        transform: translateY(0px);
+        animation: hovercontent404 4s ease-in-out infinite;
+    }
+    h1 {
+        transform: translateY(0px);
+        animation: hovertitle404 4s ease-in-out infinite;
+    }
+}
+@keyframes hovertitle404 {
+    0% {
+        transform: translateY(-16px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-16px);
+    }
+}
+@keyframes hovercontent404 {
+    0% {
+        transform: translateY(-8px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-8px);
+    }
+}
+@keyframes hover404 {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+#brokeglass_contents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    spline-viewer {
+        height: 800px;
+        width: 100%;
+    }
+}
+.text-error404 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the div */
+    text-align: center; /* Optional: center text inside the div */
+}
+/* End of 404 */

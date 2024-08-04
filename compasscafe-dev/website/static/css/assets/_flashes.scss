@@ -1,0 +1,28 @@
+/* Flash Pop-up Alerts */
+.alert-dismissible {
+    position: fixed;
+    display: block;
+    z-index: 100000;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    font-family: "JetBrains Mono";
+    font-size: 14px;
+    background-color: #1b1b1b;
+    color: #fff;
+    padding: 10px 20px;
+}
+.alert-dismissible .fa-times {
+    color: #fff;
+    padding: 10px;
+    background-color: transparent;
+    border: 0;
+    transform: scale(1.5) translateX(4px);
+}
+.alert-success {
+    border: 1px solid var(--main-lightblue1);
+}
+.alert-danger {
+    border: 1px solid var(--main-beige);
+}
+/* End of Flashes */

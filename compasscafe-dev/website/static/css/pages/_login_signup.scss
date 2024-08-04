@@ -1,0 +1,56 @@
+/* ## USER LOGIN / SIGN UP ## */
+.user-loginui {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 650px;
+    margin: 80px auto;
+    overflow: hidden;
+    form {
+        padding: 100px;
+    }
+}
+.user-signupui {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 900px;
+    margin: 80px auto;
+    overflow: hidden;
+    form {
+        padding: 100px;
+    }
+    col {
+        margin: 0;
+    }
+}
+
+
+.user-inuibtn button, .user-inuibtn a {
+    width: 100%;
+    text-decoration: none;
+}
+
+label {
+    font-family: "Open Sans";
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+}
+
+
+.user-inui .col {
+    padding: 0;
+}
+
+/* Temporary User Login / Signup Image */
+.user-inui-img {
+    background-image: url(/static/assets/media/filler.png);
+    background-position: center;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+}
+/* ## END OF USER LOGIN / SIGN UP ## */

@@ -1,0 +1,171 @@
+/* ## Footer ## */
+/* Upper Footer */
+footer {
+    color: #fff;
+    .row {
+        margin: 0;
+        padding: 0;
+    }
+}
+.footer-upper {
+    background-image: linear-gradient(var(--main-navy), #1f2541);
+    margin-bottom: 100vh;
+    .row-upper {
+        border-top: #6c78b4 1px solid;
+        border-bottom: #6c78b4 1px solid;
+    }
+}
+.footer-lower {
+    background-image: var(--bg-dark);
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+.upperfooter-left {
+    padding: 50px;
+}
+.upperfooter-right {
+    text-align: right;
+    padding: 50px;
+    text-transform: uppercase;
+}
+
+.footer-upper {
+    /* Upper Left */
+    #footerleft-text {
+        padding-left: 40px;
+    }
+    #footerleft-text h5 {
+        font-family: "Open Sans";
+        font-weight: 600;
+        text-transform: uppercase;
+        border-bottom: 1px solid #fff;
+        width: 150px;
+    }
+    #footerleft-text p {
+        color: #babdce;
+        font-family: "JetBrains Mono";
+        font-weight: 300;
+    }
+    .upperfooter-left ul {
+        padding-left: 0;
+        align-items: center;
+    }
+    .upperfooter-left ul li {
+        display: inline-block;
+        vertical-align: top;
+    }
+    /* Hover Line Navbar */
+    .footer-links::after {
+        content: '';
+        width: 0;
+        height: 1px;
+        background-color: #fff;
+        margin: auto;
+        display: block;
+    }
+
+    .footer-links:hover::after {
+        width: 100%;
+        transition: all 0.5s;
+    }
+
+
+    /* Upper Right */
+    .upperfooter-right .upperfooter-up ul li {
+        display: inline-block;
+        margin-left: 60px;
+    }
+    .upperfooter-right .upperfooter-down ul li {
+        display: inline-block;
+    }
+    .upperfooter-right ul li .footer-links {
+        color: #fff;
+        font-family: "JetBrains Mono";
+        font-weight: 300;
+        text-decoration: none;
+    }
+    .upperfooter-right img {
+        margin: 10px 0px 0px 20px;
+        width: 40px;
+        transform: scale(1);
+        transition: transform 0.2s ease-in-out;
+    }
+    .upperfooter-right img:hover {
+        transform: scale(1.15);
+    }
+}
+
+
+/* Footer Lower */
+/* Fixed Footer Scroll Reveal */
+body {
+    background-image: var(--bg-dark);
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+.container-middle {
+    background-image: var(--bg-white);
+    background-attachment: fixed;
+}
+
+/* Lower Footer Logo */
+.lowerfooter-upper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#footer-logo {
+    width: 80%;
+    margin: 80px 0;
+    animation: footerbanner-unhover 0.5s ease-in-out forwards;
+}
+@keyframes footerbanner-unhover {
+    0% {
+        transform: scale(0.98);
+        filter: brightness(0.4);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+#footer-logo:hover {
+    animation: footerbanner-hover 0.7s ease-in-out forwards;
+}
+@keyframes footerbanner-hover {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    100% {
+        transform: scale(0.98);
+        filter: brightness(0.4);
+    }
+}
+
+/* Lower Footer Break */
+.lowerfooter {
+    padding: 20px 50px;
+}
+.lowerfooter-right {
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-transform: capitalize;
+    p {
+        margin-bottom: 0;
+        text-align: right;
+    }
+}
+.lowerfooter-container {
+    border-top: rgb(79, 79, 79) 1px solid;
+    border-bottom: rgb(79, 79, 79) 1px solid;
+}
+/* ## End of Footer ## */

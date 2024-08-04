@@ -1,0 +1,118 @@
+/* ## Navbar Side Menu ## */
+
+/* BUTTON */
+
+.sideToggle {
+    font-size: 16px;
+}
+#sideMenu {
+    height: 100%;
+    padding: 70px 50px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 400px;
+    transform: translateX(400px);
+    transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: var(--main-navy);
+    border-left: var(--main-lightblue2) 1px solid;
+    color: var(--main-beige);
+    z-index: 1000;
+    i {
+        font-size: 32px;
+        transform: rotate(0);
+        transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        color: #fff;
+    }
+    i:hover {
+        transform: rotate(90deg);
+    }
+    h6 {
+        color: #fff;
+    }
+}
+.nav-item input[type="checkbox"]:checked ~ #sideMenu {
+    transform: translateX(0);
+}
+.nav-item input[type=checkbox] {
+    display: none;
+}
+
+
+
+/* CONTENTS */
+
+.sideMenu-contents{
+    margin:0;
+    padding:0;
+    text-align: right;
+    list-style-type: none;
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-transform: uppercase;
+    .sideNav {
+        line-height: 40px;
+        background-color: transparent;
+        transition: background-color 0.5s;
+        position: relative;
+        overflow-x: hidden;
+        a {
+            transform: translateX(0px);
+            transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    .sideNav:hover {
+        background-color: #404a7c;
+        width: 100%;
+        a {
+            transform: translateX(-20px);
+        }
+    }
+    h3 {
+        font-family: "Bungee";
+        text-shadow: 0 4px #000;
+    }
+    .sideNav::before {
+        content: '';
+        width: 0px;
+        height: 100%;
+        background-color: var(--main-beige);
+        margin: auto;
+        display: block;
+        position: absolute;
+    }
+    .sideNav:hover::before {
+        width: 4px;
+        transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+}
+
+#sideCredits {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 50px 25px 0;
+}
+
+/* Darken on Side Menu */
+.darkened-SideScreen {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+.nav-item input[type="checkbox"]:checked ~ .darkened-SideScreen {
+    opacity: 1;
+    visibility: visible;
+}
+.sideHeader {
+    position: relative;
+}
+
+/* ## End of Navbar Side Menu ## */

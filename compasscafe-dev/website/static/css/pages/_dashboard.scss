@@ -1,0 +1,118 @@
+/* Dashboard User Interface */
+.dashboarduser-header {
+    border-bottom: 2px solid #cbcbcb;
+}
+.dashboarduseredit {
+    color: #000;
+}
+.dashboarduser-table {
+    border: 2px solid var(--main-white);
+    background-color: var(--main-white);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 50px;
+    width: 100%;
+    transform: scale(1);
+    transition: all 0.3s ease-out;
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    h2 {
+        font-family: "Bungee";
+        text-transform: uppercase;
+        font-size: 40px;
+    }
+}
+.dashboarduser-table:hover {
+    border: 2px solid #ddd;
+    transform: scale(1.01);
+}
+.dashboard-col .dash-hello {
+    background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
+    img {
+        position: absolute;
+        height: 130%;
+        bottom: 0;
+        right: 50px;
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
+    }
+}
+
+.dash-menu1 {
+    margin-bottom: 30px;
+}
+.dash-sides {
+    transform: scale(1);
+}
+.dash-sides:hover {
+    transform: scale(1.03);
+}
+.dash-sides h6 {
+    font-family: "JetBrains Mono";
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 18px;
+}
+.dash-sides ul li a {
+    font-family: "Open Sans";
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dash-sides ul li {
+    transform: translateX(0px);
+    transition: all 0.3s ease-out;
+}
+.dash-sides ul li:hover {
+    transform: translateX(10px);
+}
+#configicon {
+    text-align: center;
+}
+#emailconfig {
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
+}
+
+#dashboard-list {
+    border-bottom: 1px solid #ddd;
+    transition: all 0.3s ease-out;
+}
+
+#dashboard-list:hover {
+    background-color: #ededed;
+    #emailconfig {
+        transform: translateX(10px);
+    }
+}
+
+.dashboarduseredit {
+    border: 0;
+    background-color: transparent;
+}
+
+#edituser_dash {
+    text-decoration: none;
+}
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+.col-md-3 {
+    padding-right: 15px;
+    position: relative;
+    z-index: 1000;
+}
+.col-md-9 {
+    padding-left: 15px;
+    position: relative;
+    z-index: 950;
+}
+
+.dashboard-containermaster {
+    display: flex;
+}
+/* End of Dashboard User Interface */
