@@ -8,10 +8,11 @@
     <div class="preload-fadein">
         <h1>Admin Dashboard</h1>
         <br>
-        <div class="container-fluid dashboard-containermaster">
-            <div class="dashboard-col col-md-3">
+        <div class="row">
+            <div class="col-lg-12 col-xl-3">
                 <div class="dashboarduser-table dash-menu1 dash-sides">
-                    {{ user.email }}
+                    <label id="loggedinas-dash"><strong>Logged in as: {{ user.schoolid }}</strong><br>
+                    {{ user.email }}</label>
                 </div>
                 <div class="dashboarduser-table dash-menu1 dash-sides">
                     <ul>
@@ -32,45 +33,47 @@
                         <li><a href="#">news</a></li>
                     </ul>
                 </div>
+                <br>
             </div>
-            <div class="dashboard-col col-md-9">
+            <div class="col-lg-12 col-xl-9">
                 <div class="dashboarduser-table dash-menu1 dash-hello">
                     <h2>Hello, {{ user.schoolid }}! 👋</h2>
                     <p><strong>Welcome to the admin dashboard.</strong>
                     <br>Here you can manage users, applications, and contacts.<p>
                     <img src="/static/assets/media/penguindance.webp" alt="stoopid" draggable="false">
                 </div>
-                <!-- Edit User Status -->
+
+                <!- - User Interactives - ->
                 {% if edit_user_id %}
                 <div class="dashboarduser-table">
                     <h3>Edit User</h3>
                     <br>
                     <form method="POST" action="{{ url_for('views.dashboard', edit_user_id=edit_user_id) }}">
                         {{ edit_form.hidden_tag() }}
-                        <!-- Email Input-->
+                        <!- - Email Input - ->
                         <p>
                             {{ edit_form.email.label }}<br>
                             {{ edit_form.email(size=32) }}
                         </p>
-                        <!-- Password Input -->
+                        <!- - Password Input - -> 
                         <p>
                         {{ edit_form.password.label }}<br>
                         {{ edit_form.password(size=32) }}<br>
                         </p>
-                        <!-- Confirm Password Input -->
+                        <!- - Confirm Password Input - ->
                         <p>
                         {{ edit_form.confirm_password.label }}<br>
                         {{ edit_form.confirm_password(size=32, id="confirm_password") }}
                         </p>
                         <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
-                        <!-- Admin Status Boolean -->
+                        <!- - Admin Status Boolean - ->
                         <p>
                             {{ edit_form.is_staff() }} Admin Privileges
                         </p>
-                        <!-- Submit Buttons -->
+                        <!- - Submit Buttons - ->
                         <br>
                         <a>{{ edit_form.submit() }}</a>
-                        <a href="{{ url_for('views.dashboard') }}" class="btn-secondary">Cancel</a>
+                        <button class="btn-secondary" type="button" onclick="window.location.href='{{ url_for('views.dashboard') }}'">Cancel</button>
                     </form>
                 </div>
                 <br>
@@ -79,19 +82,19 @@
 
 
 
-                <!-- User List with Interactables -->
-                <div class="dashboarduser-table">
+                <!- - User List with Interactables - ->
+                <div class="dashboarduser-table adminusersheet">
 
 
-                    <!-- User Views -->
+                    <!- - User Views - ->
                     <div id="sortbuttons">
                         <h3>Users</h3>
                         <ul class="buttonclass">
-                            <!-- Sort User -->
+                            <!- - Sort User - ->
                             <li>
                                 <form method="GET" action="{{ url_for('views.dashboard') }}">
                                     {{ sort_form.hidden_tag() }}
-                                    <button id="sortPopBTN" class="btn-secondary" type="button">Sort</button> <!-- Pop Up Filter Button -->
+                                    <button id="sortPopBTN" class="btn-secondary" type="button">Sort</button> <!- - Pop Up Filter Button - ->
 
                                     <div id="sortjsPopup" class="filterpopup">
                                         <div class="popup-content">
@@ -108,7 +111,7 @@
                                                 </li>
                                                 <br>
                                                 <li>
-                                                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Filter Button -->
+                                                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!- - Submit Filter Button - ->
                                                 </li>
                                             </ul>
                                         </div>
@@ -116,11 +119,11 @@
                                 </form>
                             </li>
 
-                            <!-- Filter User -->
+                            <!- - Filter User - ->
                             <li>
                                 <form method="POST" action="{{ url_for('views.dashboard') }}">
                                     {{ filter_form.hidden_tag() }}
-                                    <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
+                                    <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <!- - Pop Up Filter Button - ->
                     
                                     <div id="filterjsPopup" class="filterpopup">
                                         <div class="popup-content">
@@ -139,7 +142,7 @@
                                                 </li>
                                                 <br>
                                                 <li> 
-                                                    <a>{{ filter_form.submit() }}</a> <!-- Submit Filter Button -->
+                                                    <a>{{ filter_form.submit() }}</a> <!- - Submit Filter Button - ->
                                                 </li>
                                             </ul>
                                         </div>

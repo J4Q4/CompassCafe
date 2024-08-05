@@ -8,8 +8,9 @@
     <h1>Lunchtime Schedules</h1>
     <br>
 
-        <div class="row">
-        <div class="col col-md-3">
+    <div class="row">
+
+        <div class="col-md-12 col-lg-3" id="applycol">
             <div id="posts">
                 {% if not user.is_staff %}
                 <h3>Your Applications</h3>
@@ -57,12 +58,11 @@
             <br/>
             {% endif %}
         </div>
-        <div class="col col-md-9">
 
+        <div class="col-md-12 col-lg-9" id="schedulecol">
             {% include 'applytable.html' %}
-
         </div>
-        
+
     </div>
   </div>
 </section>

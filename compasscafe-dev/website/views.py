@@ -260,8 +260,7 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= 4:
-                flash(f'{date_day}, {
-                      date_duty} is full: 4 baristas max.', category='error')
+                flash(f'{date_day}, {date_duty} is full: 4 baristas max.', category='error')
 
             else:
                 # Formatting User Apply Input

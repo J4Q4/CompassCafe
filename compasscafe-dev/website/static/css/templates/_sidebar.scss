@@ -8,11 +8,12 @@
 #sideMenu {
     height: 100%;
     padding: 70px 50px;
+    border-radius: 20px 0 0 20px;
     position: fixed;
     right: 0;
     top: 0;
-    width: 400px;
-    transform: translateX(400px);
+    width: 350px;
+    transform: translateX(350px);
     transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     background-color: var(--main-navy);
     border-left: var(--main-lightblue2) 1px solid;

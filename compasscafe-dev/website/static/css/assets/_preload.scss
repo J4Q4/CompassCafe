@@ -32,16 +32,16 @@
 }
 
 /* REMOVED FUNCTIONALITY */
-/* NO SCROLL ON LOAD */
-/* html, body {
+// NO SCROLL ON LOAD
+html, body {
     overflow-y: hidden;
     height: 100%;
 }
- Add Class to Scroll 
+// Add Class to Scroll 
 html.noscroll, body.noscroll {
     overflow-y: visible;
     height: auto;
-} */
+}
 
 .preload-fadein {
     animation: preload-fadein 0.8s ease-out forwards;

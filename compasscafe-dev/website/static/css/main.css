@@ -66,16 +66,16 @@ form #filterPopBTN,
   }
 }
 /* REMOVED FUNCTIONALITY */
-/* NO SCROLL ON LOAD */
-/* html, body {
-    overflow-y: hidden;
-    height: 100%;
+html, body {
+  overflow-y: hidden;
+  height: 100%;
 }
- Add Class to Scroll 
+
 html.noscroll, body.noscroll {
-    overflow-y: visible;
-    height: auto;
-} */
+  overflow-y: visible;
+  height: auto;
+}
+
 .preload-fadein {
   animation: preload-fadein 0.8s ease-out forwards;
   opacity: 0;
@@ -465,6 +465,7 @@ table, th, td {
   border-collapse: collapse;
   width: 100%;
   font-family: "Open Sans";
+  overflow-x: hidden;
 }
 
 table {
@@ -720,11 +721,12 @@ Move Margins to Match Logo */
 #sideMenu {
   height: 100%;
   padding: 70px 50px;
+  border-radius: 20px 0 0 20px;
   position: fixed;
   right: 0;
   top: 0;
-  width: 400px;
-  transform: translateX(400px);
+  width: 350px;
+  transform: translateX(350px);
   transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   background-color: var(--main-navy);
   border-left: var(--main-lightblue2) 1px solid;
@@ -839,15 +841,6 @@ footer .row {
   padding: 0;
 }
 
-.footer-upper {
-  background-image: linear-gradient(var(--main-navy), #1f2541);
-  margin-bottom: 100vh;
-}
-.footer-upper .row-upper {
-  border-top: #6c78b4 1px solid;
-  border-bottom: #6c78b4 1px solid;
-}
-
 .footer-lower {
   background-image: var(--bg-dark);
   padding: 0;
@@ -869,9 +862,15 @@ footer .row {
 }
 
 .footer-upper {
+  background-image: linear-gradient(var(--main-navy), #1f2541);
+  margin-bottom: 100vh;
   /* Upper Left */
   /* Hover Line Navbar */
   /* Upper Right */
+}
+.footer-upper .row-upper {
+  border-top: #6c78b4 1px solid;
+  border-bottom: #6c78b4 1px solid;
 }
 .footer-upper #footerleft-text {
   padding-left: 40px;
@@ -1006,10 +1005,16 @@ body {
 
 /* ## End of Footer ## */
 /* Beninging of Being Fancy */
+/* Breakpoint Library */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  width: 100% !important;
+  overflow-x: hidden !important;
 }
 
 /* Override Bootstrap's Default Padding */
@@ -1017,16 +1022,17 @@ body {
   padding: 0;
 }
 
-/* REMOVED FUNCTIONALITY */
 /* Remove Scrollbar */
-/* ::-webkit-scrollbar {
-    display: none;
-} */
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* Disable Browser's Native Scroll
 To Enable Lenis Smooth Scroll */
-/* html {
-    scroll-behavior: auto !important;
-} */
+html {
+  scroll-behavior: auto !important;
+}
+
 /* ## Cover Fixed Footer with Container ## */
 /* User UI Header */
 h1 {
@@ -1039,6 +1045,7 @@ h1 {
 
 .blankspace-test p {
   margin: 0;
+  width: 100%;
 }
 
 .whitespace-test {
@@ -1051,24 +1058,50 @@ h1 {
   background-color: var(--main-white);
   padding: 100px 150px;
   margin: 0;
-}
-@media screen and (max-width: 768px) {
-  .beigespace-test {
-    padding: 100px 20px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .beigespace-test {
-    padding: 100px 0;
-  }
+  width: 100%;
+  margin-bottom: 0;
+  overflow: hidden;
 }
 
 .bluespace-test {
   background-color: var(--main-lightblue2);
   padding: 100px 150px;
   margin: 0;
+  width: 100%;
 }
 
+.col-md-3 {
+  padding-right: 15px;
+  position: relative;
+  z-index: 1000;
+}
+
+.col-md-9 {
+  padding-left: 15px;
+  position: relative;
+  z-index: 950;
+}
+
+.dashboarduser-table {
+  padding: 50px;
+}
+
+@media screen and (max-width: 1400px) {
+  .beigespace-test {
+    padding: 100px 20px;
+  }
+  .dashboarduser-table {
+    padding: 50px;
+  }
+}
+@media screen and (max-width: 576px) {
+  .beigespace-test {
+    padding: 100px 0;
+  }
+  .dashboarduser-table {
+    padding: 20px;
+  }
+}
 /* PAGES */
 /* Home */
 /* ## HOME ## */
@@ -1124,6 +1157,11 @@ h1 {
   display: block;
   z-index: 2;
   position: relative;
+}
+
+.herowave-container {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* ## END OF HOME ## */
@@ -1209,8 +1247,8 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center the div */
-  text-align: center; /* Optional: center text inside the div */
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 /* End of 404 */
@@ -1270,6 +1308,10 @@ h1 {
   border-radius: 15px;
 }
 
+.schedulegrayed {
+  color: gray !important;
+}
+
 /* End of Apply Table */
 /* Dashboard */
 /* Dashboard User Interface */
@@ -1286,7 +1328,6 @@ h1 {
   background-color: var(--main-white);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  padding: 50px;
   width: 100%;
   transform: scale(1);
   transition: all 0.3s ease-out;
@@ -1306,10 +1347,10 @@ h1 {
   transform: scale(1.01);
 }
 
-.dashboard-col .dash-hello {
+.dash-hello {
   background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
 }
-.dashboard-col .dash-hello img {
+.dash-hello img {
   position: absolute;
   height: 130%;
   bottom: 0;
@@ -1387,20 +1428,25 @@ h1 {
   box-shadow: none;
 }
 
-.col-md-3 {
-  padding-right: 15px;
-  position: relative;
+#applycol {
+  display: block;
   z-index: 1000;
 }
 
-.col-md-9 {
-  padding-left: 15px;
-  position: relative;
-  z-index: 950;
+#schedulecol {
+  display: block;
+  z-index: 999;
 }
 
-.dashboard-containermaster {
-  display: flex;
+.adminusersheet {
+  overflow-x: scroll;
+}
+
+#loggedinas-dash {
+  font-family: "JetBrains Mono";
+  font-size: 14px;
+  text-transform: none !important;
+  color: #000;
 }
 
 /* End of Dashboard User Interface */

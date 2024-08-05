@@ -10,7 +10,6 @@
     background-color: var(--main-white);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
     border-radius: 10px;
-    padding: 50px;
     width: 100%;
     transform: scale(1);
     transition: all 0.3s ease-out;
@@ -28,7 +27,7 @@
     border: 2px solid #ddd;
     transform: scale(1.01);
 }
-.dashboard-col .dash-hello {
+.dash-hello {
     background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
     img {
         position: absolute;
@@ -101,18 +100,24 @@
     box-shadow: none;
 }
 
-.col-md-3 {
-    padding-right: 15px;
-    position: relative;
+
+#applycol {
+    display: block;
     z-index: 1000;
 }
-.col-md-9 {
-    padding-left: 15px;
-    position: relative;
-    z-index: 950;
+#schedulecol {
+    display: block;
+    z-index: 999;
 }
 
-.dashboard-containermaster {
-    display: flex;
+.adminusersheet {
+    overflow-x: scroll;
+}
+
+#loggedinas-dash {
+    font-family: "JetBrains Mono";
+    font-size: 14px;
+    text-transform: none !important;
+    color: #000;
 }
 /* End of Dashboard User Interface */

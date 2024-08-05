@@ -7,14 +7,7 @@ footer {
         padding: 0;
     }
 }
-.footer-upper {
-    background-image: linear-gradient(var(--main-navy), #1f2541);
-    margin-bottom: 100vh;
-    .row-upper {
-        border-top: #6c78b4 1px solid;
-        border-bottom: #6c78b4 1px solid;
-    }
-}
+
 .footer-lower {
     background-image: var(--bg-dark);
     padding: 0;
@@ -34,6 +27,12 @@ footer {
 }
 
 .footer-upper {
+    background-image: linear-gradient(var(--main-navy), #1f2541);
+    margin-bottom: 100vh;
+    .row-upper {
+        border-top: #6c78b4 1px solid;
+        border-bottom: #6c78b4 1px solid;
+    }
     /* Upper Left */
     #footerleft-text {
         padding-left: 40px;
