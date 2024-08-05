@@ -186,6 +186,7 @@
     {% for category, message in messages %} {% if category =='error' %}
     <!--Error Pop-up Message-->
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
       {{ message }}
       <button type="button" class="fa fa-times" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true"></span>
@@ -194,6 +195,7 @@
     <!--Success Pop-up Message-->
     {% else %}
     <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="fa fa-check-circle" aria-hidden="true"></i>
       {{ message }}
       <button type="button" class="fa fa-times" data-bs-dismiss="alert" aria-label="Close">
         <span aria-hidden="true"></span>

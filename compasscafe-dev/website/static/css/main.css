@@ -403,74 +403,6 @@ input[type=password]:focus,
 }
 
 /* End of Dropdown Menu : GENERAL */
-/* DASHBOARD USER FILTER */
-#sortbuttons .buttonclass {
-  list-style-type: none;
-  padding-left: 0;
-  margin-left: 0;
-}
-#sortbuttons .buttonclass li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.popup-content ul {
-  padding: 20px;
-}
-.popup-content ul li {
-  margin-bottom: 20px;
-}
-.popup-content ul li input {
-  margin: 0;
-}
-.popup-content ul li input[type=checkbox] {
-  transform: scale(1.4);
-  margin-right: 5px;
-}
-.popup-content ul li input[type=select] {
-  padding: 20px;
-}
-.popup-content ul li select {
-  padding: 15px;
-  border: #000 1px solid;
-  border-radius: 5px;
-  width: 100%;
-  font-family: "JetBrains Mono";
-}
-
-.dash-filter input[type=checkbox] {
-  transform: scale(1.4);
-}
-
-.filterpopup {
-  display: none;
-  position: absolute;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  margin-top: 10px;
-  padding: 15px;
-  background-color: #fff;
-  z-index: 10000;
-}
-
-.dash-popupjs {
-  display: block;
-  background-color: var(--main-white);
-  transform: translateY(0);
-  animation: dash-popupanim 0.3s ease-out;
-}
-
-@keyframes dash-popupanim {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* End of Dashboard Popup */
 /* Spreadsheet User Interface */
 /* Global */
 table, th, td {
@@ -1064,7 +996,7 @@ h1 {
   margin: 0;
   width: 100%;
   margin-bottom: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .bluespace-test {
@@ -1443,10 +1375,6 @@ h1 {
   z-index: 999;
 }
 
-.adminusersheet {
-  overflow-x: scroll;
-}
-
 #loggedinas-dash {
   font-family: "JetBrains Mono";
   font-size: 14px;
@@ -1455,6 +1383,75 @@ h1 {
 }
 
 /* End of Dashboard User Interface */
+input[type=checkbox] {
+  transform: scale(1.4);
+  margin: 0 5px !important;
+}
+
+/* DASHBOARD USER FILTER */
+#sortbuttons .buttonclass {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+#sortbuttons .buttonclass li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.popup-content ul {
+  padding: 20px;
+}
+.popup-content ul li {
+  margin-bottom: 20px;
+}
+.popup-content ul li input {
+  margin: 0;
+}
+.popup-content ul li input[type=select] {
+  padding: 20px;
+}
+.popup-content ul li select {
+  padding: 15px;
+  border: #000 1px solid;
+  border-radius: 5px;
+  width: 100%;
+  font-family: "JetBrains Mono";
+}
+
+.dash-filter input[type=checkbox] {
+  transform: scale(1.4);
+}
+
+.filterpopup {
+  display: none;
+  position: absolute;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+  z-index: 10000;
+}
+
+.dash-popupjs {
+  display: block;
+  background-color: var(--main-white);
+  transform: translateY(0);
+  animation: dash-popupanim 0.3s ease-out;
+}
+
+@keyframes dash-popupanim {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* End of Dashboard Popup */
 /* Login & Signup */
 /* ## USER LOGIN / SIGN UP ## */
 .user-loginui {

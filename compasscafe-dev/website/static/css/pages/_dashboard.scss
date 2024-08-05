@@ -73,6 +73,8 @@
 #emailconfig {
     transform: translateX(0);
     transition: transform 0.3s ease-out;
+    text-decoration: none;
+    font-family: "JetBrains Mono";
 }
 
 #dashboard-list {
@@ -110,9 +112,9 @@
     z-index: 999;
 }
 
-.adminusersheet {
-    overflow-x: scroll;
-}
+// .adminusersheet {
+//     overflow-x: scroll;
+// }
 
 #loggedinas-dash {
     font-family: "JetBrains Mono";
@@ -121,3 +123,75 @@
     color: #000;
 }
 /* End of Dashboard User Interface */
+
+input[type="checkbox"] {
+    transform: scale(1.4);
+    margin: 0 5px !important;
+}
+
+
+/* DASHBOARD USER FILTER */
+#sortbuttons {
+    .buttonclass {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+    }
+    .buttonclass li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+}
+.popup-content {
+    ul {
+        padding: 20px;
+    }
+    ul li {
+        margin-bottom: 20px;
+        input {
+            margin: 0;
+        }
+        input[type="select"] {
+            padding: 20px;
+        }
+        select {
+            padding: 15px;
+            border: #000 1px solid;
+            border-radius: 5px;
+            width: 100%;
+            font-family: "JetBrains Mono";
+        }
+    }
+}
+
+.dash-filter input[type="checkbox"] {
+    transform: scale(1.4);
+}
+.filterpopup {
+	display: none;
+    position: absolute;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #fff;
+    z-index: 10000;
+}
+
+.dash-popupjs {
+    display: block;
+    background-color: var(--main-white);
+    transform: translateY(0);
+    animation: dash-popupanim 0.3s ease-out;
+}
+@keyframes dash-popupanim {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* End of Dashboard Popup */

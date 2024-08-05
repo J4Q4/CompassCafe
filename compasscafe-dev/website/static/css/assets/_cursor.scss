@@ -1,6 +1,7 @@
 /* Custom Cursor */
 body {
     cursor: url('/static/assets/img/cursor-point.png'), auto;
+/* Everything Interactable - Hover */
 }
 a:hover,
 i:hover,
@@ -21,6 +22,7 @@ textarea:hover,
 .show-button:hover,
 #sideMenu i:hover,
 form #filterPopBTN,
-#sortPopBTN:hover {
+#sortPopBTN:hover,
+.sideToggle1 {
     cursor: url('/static/assets/img/cursor-ok.png'), pointer;
 }

@@ -11,16 +11,10 @@ $grid-breakpoints: (
 );
 
 
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
-    width: 100% !important;
-    overflow-x: hidden !important;
 }
 
 /* Override Bootstrap's Default Padding */
@@ -65,7 +59,7 @@ h1 {
     margin: 0;
     width: 100%;
     margin-bottom: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .bluespace-test {
     background-color: var(--main-lightblue2);
