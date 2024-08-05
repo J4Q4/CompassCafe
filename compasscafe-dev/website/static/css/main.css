@@ -6,6 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
 body {
   cursor: url("/static/assets/img/cursor-point.png"), auto;
+  /* Everything Interactable - Hover */
 }
 
 a:hover,
@@ -27,7 +28,8 @@ textarea:hover,
 .show-button:hover,
 #sideMenu i:hover,
 form #filterPopBTN,
-#sortPopBTN:hover {
+#sortPopBTN:hover,
+.sideToggle1 {
   cursor: url("/static/assets/img/cursor-ok.png"), pointer;
 }
 
@@ -66,16 +68,16 @@ form #filterPopBTN,
   }
 }
 /* REMOVED FUNCTIONALITY */
-html, body {
-  overflow-y: hidden;
-  height: 100%;
+@media screen and (min-width: 768px) {
+  html, body {
+    overflow-y: hidden;
+    height: 100%;
+  }
+  html.noscroll, body.noscroll {
+    overflow-y: visible;
+    height: auto;
+  }
 }
-
-html.noscroll, body.noscroll {
-  overflow-y: visible;
-  height: auto;
-}
-
 .preload-fadein {
   animation: preload-fadein 0.8s ease-out forwards;
   opacity: 0;
@@ -209,6 +211,9 @@ html.noscroll, body.noscroll {
   padding: 10px 20px;
   transform: translateY(0);
   animation: btnsecondary-unhover 0.2s ease-in-out;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
 }
 
 @keyframes btnsecondary-unhover {
@@ -303,19 +308,27 @@ input[type=password]:focus,
 }
 
 .alert-dismissible .fa-times {
-  color: #fff;
+  color: #000;
   padding: 10px;
   background-color: transparent;
   border: 0;
   transform: scale(1.5) translateX(4px);
 }
+.alert-dismissible i {
+  transform: scale(1.2);
+  padding-right: 5px;
+}
 
 .alert-success {
-  border: 1px solid var(--main-lightblue1);
+  border: 1px solid #000;
+  color: var(--main-navy);
+  background: repeating-linear-gradient(-45deg, #B9CEE6, #B9CEE6 5px, var(--main-lightblue2) 5px, var(--main-lightblue2) 25px);
 }
 
 .alert-danger {
-  border: 1px solid var(--main-beige);
+  border: 1px solid #000;
+  color: #000;
+  background: repeating-linear-gradient(-45deg, var(--main-beige), var(--main-beige) 5px, #ece4dd 5px, #ece4dd 25px);
 }
 
 /* End of Flashes */
@@ -714,10 +727,6 @@ Move Margins to Match Logo */
 /* End of Navbar */
 /* ## Navbar Side Menu ## */
 /* BUTTON */
-.sideToggle {
-  font-size: 16px;
-}
-
 #sideMenu {
   height: 100%;
   padding: 70px 50px;
@@ -739,7 +748,7 @@ Move Margins to Match Logo */
   transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   color: #fff;
 }
-#sideMenu i:hover {
+#sideMenu .sideToggle1:hover i {
   transform: rotate(90deg);
 }
 #sideMenu h6 {
@@ -1012,11 +1021,6 @@ body {
   box-sizing: border-box;
 }
 
-body {
-  width: 100% !important;
-  overflow-x: hidden !important;
-}
-
 /* Override Bootstrap's Default Padding */
 .container-fluid {
   padding: 0;
@@ -1134,7 +1138,6 @@ h1 {
   transform: translate(-50%, -50%);
   z-index: 10;
   position: absolute;
-  pointer-events: none;
 }
 
 #hero-wave {
@@ -1401,6 +1404,8 @@ h1 {
 #emailconfig {
   transform: translateX(0);
   transition: transform 0.3s ease-out;
+  text-decoration: none;
+  font-family: "JetBrains Mono";
 }
 
 #dashboard-list {

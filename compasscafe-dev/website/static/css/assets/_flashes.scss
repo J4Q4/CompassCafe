@@ -12,17 +12,27 @@
     color: #fff;
     padding: 10px 20px;
 }
-.alert-dismissible .fa-times {
-    color: #fff;
+.alert-dismissible {
+    .fa-times {
+    color: #000;
     padding: 10px;
     background-color: transparent;
     border: 0;
     transform: scale(1.5) translateX(4px);
+    }
+    i {
+        transform: scale(1.2);
+        padding-right: 5px;
+    }
 }
 .alert-success {
-    border: 1px solid var(--main-lightblue1);
+    border: 1px solid #000;
+    color: var(--main-navy);
+    background: repeating-linear-gradient( -45deg, #B9CEE6, #B9CEE6 5px, var(--main-lightblue2) 5px, var(--main-lightblue2) 25px );
 }
 .alert-danger {
-    border: 1px solid var(--main-beige);
+    border: 1px solid #000;
+    color: #000;
+    background: repeating-linear-gradient( -45deg, var(--main-beige), var(--main-beige) 5px, #ece4dd 5px, #ece4dd 25px );
 }
 /* End of Flashes */
