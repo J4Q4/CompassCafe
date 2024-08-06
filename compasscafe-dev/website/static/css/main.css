@@ -338,10 +338,6 @@ input[type=password]:focus,
   border-radius: 15px;
   border: 2px solid var(--main-white);
   transition: border 0.3s ease-in-out;
-  position: absolute !important;
-  top: 0 !important;
-  z-index: 1000; /* Ensure dropdown menu is on top */
-  overflow: hidden; /* Prevent overflow issues */
 }
 
 .dropdown-menu:hover {
@@ -382,7 +378,7 @@ input[type=password]:focus,
 }
 
 /* Dropdown Actions */
-.dropdown-menu li a {
+.dropdown-menu li a, .dropdown-menu li form {
   font-family: "JetBrains Mono";
   font-weight: 300;
   text-transform: capitalize;
@@ -397,7 +393,7 @@ input[type=password]:focus,
 .dropdown-menu li:hover {
   background-color: #ddd;
 }
-.dropdown-menu li:hover a {
+.dropdown-menu li:hover a, .dropdown-menu li:hover form {
   transform: translateX(10px);
   background-color: #ddd;
 }
@@ -410,13 +406,11 @@ table, th, td {
   border-collapse: collapse;
   width: 100%;
   font-family: "Open Sans";
-  overflow-x: hidden;
 }
 
 table {
   padding: 0;
   border-radius: 10px;
-  overflow: hidden;
 }
 
 /* Color Palette Declarations */
@@ -992,7 +986,6 @@ h1 {
 
 .beigespace-test {
   background-color: var(--main-white);
-  padding: 100px 150px;
   margin: 0;
   width: 100%;
   margin-bottom: 0;
@@ -1022,20 +1015,46 @@ h1 {
   padding: 50px;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (min-width: 992px) {
   .beigespace-test {
-    padding: 100px 20px;
+    padding: 100px 150px;
   }
   .dashboarduser-table {
-    padding: 50px;
+    padding: 20px;
+  }
+  .dash-showmobile {
+    display: none;
+  }
+  .dash-showmain {
+    visibility: inline-block;
   }
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 992px) {
+  .beigespace-test {
+    padding: 100px 50px;
+  }
+  .dashboarduser-table {
+    padding: 20px;
+  }
+  .dash-showmobile {
+    display: none;
+  }
+  .dash-showmain {
+    visibility: inline-block;
+  }
+}
+@media screen and (max-width: 768px) {
   .beigespace-test {
     padding: 100px 0;
   }
   .dashboarduser-table {
     padding: 20px;
+  }
+  .dash-showmobile {
+    display: inline-block;
+  }
+  .dash-showmain {
+    display: none;
   }
 }
 /* PAGES */
@@ -1500,8 +1519,11 @@ label {
 
 /* Temporary User Login / Signup Image */
 .user-inui-img {
-  background-image: url(/static/assets/media/filler.png);
+  background-image: url(/static/assets/media/carson.gif);
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  border-left: 1px solid #000;
   width: 100%;
   height: auto;
   overflow: hidden;

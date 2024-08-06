@@ -55,7 +55,6 @@ h1 {
 }
 .beigespace-test {
     background-color: var(--main-white);
-    padding: 100px 150px;
     margin: 0;
     width: 100%;
     margin-bottom: 0;
@@ -86,23 +85,52 @@ h1 {
     padding: 50px;
 }
 
-// Less Than XXL
-@media screen and (max-width: map-get($grid-breakpoints, xxl)) {
+// More than Large
+@media screen and (min-width: map-get($grid-breakpoints, lg)) {
     .beigespace-test {
-        padding: 100px 20px;
+        padding: 100px 150px;
     }
     .dashboarduser-table {
-        padding: 50px;
+        padding: 20px;
+    }
+    .dash-showmobile {
+        display: none;
+    }
+    .dash-showmain {
+        visibility: inline-block;
+    }
+    
+} 
+
+// Less than Large
+@media screen and (max-width: map-get($grid-breakpoints, lg)) {
+    .beigespace-test {
+        padding: 100px 50px;
+    }
+    .dashboarduser-table {
+        padding: 20px;
+    }
+    .dash-showmobile {
+        display: none;
+    }
+    .dash-showmain {
+        visibility: inline-block;
     }
 }
 
-// Less Than SM
-@media screen and (max-width: map-get($grid-breakpoints, sm)) {
+// Less than Medium
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
     .beigespace-test {
         padding: 100px 0;
     }
     .dashboarduser-table {
         padding: 20px;
+    }
+    .dash-showmobile {
+        display: inline-block;
+    }
+    .dash-showmain {
+        display: none;
     }
 }
 

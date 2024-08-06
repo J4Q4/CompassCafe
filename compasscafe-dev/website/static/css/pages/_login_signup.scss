@@ -46,8 +46,11 @@ label {
 
 /* Temporary User Login / Signup Image */
 .user-inui-img {
-    background-image: url(/static/assets/media/filler.png);
+    background-image: url(/static/assets/media/carson.gif);
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    border-left: 1px solid #000;
     width: 100%;
     height: auto;
     overflow: hidden;

@@ -156,33 +156,66 @@
                     <table>
                         <tr class="dashboarduser-header">
                             <th>Email</th>
-                            <th>Admin</th>
-                            <th>Configure</th>
-                            <th>Delete</th>
+                            <th class="dash-showmain">Admin</th>
+                            <th class="dash-showmain">Configure</th>
+                            <th class="dash-showmain">Delete</th>
+                            <th class="dash-showmobile">Settings</th>
                         </tr>
                         {% for user in users %}
                         <tr id="dashboard-list">
+                            <! - - User Email - ->
                             <td id="emailconfig">{{ user.email }}</td>
-                            <td id="configicon">
-                            {% if user.is_staff %}
-                            <i class="fas fa-check" title='Admin User'></i>
-                            {% else %}
-                            <i class="fas fa-times" title='Regular User'></i>
-                            {% endif %}
+                            <! - - Admin Status - ->
+                            <td id="configicon" class="dash-showmain">
+                                {% if user.is_staff %}
+                                <i class="fas fa-check" title='Admin User'></i>
+                                {% else %}
+                                <i class="fas fa-times" title='Regular User'></i>
+                                {% endif %}
                             </td>
-                            <td id="configicon">
+                            <! - - Edit User - ->
+                            <td id="configicon" class="dash-showmain">
                                 <a id="edituser_dash" href="{{ url_for('views.dashboard', edit_user_id=user.id) }}">
                                     <button class="dashboarduseredit" type="submit">
                                         <i class="fa fa-pencil"  title='Edit User'></i>
                                     </button>
                                 </a>
                             </td>
-                            <td id="configicon">
-                                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST" style="display:inline;">
+                            <! - - Delete User - ->
+                            <td id="configicon" class="dash-showmain">
+                                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
                                     <button class="dashboarduseredit" type="submit">
                                     <i class="fa fa-trash"  title='Delete User'></i>
                                     </button>
                                 </form>
+                            </td>
+
+                            <! - - Dropdown Button - Visible on Smaller Screens - ->
+                            <td class="dash-showmobile">
+                                <div class="btn-group" id="apply-delete">
+                                    <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
+                                    <ul class="dropdown-menu">
+                                        <h6 class="dropdown-header">User Configuration</h6>
+                                        <li><a class="dropdown-item">
+                                            Admin:
+                                            {% if user.is_staff %}
+                                            <i class="fas fa-check" title='Admin User'></i>
+                                            {% else %}
+                                            <i class="fas fa-times" title='Regular User'></i>
+                                            {% endif %}
+                                        </a></li>
+                                        <li><a class="dropdown-item" href="{{ url_for('views.dashboard', edit_user_id=user.id) }}" type="submit">
+                                            Configure
+                                        </a></li> 
+                                        <li>
+                                            <form id="delete-user-form" action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
+                                                <button class="dashboarduseredit" type="submit" title="Delete User">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>  
                             </td>
                         </tr>
                         {% endfor %}
