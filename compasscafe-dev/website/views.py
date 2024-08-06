@@ -238,6 +238,11 @@ def apply():
     WeekANow, WeekBNow, weekDateA, weekDateB, datesWeekA, datesWeekB = determine_week(
         today)
 
+    # PENDING APPLICATION PAGINATION
+    page = request.args.get('page', 1, type=int)
+    post_pending = Apply.query.filter_by(
+        status='pending').paginate(page=page, per_page=6)
+
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
                            weekDateA=weekDateA, weekDateB=weekDateB,

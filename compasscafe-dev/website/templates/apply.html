@@ -23,6 +23,7 @@
                     <div class="row">
                         {% for post in post_pending %}
                             {% if user.id == post.author or user.is_staff %}
+                            <! - - Pending Card - - >
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12">
                                     <div class="card dashboarduser-table mb-4">
                                         <div class="card-body">
@@ -48,8 +49,24 @@
                                         </div>
                                     </div>
                                 </div>
+                            <! - - End of Pending Card - - >
                             {% endif %}
                         {% endfor %}
+                    </div>
+                    <div class="row">
+                        <! - - Pagination - - >
+                        {% for page_num in post_pending.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                            {% if page_num %}
+                                {% if page_num == post_pending.page %}
+                                    <a class="btn btn-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
+                                {% else %}
+                                    <a class="btn btn-outline-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
+                                {% endif %}
+                            {% else %}
+                                ...
+                            {% endif %}
+                        {% endfor %}
+                        <! - - End of Pagination - - >
                     </div>
                 </div>
                 
