@@ -53,14 +53,14 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div class="row">
+                    <div class="row pagination-row">
                         <! - - Pagination - - >
                         {% for page_num in post_pending.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                             {% if page_num %}
                                 {% if page_num == post_pending.page %}
-                                    <a class="btn btn-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
+                                    <a class="pagination-btn pgntnbtn-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
                                 {% else %}
-                                    <a class="btn btn-outline-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
+                                    <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
                                 {% endif %}
                             {% else %}
                                 ...

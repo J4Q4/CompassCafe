@@ -158,10 +158,10 @@ form #filterPopBTN,
   border-radius: 20px;
   padding: 10px 20px;
   transform: translateY(0);
-  animation: btnprimary-unhover 0.2s ease-in-out;
+  animation: btn-unhover 0.2s ease-in-out;
 }
 
-@keyframes btnprimary-unhover {
+@keyframes btn-unhover {
   0% {
     transform: translateY(-6px);
     box-shadow: 0 5px 0 #000;
@@ -174,10 +174,10 @@ form #filterPopBTN,
   background-color: var(--main-lightblue1);
   color: #000;
   border: 2px solid #000;
-  animation: btnprimary-hover 0.4s ease-in-out forwards;
+  animation: btn-hover 0.4s ease-in-out forwards;
 }
 
-@keyframes btnprimary-hover {
+@keyframes btn-hover {
   0% {
     transform: translateY(0);
     box-shadow: 0 0 0 #000;
@@ -210,45 +210,19 @@ form #filterPopBTN,
   border-radius: 20px;
   padding: 10px 20px;
   transform: translateY(0);
-  animation: btnsecondary-unhover 0.2s ease-in-out;
+  animation: btn-unhover 0.2s ease-in-out;
   text-decoration: none;
   position: relative;
   display: inline-block;
 }
 
-@keyframes btnsecondary-unhover {
-  0% {
-    transform: translateY(-6px);
-    box-shadow: 0 5px 0 #000;
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 .btn-secondary:hover {
   background-color: var(--main-beige);
   color: #000;
   border: 2px solid #000;
-  animation: btnprimary-hover 0.4s ease-in-out forwards;
+  animation: btn-hover 0.4s ease-in-out forwards;
 }
 
-@keyframes btnsecondary-hover {
-  0% {
-    transform: translateY(0);
-    box-shadow: 0 0 0 #000;
-  }
-  40% {
-    transform: translateY(-8px);
-    box-shadow: 0 5px 0 #000;
-  }
-  70% {
-    transform: translateY(-4px);
-  }
-  100% {
-    transform: translateY(-6px);
-    box-shadow: 0 5px 0 #000;
-  }
-}
 .btn-primary:active {
   background-color: var(--main-white) !important;
   color: #000 !important;
@@ -256,6 +230,36 @@ form #filterPopBTN,
 }
 
 /* End of Submit Button */
+/* Pagination */
+.pagination-row {
+  justify-content: center;
+}
+
+.pagination-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-white);
+  color: #000;
+  margin: 0 10px;
+  border-radius: 10px;
+  border: #000 2px solid;
+  text-decoration: none;
+  position: relative;
+  transform: translateY(0);
+  font-family: "JetBrains Mono";
+  animation: btn-unhover 0.2s ease-in-out;
+}
+.pagination-btn:hover {
+  animation: btn-hover 0.4s ease-in-out forwards;
+}
+
+.pgntnbtn-info {
+  background-color: var(--main-lightblue2);
+}
+
 /* Targeting WebKit browsers */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
