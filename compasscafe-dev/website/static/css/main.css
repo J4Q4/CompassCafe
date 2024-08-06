@@ -1270,6 +1270,29 @@ h1 {
   color: gray !important;
 }
 
+/* Center User Table Contents */
+.applysched-table, .applysched-table th, .applysched-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Delete Barista Animation */
+#baristadelete {
+  position: relative;
+  animation: btn-unhover 0.2s ease-in-out;
+}
+#baristadelete i {
+  transform: rotate(0deg);
+  transition: all 0.3s;
+}
+
+#baristadelete:hover {
+  animation: btn-hover 0.4s ease-in-out forwards;
+}
+#baristadelete:hover i {
+  transform: rotate(90deg);
+}
+
 /* End of Apply Table */
 /* Dashboard */
 /* Dashboard User Interface */

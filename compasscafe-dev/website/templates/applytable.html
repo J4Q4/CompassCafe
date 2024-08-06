@@ -13,7 +13,7 @@
             <p>Lunch : 11:00 AM - 11:25 AM</p>
         </li>
     </ul>
-    <table class="table">
+    <table class="table applysched-table">
         <thead>
             <tr>
                 <th class="schedulegrayed">MON</th>
@@ -63,10 +63,8 @@
             {% endfor %}
     
             <! - - Check Number of Applications - - >
-            <! - - Set Max to the Most Entries for either Tuesday or Thursday - - >
-            {% set max_entries = week_a.tuesday|length 
-                if week_a.tuesday|length > week_a.thursday|length 
-                else week_a.thursday|length %}
+            <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
+            {% set max_entries = [week_a.tuesday|length, week_a.thursday|length, 4]|max %}
     
             <! - - Update Rows on Number of Applications - - >
             {% for applylvl in range(max_entries) %}
@@ -83,7 +81,7 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -91,6 +89,10 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                    {% else %}
+                        <! - - Placeholder Row - - >
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
                     {% endif %}
                 </td>
                 <td> </td>
@@ -105,7 +107,7 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -113,6 +115,10 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                    {% else %}
+                        <! - - Placeholder Row - - >
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
                     {% endif %}
                 </td>
                 <td> </td>
@@ -138,7 +144,7 @@
             <p>Lunch : 11:00 AM - 11:25 AM</p>
         </li>
     </ul>
-    <table class="table">
+    <table class="table applysched-table">
         <thead>
             <tr>
                 <th class="schedulegrayed">MON</th>
@@ -188,8 +194,8 @@
             {% endfor %}
     
             <! - - Check Number of Applications - - >
-            <! - - Set Max to the Most Entries for either Tuesday or Thursday - - >
-            {% set max_entries = week_b.tuesday|length if week_b.tuesday|length > week_b.thursday|length else week_b.thursday|length %}
+            <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
+            {% set max_entries = [week_a.tuesday|length, week_a.thursday|length, 4]|max %}
     
             <! - - Update Rows on Number of Applications - - >
             {% for applylvl in range(max_entries) %}
@@ -206,7 +212,7 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -214,6 +220,10 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                        {% else %}
+                        <! - - Placeholder Row - - >
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
                     {% endif %}
                 </td>
                 <td> </td>
@@ -228,7 +238,7 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -236,6 +246,10 @@
                                 {% endif %}
                             {% endif %}
                         {% endfor %}
+                        {% else %}
+                        <! - - Placeholder Row - - >
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
                     {% endif %}
                 </td>
                 <td> </td>

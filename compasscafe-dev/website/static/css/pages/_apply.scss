@@ -54,4 +54,28 @@
 .schedulegrayed {
     color: gray !important;
 }
+
+
+/* Center User Table Contents */
+.applysched-table, .applysched-table th, .applysched-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+/* Delete Barista Animation */
+#baristadelete {
+    position: relative;
+    animation: btn-unhover .2s ease-in-out;
+    i {
+        transform: rotate(0deg);
+        transition: all 0.3s;
+    }
+}
+#baristadelete:hover {
+    animation: btn-hover .4s ease-in-out forwards;
+    i {
+        transform: rotate(90deg);
+    }
+}
 /* End of Apply Table */
