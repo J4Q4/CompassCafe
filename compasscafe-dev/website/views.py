@@ -224,6 +224,15 @@ def determine_week(today):
     return WeekANow, WeekBNow, weekDateA, weekDateB, datesWeekA, datesWeekB
 
 
+# SEE ALL PAGINATION PAGES IF ADMIN
+
+def pendingApply(user, page):
+    if user.is_staff:
+        return Apply.query.filter_by(status='pending').paginate(page=page, per_page=6)
+    else:
+        return Apply.query.filter_by(status='pending', author=user.id).paginate(page=page, per_page=6)
+
+
 # APPLY ROUTE
 
 @views.route("/apply")
@@ -240,8 +249,7 @@ def apply():
 
     # PENDING APPLICATION PAGINATION
     page = request.args.get('page', 1, type=int)
-    post_pending = Apply.query.filter_by(
-        status='pending').paginate(page=page, per_page=6)
+    post_pending = pendingApply(current_user, page)
 
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
