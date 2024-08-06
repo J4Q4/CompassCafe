@@ -164,6 +164,18 @@ def delete_user(user_id):
         flash('This user cannot be deleted.', category='error')
         return redirect(url_for('views.dashboard'))
 
+    # Delete Existing User Pending or Accepted Applications
+    apply_pending = Apply.query.filter_by(
+        author=user.id, status='pending').all()
+    apply_accept = Apply.query.filter_by(
+        author=user.id, status='accepted').all()
+
+    for application in apply_pending:
+        db.session.delete(application)
+
+    for application in apply_accept:
+        db.session.delete(application)
+
     db.session.delete(user)
     db.session.commit()
     flash('User deleted successfully!', 'success')
@@ -260,7 +272,8 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= 4:
-                flash(f'{date_day}, {date_duty} is full: 4 baristas max.', category='error')
+                flash(f'{date_day}, {
+                      date_duty} is full: 4 baristas max.', category='error')
 
             else:
                 # Formatting User Apply Input

@@ -208,7 +208,7 @@
                                             Configure
                                         </a></li> 
                                         <li>
-                                            <form id="delete-user-form" action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
+                                            <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
                                                 <button class="dashboarduseredit" type="submit" title="Delete User">
                                                     Delete
                                                 </button>
