@@ -81,12 +81,26 @@ h1 {
 }
 
 
-.dashboarduser-table {
-    padding: 50px;
+
+
+// More than Extra Large
+@media screen and (min-width: map-get($grid-breakpoints, xxl)) {
+    .beigespace-test {
+        padding: 100px 150px;
+    }
+    .dashboarduser-table {
+        padding: 50px;
+    }
+    .dash-showmobile {
+        display: none;
+    }
+    .dash-showmain {
+        visibility: inline-block;
+    }
 }
 
-// More than Large
-@media screen and (min-width: map-get($grid-breakpoints, lg)) {
+// Less than Extra Large
+@media screen and (max-width: map-get($grid-breakpoints, xxl)) {
     .beigespace-test {
         padding: 100px 150px;
     }

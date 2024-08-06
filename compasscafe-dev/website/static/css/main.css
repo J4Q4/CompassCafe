@@ -1015,11 +1015,21 @@ h1 {
   z-index: 950;
 }
 
-.dashboarduser-table {
-  padding: 50px;
+@media screen and (min-width: 1400px) {
+  .beigespace-test {
+    padding: 100px 150px;
+  }
+  .dashboarduser-table {
+    padding: 50px;
+  }
+  .dash-showmobile {
+    display: none;
+  }
+  .dash-showmain {
+    visibility: inline-block;
+  }
 }
-
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 1400px) {
   .beigespace-test {
     padding: 100px 150px;
   }
