@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from flask_login import login_required, current_user
-from .models import User, EditUser, FilterForm, SortForm, Apply
+from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 from werkzeug.exceptions import HTTPException
@@ -226,21 +226,48 @@ def determine_week(today):
 
 # SEE ALL PAGINATION PAGES IF ADMIN
 
-def pendingApply(user, page):
+def pendingApply(user, page, pendform=None):
+    query = Apply.query.filter_by(status='pending')
+
+    # Filter Apply Form for Pending Applications
+    if pendform:
+        if pendform.schoolid.data and pendform.schoolid.data != 'None':
+            query = query.filter(Apply.schoolid == pendform.schoolid.data)
+        if pendform.date_duty.data and pendform.date_duty.data != 'None':
+            query = query.filter(Apply.date_duty == pendform.date_duty.data)
+        if pendform.date_day.data and pendform.date_day.data != 'None':
+            query = query.filter(Apply.date_day == pendform.date_day.data)
+        if pendform.yearlevel.data and pendform.yearlevel.data != 'None':
+            query = query.filter(Apply.yearlevel == pendform.yearlevel.data)
+
     if user.is_staff:
-        return Apply.query.filter_by(status='pending').paginate(page=page, per_page=6)
+        return query.paginate(page=page, per_page=6)
     else:
-        return Apply.query.filter_by(status='pending', author=user.id).paginate(page=page, per_page=6)
+        return query.filter_by(author=user.id).paginate(page=page, per_page=6)
 
 
 # APPLY ROUTE
 
-@views.route("/apply")
+@views.route("/apply", methods=['GET', 'POST'])
 @login_required
 def apply():
+    if request.method == 'POST':
+        # Filter Apply Form
+        applyform = FilterApply(request.form)
+        if applyform.validate_on_submit():
+            return redirect(url_for('views.apply',
+                                    schoolid=applyform.schoolid.data,
+                                    date_duty=applyform.date_duty.data,
+                                    date_day=applyform.date_day.data,
+                                    yearlevel=applyform.yearlevel.data))
+    else:
+        applyform = FilterApply(request.args)
+
+    # Base query for accepted applications
+    query_accept = Apply.query.filter_by(status='accepted')
+
     posts = Apply.query.all()
-    post_accept = Apply.query.filter_by(status='accepted').all()
-    post_pending = Apply.query.filter_by(status='pending').all()
+    post_accept = query_accept.all()
 
     # DISPLAY DATE UNDER WEEKDAY
     today = datetime.now().date()
@@ -249,13 +276,13 @@ def apply():
 
     # PENDING APPLICATION PAGINATION
     page = request.args.get('page', 1, type=int)
-    post_pending = pendingApply(current_user, page)
+    post_pending = pendingApply(current_user, page, pendform=applyform)
 
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
                            weekDateA=weekDateA, weekDateB=weekDateB,
                            datesWeekA=datesWeekA, datesWeekB=datesWeekB, today=today,
-                           WeekANow=WeekANow, WeekBNow=WeekBNow)
+                           WeekANow=WeekANow, WeekBNow=WeekBNow, applyform=applyform)
 
 
 # CREATE APPLICATIONS ROUTE

@@ -15,7 +15,57 @@
                 {% if not user.is_staff %}
                 <h3>Your Applications</h3>
                 {% else %}
-                <h3>All Applications</h3>
+                <h3 class="mb-4">All Applications</h3>
+                <! - - Filter User - - >
+                <div id="sortbuttons">
+                    <ul class="buttonclass">
+                        <li>
+                            <form method="GET" action="{{ url_for('views.apply') }}">
+                                {{ applyform.hidden_tag() }}
+                                <button id="applyPopBTN" class="btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
+
+                                <div id="applyjsPopup" class="filterpopup">
+                                    <div class="popup-content">
+                                        <div class="form-group mb-4">
+                                            <label for="schoolid">School ID</label>
+                                            <input type="text" name="schoolid" class="form-control" placeholder="00000" value="{{ request.args.get('schoolid', '') }}" size="32" data-maxlength="5" oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))">
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="date_duty">Week</label>
+                                            <select name="date_duty" class="form-control">
+                                                <option value="None" {% if request.args.get('date_duty') == 'None' %}selected{% endif %}>None</option>
+                                                <option value="Week A" {% if request.args.get('date_duty') == 'Week A' %}selected{% endif %}>Week A</option>
+                                                <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="date_day">Day</label>
+                                            <select name="date_day" class="form-control">
+                                                <option value="None" {% if request.args.get('date_day') == 'None' %}selected{% endif %}>None</option>
+                                                <option value="Tuesday" {% if request.args.get('date_day') == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+                                                <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="yearlevel">Year Level</label>
+                                            <select name="yearlevel" class="form-control">
+                                                <option value="None" {% if request.args.get('yearlevel') == 'None' %}selected{% endif %}>None</option>
+                                                <option value="11" {% if request.args.get('yearlevel') == '11' %}selected{% endif %}>Year 11</option>
+                                                <option value="12" {% if request.args.get('yearlevel') == '12' %}selected{% endif %}>Year 12</option>
+                                                <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <! - - End of Filter User - - >
+                
                 {% endif %}
                 <br>
 

@@ -57,16 +57,16 @@
                         </p>
                         <!- - Password Input - -> 
                         <p>
-                        {{ edit_form.password.label }}<br>
-                        {{ edit_form.password(size=32) }}<br>
+                            {{ edit_form.password.label }}<br>
+                            {{ edit_form.password(size=32) }}<br>
                         </p>
                         <!- - Confirm Password Input - ->
                         <p>
                         {{ edit_form.confirm_password.label }}<br>
                         {{ edit_form.confirm_password(size=32, id="confirm_password") }}
                         </p>
-                        <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
-                        <!- - Admin Status Boolean - ->
+                            <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+                            <!- - Admin Status Boolean - ->
                         <p>
                             {{ edit_form.is_staff() }} Admin Privileges
                         </p>
@@ -90,11 +90,12 @@
                     <div id="sortbuttons">
                         <h3>Users</h3>
                         <ul class="buttonclass">
+
                             <!- - Sort User - ->
                             <li>
                                 <form method="GET" action="{{ url_for('views.dashboard') }}">
                                     {{ sort_form.hidden_tag() }}
-                                    <button id="sortPopBTN" class="btn-secondary" type="button">Sort</button> <!- - Pop Up Filter Button - ->
+                                    <button id="sortPopBTN" class="btn-secondary" type="button">Sort</button> <!- - Pop Up Sort Button - ->
 
                                     <div id="sortjsPopup" class="filterpopup">
                                         <div class="popup-content">
@@ -111,13 +112,14 @@
                                                 </li>
                                                 <br>
                                                 <li>
-                                                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!- - Submit Filter Button - ->
+                                                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!- - Submit Sort Button - ->
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </form>
                             </li>
+                            <!- - End of - ->
 
                             <!- - Filter User - ->
                             <li>
@@ -149,6 +151,8 @@
                                     </div>
                                 </form>
                             </li>
+                            <!- - End of Filter User - ->
+
                         </ul>
                     </div>
 

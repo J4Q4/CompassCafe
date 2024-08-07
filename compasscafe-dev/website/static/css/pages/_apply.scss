@@ -78,4 +78,13 @@
         transform: rotate(90deg);
     }
 }
+
+#applyjsPopup .popup-content {
+    padding: 20px;
+    select {
+        padding: 15px 20px;
+        border: 1px solid #000;
+        font-family: "JetBrains Mono";
+    }
+}
 /* End of Apply Table */

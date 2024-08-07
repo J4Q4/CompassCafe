@@ -1303,6 +1303,15 @@ h1 {
   transform: rotate(90deg);
 }
 
+#applyjsPopup .popup-content {
+  padding: 20px;
+}
+#applyjsPopup .popup-content select {
+  padding: 15px 20px;
+  border: 1px solid #000;
+  font-family: "JetBrains Mono";
+}
+
 /* End of Apply Table */
 /* Dashboard */
 /* Dashboard User Interface */
@@ -1562,7 +1571,7 @@ label {
   background-size: 100% auto;
   border-left: 1px solid #000;
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: hidden;
   display: flex;
 }

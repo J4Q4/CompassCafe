@@ -15,6 +15,7 @@ function togglePassword() {
 
 
 
+// Dashboard Popups
 document.addEventListener('DOMContentLoaded', () => {
     
     // Show Popup
@@ -30,8 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closePopup(popup) {
         popup.classList.remove("dash-popupjs");
     }
-
-    
     // Sort Popup
     const sortPopup = document.getElementById("sortjsPopup");
     const sortBtn = document.getElementById("sortPopBTN");
@@ -62,6 +61,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+
+
+// Apply Popups
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Show Popup
+    function togglePopup(popup) {
+        if (popup.classList.contains("dash-popupjs")) {
+            popup.classList.remove("dash-popupjs");
+        } else {
+            popup.classList.add("dash-popupjs");
+        }
+    }
+
+    // Click out of Range – Close Popup
+    function closePopup(popup) {
+        popup.classList.remove("dash-popupjs");
+    }
+
+    // Apply Popup
+    const applyPopup = document.getElementById("applyjsPopup");
+    const applyBtn = document.getElementById("applyPopBTN");
+    
+    applyBtn.addEventListener('click', () => {
+        togglePopup(applyPopup);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target != applyBtn && !applyPopup.contains(event.target)) {
+            closePopup(applyPopup);
+        }
+    });
+    
+});
 
 
 

@@ -41,10 +41,25 @@ class EditUser(FlaskForm):
 # Filter User
 
 class FilterForm(FlaskForm):
+    # User Filter Dashboard
     email = StringField('Email', validators=[Optional()], render_kw={
                         "placeholder": "Email"})
     is_staff_true = BooleanField('Is Admin')
     is_staff_false = BooleanField('Not Admin')
+    # Submit Button
+    submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
+
+
+# Filter Apply
+
+class FilterApply(FlaskForm):
+    schoolid = StringField('School ID', validators=[Optional()])
+    date_duty = SelectField('Week', validators=[Optional()], render_kw={
+                            "class": "apply-selectfilter"})
+    date_day = SelectField('Day', validators=[Optional()], render_kw={
+                           "class": "apply-selectfilter"})
+    yearlevel = SelectField('Year Level', validators=[Optional()], render_kw={
+                            "class": "apply-selectfilter"})
     submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
 
 
