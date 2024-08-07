@@ -278,11 +278,20 @@ def apply():
     page = request.args.get('page', 1, type=int)
     post_pending = pendingApply(current_user, page, pendform=applyform)
 
+    # RETAIN FILTER PARAMETERS ON PAGINATION
+    filterprmtrs = {key: value for key,
+                    value in request.args.items() if key != 'page'}
+
+    paginPages = {'pages': [{'url': url_for('views.apply', page=page_num, **filterprmtrs),
+                             'num': page_num, 'current': page_num == post_pending.page}
+                            for page_num in post_pending.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)]}
+
     return render_template("apply.html", user=current_user, posts=posts,
                            post_accept=post_accept, post_pending=post_pending,
                            weekDateA=weekDateA, weekDateB=weekDateB,
                            datesWeekA=datesWeekA, datesWeekB=datesWeekB, today=today,
-                           WeekANow=WeekANow, WeekBNow=WeekBNow, applyform=applyform)
+                           WeekANow=WeekANow, WeekBNow=WeekBNow, applyform=applyform,
+                           paginPages=paginPages)
 
 
 # CREATE APPLICATIONS ROUTE

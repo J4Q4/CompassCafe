@@ -104,19 +104,19 @@
                         {% endfor %}
                     </div>
                     <div class="row pagination-row">
-                        <! - - Pagination - - >
-                        {% for page_num in post_pending.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-                            {% if page_num %}
-                                {% if page_num == post_pending.page %}
-                                    <a class="pagination-btn pgntnbtn-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
+                        <!-- Pagination -->
+                        {% for page in paginPages.pages %}
+                            {% if page.url and page.num %}
+                                {% if page.current %}
+                                    <a class="pagination-btn pgntnbtn-info mb-4 current" href="{{ page.url }}">{{ page.num }}</a>
                                 {% else %}
-                                    <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ url_for('views.apply', page=page_num) }}">{{ page_num }}</a>
+                                    <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ page.url }}">{{ page.num }}</a>
                                 {% endif %}
                             {% else %}
                                 ...
                             {% endif %}
                         {% endfor %}
-                        <! - - End of Pagination - - >
+                        <!-- End of Pagination -->
                     </div>
                 </div>
                 
