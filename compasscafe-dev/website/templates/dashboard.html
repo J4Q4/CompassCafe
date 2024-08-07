@@ -111,7 +111,7 @@
                                                     </select>
                                                 </li>
                                                 <br>
-                                                <li>
+                                                <li class="last-list">
                                                     <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!- - Submit Sort Button - ->
                                                 </li>
                                             </ul>
@@ -143,8 +143,11 @@
                                                     {{ filter_form.is_staff_false() }} Not Admin
                                                 </li>
                                                 <br>
-                                                <li> 
+                                                <li class="last-list"> 
                                                     <a>{{ filter_form.submit() }}</a> <!- - Submit Filter Button - ->
+                                                </li>
+                                                <li style="display: inline-block;" class="last-list">
+                                                    <a href="{{ url_for('views.dashboard') }}" class="btn-secondary">Clear Filters</a> <!- - Clear Filter Button - ->
                                                 </li>
                                             </ul>
                                         </div>

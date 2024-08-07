@@ -1464,24 +1464,28 @@ input[type=checkbox] {
   margin-right: 10px;
 }
 
-.popup-content ul {
+#filterjsPopup .popup-content ul, #sortjsPopup .popup-content ul {
   padding: 20px;
 }
-.popup-content ul li {
+#filterjsPopup .popup-content ul li, #sortjsPopup .popup-content ul li {
   margin-bottom: 20px;
 }
-.popup-content ul li input {
+#filterjsPopup .popup-content ul li input, #sortjsPopup .popup-content ul li input {
   margin: 0;
 }
-.popup-content ul li input[type=select] {
+#filterjsPopup .popup-content ul li input[type=select], #sortjsPopup .popup-content ul li input[type=select] {
   padding: 20px;
 }
-.popup-content ul li select {
+#filterjsPopup .popup-content ul li select, #sortjsPopup .popup-content ul li select {
   padding: 15px;
   border: #000 1px solid;
   border-radius: 5px;
   width: 100%;
   font-family: "JetBrains Mono";
+}
+
+.last-list {
+  margin-bottom: 0 !important;
 }
 
 .dash-filter input[type=checkbox] {

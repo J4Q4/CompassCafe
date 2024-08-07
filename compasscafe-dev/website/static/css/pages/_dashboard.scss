@@ -142,7 +142,7 @@ input[type="checkbox"] {
         margin-right: 10px;
     }
 }
-.popup-content {
+#filterjsPopup .popup-content, #sortjsPopup .popup-content {
     ul {
         padding: 20px;
     }
@@ -162,6 +162,10 @@ input[type="checkbox"] {
             font-family: "JetBrains Mono";
         }
     }
+}
+
+.last-list {
+    margin-bottom: 0 !important;
 }
 
 .dash-filter input[type="checkbox"] {
