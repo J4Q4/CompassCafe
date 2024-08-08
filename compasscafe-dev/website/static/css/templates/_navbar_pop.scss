@@ -1,0 +1,37 @@
+#newnav {
+    position: static;
+    top: 0;
+    background-color: transparent;
+    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border: none;
+    transform: translateY(0);
+}
+
+.navshow-links {
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    margin-right: 50px;
+}
+
+.shownav {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    animation: shownav 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    .navshow-links {
+        border-radius: 10px;
+        padding-right: 50px;
+        background-color: var(--main-white);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    }
+}
+
+@keyframes shownav {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

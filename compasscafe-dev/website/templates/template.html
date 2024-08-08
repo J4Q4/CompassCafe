@@ -118,68 +118,71 @@
         
         <!-- Expandable Links -->
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <!-- Apply Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="/apply">apply</a>
-            </li>
-            <!-- Menu Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="/menu">menu</a>
-            </li>
-            <!-- News Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="/news">news</a>
-            </li>
+          <div class="navshow-links">
+            <ul class="navbar-nav">
+              <!-- Apply Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/apply">apply</a>
+              </li>
+              <!-- Menu Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/menu">menu</a>
+              </li>
+              <!-- News Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/news">news</a>
+              </li>
 
-            <!-- Account Page - Dropdown [Big Screen] -->
-            <li class="nav-item d-none d-sm-block">
-              <input type="checkbox" id="openSide-md">
-              <label for="openSide-md" class="sideToggle1 nav-link">
-                <i class="fa-regular fa-user"></i>
-              </label>
-              <div id="sideMenu">
-                <ul class="sideMenu-contents">
-                  <li>
-                    <label for="openSide-md" class="sideToggle1">
-                      <i class="fa fa-times"></i>
-                    </label>
-                  </li>
-                  <br>
-                  <!-- Admin User-->
-                  <h3 class="sideHeader sideText1">Account</h3>
-                  <br>
-                  {% if user.is_authenticated %}
-                  <!-- User Logged In -->
-                  {% if user.is_staff %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-                  {% else %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/settings">settings</a></li>
-                  {% endif %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/login">quick login</a></li>
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/logout">logout</a></li>
-                  {% else %}
-                  <!-- User Not Logged In -->
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/login">login</a></li>
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/signup">sign up</a></li>
-                  {% endif %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/contact">contact</a></li>
-                  <li id="sideCredits">
-                    <p class="sideHeader sideText1">© Compass Cafe SMC | 2024</p>
-                  </li>
-                </ul>
-              </div>
-              <!-- Darkened Screen -->
-              <div class="darkened-SideScreen"></div>
-            </li>
-            <!-- End of Account Page - Dropdown [Big Screen] -->
-             
-          </ul>
+              <!-- Account Page - Dropdown [Big Screen] -->
+              <li class="nav-item d-none d-sm-block">
+                <input type="checkbox" id="openSide-md">
+                <label for="openSide-md" class="sideToggle1 nav-link">
+                  <i class="fa-regular fa-user"></i>
+                </label>
+                <div id="sideMenu">
+                  <ul class="sideMenu-contents">
+                    <li>
+                      <label for="openSide-md" class="sideToggle1">
+                        <i class="fa fa-times"></i>
+                      </label>
+                    </li>
+                    <br>
+                    <!-- Admin User-->
+                    <h3 class="sideHeader sideText1">Account</h3>
+                    <br>
+                    {% if user.is_authenticated %}
+                    <!-- User Logged In -->
+                    {% if user.is_staff %}
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+                    {% else %}
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/settings">settings</a></li>
+                    {% endif %}
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/login">quick login</a></li>
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/logout">logout</a></li>
+                    {% else %}
+                    <!-- User Not Logged In -->
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/login">login</a></li>
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/signup">sign up</a></li>
+                    {% endif %}
+                    <li class="sideNav sideText1"><a class="dropdown-item" href="/contact">contact</a></li>
+                    <li id="sideCredits">
+                      <p class="sideHeader sideText1">© Compass Cafe SMC | 2024</p>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Darkened Screen -->
+                <div class="darkened-SideScreen"></div>
+              </li>
+              <!-- End of Account Page - Dropdown [Big Screen] -->
+              
+            </ul>
+          </div
         </div>
         <!-- End of Expandable Links -->
       </div>
     </nav>
     <!-- End of Navbar -->
+
 
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}

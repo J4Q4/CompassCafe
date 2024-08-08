@@ -322,8 +322,7 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= barista_max:
-                flash(f'{date_day}, {date_duty} is full: {
-                      barista_max} baristas max.', category='error')
+                flash(f'{date_day}, {date_duty} is full: {barista_max} baristas max.', category='error')
 
             else:
                 # Formatting User Apply Input
@@ -399,8 +398,7 @@ def accept_application(post_id):
     accepted_count = Apply.query.filter_by(
         status='accepted', date_duty=week, date_day=day).count()
     if accepted_count >= barista_max:
-        flash(f'{day}, {week} is full: {
-              barista_max} baristas max.', category='error')
+        flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
 
     else:
         post.status = 'accepted'

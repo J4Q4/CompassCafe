@@ -32,3 +32,20 @@ window.addEventListener('scroll', function() {
         resetButton.classList.remove("show-button");
     }
 });
+
+
+
+
+// Navbar Popup Animation
+document.addEventListener('DOMContentLoaded', function() {
+    let shownewnav = document.getElementById("nav-home");
+
+    // Show after 600px
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 600) {
+            shownewnav.classList.add("shownav");
+        } else {
+            shownewnav.classList.remove("shownav");
+        }
+    });
+});
