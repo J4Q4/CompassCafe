@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show after 600px
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 600) {
+        if (window.scrollY > 400) {
             shownewnav.classList.add("shownav");
         } else {
             shownewnav.classList.remove("shownav");

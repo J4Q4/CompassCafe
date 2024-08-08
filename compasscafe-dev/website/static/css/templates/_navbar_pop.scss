@@ -7,23 +7,44 @@
     transform: translateY(0);
 }
 
-.navshow-links {
-    background-color: transparent;
-    position: absolute;
-    right: 0;
-    margin-right: 50px;
-}
-
 .shownav {
     position: fixed;
     top: 0;
     height: 100%;
     animation: shownav 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-    .navshow-links {
-        border-radius: 10px;
-        padding-right: 50px;
-        background-color: var(--main-white);
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+    @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+        .nav-link {
+            margin-left: 40px;
+        }
+        .navshow-links {
+            position: absolute;
+            border-radius: 10px;
+            padding-right: 50px;
+            background-color: var(--main-white);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+            margin-right: 50px;
+            right: 0;
+        }
+    }
+    @media screen and (max-width: map-get($grid-breakpoints, sm)) {
+        .navshow-links {
+            background-color: var(--main-white);
+            top: 0;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+            left: 0;
+            right: 0;
+            top: 0;
+        }
+        .navbar-collapse {
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            position: absolute;
+            padding: 120px 50px 0 50px;
+            z-index: -1;
+            border-radius: 0 0 15px 15px;
+        }
     }
 }
 
