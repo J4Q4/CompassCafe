@@ -2,16 +2,58 @@
     position: static;
     top: 0;
     background-color: transparent;
-    transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     border: none;
     transform: translateY(0);
 }
 
+/* Origin Navbar */
+/* Navbar Positioning on Breakpoints */
+@media screen and (min-width: map-get($grid-breakpoints, sm)) {
+    .nav-link {
+        margin-left: 40px;
+    }
+    .navbar {
+        padding: 20px 50px;
+        
+    }
+    .nav-container {
+        padding: 0;
+        background-color: transparent;
+    }
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, sm)) {
+    .navbar {
+        padding: 0;
+    }
+    .nav-container {
+        padding: 20px 50px !important;
+        background-color: transparent;
+        border-radius: 0 0 15px 15px;
+    }
+    .last-mini-linknav {
+        margin-bottom: 20px;
+    }
+    .navbar-collapse {
+        background-color: var(--main-white);
+        padding: 20px;
+        border-radius: 15px;
+        border: 2px solid #000;
+        box-shadow: 0 5px 0 #000;
+        margin-top: 20px;
+    }
+    
+}
+
+
+/* Popup Navbar - After Scroll */
 .shownav {
     position: fixed;
     top: 0;
     height: 100%;
     animation: shownav 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+
     @media screen and (min-width: map-get($grid-breakpoints, sm)) {
         .nav-link {
             margin-left: 40px;
@@ -27,6 +69,12 @@
         }
     }
     @media screen and (max-width: map-get($grid-breakpoints, sm)) {
+        .nav-container {
+            background-color: var(--main-white);
+        }
+        .nav-link {
+            margin-left: 0;
+        }
         .navshow-links {
             background-color: var(--main-white);
             top: 0;
@@ -41,6 +89,7 @@
             right: 0;
             top: 0;
             position: absolute;
+            border: 2px solid var(--main-white) !important;
             padding: 120px 50px 0 50px;
             z-index: -1;
             border-radius: 0 0 15px 15px;
