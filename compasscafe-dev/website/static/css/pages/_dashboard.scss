@@ -13,6 +13,7 @@
     width: 100%;
     transform: scale(1);
     transition: all 0.3s ease-out;
+    z-index: 1;
     ul {
         list-style-type: none;
         padding-left: 0;
@@ -26,7 +27,9 @@
 .dashboarduser-table:hover {
     border: 2px solid #ddd;
     transform: scale(1.01);
+    z-index: 2;
 }
+
 .dash-hello {
     background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
     img {
@@ -35,7 +38,7 @@
         bottom: 0;
         right: 50px;
         filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
-        animation: cuppadash 0.2s cubic-bezier(1, 0, 0, 1) infinite !important;
+        animation: cuppadash 0.5s cubic-bezier(1, 0, 0, 1) infinite !important;
     }
 
     @keyframes cuppadash {
@@ -43,7 +46,7 @@
             transform: translateY(0) scaleY(0.89);
         }
         72% {
-            transform: translateY(-30px) scaleY(1);
+            transform: translateY(-40px) scaleY(1);
         }
         100% {
             transform: translateY(0) scaleY(0.89);
@@ -210,5 +213,13 @@ input[type="checkbox"] {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+
+.emailelipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 10px;
 }
 /* End of Dashboard Popup */

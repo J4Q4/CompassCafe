@@ -22,6 +22,9 @@
 }
 
 /* Dropdown Items */
+.adminusersheet .dropdown-menu li {
+    text-align: end;
+}
 .dropdown-menu li {
     position: relative;
     overflow-x: hidden;

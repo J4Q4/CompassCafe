@@ -29,9 +29,11 @@ footer {
 .footer-upper {
     background-image: linear-gradient(var(--main-navy), #1f2541);
     margin-bottom: 100vh;
+    border-radius: 0 0 15px 15px;
     .row-upper {
         border-top: #6c78b4 1px solid;
         border-bottom: #6c78b4 1px solid;
+        border-radius: 0 0 15px 15px;
     }
     /* Upper Left */
     #footerleft-text {
@@ -43,15 +45,21 @@ footer {
         text-transform: uppercase;
         border-bottom: 1px solid #fff;
         width: 150px;
-    }
-    #footerleft-text p {
+        white-space: normal;
+        }
+        #footerleft-text p {
         color: #babdce;
         font-family: "JetBrains Mono";
         font-weight: 300;
-    }
+        white-space: normal;
+        }
     .upperfooter-left ul {
         padding-left: 0;
-        align-items: center;
+        align-items: flex-start;
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
     .upperfooter-left ul li {
         display: inline-block;

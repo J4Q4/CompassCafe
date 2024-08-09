@@ -19,7 +19,6 @@
                         <h6>Admin Settings</h3>
                         <li><a href="#">users</a></li>
                         <li><a href="#">applications</a></li>
-                        <li><a href="#">contacts</a></li>
                         <br>
                         <h6>User Settings</h3>
                         <li><a href="#">profile</a></li>
@@ -30,7 +29,6 @@
                     <ul>
                         <h6>Site Settings</h3>
                         <li><a href="#">menu</a></li>
-                        <li><a href="#">news</a></li>
                     </ul>
                 </div>
                 <br>
@@ -39,8 +37,8 @@
                 <div class="dashboarduser-table dash-menu1 dash-hello">
                     <h2>Hello, {{ user.schoolid }}! 👋</h2>
                     <p><strong>Welcome to the admin dashboard.</strong>
-                    <br>Here you can manage users, applications, and contacts.<p>
-                    <img src="/static/assets/media/coffeerun.gif" alt="cup of coffee" draggable="false">
+                    <br>Here you can manage users and applications.<p>
+                    <img src="/static/assets/media/coffeebounce.gif" alt="cup of coffee" draggable="false">
                 </div>
 
                 <!- - User Interactives - ->
@@ -171,7 +169,7 @@
                         {% for user in users %}
                         <tr id="dashboard-list">
                             <! - - User Email - ->
-                            <td id="emailconfig">{{ user.email }}</td>
+                            <td id="emailconfig" class="emailelipsis">{{ user.email }}</td>
                             <! - - Admin Status - ->
                             <td id="configicon" class="dash-showmain">
                                 {% if user.is_staff %}
@@ -202,14 +200,14 @@
                                 <div class="btn-group" id="apply-delete">
                                     <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
                                     <ul class="dropdown-menu">
-                                        <h6 class="dropdown-header">User Configuration</h6>
+                                        <h6 class="dropdown-header">{{ user.email }}</h6>
                                         <li><a class="dropdown-item">
-                                            Admin:
                                             {% if user.is_staff %}
                                             <i class="fas fa-check" title='Admin User'></i>
                                             {% else %}
                                             <i class="fas fa-times" title='Regular User'></i>
                                             {% endif %}
+                                            Admin
                                         </a></li>
                                         <li><a class="dropdown-item" href="{{ url_for('views.dashboard', edit_user_id=user.id) }}" type="submit">
                                             Configure
