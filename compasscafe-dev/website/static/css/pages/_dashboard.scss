@@ -31,10 +31,23 @@
     background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
     img {
         position: absolute;
-        height: 130%;
+        height: 140%;
         bottom: 0;
         right: 50px;
         filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
+        animation: cuppadash 0.2s cubic-bezier(1, 0, 0, 1) infinite !important;
+    }
+
+    @keyframes cuppadash {
+        0% {
+            transform: translateY(0) scaleY(0.89);
+        }
+        72% {
+            transform: translateY(-30px) scaleY(1);
+        }
+        100% {
+            transform: translateY(0) scaleY(0.89);
+        }
     }
 }
 

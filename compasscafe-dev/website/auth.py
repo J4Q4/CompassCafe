@@ -7,6 +7,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint("auth", __name__)
 
+# ACCEPT EMAIL DOMAINS - STAFF AND USER
+
+ACCEPTED_EMAIL_DOMAINS = ["sanctamaria.school.nz", "my.sanctamaria.school.nz"]
+
+
+def is_validemail(email):
+    return email.split('@')[-1] in ACCEPTED_EMAIL_DOMAINS
+
 
 ## USER AUTHENTICATION  WEBPAGES ##
 
@@ -61,6 +69,8 @@ def sign_up():
             flash('Password must be at least 8 characters.', category='error')
         elif len(email) < 4:
             flash('Email is invalid', category='error')
+        elif not is_validemail(email):
+            flash('Please use your school email.', category='error')
         else:
             new_user = User(email=email, schoolid=schoolid, password=generate_password_hash(
                 password1, method='scrypt:32768:8:1'))
