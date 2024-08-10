@@ -71,8 +71,6 @@ def dashboard():
 
     # SORT USER
 
-    if request.args.get('sort_by'):
-        sort_by = request.args.get('sort_by')
     if sort_by == 'email_asc':
         query = query.order_by(User.email.asc())
     elif sort_by == 'email_desc':
@@ -99,6 +97,7 @@ def dashboard():
     # RETAIN FILTER PARAMETERS ON PAGINATION
     filterprmtrs = {key: value for key,
                     value in request.args.items() if key != 'page'}
+
     paginEntries = {'pages': [{'url': url_for('views.dashboard', page=page_num, **filterprmtrs),
                                'num': page_num, 'current': page_num == paginUsers.page}
                               for page_num in paginUsers.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)]}
