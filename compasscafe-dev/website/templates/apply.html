@@ -10,7 +10,7 @@
 
     <div class="row">
 
-        <div class="col-xl-12 col-xxl-3" id="applycol">
+        <div class="col-xl-12 col-xxl-3">
             <div id="posts">
                 {% if not user.is_staff %}
                 <h3>Your Applications</h3>
@@ -110,7 +110,7 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    <div class="row pagination-row">
+                    <div class="row pagination-row mb-4">
                         <!-- Pagination -->
                         {% for page in paginPages.pages %}
                             {% if page.url and page.num %}
@@ -140,7 +140,7 @@
             {% endif %}
         </div>
 
-        <div class="col-xl-12 col-xxl-9" id="schedulecol">
+        <div class="col-xl-12 col-xxl-9">
             {% include 'applytable.html' %}
         </div>
 

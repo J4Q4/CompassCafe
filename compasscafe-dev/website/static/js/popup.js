@@ -173,3 +173,15 @@ gsap.fromTo(".sideText",
     }
 );
 });
+
+
+
+
+// Dropdown Z-Index Fix
+document.querySelectorAll('.dropdown-toggle').forEach(button => {
+    button.addEventListener('click', function() {
+        // Find Parent of Dropdown - Card
+        const dropdown = this.closest('.dashboarduser-table');
+        dropdown.style.zIndex = '3';
+    });
+});

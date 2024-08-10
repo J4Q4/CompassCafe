@@ -4,6 +4,7 @@
     border-radius: 15px;
     border: 2px solid var(--main-white);
     transition: border 0.3s ease-in-out;
+    position: absolute;
 }
 
 .dropdown-menu:hover {

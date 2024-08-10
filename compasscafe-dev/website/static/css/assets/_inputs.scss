@@ -9,12 +9,14 @@ input[type=text],
 input[type=number], 
 input[type=email], 
 input[type=password], 
-#apply-dropdown {
+#apply-dropdown,
+#sort_by,
+.form-control {
     padding: 12px 20px;
     margin: 8px 0;
     border: 1px solid #000;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: var(--main-white) !important;
     color: #000;
     font-family: "JetBrains Mono";
 }

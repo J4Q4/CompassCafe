@@ -305,12 +305,14 @@ input[type=text],
 input[type=number],
 input[type=email],
 input[type=password],
-#apply-dropdown {
+#apply-dropdown,
+#sort_by,
+.form-control {
   padding: 12px 20px;
   margin: 8px 0;
   border: 1px solid #000;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--main-white) !important;
   color: #000;
   font-family: "JetBrains Mono";
 }
@@ -375,6 +377,7 @@ input[type=password]:focus,
   border-radius: 15px;
   border: 2px solid var(--main-white);
   transition: border 0.3s ease-in-out;
+  position: absolute;
 }
 
 .dropdown-menu:hover {
@@ -1520,6 +1523,7 @@ h1 {
   transform: scale(1);
   transition: all 0.3s ease-out;
   z-index: 1;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
 }
 .dashboarduser-table ul {
   list-style-type: none;
@@ -1532,13 +1536,14 @@ h1 {
 }
 
 .dashboarduser-table:hover {
-  border: 2px solid #ddd;
+  border: 2px solid #f0f0f0;
   transform: scale(1.01);
   z-index: 2;
 }
 
 .dash-hello {
-  background-image: linear-gradient(var(--main-lightblue2), var(--main-lightblue1), #e8ecfa);
+  background: linear-gradient(145deg, var(--main-lightblue2), #f1fbff);
+  box-shadow: inset 14px 14px 29px #d1dbe7, inset -14px -14px 29px #f1fbff;
 }
 .dash-hello img {
   position: absolute;
@@ -1632,16 +1637,6 @@ h1 {
   box-shadow: none;
 }
 
-#applycol {
-  display: block;
-  z-index: 1000;
-}
-
-#schedulecol {
-  display: block;
-  z-index: 999;
-}
-
 #loggedinas-dash {
   font-family: "JetBrains Mono";
   font-size: 14px;
@@ -1733,24 +1728,26 @@ input[type=checkbox] {
 /* Login & Signup */
 /* ## USER LOGIN / SIGN UP ## */
 .user-loginui {
-  background-color: #fff;
-  border: 1px solid #000;
+  background-color: var(--main-white);
+  border: 2px solid #e5e6e6;
   border-radius: 10px;
   height: 650px;
   margin: 80px auto;
   overflow: hidden;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
 }
 .user-loginui form {
   padding: 100px;
 }
 
 .user-signupui {
-  background-color: #fff;
-  border: 1px solid #000;
+  background-color: var(--main-white);
+  border: 2px solid #e5e6e6;
   border-radius: 10px;
   height: 900px;
   margin: 80px auto;
   overflow: hidden;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
 }
 .user-signupui form {
   padding: 100px;
