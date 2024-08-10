@@ -166,7 +166,7 @@
                             <th class="dash-showmain">Delete</th>
                             <th class="dash-showmobile">Settings</th>
                         </tr>
-                        {% for user in users %}
+                        {% for user in paginUsers.items %}
                         <tr id="dashboard-list">
                             <! - - User Email - ->
                             <td id="emailconfig" class="emailelipsis">{{ user.email }}</td>
@@ -225,6 +225,16 @@
                         </tr>
                         {% endfor %}
                     </table>
+
+                    <!-- Pagination -->
+                    {% for page in paginEntries['pages'] %}
+                    {% if page['current'] %}
+                        <a href="{{ page['url'] }}" class="btn btn-info mb-4">{{ page['num'] }}</a>
+                    {% else %}
+                        <a href="{{ page['url'] }}" class="btn btn-outline-info mb-4">{{ page['num'] }}</a>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- End of Pagination -->
                 </div>
             </div>
         </div>

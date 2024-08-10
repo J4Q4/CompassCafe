@@ -73,15 +73,15 @@ def dashboard():
 
     if request.args.get('sort_by'):
         sort_by = request.args.get('sort_by')
-        if sort_by == 'email_asc':
-            query = query.order_by(User.email.asc())
-        elif sort_by == 'email_desc':
-            query = query.order_by(User.email.desc())
+    if sort_by == 'email_asc':
+        query = query.order_by(User.email.asc())
+    elif sort_by == 'email_desc':
+        query = query.order_by(User.email.desc())
         # STAFF - [ INVERTED ASC/DESC TO MAKE SENSE ]
-        elif sort_by == 'is_staff_asc':
-            query = query.order_by(User.is_staff.desc())
-        elif sort_by == 'is_staff_desc':
-            query = query.order_by(User.is_staff.asc())
+    elif sort_by == 'is_staff_asc':
+        query = query.order_by(User.is_staff.desc())
+    elif sort_by == 'is_staff_desc':
+        query = query.order_by(User.is_staff.asc())
 
     # FILTER USER
     if filter_form.validate_on_submit():
@@ -92,7 +92,16 @@ def dashboard():
         elif filter_form.is_staff_false.data and not filter_form.is_staff_true.data:
             query = query.filter_by(is_staff=False)
 
-    users = query.all()
+    # USER PAGINATION
+    page = request.args.get('page', 1, type=int)
+    paginUsers = query.paginate(page=page, per_page=2)
+
+    # RETAIN FILTER PARAMETERS ON PAGINATION
+    filterprmtrs = {key: value for key,
+                    value in request.args.items() if key != 'page'}
+    paginEntries = {'pages': [{'url': url_for('views.dashboard', page=page_num, **filterprmtrs),
+                               'num': page_num, 'current': page_num == paginUsers.page}
+                              for page_num in paginUsers.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)]}
 
     # EDIT USER ROUTE
 
@@ -117,8 +126,8 @@ def dashboard():
                 if existing_user and existing_user.id != user.id:
                     flash('Email is already in use.', category='error')
                     return render_template("dashboard.html",
-                                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
-                                           filter_form=filter_form, sort_form=sort_form)
+                                           user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
+                                           filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
 
                 # Update User Email
 
@@ -133,8 +142,8 @@ def dashboard():
                     elif edit_form.password.data or edit_form.confirm_password.data:
                         flash('Please confirm password!', category='error')
                         return render_template("dashboard.html",
-                                               user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
-                                               filter_form=filter_form, sort_form=sort_form)
+                                               user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
+                                               filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
                 db.session.commit()
                 flash('User configuration successful!', category='success')
                 return redirect(url_for('views.dashboard'))
@@ -144,8 +153,8 @@ def dashboard():
             edit_form = EditUser(obj=user)
 
     return render_template("dashboard.html",
-                           user=current_user, users=users, edit_form=edit_form, edit_user_id=edit_user_id,
-                           filter_form=filter_form, sort_form=sort_form)
+                           user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
+                           filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
 
 
 # DELETE USER ROUTE
@@ -322,7 +331,8 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= barista_max:
-                flash(f'{date_day}, {date_duty} is full: {barista_max} baristas max.', category='error')
+                flash(f'{date_day}, {date_duty} is full: {
+                      barista_max} baristas max.', category='error')
 
             else:
                 # Formatting User Apply Input
@@ -398,7 +408,8 @@ def accept_application(post_id):
     accepted_count = Apply.query.filter_by(
         status='accepted', date_duty=week, date_day=day).count()
     if accepted_count >= barista_max:
-        flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
+        flash(f'{day}, {week} is full: {
+              barista_max} baristas max.', category='error')
 
     else:
         post.status = 'accepted'
