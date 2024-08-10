@@ -231,9 +231,9 @@
                         {% for page in paginEntries.pages %}
                             {% if page.url and page.num %}
                                 {% if page.current %}
-                                    <a class="pagination-btn pgntnbtn-info mb-4 current" href="{{ page.url }}">{{ page.num }}</a>
+                                    <a class="pagination-btn pgntnbtn-info current" href="{{ page.url }}">{{ page.num }}</a>
                                 {% else %}
-                                    <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ page.url }}">{{ page.num }}</a>
+                                    <a class="pagination-btn pgntnbtn-outline-info" href="{{ page.url }}">{{ page.num }}</a>
                                 {% endif %}
                             {% else %}
                                 ...
