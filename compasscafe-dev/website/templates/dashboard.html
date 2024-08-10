@@ -158,7 +158,7 @@
                     </div>
 
 
-                    <table>
+                    <table class="mb-4">
                         <tr class="dashboarduser-header">
                             <th>Email</th>
                             <th class="dash-showmain">Admin</th>
@@ -226,15 +226,21 @@
                         {% endfor %}
                     </table>
 
-                    <!-- Pagination -->
-                    {% for page in paginEntries['pages'] %}
-                    {% if page['current'] %}
-                        <a href="{{ page['url'] }}" class="btn btn-info mb-4">{{ page['num'] }}</a>
-                    {% else %}
-                        <a href="{{ page['url'] }}" class="btn btn-outline-info mb-4">{{ page['num'] }}</a>
-                    {% endif %}
-                    {% endfor %}
-                    <!-- End of Pagination -->
+                    <div class="row pagination-row">
+                        <!-- Pagination -->
+                        {% for page in paginEntries.pages %}
+                            {% if page.url and page.num %}
+                                {% if page.current %}
+                                    <a class="pagination-btn pgntnbtn-info mb-4 current" href="{{ page.url }}">{{ page.num }}</a>
+                                {% else %}
+                                    <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ page.url }}">{{ page.num }}</a>
+                                {% endif %}
+                            {% else %}
+                                ...
+                            {% endif %}
+                        {% endfor %}
+                        <!-- End of Pagination -->
+                    </div>
                 </div>
             </div>
         </div>

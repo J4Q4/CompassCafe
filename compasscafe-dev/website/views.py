@@ -67,7 +67,16 @@ def dashboard():
 
     sort_by = request.args.get('sort_by', 'email_asc')
     sort_form = SortForm(data={'sort_by': sort_by})
-    filter_form = FilterForm()
+
+    email_filter = request.args.get('email', '')
+    is_staff_true = request.args.get('is_staff_true') == '1'
+    is_staff_false = request.args.get('is_staff_false') == '1'
+
+    filter_form = FilterForm(data={
+        'email': email_filter,
+        'is_staff_true': is_staff_true,
+        'is_staff_false': is_staff_false
+    })
 
     # SORT USER
 
@@ -83,20 +92,32 @@ def dashboard():
 
     # FILTER USER
     if filter_form.validate_on_submit():
-        if filter_form.email.data:
-            query = query.filter(User.email.contains(filter_form.email.data))
-        if filter_form.is_staff_true.data and not filter_form.is_staff_false.data:
-            query = query.filter_by(is_staff=True)
-        elif filter_form.is_staff_false.data and not filter_form.is_staff_true.data:
-            query = query.filter_by(is_staff=False)
+        email_filter = filter_form.email.data
+        is_staff_true = filter_form.is_staff_true.data
+        is_staff_false = filter_form.is_staff_false.data
+        return redirect(url_for('views.dashboard', sort_by=sort_by, email=email_filter,
+                                is_staff_true='1' if is_staff_true else '',
+                                is_staff_false='1' if is_staff_false else ''))
+
+    # APPLY FILTERS
+    if email_filter:
+        query = query.filter(User.email.contains(email_filter))
+    if is_staff_true and not is_staff_false:
+        query = query.filter_by(is_staff=True)
+    elif is_staff_false and not is_staff_true:
+        query = query.filter_by(is_staff=False)
 
     # USER PAGINATION
     page = request.args.get('page', 1, type=int)
-    paginUsers = query.paginate(page=page, per_page=2)
+    paginUsers = query.paginate(page=page, per_page=12)
 
     # RETAIN FILTER PARAMETERS ON PAGINATION
-    filterprmtrs = {key: value for key,
-                    value in request.args.items() if key != 'page'}
+    filterprmtrs = {
+        'sort_by': sort_by,
+        'email': email_filter,
+        'is_staff_true': '1' if is_staff_true else '',
+        'is_staff_false': '1' if is_staff_false else ''
+    }
 
     paginEntries = {'pages': [{'url': url_for('views.dashboard', page=page_num, **filterprmtrs),
                                'num': page_num, 'current': page_num == paginUsers.page}
@@ -113,7 +134,7 @@ def dashboard():
         # Admin Config Lock
         if user.email == 'admin@sanctamaria.school.nz':
             flash('This user cannot be edited.', category='error')
-            return redirect(url_for('views.dashboard'))
+            return redirect(url_for('views.dashboard', **filterprmtrs))
 
         # User Email
         if request.method == 'POST':
@@ -145,7 +166,7 @@ def dashboard():
                                                filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
                 db.session.commit()
                 flash('User configuration successful!', category='success')
-                return redirect(url_for('views.dashboard'))
+                return redirect(url_for('views.dashboard', **filterprmtrs))
             else:
                 flash('Passwords do not match!', category='error')
         else:
