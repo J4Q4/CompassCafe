@@ -10,8 +10,8 @@
 /* Origin Navbar */
 /* Navbar Positioning on Breakpoints */
 @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-    .nav-link {
-        margin-left: 40px;
+    .navbar-nav {
+        gap: 40px;
     }
     .navbar {
         padding: 20px 50px;
@@ -54,13 +54,13 @@
     animation: shownav 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 
     @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-        .nav-link {
-            margin-left: 40px;
+        navbar-nav {
+            gap: 40px;
         }
         .navshow-links {
             position: absolute;
             border-radius: 10px;
-            padding-right: 50px;
+            padding: 0 50px;
             background-color: var(--main-white);
             box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
             margin-right: 50px;

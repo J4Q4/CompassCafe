@@ -106,6 +106,43 @@ footer {
     }
 }
 
+#firstfooter-link {
+    margin-left: 0 !important;
+}
+
+@media screen and (max-width: map-get($grid-breakpoints, lg)) {
+    .upperfooter-left ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .upperfooter-up ul, .upperfooter-down ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .upperfooter-up ul {
+        gap: 100px
+    }
+    .upperfooter-down ul {
+        gap: 200px;
+        img {
+            margin: 0 !important;
+        }
+    }
+}
+@media screen and (max-width: map-get($grid-breakpoints, sm)) {
+    .upperfooter-up ul {
+        gap: 10px
+    }
+    .upperfooter-down ul {
+        gap: 100px;
+    }
+}
+
+/* End of Footer Upper */
+
+
 
 /* Footer Lower */
 /* Fixed Footer Scroll Reveal */

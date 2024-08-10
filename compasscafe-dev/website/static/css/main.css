@@ -706,8 +706,8 @@ Move Margins to Match Logo */
 /* Origin Navbar */
 /* Navbar Positioning on Breakpoints */
 @media screen and (min-width: 576px) {
-  .nav-link {
-    margin-left: 40px;
+  .navbar-nav {
+    gap: 40px;
   }
   .navbar {
     padding: 20px 50px;
@@ -746,13 +746,13 @@ Move Margins to Match Logo */
   animation: shownav 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
 @media screen and (min-width: 576px) {
-  .shownav .nav-link {
-    margin-left: 40px;
+  .shownav navbar-nav {
+    gap: 40px;
   }
   .shownav .navshow-links {
     position: absolute;
     border-radius: 10px;
-    padding-right: 50px;
+    padding: 0 50px;
     background-color: var(--main-white);
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
     margin-right: 50px;
@@ -1017,6 +1017,40 @@ footer .row {
   transform: scale(1.15);
 }
 
+#firstfooter-link {
+  margin-left: 0 !important;
+}
+
+@media screen and (max-width: 992px) {
+  .upperfooter-left ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .upperfooter-up ul, .upperfooter-down ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .upperfooter-up ul {
+    gap: 100px;
+  }
+  .upperfooter-down ul {
+    gap: 200px;
+  }
+  .upperfooter-down ul img {
+    margin: 0 !important;
+  }
+}
+@media screen and (max-width: 576px) {
+  .upperfooter-up ul {
+    gap: 10px;
+  }
+  .upperfooter-down ul {
+    gap: 100px;
+  }
+}
+/* End of Footer Upper */
 /* Footer Lower */
 /* Fixed Footer Scroll Reveal */
 body {
@@ -1222,7 +1256,7 @@ h1 {
 }
 @media screen and (max-width: 1400px) {
   .beigespace-test {
-    padding: 100px 150px;
+    padding: 100px 100px;
   }
   .dashboarduser-table {
     padding: 20px;
@@ -1413,7 +1447,7 @@ h1 {
 /* End of 404 */
 /* Apply */
 /* APPLY TABLE */
-#posts h3, .dashboarduser-table h3 {
+#posts h3, .dashboarduser-table h3, .lunch-sched h3 {
   font-family: "JetBrains Mono";
 }
 

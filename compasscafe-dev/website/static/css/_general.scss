@@ -91,7 +91,7 @@ h1 {
 // Less than Extra Large
 @media screen and (max-width: map-get($grid-breakpoints, xxl)) {
     .beigespace-test {
-        padding: 100px 150px;
+        padding: 100px 100px;
     }
     .dashboarduser-table {
         padding: 20px;
