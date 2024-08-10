@@ -13,9 +13,9 @@
         <div class="col-xl-12 col-xxl-12">
             <div id="posts">
                 {% if not user.is_staff %}
-                <h3>Your Applications</h3>
+                <h3 class="mb-4"><strong>Your Applications</strong></h3>
                 {% else %}
-                <h3 class="mb-4">All Applications</h3>
+                <h3 class="mb-4"><strong>All Applications</strong></h3>
                 <! - - Filter User - - >
                 <div id="sortbuttons">
                     <ul class="buttonclass">
@@ -131,8 +131,8 @@
             </div>
             {% if not user.is_staff %}
             <br/>
-            <div>
-                <a href="/apply/submit_duty"><button type="button" class="btn-primary" id="btn-applysubmit">
+            <div id="btn-applysubmit">
+                <a href="/apply/submit_duty"><button type="button" class="btn-primary">
                     <i class="fa fa-plus" aria-hidden="true"></i> New Application
                 </button></a>
             </div>
@@ -141,7 +141,7 @@
         </div>
 
         <div class="col-xl-12 col-xxl-12 lunch-sched">
-            <h3 class="mb-4">Timetables</h3>
+            <h3 class="mb-4"><strong>Barista Roster</strong></h3>
             {% include 'applytable.html' %}
         </div>
 

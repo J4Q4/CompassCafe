@@ -1490,14 +1490,16 @@ h1 {
 }
 
 #btn-applysubmit {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Apply Schedule Calendar Today */
-.datetoday-selected {
+.datetoday-selected span {
   background-color: var(--main-lightblue2) !important;
   color: var(--main-navy) !important;
-  padding: 5px 20px;
+  padding: 5px;
   border-radius: 15px;
 }
 

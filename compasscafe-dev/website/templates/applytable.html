@@ -1,7 +1,10 @@
 <div class="dashboarduser-table" id="applytable">
     <ul id="apply-barista">
         <li>
-            <h3>Barista Roster</h3>
+            <h3>{{ current_month }}</h3>
+            <span>
+                {{ current_day }}
+            </span>
         </li>
         <li id="week-desc">
             <h6><strong class="
@@ -10,7 +13,7 @@
                 {% endif %}
                 ">Week A</strong>
             </h6>
-            <p>Lunch : 11:00 AM - 11:25 AM</p>
+            <p>Lunch : 11:00 AM<br>11:25 AM</p>
         </li>
     </ul>
     <table class="table applysched-table">
@@ -26,27 +29,62 @@
                 <td>
                     <strong class="{% if datesWeekA['Monday'] == today %}
                     datetoday-selected
-                    {% endif %} schedulegrayed">{{ datesWeekA['Monday'].strftime('%d %B') }}</strong>
+                    {% endif %} schedulegrayed">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekA['Monday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekA['Monday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekA['Tuesday'] == today %}
                     datetoday-selected
-                    {% endif %}">{{ datesWeekA['Tuesday'].strftime('%d %B') }}</strong>
+                    {% endif %}">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekA['Tuesday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekA['Tuesday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekA['Wednesday'] == today %}
                     datetoday-selected
-                    {% endif %} schedulegrayed">{{ datesWeekA['Wednesday'].strftime('%d %B') }}</strong>
+                    {% endif %} schedulegrayed">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekA['Wednesday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekA['Wednesday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekA['Thursday'] == today %}
                     datetoday-selected
-                    {% endif %}">{{ datesWeekA['Thursday'].strftime('%d %B') }}</strong>
+                    {% endif %}">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekA['Thursday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekA['Thursday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekA['Friday'] == today %}
                     datetoday-selected
-                    {% endif %} schedulegrayed">{{ datesWeekA['Friday'].strftime('%d %B') }}</strong>
+                    {% endif %} schedulegrayed">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekA['Friday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekA['Friday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
             </tr>
         </thead>
@@ -131,7 +169,10 @@
 <div class="dashboarduser-table">
     <ul id="apply-barista">
         <li>
-            <h3>Barista Roster</h3>
+            <h3>{{ current_month }}</h3>
+            <span>
+                {{ current_day }}
+            </span>
         </li>
         <li id="week-desc">
             <h6>
@@ -141,7 +182,7 @@
                 {% endif %}
                 ">Week B</strong>
             </h6>
-            <p>Lunch : 11:00 AM - 11:25 AM</p>
+            <p>Lunch : 11:00 AM<br>11:25 AM</p>
         </li>
     </ul>
     <table class="table applysched-table">
@@ -157,27 +198,62 @@
                 <td>
                     <strong class="{% if datesWeekB['Monday'] == today %}
                     datetoday-selected
-                    {% endif %} schedulegrayed">{{ datesWeekB['Monday'].strftime('%d %B') }}</strong>
+                    {% endif %} schedulegrayed">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekB['Monday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekB['Monday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekB['Tuesday'] == today %}
                     datetoday-selected
-                    {% endif %}">{{ datesWeekB['Tuesday'].strftime('%d %B') }}</strong>
+                    {% endif %}">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekB['Tuesday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekB['Tuesday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekB['Wednesday'] == today %}
                     datetoday-selected
-                    {% endif %} schedulegrayed">{{ datesWeekB['Wednesday'].strftime('%d %B') }}</strong>
+                    {% endif %} schedulegrayed">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekB['Wednesday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekB['Wednesday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekB['Thursday'] == today %}
                     datetoday-selected
-                    {% endif %}">{{ datesWeekB['Thursday'].strftime('%d %B') }}</strong>
+                    {% endif %}">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekB['Thursday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekB['Thursday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
                 <td>
                     <strong class="{% if datesWeekB['Friday'] == today %}
                     datetoday-selected
-                    {% endif %} schedulegrayed">{{ datesWeekB['Friday'].strftime('%d %B') }}</strong>
+                    {% endif %} schedulegrayed">
+                        <span class="d-none d-md-block">
+                            {{ datesWeekB['Friday'].strftime('%d %B') }}
+                        </span>
+                        <span class="d-block d-md-none">
+                            {{ datesWeekB['Friday'].strftime('%d') }}
+                        </span>
+                    </strong>
                 </td>
             </tr>
         </thead>

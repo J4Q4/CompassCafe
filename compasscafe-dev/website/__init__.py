@@ -39,7 +39,12 @@ def create_app():
 
     # Current Year
     @app.context_processor
-    def yearNow():
-        return {'current_year': datetime.now().year}
+    def currentDate():
+        now = datetime.now()
+        return {
+            'current_year': now.year,
+            'current_month': now.strftime('%B'),
+            'current_day': now.strftime('%d %B %Y')
+        }
 
     return app
