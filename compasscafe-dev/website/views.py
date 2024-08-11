@@ -91,7 +91,7 @@ def dashboard():
         query = query.order_by(User.is_staff.asc())
 
     # FILTER USER
-    if filter_form.validate_on_submit():
+    if filter_form.validate_on_submit() and 'filter_submit' in request.form:
         email_filter = filter_form.email.data
         is_staff_true = filter_form.is_staff_true.data
         is_staff_false = filter_form.is_staff_false.data
@@ -109,7 +109,7 @@ def dashboard():
 
     # USER PAGINATION
     page = request.args.get('page', 1, type=int)
-    paginUsers = query.paginate(page=page, per_page=12)
+    paginUsers = query.paginate(page=page, per_page=2)
 
     # RETAIN FILTER PARAMETERS ON PAGINATION
     filterprmtrs = {
@@ -127,7 +127,6 @@ def dashboard():
 
     edit_user_id = request.args.get('edit_user_id')
     edit_form = EditUser()
-    sort_form = SortForm()
     if edit_user_id:
         user = User.query.get_or_404(edit_user_id)
 
@@ -137,7 +136,7 @@ def dashboard():
             return redirect(url_for('views.dashboard', **filterprmtrs))
 
         # User Email
-        if request.method == 'POST':
+        if request.method == 'POST' and 'edit_submit' in request.form:
             if edit_form.validate_on_submit():
 
                 # Existing User Email
@@ -155,15 +154,15 @@ def dashboard():
                 user.is_staff = edit_form.is_staff.data
 
                 # User Password
-                if edit_form.password.data or edit_form.confirm_password.data:
-                    if edit_form.password.data == edit_form.confirm_password.data:
-                        user.password = generate_password_hash(
-                            edit_form.password.data)
-                    elif edit_form.password.data or edit_form.confirm_password.data:
-                        flash('Please confirm password!', category='error')
-                        return render_template("dashboard.html",
-                                               user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
-                                               filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
+                if edit_form.password.data and edit_form.password.data == edit_form.confirm_password.data:
+                    user.password = generate_password_hash(
+                        edit_form.password.data)
+                else:
+                    flash('Please confirm password!', category='error')
+                    return render_template("dashboard.html",
+                                           user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
+                                           filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
+
                 db.session.commit()
                 flash('User configuration successful!', category='success')
                 return redirect(url_for('views.dashboard', **filterprmtrs))

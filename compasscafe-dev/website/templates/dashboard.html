@@ -55,29 +55,29 @@
                     <br>
                     <form method="POST" action="{{ url_for('views.dashboard', edit_user_id=edit_user_id) }}">
                         {{ edit_form.hidden_tag() }}
-                        <!- - Email Input - ->
+                        <! - - Email Input - - >
                         <p>
                             {{ edit_form.email.label }}<br>
                             {{ edit_form.email(size=32) }}
                         </p>
-                        <!- - Password Input - -> 
+                        <! - - Password Input - - > 
                         <p>
                             {{ edit_form.password.label }}<br>
                             {{ edit_form.password(size=32) }}<br>
                         </p>
-                        <!- - Confirm Password Input - ->
+                        <! - - Confirm Password Input - - >
                         <p>
-                        {{ edit_form.confirm_password.label }}<br>
-                        {{ edit_form.confirm_password(size=32, id="confirm_password") }}
+                            {{ edit_form.confirm_password.label }}<br>
+                            {{ edit_form.confirm_password(size=32, id="confirm_password") }}
                         </p>
-                            <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
-                            <!- - Admin Status Boolean - ->
+                        <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+                        <! - - Admin Status Boolean - - >
                         <p>
                             {{ edit_form.is_staff() }} Admin Privileges
                         </p>
-                        <!- - Submit Buttons - ->
+                        <! - - Submit Buttons - - >
                         <br>
-                        <a>{{ edit_form.submit() }}</a>
+                        <button type="submit" name="edit_submit" class="btn-primary">Update User</button>
                         <a class="btn-secondary" href="{{ url_for('views.dashboard') }}" style="margin-left: 10px;">Cancel</a>
                     </form>
                 </div>
@@ -130,8 +130,8 @@
                             <li>
                                 <form method="POST" action="{{ url_for('views.dashboard') }}">
                                     {{ filter_form.hidden_tag() }}
-                                    <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <!- - Pop Up Filter Button - ->
-                    
+                                    <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <! - - Pop Up Filter Button - - >
+                                
                                     <div id="filterjsPopup" class="filterpopup">
                                         <div class="popup-content">
                                             <ul>
@@ -148,11 +148,11 @@
                                                     {{ filter_form.is_staff_false() }} Not Admin
                                                 </li>
                                                 <br>
-                                                <li class="last-list"> 
-                                                    <a>{{ filter_form.submit() }}</a> <!- - Submit Filter Button - ->
+                                                <li class="last-list">
+                                                    <button type="submit" name="filter_submit" class="btn-primary">Filter</button> <! - - Submit Filter Button - - >
                                                 </li>
                                                 <li style="display: inline-block;" class="last-list">
-                                                    <a href="{{ url_for('views.dashboard') }}" class="btn-secondary">Clear Filters</a> <!- - Clear Filter Button - ->
+                                                    <a href="{{ url_for('views.dashboard') }}" class="btn-secondary">Clear Filters</a> <! - - Clear Filter Button - - >
                                                 </li>
                                             </ul>
                                         </div>
