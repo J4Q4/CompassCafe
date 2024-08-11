@@ -2,12 +2,77 @@
 {% block content %}
 
 <!-- Blank Space -->
-<section class="blankspace-test">
+<section class="beigespace-test">
+  <br>
+  <br>
+  <div class="preload-fadein">
+    <div class="row mb-4">
+      <div class="col-md-12 col-lg-6">
+        <h1>Profile</h1>
+      </div>
+      <div class="head-directory col-md-12 col-lg-6 justify-content-end">
+        {% if user.is_staff %}
+        <a id="direct-selected">profile</a> / <a href="/dashboard">dashboard</a> / <a href="/home">home</a>
+        {% else %}
+        <a id="direct-selected">profile</a> / <a href="/dashboard">settings</a> / <a href="/home">home</a>
+        {% endif %}
+      </div>
+    </div>
     <br>
-    <br>
-    <br>
-    <br>
-  <p>Settings</p>
+    <div class="row">
+      <div class="col-lg-12 col-xl-3">
+        <div class="dashboarduser-table dash-sides mb-4">
+          <div class="logas-dash">
+            <label id="loggedinas-dash" title="{{ user.email }}">
+              <strong>Logged in as: {{ user.schoolid }}</strong><br>
+              {{ user.email }}
+              </label>
+            </div>
+          </div>
+          <div class="dashboarduser-table dash-sides mb-4">
+            <ul>
+              {% if user.is_staff %}
+              <ul>
+                <h6>Admin Settings</h3>
+                <li><a href="/dashboard">users</a></li>
+                <li><a href="/apply">applications</a></li>
+              </ul>
+              <br>
+              {% endif %}
+              <ul>
+                <h6>User Settings</h3>
+                <li><a href="/settings">profile</a></li>
+                <li><a href="#">interface</a></li>
+              </ul>
+            </ul>
+          </div>
+          {% if user.is_staff %}
+          <div class="dashboarduser-table dash-sides">
+            <ul>
+              <h6>Site Settings</h3>
+              <li><a href="#">menu</a></li>
+            </ul>
+          </div>
+          {% endif %}
+          <br>
+          </div>
+          <div class="col-lg-12 col-xl-9">
+            <div class="dashboarduser-table dash-hello mb-4">
+              <h2>Hello, {{ user.schoolid }}! 👋</h2>
+              <p><strong>Welcome to the user settings.</strong>
+              <br>Here you can manage your own account.<p>
+              <img src="/static/assets/media/coffeebounce.gif" alt="cup of coffee" draggable="false" oncontextmenu="return false;">
+            </div>
+
+
+            <!-- User Account Settings (Individual)-->
+
+            
+          </div>
+        </div>
+    </div>
+  </div>
+
 </section>
 <!-- End of Blank Space -->
 

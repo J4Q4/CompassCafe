@@ -18,18 +18,26 @@
         <div class="row">
             <div class="col-lg-12 col-xl-3">
                 <div class="dashboarduser-table dash-sides mb-4">
-                    <label id="loggedinas-dash"><strong>Logged in as: {{ user.schoolid }}</strong><br>
-                    {{ user.email }}</label>
+                    <div class="logas-dash">
+                        <label id="loggedinas-dash" title="{{ user.email }}">
+                            <strong>Logged in as: {{ user.schoolid }}</strong><br>
+                            {{ user.email }}
+                        </label>
+                    </div>
                 </div>
                 <div class="dashboarduser-table dash-sides mb-4">
                     <ul>
-                        <h6>Admin Settings</h3>
-                        <li><a href="#">users</a></li>
-                        <li><a href="/apply">applications</a></li>
+                        <ul>
+                            <h6>Admin Settings</h3>
+                                <li><a href="/dashboard">users</a></li>
+                                <li><a href="/apply">applications</a></li>
+                        </ul>
                         <br>
-                        <h6>User Settings</h3>
-                        <li><a href="#">profile</a></li>
-                        <li><a href="#">interface</a></li>
+                        <ul>
+                            <h6>User Settings</h3>
+                            <li><a href="#">profile</a></li>
+                            <li><a href="#">interface</a></li>
+                        </ul>
                     </ul>
                 </div>
                 <div class="dashboarduser-table dash-sides">
@@ -114,6 +122,7 @@
                                                         <option value="is_staff_asc" {% if request.args.get('sort_by') == 'is_staff_asc' %}selected{% endif %}>Admin Status (Ascending)</option>
                                                         <option value="is_staff_desc" {% if request.args.get('sort_by') == 'is_staff_desc' %}selected{% endif %}>Admin Status (Descending)</option>
                                                     </select>
+                                                    <! - - Retain Filter Values - ->
                                                     <input type="hidden" name="email" value="{{ request.args.get('email', '') }}">
                                                     <input type="hidden" name="is_staff_true" value="{{ request.args.get('is_staff_true', '') }}">
                                                     <input type="hidden" name="is_staff_false" value="{{ request.args.get('is_staff_false', '') }}">

@@ -59,6 +59,13 @@
     }
 }
 
+.loggedinas-headdash {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
 .dash-sides {
     transform: scale(1);
 }
@@ -127,6 +134,16 @@
     text-transform: none !important;
     color: #000;
 }
+.logas-dash {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 /* End of Dashboard User Interface */
 
 input[type="checkbox"] {
