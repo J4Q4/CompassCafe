@@ -33,14 +33,22 @@ h1 {
     filter: drop-shadow(2px 5px 0 var(--main-beige));
 }
 
-.blankspace-test p {
-    margin: 0;
-    width: 100%;
+.content-space {
+    padding: 150px;
+    overflow-x: hidden;
+}
+
+.blankspace-test {
+    p {
+        margin: 0;
+        width: 100%;
+    }
 }
 .whitespace-test {
     background-color: #fff;
     margin: 0;
     width: 100%;
+    overflow-x: hidden;
 }
 .beigespace-test {
     background-color: var(--main-white);
@@ -54,6 +62,7 @@ h1 {
     padding: 100px 150px;
     margin: 0;
     width: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -137,3 +146,9 @@ h1 {
     }
 }
 
+
+// Fade In Effect
+.fade-in div > * {
+    opacity: 0;
+    transform: translateY(20px);
+}

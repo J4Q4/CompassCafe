@@ -2,7 +2,7 @@
 #resetButton {
     /* Button Correction */
     position: fixed;
-    z-index: 99;
+    z-index: 100000;
     border: none;
     outline: none;
     /* Button Style */
@@ -44,6 +44,7 @@
     padding: 10px 20px;
     transform: translateY(0);
     animation: btn-unhover .2s ease-in-out;
+    text-decoration: none;
 }
 @keyframes btn-unhover {
     0% {

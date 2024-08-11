@@ -57,6 +57,17 @@
 .herowave-container {
     width: 100%;
     overflow-x: hidden;
+    img {
+        z-index: 2000;
+    }
+}
+
+.carousel-space {
+    z-index: 1000;
+    position: relative;
+    background-color: var(--main-beige);
+    height: auto;
+    border-radius: 0 0 50px 50px;
 }
 
 /* ## END OF HOME ## */

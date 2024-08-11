@@ -9,7 +9,7 @@
     border: 2px solid var(--main-white);
     background-color: var(--main-white);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
+    border-radius: 25px;
     width: 100%;
     transform: scale(1);
     transition: all 0.3s ease-out;
@@ -58,9 +58,6 @@
     }
 }
 
-.dash-menu1 {
-    margin-bottom: 30px;
-}
 .dash-sides {
     transform: scale(1);
 }

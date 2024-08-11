@@ -34,8 +34,6 @@ window.addEventListener('scroll', function() {
 });
 
 
-
-
 // Navbar Popup Animation
 document.addEventListener('DOMContentLoaded', function() {
     let shownewnav = document.getElementById("nav-home");
@@ -47,5 +45,34 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             shownewnav.classList.remove("shownav");
         }
+    });
+});
+
+
+// Content Fade In on Scroll
+document.addEventListener('DOMContentLoaded', function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate Container Contents
+    gsap.utils.toArray('.fade-in div > *').forEach(function (fadeContent) {
+        gsap.fromTo(fadeContent, 
+            { 
+                opacity: 0, 
+                y: 50 
+            }, 
+            { 
+                opacity: 1, 
+                y: 0, 
+                duration: 1, 
+                delay: Math.random() * 0.5,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: fadeContent,
+                    start: "top 100%",
+                    toggleActions: "play none none none", 
+                    once: true 
+                }
+            }
+        );
     });
 });
