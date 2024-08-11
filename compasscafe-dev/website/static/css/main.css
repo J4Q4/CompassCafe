@@ -619,7 +619,7 @@ table {
   color: #000;
   text-transform: uppercase;
   font-family: "JetBrains Mono";
-  font-weight: 300;
+  font-weight: 400;
   text-decoration: none;
   font-size: 16px;
   transition: color 0.1s ease-out;
@@ -1198,6 +1198,7 @@ html {
 h1 {
   font-family: "Bungee";
   font-weight: 600;
+  font-size: 64px !important;
   text-transform: uppercase;
   text-shadow: 2px 5px var(--main-lightblue2);
   filter: drop-shadow(2px 5px 0 var(--main-beige));
@@ -1304,6 +1305,45 @@ h1 {
     display: none;
   }
 }
+.head-directory {
+  gap: 20px;
+  display: flex;
+  z-index: 1000;
+  text-shadow: #fff 0 3px 0px;
+}
+@media screen and (max-width: 992px) {
+  .head-directory {
+    flex-direction: row-reverse;
+  }
+}
+.head-directory #direct-selected {
+  font-weight: 600;
+}
+.head-directory a {
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
+  display: inline-block;
+  animation: nav-linkunhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+.head-directory a:hover:not(#direct-selected) {
+  animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+.head-directory a:not(#direct-selected)::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  background-color: #000;
+  display: block;
+}
+.head-directory a:not(#direct-selected):hover::after {
+  width: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
 .fade-in div > * {
   opacity: 0;
   transform: translateY(20px);
@@ -1609,6 +1649,7 @@ h1 {
   position: absolute;
   height: 140%;
   bottom: 0;
+  z-index: 2;
   right: 50px;
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
   animation: cuppadash 0.5s cubic-bezier(1, 0, 0, 1) infinite !important;

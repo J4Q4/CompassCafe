@@ -40,6 +40,7 @@
         position: absolute;
         height: 140%;
         bottom: 0;
+        z-index: 2;
         right: 50px;
         filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
         animation: cuppadash 0.5s cubic-bezier(1, 0, 0, 1) infinite !important;
