@@ -129,6 +129,9 @@ h1 {
     .dash-showmain {
         visibility: inline-block;
     }
+    .bluespace-test {
+        padding: 100px 50px;
+    }
 }
 
 // Less than Medium
@@ -144,6 +147,9 @@ h1 {
     }
     .dash-showmain {
         display: none;
+    }
+    .bluespace-test {
+        padding: 100px 0;
     }
 }
 

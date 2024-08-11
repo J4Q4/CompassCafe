@@ -9,6 +9,7 @@
                3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
         filter: drop-shadow(0 15px 0 var(--main-navy));
         letter-spacing: 5px;
+        font-size: 200px !important;
     }
     strong {
         font-family: "Open Sans";
@@ -19,6 +20,11 @@
         font-weight: 300
     }
 }
+
+#div404 {
+    height: 100%;
+}
+
 #error404_contents {
     transform: translateY(0px);
     animation: hover404 4s ease-in-out infinite;
@@ -82,3 +88,12 @@
     text-align: center;
 }
 /* End of 404 */
+
+/* RESPONSIVENESS */
+@media screen and (max-width: map-get($grid-breakpoints, "md")) {
+    #contain404 {
+        h1 {
+            font-size: 100px !important;
+        }
+    }
+}

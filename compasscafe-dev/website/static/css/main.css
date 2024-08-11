@@ -1273,6 +1273,9 @@ h1 {
   .dash-showmain {
     visibility: inline-block;
   }
+  .bluespace-test {
+    padding: 100px 50px;
+  }
 }
 @media screen and (max-width: 768px) {
   .beigespace-test {
@@ -1286,6 +1289,9 @@ h1 {
   }
   .dash-showmain {
     display: none;
+  }
+  .bluespace-test {
+    padding: 100px 0;
   }
 }
 .head-directory {
@@ -1417,6 +1423,7 @@ h1 {
   text-shadow: 6px 0 var(--main-navy), -6px 0 var(--main-navy), 0 6px var(--main-navy), 0 -6px var(--main-navy), 3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
   filter: drop-shadow(0 15px 0 var(--main-navy));
   letter-spacing: 5px;
+  font-size: 200px !important;
 }
 #contain404 strong {
   font-family: "Open Sans";
@@ -1425,6 +1432,10 @@ h1 {
 #contain404 p {
   font-family: "JetBrains Mono";
   font-weight: 300;
+}
+
+#div404 {
+  height: 100%;
 }
 
 #error404_contents {
@@ -1492,6 +1503,12 @@ h1 {
 }
 
 /* End of 404 */
+/* RESPONSIVENESS */
+@media screen and (max-width: 768px) {
+  #contain404 h1 {
+    font-size: 100px !important;
+  }
+}
 /* Apply */
 /* APPLY TABLE */
 #posts h3, .dashboarduser-table h3, .lunch-sched h3 {
