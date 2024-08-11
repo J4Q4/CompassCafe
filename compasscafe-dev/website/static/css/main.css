@@ -1092,7 +1092,7 @@ body {
 
 .lowerfooter-right {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   justify-content: flex-end;
   font-family: "JetBrains Mono";
   font-weight: 300;
@@ -1103,6 +1103,32 @@ body {
   text-align: right;
 }
 
+@media screen and (min-width: 576px) {
+  .lowerfooter-right {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  .lowerfooter-right p {
+    white-space: nowrap;
+  }
+}
+@media screen and (max-width: 576px) {
+  .lowerfooter-left img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  .lowerfooter-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lowerfooter-right p {
+    white-space: normal;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+}
 .lowerfooter-container {
   border-top: rgb(79, 79, 79) 1px solid;
   border-bottom: rgb(79, 79, 79) 1px solid;
@@ -1112,7 +1138,7 @@ body {
 /* CUP OF TEA STICKER */
 #footer-cuppa {
   position: absolute;
-  width: 300px;
+  width: 100%;
   z-index: 1;
   animation: cuppasticka 0.5s cubic-bezier(1, 0, 0, 1) infinite !important;
   animation-delay: 0.3s;
@@ -1122,7 +1148,7 @@ body {
 
 #footer-cuppa-fast {
   position: absolute;
-  width: 300px;
+  width: 100%;
   z-index: 1;
   animation: cuppasticka 0.2s cubic-bezier(1, 0, 0, 1) infinite !important;
   transition: transform 0.1s ease-in-out;
@@ -1130,9 +1156,9 @@ body {
 }
 
 .cuppa-hover {
-  transform: translate(150px, -40px) !important;
   z-index: 1;
   position: absolute;
+  width: 300px;
 }
 
 .cuppa-hover:hover #footer-cuppa {
@@ -1151,6 +1177,31 @@ body {
   }
   100% {
     transform: translateY(0) scaleY(0.85);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .cuppa-hover {
+    transform: translate(200px, -80px) scale(1);
+  }
+}
+@media screen and (max-width: 1200px) {
+  .cuppa-hover {
+    transform: translate(150px, -80px) scale(0.8);
+  }
+}
+@media screen and (max-width: 992px) {
+  .cuppa-hover {
+    transform: translate(100px, -60px) scale(0.6);
+  }
+}
+@media screen and (max-width: 768px) {
+  .cuppa-hover {
+    transform: translate(0, -400px) scale(1.1);
+  }
+}
+@media screen and (max-width: 576px) {
+  .cuppa-hover {
+    transform: translate(0, -250px) scale(0.6);
   }
 }
 /* Beninging of Being Fancy */
