@@ -14,7 +14,7 @@
         {% if user.is_staff %}
         <a id="direct-selected">profile</a> / <a href="/dashboard">dashboard</a> / <a href="/home">home</a>
         {% else %}
-        <a id="direct-selected">profile</a> / <a href="/dashboard">settings</a> / <a href="/home">home</a>
+        <a id="direct-selected">profile</a> / <a href="/settings">settings</a> / <a href="/home">home</a>
         {% endif %}
       </div>
     </div>
@@ -40,10 +40,18 @@
               <br>
               {% endif %}
               <ul>
-                <h6>User Settings</h3>
-                <li><a href="/settings">profile</a></li>
-                <li><a href="#">interface</a></li>
-              </ul>
+                <ul class="mb-4">
+                    <h6>User Settings</h3>
+                    <li><a href="/settings">account</a></li>
+                    <li><a href="#">user interface</a></li>
+                </ul>
+                {% if not user.is_staff %}
+                <ul>
+                    <h6>Submissions</h6>
+                    <li><a href="/apply">your applications</a></li>
+                </ul>
+                {% endif %}
+            </ul>
             </ul>
           </div>
           {% if user.is_staff %}
