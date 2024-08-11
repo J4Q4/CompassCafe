@@ -184,4 +184,9 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
         const dropdown = this.closest('.dashboarduser-table');
         dropdown.style.zIndex = '3';
     });
+    button.addEventListener('hidden.bs.dropdown', function() {
+        // Find Parent of Dropdown - Card
+        const dropdown = this.closest('.dashboarduser-table');
+        dropdown.style.zIndex = '';
+    });
 });
