@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from flask_login import login_required, current_user
 from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply
+from .auth import is_validemail
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 from werkzeug.exceptions import HTTPException
@@ -81,14 +82,14 @@ def dashboard():
     # SORT USER
 
     if sort_by == 'email_asc':
-        query = query.order_by(User.email.asc())
+        query = User.query.order_by(User.email.asc())
     elif sort_by == 'email_desc':
-        query = query.order_by(User.email.desc())
+        query = User.query.order_by(User.email.desc())
         # STAFF - [ INVERTED ASC/DESC TO MAKE SENSE ]
     elif sort_by == 'is_staff_asc':
-        query = query.order_by(User.is_staff.desc())
+        query = User.query.order_by(User.is_staff.desc())
     elif sort_by == 'is_staff_desc':
-        query = query.order_by(User.is_staff.asc())
+        query = User.query.order_by(User.is_staff.asc())
 
     # FILTER USER
     if filter_form.validate_on_submit() and 'filter_submit' in request.form:
@@ -144,6 +145,8 @@ def dashboard():
                     email=edit_form.email.data).first()
                 if existing_user and existing_user.id != user.id:
                     flash('Email is already in use.', category='error')
+                elif not is_validemail(edit_form.email.data):
+                    flash('Please use school email.', category='error')
                     return render_template("dashboard.html",
                                            user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
                                            filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
@@ -154,14 +157,15 @@ def dashboard():
                 user.is_staff = edit_form.is_staff.data
 
                 # User Password
-                if edit_form.password.data and edit_form.password.data == edit_form.confirm_password.data:
-                    user.password = generate_password_hash(
-                        edit_form.password.data)
-                else:
-                    flash('Please confirm password!', category='error')
-                    return render_template("dashboard.html",
-                                           user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
-                                           filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
+                if edit_form.password.data:
+                    if edit_form.password.data == edit_form.confirm_password.data:
+                        user.password = generate_password_hash(
+                            edit_form.password.data)
+                    else:
+                        flash('Please confirm password!', category='error')
+                        return render_template("dashboard.html",
+                                               user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
+                                               filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
 
                 db.session.commit()
                 flash('User configuration successful!', category='success')

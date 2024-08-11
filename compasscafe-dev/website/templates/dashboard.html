@@ -114,6 +114,9 @@
                                                         <option value="is_staff_asc" {% if request.args.get('sort_by') == 'is_staff_asc' %}selected{% endif %}>Admin Status (Ascending)</option>
                                                         <option value="is_staff_desc" {% if request.args.get('sort_by') == 'is_staff_desc' %}selected{% endif %}>Admin Status (Descending)</option>
                                                     </select>
+                                                    <input type="hidden" name="email" value="{{ request.args.get('email', '') }}">
+                                                    <input type="hidden" name="is_staff_true" value="{{ request.args.get('is_staff_true', '') }}">
+                                                    <input type="hidden" name="is_staff_false" value="{{ request.args.get('is_staff_false', '') }}">
                                                 </li>
                                                 <br>
                                                 <li class="last-list">
@@ -124,11 +127,11 @@
                                     </div>
                                 </form>
                             </li>
-                            <!- - End of - ->
+                            <!- - End of Sort - ->
 
                             <!- - Filter User - ->
                             <li>
-                                <form method="POST" action="{{ url_for('views.dashboard') }}">
+                                <form method="POST" action="{{ url_for('views.dashboard', sort_by=request.args.get('sort_by')) }}">
                                     {{ filter_form.hidden_tag() }}
                                     <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <! - - Pop Up Filter Button - - >
                                 
@@ -197,7 +200,7 @@
                             <td id="configicon" class="dash-showmain">
                                 <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
                                     <button class="dashboarduseredit" type="submit">
-                                    <i class="fa fa-trash"  title='Delete User'></i>
+                                    <i class="fa fa-trash" title='Delete User'></i>
                                     </button>
                                 </form>
                             </td>
