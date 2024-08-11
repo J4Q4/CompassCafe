@@ -44,13 +44,53 @@ def news():
 
 # SETTINGS ROUTE
 
-@views.route("/settings")
+@views.route("/settings", methods=['GET', 'POST'])
 @login_required
 def settings():
-    return render_template("settings.html", user=current_user)
+    edit_form = EditUser(obj=current_user)
+
+    if request.method == 'POST' and 'edit_submit' in request.form:
+        if edit_userfn(edit_form, current_user):
+            return redirect(url_for('views.settings'))
+
+    return render_template("settings.html", user=current_user, edit_form=edit_form)
 
 
 ## ACTIONS ##
+
+
+# EDIT USER FUNCTION
+
+def edit_userfn(edit_form, user):
+    if edit_form.validate_on_submit():
+        # EXISTING USER EMAIL CHECK
+        existing_user = User.query.filter_by(
+            email=edit_form.email.data).first()
+        if existing_user and existing_user.id != user.id:
+            flash('Email is already in use.', category='error')
+            return False
+        # SANCTA EMAIL DOMAIN VERIFICATION
+        elif not is_validemail(edit_form.email.data):
+            flash('Please use a valid school email.', category='error')
+            return False
+
+        # UPDATE EMAIL
+        user.email = edit_form.email.data
+
+        # UPDATE VALID PASSWORD INPUTS
+        if edit_form.password.data:
+            if edit_form.password.data == edit_form.confirm_password.data:
+                user.password = generate_password_hash(edit_form.password.data)
+            else:
+                flash('Passwords do not match!', category='error')
+                return False
+
+        # ADD CHANGES
+        db.session.commit()
+        flash('User updated successfully!', category='success')
+        return True
+
+    return False
 
 
 ## ADMIN ROUTES ##
@@ -110,7 +150,7 @@ def dashboard():
 
     # USER PAGINATION
     page = request.args.get('page', 1, type=int)
-    paginUsers = query.paginate(page=page, per_page=2)
+    paginUsers = query.paginate(page=page, per_page=12)
 
     # RETAIN FILTER PARAMETERS ON PAGINATION
     filterprmtrs = {
@@ -136,40 +176,15 @@ def dashboard():
             flash('This user cannot be edited.', category='error')
             return redirect(url_for('views.dashboard', **filterprmtrs))
 
-        # User Email
+        # EDIT USER VALIDATION
         if request.method == 'POST' and 'edit_submit' in request.form:
             if edit_form.validate_on_submit():
-
-                # Existing User Email
-                existing_user = User.query.filter_by(
-                    email=edit_form.email.data).first()
-                if existing_user and existing_user.id != user.id:
-                    flash('Email is already in use.', category='error')
-                elif not is_validemail(edit_form.email.data):
-                    flash('Please use school email.', category='error')
-                    return render_template("dashboard.html",
-                                           user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
-                                           filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
-
-                # Update User Email
-
-                user.email = edit_form.email.data
-                user.is_staff = edit_form.is_staff.data
-
-                # User Password
-                if edit_form.password.data:
-                    if edit_form.password.data == edit_form.confirm_password.data:
-                        user.password = generate_password_hash(
-                            edit_form.password.data)
-                    else:
-                        flash('Please confirm password!', category='error')
-                        return render_template("dashboard.html",
-                                               user=current_user, edit_form=edit_form, edit_user_id=edit_user_id,
-                                               filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
-
-                db.session.commit()
-                flash('User configuration successful!', category='success')
-                return redirect(url_for('views.dashboard', **filterprmtrs))
+                # HANDLES EMAIL AND PASSWORD VERIFICATION
+                if edit_userfn(edit_form, user):
+                    # ADMIN CHECKBOX - SEPARATE FROM DEFINITION
+                    user.is_staff = 'is_staff' in request.form
+                    db.session.commit()
+                    return redirect(url_for('views.dashboard', **filterprmtrs))
             else:
                 flash('Passwords do not match!', category='error')
         else:

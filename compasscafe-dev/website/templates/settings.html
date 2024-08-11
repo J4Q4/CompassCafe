@@ -74,6 +74,34 @@
 
 
             <!-- User Account Settings (Individual)-->
+            <div class="dashboarduser-table">
+              <h3>Edit Profile</h3>
+              <form method="POST">
+                  {{ edit_form.hidden_tag() }}
+                  <! - - Email Input - - >
+                  <p>
+                      {{ edit_form.email.label }}<br>
+                      {{ edit_form.email(size=32) }}
+                  </p>
+                  <! - - Password Input - - > 
+                  <p>
+                      {{ edit_form.password.label }}<br>
+                      {{ edit_form.password(size=32) }}<br>
+                  </p>
+                  <! - - Confirm Password Input - - >
+                  <p>
+                      {{ edit_form.confirm_password.label }}<br>
+                      {{ edit_form.confirm_password(size=32, id="confirm_password") }}
+                  </p>
+                  <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
+                  <! - - Submit Buttons - - >
+                  <br>
+                  <br>
+                  <button type="submit" name="edit_submit" class="btn-primary">Update Profile</button>
+                  <a class="btn-secondary" href="{{ url_for('views.settings') }}" style="margin-left: 10px;">Cancel</a>
+              </form>
+             
+          </div>
 
             
           </div>
