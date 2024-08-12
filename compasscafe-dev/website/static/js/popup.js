@@ -190,3 +190,27 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
         dropdown.style.zIndex = '';
     });
 });
+
+
+
+
+// User Deletion Confirmation Popup
+function showDeletePopup(userId, userEmail) {
+    // Find Delete Button
+    const deleteForm = document.getElementById('delete-form');
+    // Set URL action for 
+    const emailSpan = document.getElementById('user-email');
+    const actionUrl = `/dashboard/delete_user/${userId}`;
+    deleteForm.action = actionUrl;
+    
+    // Display the user's email in the popup
+    emailSpan.textContent = userEmail;
+    
+    // Show Popup
+    document.getElementById('confirm-popup').classList.add('show-delete-confirm');
+}
+
+// Close Popup
+function closePopup() {
+    document.getElementById('confirm-popup').classList.remove('show-delete-confirm');
+}

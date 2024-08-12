@@ -1,6 +1,9 @@
 {% extends "template.html" %}{% block title %}Dashboard{% endblock %}
 {% block content %}
 
+<!-- Delete Confirmation Popup On Top -->
+{% include 'confirm_delete.html' %}
+
 <!-- Blank Space -->
 <section class="beigespace-test">
     <br>
@@ -176,7 +179,7 @@
                         </ul>
                     </div>
 
-
+                    
                     <table class="mb-4">
                         <tr class="dashboarduser-header">
                             <th>Email</th>
@@ -205,13 +208,12 @@
                                     </button>
                                 </a>
                             </td>
-                            <! - - Delete User - ->
+                            <! - - Delete User - - >
                             <td id="configicon" class="dash-showmain">
-                                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
-                                    <button class="dashboarduseredit" type="submit">
+                                <! - - Trigger Confirmation Popup - - >
+                                <button class="dashboarduseredit" type="button" onclick="showDeletePopup('{{ user.id }}', '{{ user.email }}')">
                                     <i class="fa fa-trash" title='Delete User'></i>
-                                    </button>
-                                </form>
+                                </button>
                             </td>
 
                             <! - - Dropdown Button - Visible on Smaller Screens - ->
@@ -233,7 +235,8 @@
                                         </a></li> 
                                         <li>
                                             <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
-                                                <button class="dashboarduseredit" type="submit" title="Delete User">
+                                                <! - - Trigger Confirmation Popup - - >
+                                                <button class="dashboarduseredit" type="button" onclick="showDeletePopup('{{ user.id }}', '{{ user.email }}')">
                                                     Delete
                                                 </button>
                                             </form>
