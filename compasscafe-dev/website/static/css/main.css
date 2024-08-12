@@ -1329,6 +1329,9 @@ h1 {
   }
 }
 @media screen and (max-width: 768px) {
+  .content-space {
+    padding: 100px 0;
+  }
   .beigespace-test {
     padding: 100px 0;
   }
@@ -1453,12 +1456,12 @@ h1 {
   z-index: 2000;
 }
 
-.carousel-space {
-  z-index: 1000;
-  position: relative;
-  background-color: var(--main-beige);
-  height: auto;
-  border-radius: 0 0 50px 50px;
+.home-img img {
+  border-radius: 25px;
+}
+
+.home-wrap {
+  padding: 100px 0;
 }
 
 /* ## END OF HOME ## */
@@ -1615,6 +1618,13 @@ h1 {
   background-color: var(--main-lightblue2) !important;
   color: var(--main-navy) !important;
   padding: 5px;
+  border-radius: 15px;
+}
+
+.weektoday-selected {
+  background-color: var(--main-lightblue2) !important;
+  color: var(--main-navy) !important;
+  padding: 10px;
   border-radius: 15px;
 }
 

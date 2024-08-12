@@ -62,12 +62,12 @@
     }
 }
 
-.carousel-space {
-    z-index: 1000;
-    position: relative;
-    background-color: var(--main-beige);
-    height: auto;
-    border-radius: 0 0 50px 50px;
+.home-img img {
+    border-radius: 25px;
 }
 
+
+.home-wrap {
+    padding: 100px 0;
+}
 /* ## END OF HOME ## */

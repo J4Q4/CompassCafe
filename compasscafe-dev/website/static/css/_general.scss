@@ -136,6 +136,9 @@ h1 {
 
 // Less than Medium
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
+    .content-space {
+        padding: 100px 0;
+    }
     .beigespace-test {
         padding: 100px 0;
     }

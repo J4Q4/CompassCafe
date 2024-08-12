@@ -111,7 +111,7 @@
                 <! - - Submit Buttons - - >
                 <br>
                 <br>
-                <button type="submit" name="edit_submit" class="btn-primary"
+                <button type="submit" name="edit_submit" class="btn-primary mb-4"
                   {% if user.email == 'admin@sanctamaria.school.nz' %}disabled{% endif %}>
                     {% if user.email == 'admin@sanctamaria.school.nz' %}
                         Disabled
@@ -119,7 +119,10 @@
                         Update Profile
                     {% endif %}
                 </button>
-                <a class="btn-secondary" href="{{ url_for('views.settings') }}" style="margin-left: 10px;">Cancel</a>
+                <a class="btn-secondary mb-4" href="{{ url_for('views.settings') }}" style="margin-left: 10px;">Cancel</a>
+                {% if user.email == 'admin@sanctamaria.school.nz' %}
+                    <p><strong>Please note:</strong> You cannot edit this admin account.</p>
+                {% endif %}
             </form>
              
           </div>
