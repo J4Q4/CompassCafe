@@ -211,21 +211,36 @@ def delete_user(user_id):
         flash('This user cannot be deleted.', category='error')
         return redirect(url_for('views.dashboard'))
 
-    # Delete Existing User Pending or Accepted Applications
-    apply_pending = Apply.query.filter_by(
-        author=user.id, status='pending').all()
-    apply_accept = Apply.query.filter_by(
-        author=user.id, status='accepted').all()
+    # Temporarily Store User For Deletion
+    session['pending_delete'] = user_id
 
-    for application in apply_pending:
-        db.session.delete(application)
+    if 'confirm_delete_submit' in request.form:
+        # Retrieve the user ID from the session
+        user_id = session.pop('pending_delete', None)
 
-    for application in apply_accept:
-        db.session.delete(application)
+        if user_id:
+            user = User.query.get_or_404(user_id)
 
-    db.session.delete(user)
-    db.session.commit()
-    flash('User deleted successfully!', 'success')
+            # Delete Associated Applications
+            apply_pending = Apply.query.filter_by(
+                author=user.id, status='pending').all()
+            apply_accept = Apply.query.filter_by(
+                author=user.id, status='accepted').all()
+
+            for application in apply_pending:
+                db.session.delete(application)
+
+            for application in apply_accept:
+                db.session.delete(application)
+
+            # Delete the user
+            db.session.delete(user)
+            db.session.commit()
+            flash('User deleted successfully!', 'success')
+        else:
+            flash('User ID not found.', 'error')
+
+    # Redirect without flashing a message
     return redirect(url_for('views.dashboard'))
 
 
@@ -369,7 +384,8 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= barista_max:
-                flash(f'{date_day}, {date_duty} is full: {barista_max} baristas max.', category='error')
+                flash(f'{date_day}, {date_duty} is full: {
+                      barista_max} baristas max.', category='error')
 
             else:
                 # Formatting User Apply Input
@@ -445,7 +461,8 @@ def accept_application(post_id):
     accepted_count = Apply.query.filter_by(
         status='accepted', date_duty=week, date_day=day).count()
     if accepted_count >= barista_max:
-        flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
+        flash(f'{day}, {week} is full: {
+              barista_max} baristas max.', category='error')
 
     else:
         post.status = 'accepted'

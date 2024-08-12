@@ -36,3 +36,61 @@
     background: repeating-linear-gradient( -45deg, var(--main-beige), var(--main-beige) 5px, #ece4dd 5px, #ece4dd 25px );
 }
 /* End of Flashes */
+
+
+/* Warning Container - DELETE */
+/* Background Popup */
+.confirm-container {
+    display: none;  /* Hidden by default */
+    position: fixed;
+    z-index: 1000000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);  /* Dark overlay */
+}
+
+/* Confirmation Popup */
+.confirm-content {
+    background-color: white;
+    padding: 50px;  /* Ensures adequate padding */
+    border-radius: 20px;
+    text-align: center;
+    z-index: 1001;  /* Stays above the overlay */
+    display: flex;
+    flex-direction: column;  /* Stacks content vertically */
+    align-items: center;  /* Centers content horizontally */
+    h3 {
+        font-family: "JetBrains Mono";
+    }
+}
+
+/* Buttons */
+#delete-form {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px; 
+}
+
+/* Animate Confirmation Popup - Display */
+.show-delete-confirm {
+    display: flex;
+    .confirm-content {
+        animation: show-delete-confirm .5s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+    }
+}
+
+@keyframes show-delete-confirm {
+    0% {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

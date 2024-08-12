@@ -33,19 +33,7 @@
 
 
 /* Submit Button */
-/* Primary Button */
-.btn-primary {
-    background-color: var(--main-lightblue2);
-    border: 2px solid #000;
-    color: #000;
-    font-family: "JetBrains Mono";
-    font-weight: 300;
-    border-radius: 20px;
-    padding: 10px 20px;
-    transform: translateY(0);
-    animation: btn-unhover .2s ease-in-out;
-    text-decoration: none;
-}
+/* Animation to Stop Hover Button */
 @keyframes btn-unhover {
     0% {
         transform: translateY(-6px);
@@ -55,12 +43,7 @@
         transform: translateY(0);
     }
 }
-.btn-primary:hover {
-    background-color: var(--main-lightblue1);
-    color: #000;
-    border: 2px solid #000;
-    animation: btn-hover .4s ease-in-out forwards;
-}
+/* Animation to Hover Button */
 @keyframes btn-hover {
     0% {
         transform: translateY(0);
@@ -79,6 +62,48 @@
         box-shadow: 0 5px 0 #000;
     }
 }
+/* Danger Button */
+.btn-danger {
+    background: repeating-linear-gradient( -45deg, #ee475b, #ee475b 4px, #eb5765 4px, #eb5765 20px );
+    border: 2px solid #000;
+    color: #000;
+    font-family: "JetBrains Mono";
+    font-weight: 400;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transform: translateY(0);
+    animation: btn-unhover .2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-danger:hover {
+    background: repeating-linear-gradient( -45deg, #ec5768, #ec5768 4px, #ec6371 4px, #ec6371 20px );
+    color: #000;
+    border: 2px solid #000;
+    animation: btn-hover .4s ease-in-out forwards;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: var(--main-lightblue2);
+    border: 2px solid #000;
+    color: #000;
+    font-family: "JetBrains Mono";
+    font-weight: 400;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transform: translateY(0);
+    animation: btn-unhover .2s ease-in-out;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: var(--main-lightblue1);
+    color: #000;
+    border: 2px solid #000;
+    animation: btn-hover .4s ease-in-out forwards;
+}
+
 
 .btn-primary:active {
     background-color: var(--main-white) !important;
@@ -92,7 +117,7 @@
     border: 2px solid #000;
     color: #000;
     font-family: "JetBrains Mono";
-    font-weight: 300;
+    font-weight: 400;
     border-radius: 20px;
     padding: 10px 20px;
     transform: translateY(0);
