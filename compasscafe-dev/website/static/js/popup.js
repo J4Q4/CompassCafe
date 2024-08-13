@@ -1,15 +1,14 @@
 // Toggle Password Visibility //
 function togglePassword() {
-    var passwordField = document.getElementById("password");
-    var confirmPasswordField = document.getElementById("confirm_password");
+    var passwordFieldID = ["password", "password1", "password2", "confirm_password"];
     var showPassword = document.getElementById("showPassword");
-    if (showPassword.checked) {
-        passwordField.type = "text";
-        confirmPasswordField.type = "text";
-    } else {
-        passwordField.type = "password";
-        confirmPasswordField.type = "password";
-    }
+    
+    passwordFieldID.forEach(function(id) {
+        var passwordField = document.getElementById(id);
+        if (passwordField) {
+            passwordField.type = showPassword.checked ? "text" : "password";
+        }
+    });
 }
 
 
