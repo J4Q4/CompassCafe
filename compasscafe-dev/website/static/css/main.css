@@ -1,4 +1,5 @@
 /* TABLE OF CONTENTS */
+/* Breakpoint Library */
 /* ASSETS */
 /* Custom Cursor */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
@@ -369,6 +370,16 @@ input[type=password]:focus,
   color: #fff;
   padding: 10px 20px;
 }
+@media screen and (max-width: 768px) {
+  .alert-dismissible {
+    width: 100vw !important;
+    bottom: 0 !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+    padding: 20px !important;
+    border-radius: 25px 25px 0 0;
+  }
+}
 
 .alert-dismissible .fa-times {
   color: #000;
@@ -421,9 +432,6 @@ input[type=password]:focus,
   flex-direction: column; /* Stacks content vertically */
   align-items: center; /* Centers content horizontally */
 }
-.confirm-content h3 {
-  font-family: "JetBrains Mono";
-}
 
 /* Buttons */
 #delete-form {
@@ -433,15 +441,16 @@ input[type=password]:focus,
   margin-top: 20px;
 }
 
-/* Animate Confirmation Popup - Display */
-.show-delete-confirm {
-  display: flex;
-}
-.show-delete-confirm .confirm-content {
-  animation: show-delete-confirm 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+/* Show and Animate Confirmation Popup */
+.confirm-container.show-delete-confirm {
+  display: flex !important; /* Make the popup visible */
 }
 
-@keyframes show-delete-confirm {
+.confirm-container.show-delete-confirm .confirm-content {
+  animation: showDeleteConfirm 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards !important;
+}
+
+@keyframes showDeleteConfirm {
   0% {
     opacity: 0;
     transform: translateY(100px);
@@ -537,7 +546,6 @@ table {
   border-radius: 10px;
 }
 
-/* Breakpoint Library */
 /* Color Palette Declarations */
 :root {
   /* Colours */
@@ -1315,6 +1323,11 @@ h1 {
   text-transform: uppercase;
   text-shadow: 2px 5px var(--main-lightblue2);
   filter: drop-shadow(2px 5px 0 var(--main-beige));
+}
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 48px !important;
+  }
 }
 
 .content-space {

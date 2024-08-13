@@ -11,7 +11,16 @@
     background-color: #1b1b1b;
     color: #fff;
     padding: 10px 20px;
+    @media screen and (max-width: map-get($grid-breakpoints, md)) {
+        width: 100vw !important;
+        bottom: 0 !important;
+        margin-bottom: 0 !important;
+        text-align: center !important;
+        padding: 20px !important;
+        border-radius: 25px 25px 0 0;
+    }
 }
+
 .alert-dismissible {
     .fa-times {
     color: #000;
@@ -63,9 +72,6 @@
     display: flex;
     flex-direction: column;  /* Stacks content vertically */
     align-items: center;  /* Centers content horizontally */
-    h3 {
-        font-family: "JetBrains Mono";
-    }
 }
 
 /* Buttons */
@@ -76,15 +82,16 @@
     margin-top: 20px; 
 }
 
-/* Animate Confirmation Popup - Display */
-.show-delete-confirm {
-    display: flex;
-    .confirm-content {
-        animation: show-delete-confirm .5s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
-    }
+/* Show and Animate Confirmation Popup */
+.confirm-container.show-delete-confirm {
+    display: flex !important;  /* Make the popup visible */
 }
 
-@keyframes show-delete-confirm {
+.confirm-container.show-delete-confirm .confirm-content {
+    animation: showDeleteConfirm 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards !important;
+}
+
+@keyframes showDeleteConfirm {
     0% {
         opacity: 0;
         transform: translateY(100px);

@@ -32,6 +32,9 @@ h1 {
     text-transform: uppercase;
     text-shadow: 2px 5px var(--main-lightblue2);
     filter: drop-shadow(2px 5px 0 var(--main-beige));
+    @media screen and (max-width: map-get($grid-breakpoints, md)) {
+        font-size: 48px !important;
+    }
 }
 
 .content-space {
