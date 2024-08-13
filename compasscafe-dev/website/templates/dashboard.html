@@ -208,7 +208,11 @@
                             <! - - Delete User - - >
                             <td id="configicon" class="dash-showmain">
                                 <! - - Trigger Confirmation Popup - - >
-                                <button class="dashboarduseredit" type="button" onclick="showDeletePopup('user', '{{ user.id }}', 'User: {{ user.email }}')">
+                                <button class="dashboarduseredit" 
+                                    onclick="showDeletePopup(this)" 
+                                    data-item-type="user" 
+                                    data-item-id="{{ user.id }}" 
+                                    data-item-description="User: {{ user.email }}">
                                     <i class="fa fa-trash" title='Delete User'></i>
                                 </button>
                             </td>
@@ -231,9 +235,15 @@
                                             Configure
                                         </a></li> 
                                         <li>
-                                            <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
+                                            <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST" onsubmit="return false;">
                                                 <! - - Trigger Confirmation Popup - - >
-                                                <button onclick="showDeletePopup('user', '{{ user.id }}', 'User: {{ user.email }}')">Delete</button>
+                                                <button class="dashboarduseredit" 
+                                                    onclick="showDeletePopup(this)" 
+                                                    data-item-type="user" 
+                                                    data-item-id="{{ user.id }}" 
+                                                    data-item-description="User: {{ user.email }}">
+                                                    Delete
+                                                </button>
                                             </form>
                                         </li>
                                     </ul>

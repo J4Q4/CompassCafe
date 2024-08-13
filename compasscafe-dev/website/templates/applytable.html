@@ -112,7 +112,7 @@
                 <td>
                     <! - - List of Baristas: Week A Tuesday - - >
                     {% if applylvl < week_a.tuesday|length %}
-                        <p>{{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}</p>
+                        <p>{{ week_a.tuesday[applylvl].firstname }}<br>{{ week_a.tuesday[applylvl].lastname }}</p>
                         <! - - To Delete if Barista: Accepted Application - - >
                         {% for application in post_accept %}
                             {% if application.firstname == week_a.tuesday[applylvl].firstname and application.lastname == week_a.tuesday[applylvl].lastname %}
@@ -142,7 +142,7 @@
                 <td>
                     <! - - List of Baristas: Week A Thursday - - >
                     {% if applylvl < week_a.thursday|length %}
-                        <p>{{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}</p>
+                        <p>{{ week_a.thursday[applylvl].firstname }}<br>{{ week_a.thursday[applylvl].lastname }}</p>
                         <! - - To Delete if Barista: Accepted Application - - >
                         {% for application in post_accept %}
                             {% if application.firstname == week_a.thursday[applylvl].firstname and application.lastname == week_a.thursday[applylvl].lastname %}
@@ -291,7 +291,7 @@
                 <td>
                     <! - - List of Baristas: Week B Tuesday - - >
                     {% if applylvl < week_b.tuesday|length %}
-                        <p>{{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}</p>
+                        <p>{{ week_b.tuesday[applylvl].firstname }}<br>{{ week_b.tuesday[applylvl].lastname }}</p>
                         <! - - To Delete if Barista: Accepted Application - - >
                         {% for application in post_accept %}
                             {% if application.firstname == week_b.tuesday[applylvl].firstname and application.lastname == week_b.tuesday[applylvl].lastname %}
@@ -321,7 +321,7 @@
                 <td>
                     <! - - List of Baristas: Week B Thursday - - >
                     {% if applylvl < week_b.thursday|length %}
-                        <p>{{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}</p>
+                        <p>{{ week_b.thursday[applylvl].firstname }}<br>{{ week_b.thursday[applylvl].lastname }}</p>
                         <! - - To Delete if Barista: Accepted Application - - >
                         {% for application in post_accept %}
                             {% if application.firstname == week_b.thursday[applylvl].firstname and application.lastname == week_b.thursday[applylvl].lastname %}

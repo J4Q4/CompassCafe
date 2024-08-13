@@ -55,11 +55,25 @@ def settings():
 
     return render_template("settings.html", user=current_user, edit_form=edit_form)
 
+# DELETE ACCOUNT IN SETTINGS ROUTE
+
+@views.route('/settings/delete_account', methods=['POST'])
+@login_required
+def delete_userNORM():
+    user_id = current_user.id
+
+    # Call the helper function
+    if 'confirm_delete_submit' in request.form:
+        if delete_userfn(user_id):
+            return redirect(url_for('views.home'))
+
+    return redirect(url_for('views.settings'))
+
 
 ## ACTIONS ##
 
 
-# EDIT USER FUNCTION
+# GENERAL EDIT USER FUNCTION
 
 def edit_userfn(edit_form, user):
     if edit_form.validate_on_submit():
@@ -91,6 +105,33 @@ def edit_userfn(edit_form, user):
         return True
 
     return False
+
+
+# GENERAL DELETE USER FUNCTION
+
+def delete_userfn(user_id):
+    user = User.query.get_or_404(user_id)
+
+    # Admin Config Lock
+    if user.email == 'admin@sanctamaria.school.nz':
+        flash('This user cannot be deleted.', category='error')
+        return False
+
+    # Delete Associated Applications
+    apply_pending = Apply.query.filter_by(author=user.id, status='pending').all()
+    apply_accept = Apply.query.filter_by(author=user.id, status='accepted').all()
+
+    for application in apply_pending:
+        db.session.delete(application)
+
+    for application in apply_accept:
+        db.session.delete(application)
+
+    # Delete the user
+    db.session.delete(user)
+    db.session.commit()
+    flash('User deleted successfully!', 'success')
+    return True
 
 
 ## ADMIN ROUTES ##
@@ -195,48 +236,19 @@ def dashboard():
                            filter_form=filter_form, sort_form=sort_form, paginUsers=paginUsers, paginEntries=paginEntries)
 
 
-# DELETE USER ROUTE
+# DASHBOARD DELETE USER ROUTE
 
 @views.route('/dashboard/delete_user/<int:user_id>', methods=['POST'])
 @login_required
 def delete_user(user_id):
-    if not current_user.is_staff:
-        flash('Access denied!', 'danger')
-        return redirect(url_for('views.home'))
+    # if not current_user.is_staff:
+    #     flash('Access denied!', 'danger')
+    #     return redirect(url_for('views.home'))
 
-    user = User.query.get_or_404(user_id)
-
-    # Admin Config Lock
-    if user.email == 'admin@sanctamaria.school.nz':
-        flash('This user cannot be deleted.', category='error')
-        return redirect(url_for('views.dashboard'))
-
-    # Temporarily Store User For Deletion
-    session['pending_delete'] = user_id
-
+    # Call the helper function
     if 'confirm_delete_submit' in request.form:
-        # Retrieve the user ID from the session
-        user_id = session.pop('pending_delete', None)
-
-        if user_id:
-            user = User.query.get_or_404(user_id)
-
-            # Delete Associated Applications
-            apply_pending = Apply.query.filter_by(author=user.id, status='pending').all()
-            apply_accept = Apply.query.filter_by(author=user.id, status='accepted').all()
-
-            for application in apply_pending:
-                db.session.delete(application)
-
-            for application in apply_accept:
-                db.session.delete(application)
-
-            # Delete the user
-            db.session.delete(user)
-            db.session.commit()
-            flash('User deleted successfully!', 'success')
-        else:
-            flash('User ID not found.', 'error')
+        if delete_userfn(user_id):
+            return redirect(url_for('views.dashboard'))
 
     return redirect(url_for('views.dashboard'))
 

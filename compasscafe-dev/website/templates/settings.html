@@ -123,6 +123,23 @@
                 {% if user.email == 'admin@sanctamaria.school.nz' %}
                     <p><strong>Please note:</strong> You cannot edit this admin account.</p>
                 {% endif %}
+                <! - - Trigger Confirmation Popup - - >
+                {% if user.email != 'admin@sanctamaria.school.nz' %}
+                <br>
+                <br>
+                <h3>Danger Zone</h3>
+                <p>Proceed with caution.</p>
+                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
+                  <button class="btn-danger" type="button"
+                      onclick="showDeletePopup(this)" 
+                      data-item-type="user" 
+                      data-item-id="{{ user.id }}" 
+                      data-item-description="User: {{ user.email }}">
+                      Delete <i class="fa fa-exclamation-triangle"></i>
+                  </button>
+                </form>
+                <p><strong>Please note:</strong> If an applied barista, please notify your supervisor first.</p>
+                {% endif %}
             </form>
              
           </div>
