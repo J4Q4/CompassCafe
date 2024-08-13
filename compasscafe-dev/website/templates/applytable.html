@@ -120,8 +120,11 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_a.tuesday[applylvl].id }}', 
-                                                'Barista: {{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}')">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button"
+                                                data-item-type="accepted_application"
+                                                data-item-id="{{ week_a.tuesday[applylvl].id }}"
+                                                data-item-description="Barista: {{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}"
+                                                onclick="showDeletePopup(this)">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -147,8 +150,11 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_a.thursday[applylvl].id }}', 
-                                                'Barista: {{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}')">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button"
+                                                data-item-type="accepted_application"
+                                                data-item-id="{{ week_a.thursday[applylvl].id }}"
+                                                data-item-description="Barista: {{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}"
+                                                onclick="showDeletePopup(this)">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -293,8 +299,11 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_b.tuesday[applylvl].id }}', 
-                                                'Barista: {{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}')">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button"
+                                                data-item-type="accepted_application"
+                                                data-item-id="{{ week_b.tuesday[applylvl].id }}"
+                                                data-item-description="Barista: {{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}"
+                                                onclick="showDeletePopup(this)">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -320,8 +329,11 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_b.thursday[applylvl].id }}', 
-                                                'Barista: {{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}')">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button"
+                                                data-item-type="accepted_application"
+                                                data-item-id="{{ week_b.thursday[applylvl].id }}"
+                                                data-item-description="Barista: {{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}"
+                                                onclick="showDeletePopup(this)">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>

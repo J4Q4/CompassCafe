@@ -195,7 +195,7 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
 
 
 // Confirm Delete Popup
-function showDeletePopup(itemType, itemId, itemDescription) {
+function showDeletePopup(button) {
     // Delete
     const deleteForm = document.getElementById('delete-form');
     // User Display
@@ -205,6 +205,11 @@ function showDeletePopup(itemType, itemId, itemDescription) {
 
     // If Error
     if (!deleteForm || !descriptionSpan || !confirmPopup) return;
+
+    // Get User Attributes
+    const itemType = button.getAttribute('data-item-type');
+    const itemId = button.getAttribute('data-item-id');
+    const itemDescription = button.getAttribute('data-item-description');
 
     // Types of Deletion
     const routes = {

@@ -99,7 +99,11 @@
                                                 <ul class="dropdown-menu">
                                                     <h6 class="dropdown-header">User Actions</h6>
                                                     <li>
-                                                        <a class="dropdown-item" onclick="showDeletePopup('pending_application', '{{ post.id }}', 'Application By: {{ post.firstname }} {{ post.lastname }}')">
+                                                        <a class="dropdown-item" 
+                                                            onclick="showDeletePopup(this)" 
+                                                            data-item-type="pending_application" 
+                                                            data-item-id="{{ post.id }}" 
+                                                            data-item-description="Applicant: {{ post.firstname }} {{ post.lastname }}">
                                                             Delete
                                                         </a>
                                                     </li>
