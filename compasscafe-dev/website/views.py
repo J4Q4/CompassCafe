@@ -222,10 +222,8 @@ def delete_user(user_id):
             user = User.query.get_or_404(user_id)
 
             # Delete Associated Applications
-            apply_pending = Apply.query.filter_by(
-                author=user.id, status='pending').all()
-            apply_accept = Apply.query.filter_by(
-                author=user.id, status='accepted').all()
+            apply_pending = Apply.query.filter_by(author=user.id, status='pending').all()
+            apply_accept = Apply.query.filter_by(author=user.id, status='accepted').all()
 
             for application in apply_pending:
                 db.session.delete(application)
@@ -240,7 +238,6 @@ def delete_user(user_id):
         else:
             flash('User ID not found.', 'error')
 
-    # Redirect without flashing a message
     return redirect(url_for('views.dashboard'))
 
 
@@ -421,20 +418,31 @@ def create_dutydate():
 
 # DELETE PENDING APPLICATIONS
 
-@views.route("/apply/delete-apply/<id>")
+@views.route("/apply/delete-apply/<id>", methods=['POST'])
 @login_required
 def delete_duty(id):
-    application = Apply.query.filter_by(id=id).first()
+    application = Apply.query.filter_by(id=id, status='pending').first()
     if not application:
         flash('Application does not exist.', category='error')
     elif current_user.id != application.author and not current_user.is_staff:
-        flash('You do not have permission to delete this application.',
-              category='error')
+        flash('You do not have permission to delete this application.', category='error')
     else:
-        db.session.delete(application)
-        db.session.commit()
-        flash('Application deleted.', category='success')
+        # Temporarily store the application ID for confirmation
+        session['pending_delete'] = id
+
+        if 'confirm_delete_submit' in request.form:
+            # Retrieve the application ID from the session
+            application_id = session.pop('pending_delete', None)
+            
+            if application_id:
+                application = Apply.query.get_or_404(application_id)
+                db.session.delete(application)
+                db.session.commit()
+                flash('Application deleted.', 'success')
+            else:
+                flash('Applicant not found.', 'error')
         return redirect(url_for('views.apply'))
+
     return redirect(url_for('views.apply'))
 
 
@@ -477,14 +485,25 @@ def accept_application(post_id):
 @views.route("/apply/delete-duty/<id>", methods=['POST'])
 @login_required
 def delete_accept(id):
-    application = Apply.query.filter_by(id=id).first()
+    application = Apply.query.filter_by(id=id, status='accepted').first()
     if not application:
         flash('Barista does not exist.', category='error')
     elif current_user.id != application.author and not current_user.is_staff:
-        flash('You do not have permission to delete this.',
-              category='error')
+        flash('You do not have permission to remove this person.', category='error')
     else:
-        db.session.delete(application)
-        db.session.commit()
-        flash('Barista removed.', category='success')
+        # Temporarily store the application ID for confirmation
+        session['pending_delete'] = id
+
+        if 'confirm_delete_submit' in request.form:
+            # Retrieve the application ID from the session
+            application_id = session.pop('pending_delete', None)
+
+            if application_id:
+                application = Apply.query.get_or_404(application_id)
+                db.session.delete(application)
+                db.session.commit()
+                flash('Barista removed.', 'success')
+            else:
+                flash('Application ID not found.', 'error')
+
     return redirect(url_for('views.apply'))

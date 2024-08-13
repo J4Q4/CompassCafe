@@ -1,3 +1,4 @@
+<!-- WEEK A TABLE INPUTS -->
 <div class="dashboarduser-table mb-5" id="applytable">
     <ul id="apply-barista">
         <li>
@@ -119,7 +120,8 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_a.tuesday[applylvl].id }}', 
+                                                'Barista: {{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}')">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -145,7 +147,8 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_a.thursday[applylvl].id }}', 
+                                                'Barista: {{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}')">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -165,6 +168,9 @@
         </tbody>
     </table>
 </div>
+
+
+<!-- WEEK B TABLE INPUTS-->
 <div class="dashboarduser-table">
     <ul id="apply-barista">
         <li>
@@ -270,7 +276,7 @@
     
             <! - - Check Number of Applications - - >
             <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
-            {% set max_entries = [week_a.tuesday|length, week_a.thursday|length, 4]|max %}
+            {% set max_entries = [week_b.tuesday|length, week_b.thursday|length, 4]|max %}
     
             <! - - Update Rows on Number of Applications - - >
             {% for applylvl in range(max_entries) %}
@@ -287,7 +293,8 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_b.tuesday[applylvl].id }}', 
+                                                'Barista: {{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}')">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>
@@ -313,7 +320,8 @@
                                 <! - - Barista Delete Button - - >
                                     <div>
                                         <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="submit">
+                                            <button class="dashboarduseredit" id="baristadelete" type="button" onclick="showDeletePopup('accepted_application', '{{ week_b.thursday[applylvl].id }}', 
+                                                'Barista: {{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}')">
                                                 <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
                                             </button>
                                         </form>

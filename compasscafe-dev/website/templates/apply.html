@@ -86,9 +86,9 @@
 
                 <div class="container">
                     <div class="row">
-                        {% for post in post_pending %}
+                        {% for post in post_pending.items %}
                             {% if user.id == post.author or user.is_staff %}
-                            <! - - Pending Card - - >
+                            <!-- Pending Card -->
                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                     <div class="card dashboarduser-table mb-4">
                                         <div class="card-body">
@@ -98,7 +98,11 @@
                                                 <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
                                                 <ul class="dropdown-menu">
                                                     <h6 class="dropdown-header">User Actions</h6>
-                                                    <li><a href="/apply/delete-apply/{{ post.id }}" class="dropdown-item">Delete</a></li>
+                                                    <li>
+                                                        <a class="dropdown-item" onclick="showDeletePopup('pending_application', '{{ post.id }}', 'Application By: {{ post.firstname }} {{ post.lastname }}')">
+                                                            Delete
+                                                        </a>
+                                                    </li>
                                                     {% if user.is_staff %}
                                                     <li><a href="/apply/accept-apply/{{ post.id }}" class="dropdown-item">Accept</a></li>
                                                     {% endif %}
@@ -114,7 +118,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <! - - End of Pending Card - - >
+                            <!-- End of Pending Card -->
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -134,6 +138,7 @@
                         <!-- End of Pagination -->
                     </div>
                 </div>
+                
                 
                 
             </div>

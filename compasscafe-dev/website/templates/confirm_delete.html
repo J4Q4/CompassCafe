@@ -1,14 +1,15 @@
-<div id="confirm-popup" class="confirm-container">
+<div id="confirm-popup" class="confirm-container" style="display:none;">
     <div class="confirm-content">
-        <!-- Display the user's email in the confirmation message -->
+        <!-- Display user in popup -->
         <h1>DANGER ZONE!</h1>
         <br>
-        <h3>Confirm user deletion?</h3>
-        <span id="user-email"></span>
+        <h3>Confirm deletion?</h3>
+        <span id="item-description"></span>
         <br>
         <p><strong>This action cannot be undone.</strong></p>
         <form id="delete-form" method="POST">
-            <button type="submit" class="btn-danger" name="confirm_delete_submit">Delete User</button>
+            <input type="hidden" name="confirm_delete_submit" value="1">
+            <button type="submit" class="btn-danger">Delete</button>
             <button type="button" class="btn-secondary" onclick="closePopup()">No Thanks</button>
         </form>
     </div>

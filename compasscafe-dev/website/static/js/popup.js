@@ -194,20 +194,29 @@ document.querySelectorAll('.dropdown-toggle').forEach(button => {
 
 
 
-// User Deletion Confirmation Popup
-function showDeletePopup(userId, userEmail) {
-    // Find Delete Button
+// Confirm Delete Popup
+function showDeletePopup(itemType, itemId, itemDescription) {
+    // Delete
     const deleteForm = document.getElementById('delete-form');
-    // Set URL action for 
-    const emailSpan = document.getElementById('user-email');
-    const actionUrl = `/dashboard/delete_user/${userId}`;
-    deleteForm.action = actionUrl;
-    
-    // Display the user's email in the popup
-    emailSpan.textContent = userEmail;
-    
+    // User Display
+    const descriptionSpan = document.getElementById('item-description');
+    // Confirm Popup
+    const confirmPopup = document.getElementById('confirm-popup');
+
+    // If Error
+    if (!deleteForm || !descriptionSpan || !confirmPopup) return;
+
+    // Types of Deletion
+    const routes = {
+        user: `/dashboard/delete_user/${itemId}`,
+        pending_application: `/apply/delete-apply/${itemId}`,
+        accepted_application: `/apply/delete-duty/${itemId}`
+    };
+
+    deleteForm.action = routes[itemType] || '';
+    descriptionSpan.textContent = itemDescription;
     // Show Popup
-    document.getElementById('confirm-popup').classList.add('show-delete-confirm');
+    confirmPopup.classList.add('show-delete-confirm');
 }
 
 // Close Popup
