@@ -395,6 +395,10 @@ def create_dutydate():
             if current_count >= barista_max:
                 flash(f'{date_day}, {date_duty} is full: {
                       barista_max} baristas max.', category='error')
+            
+            # Max 4 Applications
+            elif Apply.query.filter_by(author=current_user.id).count() >= 4:
+                flash('You cannot submit more than 4 applications.', category='error')
 
             else:
                 # Formatting User Apply Input
