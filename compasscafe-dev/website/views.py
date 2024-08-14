@@ -474,25 +474,24 @@ def accept_application(post_id):
         flash('You do not have permission to do this.', category='error')
         return redirect(url_for('views.apply'))
 
-    # Week Day Categories
-    # Week A or Week B
-    week = post.date_duty
-    # Tuesday or Thursday
-    day = post.date_day
+    if request.method == 'POST' and 'confirm_accept_submit' in request.form:
+        # Week Day Categories
+        # Week A or Week B
+        week = post.date_duty
+        # Tuesday or Thursday
+        day = post.date_day
 
-    # Maximum of 4 Baristas on Given Date
-    barista_max = 4
-    accepted_count = Apply.query.filter_by(
-        status='accepted', date_duty=week, date_day=day).count()
-    if accepted_count >= barista_max:
-        flash(f'{day}, {week} is full: {
-              barista_max} baristas max.', category='error')
+        # Maximum of 4 Baristas on Given Date
+        barista_max = 4
+        accepted_count = Apply.query.filter_by(status='accepted', date_duty=week, date_day=day).count()
+        if accepted_count >= barista_max:
+            flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
+        else:
+            post.status = 'accepted'
+            db.session.commit()
+            flash('Barista added!', category='success')
 
-    else:
-        post.status = 'accepted'
-        db.session.commit()
-        flash('Barista added!', category='success')
-
+        return redirect(url_for('views.apply'))
     return redirect(url_for('views.apply'))
 
 

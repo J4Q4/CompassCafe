@@ -434,7 +434,7 @@ input[type=password]:focus,
 }
 
 /* Buttons */
-#delete-form {
+#delete-form, #accept-form {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -1703,6 +1703,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.submitapply-btn > * {
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 /* Apply Schedule Calendar Today */

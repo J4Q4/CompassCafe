@@ -108,7 +108,16 @@
                                                         </a>
                                                     </li>
                                                     {% if user.is_staff %}
-                                                    <li><a href="/apply/accept-apply/{{ post.id }}" class="dropdown-item">Accept</a></li>
+                                                    <li>
+                                                        <!-- Accept Button (Trigger the Confirmation Popup) -->
+                                                        <a
+                                                            class="dropdown-item accept-button" 
+                                                            onclick="showAcceptPopup(this)" 
+                                                            data-item-id="{{ post.id }}" 
+                                                            data-item-description="Applicant: {{ post.firstname }} {{ post.lastname }}">
+                                                            Accept
+                                                        </a>
+                                                    </li>
                                                     {% endif %}
                                                 </ul>
                                             </div>
@@ -148,7 +157,7 @@
             </div>
             {% if not user.is_staff %}
             <br/>
-            <div id="btn-applysubmit">
+            <div id="btn-applynew">
                 <a href="/apply/submit_duty"><button type="button" class="btn-primary">
                     <i class="fa fa-plus" aria-hidden="true"></i> New Application
                 </button></a>

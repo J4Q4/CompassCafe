@@ -45,6 +45,10 @@
     align-items: center;
 }
 
+.submitapply-btn > * {
+    width: 100% !important;
+    margin: 0 !important;
+}
 /* Apply Schedule Calendar Today */
 .datetoday-selected span{
     background-color: var(--main-lightblue2) !important;

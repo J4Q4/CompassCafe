@@ -227,3 +227,33 @@ function showDeletePopup(button) {
 function closePopup() {
     document.getElementById('confirm-popup').classList.remove('show-delete-confirm');
 }
+
+
+
+
+// Show Accept Popup
+function showAcceptPopup(button) {
+    // Apply
+    const acceptForm = document.getElementById('accept-form')
+    // User Display
+    const descriptionSpan = document.getElementById('accept-item-description');
+    // Confirm Popup
+    const confirmPopup = document.getElementById('confirm-accept-popup');
+
+    // If Error
+    if (!acceptForm || !descriptionSpan || !confirmPopup) return;
+
+    // Get User Attributes
+    const itemId = button.getAttribute('data-item-id');
+    const itemDescription = button.getAttribute('data-item-description');
+
+    acceptForm.action = `/apply/accept-apply/${itemId}`;
+    descriptionSpan.textContent = itemDescription;
+    // Show Popup
+    confirmPopup.classList.add('show-delete-confirm');
+}
+
+// Close Popup
+function closeAcceptPopup() {
+    document.getElementById('confirm-accept-popup').classList.remove('show-delete-confirm');
+}
