@@ -88,15 +88,9 @@ def sign_up():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            flash('Account created!', category='success')
-
-            if email == 'admin@sanctamaria.school.nz':
-                new_user.is_staff = True
-                db.session.commit()
-                flash('Registered as admin!', category='success')
-
             # Send welcome email
             welcomeEmail(email)
+            flash('Account created!', category='success')
 
             if email == 'admin@sanctamaria.school.nz':
                 new_user.is_staff = True

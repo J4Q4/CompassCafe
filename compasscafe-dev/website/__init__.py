@@ -64,11 +64,11 @@ def create_app():
             'current_day': now.strftime('%d %B %Y')
         }
 
-    @app.route('/send-email')
-    def test_email():
-        user_email = "jaqa.g6@gmail.com"
-        welcomeEmail(user_email)
-        return "Email sent to " + user_email
+    # @app.route('/send-email')
+    # def test_email():
+    #     user_email = "jaqa.g6@gmail.com"
+    #     welcomeEmail(user_email)
+    #     return "Email sent to " + user_email
 
     from .models import User
 
