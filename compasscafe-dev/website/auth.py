@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from . import db
+from . import db, welcomeEmail
 from .models import User
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -89,6 +89,14 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
+
+            if email == 'admin@sanctamaria.school.nz':
+                new_user.is_staff = True
+                db.session.commit()
+                flash('Registered as admin!', category='success')
+
+            # Send welcome email
+            welcomeEmail(email)
 
             if email == 'admin@sanctamaria.school.nz':
                 new_user.is_staff = True
