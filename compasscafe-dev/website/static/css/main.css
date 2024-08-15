@@ -1699,8 +1699,14 @@ h1 {
   text-transform: capitalize;
 }
 
-#btn-applysubmit {
+#btn-applynew {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn-applysubmit {
+  width: 100%;
   justify-content: center;
   align-items: center;
 }

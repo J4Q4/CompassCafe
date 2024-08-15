@@ -5,7 +5,7 @@ from .auth import is_validemail
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 from werkzeug.exceptions import HTTPException
-from . import db
+from . import db, baristaEmail
 
 views = Blueprint("views", __name__)
 
@@ -56,6 +56,7 @@ def settings():
     return render_template("settings.html", user=current_user, edit_form=edit_form)
 
 # DELETE ACCOUNT IN SETTINGS ROUTE
+
 
 @views.route('/settings/delete_account', methods=['POST'])
 @login_required
@@ -118,8 +119,10 @@ def delete_userfn(user_id):
         return False
 
     # Delete Associated Applications
-    apply_pending = Apply.query.filter_by(author=user.id, status='pending').all()
-    apply_accept = Apply.query.filter_by(author=user.id, status='accepted').all()
+    apply_pending = Apply.query.filter_by(
+        author=user.id, status='pending').all()
+    apply_accept = Apply.query.filter_by(
+        author=user.id, status='accepted').all()
 
     for application in apply_pending:
         db.session.delete(application)
@@ -393,11 +396,13 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= barista_max:
-                flash(f'{date_day}, {date_duty} is full: {barista_max} baristas max.', category='error')
-            
+                flash(f'{date_day}, {date_duty} is full: {
+                      barista_max} baristas max.', category='error')
+
             # Max 4 Applications
             elif Apply.query.filter_by(author=current_user.id).count() >= 4:
-                flash('You cannot submit more than 4 applications.', category='error')
+                flash('You cannot submit more than 4 applications.',
+                      category='error')
 
             else:
                 # Formatting User Apply Input
@@ -440,7 +445,8 @@ def delete_duty(id):
     if not application:
         flash('Application does not exist.', category='error')
     elif current_user.id != application.author and not current_user.is_staff:
-        flash('You do not have permission to delete this application.', category='error')
+        flash('You do not have permission to delete this application.',
+              category='error')
     else:
         # Temporarily store the application ID for confirmation
         session['pending_delete'] = id
@@ -448,7 +454,7 @@ def delete_duty(id):
         if 'confirm_delete_submit' in request.form:
             # Retrieve the application ID from the session
             application_id = session.pop('pending_delete', None)
-            
+
             if application_id:
                 application = Apply.query.get_or_404(application_id)
                 db.session.delete(application)
@@ -482,13 +488,25 @@ def accept_application(post_id):
 
         # Maximum of 4 Baristas on Given Date
         barista_max = 4
-        accepted_count = Apply.query.filter_by(status='accepted', date_duty=week, date_day=day).count()
+        accepted_count = Apply.query.filter_by(
+            status='accepted', date_duty=week, date_day=day).count()
         if accepted_count >= barista_max:
-            flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
+            flash(f'{day}, {week} is full: {
+                  barista_max} baristas max.', category='error')
         else:
             post.status = 'accepted'
             db.session.commit()
-            flash('Barista added!', category='success')
+
+            # Access the user's email through the relationship
+            user_email = post.user.email
+
+            # Send the barista email
+            acceptBarista = baristaEmail(user_email, week, day)
+            if acceptBarista == "Sent":
+                flash('Barista added and email sent!', category='success')
+            else:
+                flash('Barista added, but failed to send email.',
+                      category='warning')
 
         return redirect(url_for('views.apply'))
     return redirect(url_for('views.apply'))

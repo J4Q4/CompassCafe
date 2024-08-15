@@ -25,6 +25,7 @@ def create_app():
     app.config['MAIL_USE_SSL'] = True
     app.config['MAIL_USERNAME'] = 'noreply@compasscafesmc.wacky.dev'
     app.config['MAIL_PASSWORD'] = 'WAKABAKA@123'
+    app.config['TESTING'] = False
 
     # https://wacky.dev:2096/cpsess2619298596/3rdparty/roundcube/?_task=mail&_mbox=INBOX
     # Temporary Mass Email Configuration
@@ -77,12 +78,32 @@ def create_app():
 
 # EMAIL FUNCTIONS
 
+
+# NEW REGISTERED USERS
+
 def welcomeEmail(user_email):
     try:
         msg = Message("Welcome to Compass Cafe Website!",
                       sender="noreply@compasscafesmc.wacky.dev",
                       recipients=[user_email])
         msg.body = "Hello user! We’re glad to have you aboard."
+        mail.send(msg)
+        return "Sent"
+    except Exception as errorEmail:
+        print(f"Failed to send email to {user_email}: {errorEmail}")
+        return "Failed"
+
+
+# ACCEPTED APPLICANTS
+
+def baristaEmail(user_email, week, day):
+    try:
+        msg = Message("Welcome to the Team! - Compass Cafe",
+                      sender="noreply@compasscafesmc.wacky.dev",
+                      recipients=[user_email])
+        # Include week and day in the email body
+        msg.body = f"Hello! You've been selected to be part of the barista team at Sancta Maria College on {
+            day} of {week}."
         mail.send(msg)
         return "Sent"
     except Exception as errorEmail:
