@@ -393,8 +393,7 @@ def create_dutydate():
             current_count = Apply.query.filter_by(
                 status='accepted', date_duty=date_duty, date_day=date_day).count()
             if current_count >= barista_max:
-                flash(f'{date_day}, {date_duty} is full: {
-                      barista_max} baristas max.', category='error')
+                flash(f'{date_day}, {date_duty} is full: {barista_max} baristas max.', category='error')
             
             # Max 4 Applications
             elif Apply.query.filter_by(author=current_user.id).count() >= 4:
