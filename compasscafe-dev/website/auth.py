@@ -13,7 +13,18 @@ ACCEPTED_EMAIL_DOMAINS = ["sanctamaria.school.nz", "my.sanctamaria.school.nz"]
 
 
 def is_validemail(email):
-    return email.split('@')[-1] in ACCEPTED_EMAIL_DOMAINS
+    local_part, domain = email.split('@')
+
+    if domain == "my.sanctamaria.school.nz":
+        # Student ID - 5 Digits
+        if not local_part.isdigit() or len(local_part) != 5:
+            return False
+        return True
+    # Staff Email - No Restrictions
+    elif domain == "sanctamaria.school.nz":
+        return True
+    else:
+        return False
 
 
 ## USER AUTHENTICATION  WEBPAGES ##
