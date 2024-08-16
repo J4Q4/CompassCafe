@@ -73,9 +73,15 @@ def create_app():
     #     return "Email sent to " + user_email
 
     from .models import User
-    
+
+    # Ensure Notifications are Working (With Context)
+    def notifyDuty_context():
+        with app.app_context():
+            notifyDuty()
+
     # Schedule Barista Notifications for Day
-    scheduler.add_job(notifyDuty, 'cron', hour=8, minute=30) # 8:30 AM
+    scheduler.add_job(notifyDuty_context, 'cron', hour=8, minute=30)  #8:30 AM
+
     scheduler.start()
 
     # Scheduler Off on App Exit
