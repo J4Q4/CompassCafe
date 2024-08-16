@@ -5,7 +5,7 @@ from .auth import is_validemail
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 from werkzeug.exceptions import HTTPException
-from . import db, baristaEmail
+from . import db, baristaEmail, notifyEmail
 
 views = Blueprint("views", __name__)
 
@@ -320,6 +320,9 @@ def pendingApply(user, page, pendform=None):
         return query.filter_by(author=user.id).paginate(page=page, per_page=6)
 
 
+## APPLY ROUTES ##
+
+
 # APPLY ROUTE
 
 @views.route("/apply", methods=['GET', 'POST'])
@@ -539,3 +542,37 @@ def delete_accept(id):
                 flash('Application ID not found.', 'error')
 
     return redirect(url_for('views.apply'))
+
+
+# NOTIFY ACCEPTED USER BARISTAS
+
+def notifyDuty():
+    today = datetime.now().date()
+    weekday_name = today.strftime('%A')  # Get Today
+
+    # Week A or Week B
+    is_week_a = apply_whichweek(today)
+
+    # Get all Baristas for the Day
+    duty_applications = Apply.query.filter_by(status='accepted', date_day=weekday_name).all()
+
+    for baristaGroup in duty_applications:
+        # Week A Tuesday
+        if is_week_a and weekday_name == 'Tuesday' and baristaGroup.date_duty == 'Week A':
+            user_email = baristaGroup.user.email
+            notifyEmail(user_email, 'Week A', 'Tuesday')
+
+        # Week A Thursday
+        elif is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week A':
+            user_email = baristaGroup.user.email
+            notifyEmail(user_email, 'Week A', 'Thursday')
+
+        # Week B Tuesday
+        elif not is_week_a and weekday_name == 'Tuesday' and baristaGroup.date_duty == 'Week B':
+            user_email = baristaGroup.user.email
+            notifyEmail(user_email, 'Week B', 'Tuesday')
+
+        # Week B Thursday
+        elif not is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week B':
+            user_email = baristaGroup.user.email
+            notifyEmail(user_email, 'Week B', 'Thursday')

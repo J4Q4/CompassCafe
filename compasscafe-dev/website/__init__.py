@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user
 from datetime import datetime
+import atexit
 from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
 
@@ -33,7 +34,7 @@ def create_app():
     db.init_app(app)
     mail.init_app(app)
 
-    from .views import views
+    from .views import views, notifyDuty
     from .auth import auth
 
     app.register_blueprint(views, url_prefix="/")
@@ -67,11 +68,18 @@ def create_app():
 
     # @app.route('/send-email')
     # def test_email():
-    #     user_email = "jaqa.g6@gmail.com"
-    #     welcomeEmail(user_email)
+    #     user_email = "18065@my.sanctamaria.school.nz"
+    #     notifyEmail(user_email, 'Week B', 'Thursday')
     #     return "Email sent to " + user_email
 
     from .models import User
+    
+    # Schedule Barista Notifications for Day
+    scheduler.add_job(notifyDuty, 'cron', hour=8, minute=30) # 8:30 AM
+    scheduler.start()
+
+    # Scheduler Off on App Exit
+    atexit.register(lambda: scheduler.shutdown(wait=False))
 
     return app
 
@@ -102,8 +110,23 @@ def baristaEmail(user_email, week, day):
                       sender="noreply@compasscafesmc.wacky.dev",
                       recipients=[user_email])
         # Include week and day in the email body
-        msg.body = f"Hello! You've been selected to be part of the barista team at Sancta Maria College on {
-            day} of {week}."
+        msg.body = f"Hello! You've been selected to be part of the barista team at Sancta Maria College on {day} of {week}. Looking forward to seeing you! :)"
+        mail.send(msg)
+        return "Sent"
+    except Exception as errorEmail:
+        print(f"Failed to send email to {user_email}: {errorEmail}")
+        return "Failed"
+
+
+# NOTIFY ON DUTY
+
+def notifyEmail(user_email, week, day):
+    try:
+        msg = Message("You're on duty today! - Compass Cafe",
+                      sender="noreply@compasscafesmc.wacky.dev",
+                      recipients=[user_email])
+        msg.body = f"Hello! You're on duty today, {day} of {week}. If there has been an error, please contact your supervisor."
+        # SHOW BUTTON FOR VIEWING SCHEDULE ON THE WEBSITE TO SHOW PROOF.
         mail.send(msg)
         return "Sent"
     except Exception as errorEmail:
