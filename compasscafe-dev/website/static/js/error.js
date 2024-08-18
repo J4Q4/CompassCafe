@@ -152,8 +152,8 @@ loader.load('/static/assets/objects/cuppa-error/coffee-drink.glb', function(gltf
 
     coffeeObject.traverse(function (child) {
         if (child.isMesh) {
-            // Solid Material
-            child.material = applyBaseMTL(0x8B4513);
+            // Toon Material
+            child.material = applyToonMTL(0x66381b);
         }
     });
 
@@ -171,16 +171,19 @@ loader.load('/static/assets/objects/cuppa-error/coffee-text.glb', function(gltf)
     coffeeText.traverse(function (child) {
         if (child.isMesh) {
             // Solid Material
-            child.material = applyBaseMTL(0x000000);
+            child.material = applyBaseMTL(0x232947);
+            // Disable Fog
+            child.material.fog = false;
         }
     });
 
-    // Add Drink Model to Group
+    // Add Text Model to Group
     coffeeError.add(coffeeText);
 
 }, undefined, function(error) {
-    console.error("Error loading liquid.", error);
+    console.error("Error loading text.", error);
 });
+
 
 
 // Interactive 3D Viewport

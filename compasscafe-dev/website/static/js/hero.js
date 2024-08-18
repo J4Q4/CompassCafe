@@ -152,8 +152,8 @@ loader.load('/static/assets/objects/cuppa-hero/coffee-drink.glb', function(gltf)
 
     coffeeObject.traverse(function (child) {
         if (child.isMesh) {
-            // Solid Material
-            child.material = applyBaseMTL(0x8B4513);
+            // Toon Material
+            child.material = applyToonMTL(0x66381b);
         }
     });
 
