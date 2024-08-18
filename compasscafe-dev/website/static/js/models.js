@@ -1,10 +1,9 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
-import { OutlineEffect } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/effects/OutlineEffect.js';
 import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
 
 // Hero Landing Page
-let cupObject, smileObject, coffeeObject;
+let cupObject, smileObject, coffeeObject, outlineObject;
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('herocanvas'), antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0);
@@ -39,10 +38,6 @@ const loader = new GLTFLoader();
 // Function to Apply Basic Material to Object
 const applyBaseMTL = (color) => new THREE.MeshBasicMaterial({ color: color });
 
-const effect = new OutlineEffect(renderer, {
-    defaultThickness: 0.01,
-});
-
 // LANDING PAGE COFFEE CUP MODEL GROUP
 
 // Cup Base Model
@@ -60,6 +55,23 @@ loader.load('/static/assets/objects/cuppa-hero/coffee-cup.glb', function(gltf) {
 
 }, undefined, function(error) {
     console.error("Error loading base cup.", error);
+});
+
+// Outline Model
+loader.load('/static/assets/objects/cuppa-hero/coffee-outline.glb', function(gltf) {
+    outlineObject = gltf.scene;
+    outlineObject.traverse(function (child) {
+        if (child.isMesh) {
+            // Solid Material
+            child.material = applyBaseMTL(0x000000);
+        }
+    });
+
+    // Add Outline Model to Group
+    coffeeHero.add(outlineObject);
+
+}, undefined, function(error) {
+    console.error("Error loading outline.", error);
 });
 
 // Load the eyes (smile) model
@@ -111,7 +123,7 @@ function onWindowResize() {
 function animate() {
     // Render the scene
     controls.update();
-    effect.render(scene, camera);
+    renderer.render(scene, camera);
     requestAnimationFrame(animate);
 }
 
