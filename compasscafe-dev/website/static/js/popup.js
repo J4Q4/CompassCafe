@@ -99,27 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Hide Spline Watermark //
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        var splineViewer = document.querySelector('spline-viewer');
-        if (splineViewer) {
-            // Find Hidden Root [ Shadow DOM ]
-            var shadowRoot = splineViewer.shadowRoot;
-            if (shadowRoot) {
-                var logo = shadowRoot.querySelector('a#logo');
-                // Hide Watermark
-                if (logo) {
-                    logo.style.display = 'none';
-                }
-            }
-        }
-    }, 2500); // 2s Delay to Hide Watermark
-});
-
-
-
-
 // Preload Progress Bar //
 document.addEventListener('DOMContentLoaded', function() {
     var progressBar = document.getElementById('progressBar');
@@ -132,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (progress >= 100) {
             clearInterval(interval);
         }
-    }, 300); // Progress Length //
+    }, 100); // Progress Length //
   });
 
 

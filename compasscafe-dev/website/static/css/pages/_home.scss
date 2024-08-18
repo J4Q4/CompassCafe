@@ -51,6 +51,10 @@
     display: block;
     z-index: 2;
     position: relative;
+    canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
 }
 
 

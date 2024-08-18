@@ -282,7 +282,7 @@
               <img src="/static/assets/img/SMC-White.svg" width="50px" alt="SMCLogo" draggable="false" oncontextmenu="return false;">
             </div>
             <div class="col-xs-12 col-sm-6 lowerfooter lowerfooter-right">
-              <p>© Compass Cafe SMC | {{ current_year }}
+              <p>&copy; Compass Cafe SMC | {{ current_year }}
               <br>Website by joqa</p>
             </div>
         </div>
@@ -304,6 +304,9 @@
     <!-- Spline Viewer -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
 
+    <!-- THREE.js -->
+    <script type="module" src="{{ url_for('static', filename='js/models.js') }}"></script>
+
     <!-- Dashboard Popup -->
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 
@@ -314,7 +317,7 @@
       setTimeout(function() {
       document.getElementById('loadscreen').classList.add('loadtrigger');
       document.documentElement.classList.add('noscroll');
-      }, 3200); //3.2s Delay to fully load Spline
+      }, 1000); //1s Delay
       });
     </script>
     {% elif is_404 %} <!-- Non-Existent -->
@@ -323,7 +326,7 @@
         setTimeout(function() {
         document.getElementById('loadscreen').classList.add('loadtrigger');
         document.documentElement.classList.add('noscroll');
-        }, 2500); //2.5s Delay to fully load Spline
+        }, 500); //0.5s Delay
         });
     </script>
     {% else %} <!-- If Other Webpage -->
