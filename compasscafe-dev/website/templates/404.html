@@ -1,5 +1,6 @@
 {% extends "template.html" %}{% block title %}Error{% endblock %}
 {% block content %}
+
 <section class="bluespace-test">
     <div class="preload-fadein" id="contain404">
         <div id="div404" class="row">
@@ -13,7 +14,9 @@
                 </div>
             </div>
             <div class="col-lg-12 col-xl-7 d-none d-xl-block" id="brokeglass_contents">
-                <spline-viewer url="https://prod.spline.design/SMJkRw74aYivCdiA/scene.splinecode"></spline-viewer>
+                <canvas id="errorcanvas"></canvas>
+                <!-- THREE.js -->
+                <script type="module" src="{{ url_for('static', filename='js/error.js') }}"></script>
             </div>
         </div>
     </div>

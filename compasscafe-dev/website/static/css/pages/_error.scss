@@ -75,11 +75,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    spline-viewer {
-        height: 800px;
-        width: 100%;
+    canvas {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
     }
 }
+
+
 .text-error404 {
     position: absolute;
     top: 50%;

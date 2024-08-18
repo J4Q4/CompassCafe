@@ -10,16 +10,16 @@ renderer.setClearColor(0x000000, 0);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const scene = new THREE.Scene();
+const heroScene = new THREE.Scene();
 
 // Master Group - Coffee Cup Hero
 const coffeeHero = new THREE.Group();
-scene.add(coffeeHero);
+heroScene.add(coffeeHero);
 
 // Point Light
 const pointLight = new THREE.PointLight(0xffffff, 1.5, 150);
 pointLight.position.set(-10, 20, 20);
-scene.add(pointLight);
+heroScene.add(pointLight);
 
 // Camera
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -27,7 +27,7 @@ camera.position.set(0, 8, 20);
 camera.lookAt(0, 0, 0);
 
 // Fog
-scene.fog = new THREE.FogExp2(0x5572c9, 0.03);
+heroScene.fog = new THREE.FogExp2(0x5572c9, 0.03);
 
 const loader = new GLTFLoader();
 
@@ -203,7 +203,7 @@ function animate() {
     coffeeHero.rotation.x = currentRotationX;
     coffeeHero.rotation.y = currentRotationY;
 
-    renderer.render(scene, camera);
+    renderer.render(heroScene, camera);
     requestAnimationFrame(animate);
 }
 

@@ -1639,9 +1639,13 @@ h1 {
   justify-content: center;
   align-items: center;
 }
-#brokeglass_contents spline-viewer {
-  height: 800px;
-  width: 100%;
+#brokeglass_contents canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  -o-object-fit: contain !important;
+     object-fit: contain !important;
 }
 
 .text-error404 {
