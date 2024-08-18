@@ -1,9 +1,9 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
 
 // Hero Landing Page
 let cupObject, smileObject, coffeeObject, outlineObject;
+let mouseX = 0, mouseY = 0;
 
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('herocanvas'), antialias: true, alpha: true });
 renderer.setClearColor(0x000000, 0);
@@ -25,10 +25,6 @@ scene.add(pointLight);
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 8, 20);
 camera.lookAt(0, 0, 0);
-
-// Orbit Controls
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enablePan = true;
 
 // Fog
 scene.fog = new THREE.FogExp2(0x5572c9, 0.03);
@@ -168,6 +164,9 @@ loader.load('/static/assets/objects/cuppa-hero/coffee-drink.glb', function(gltf)
     console.error("Error loading liquid.", error);
 });
 
+
+// Interactive 3D Viewport
+
 // 3D Viewport Responsiveness
 window.addEventListener('resize', onWindowResize);
 
@@ -175,12 +174,35 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    controls.update();
 }
+
+
+// Mouse Hover Interaction
+let targetRotationX = 0;
+let targetRotationY = 0;
+let currentRotationX = 0;
+let currentRotationY = 0;
+
+const sensitivity = 0.3;
+const dampingFactor = 0.05;
+
+document.onmousemove = function(e) {
+    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+
+    targetRotationX = mouseY * sensitivity;
+    targetRotationY = mouseX * sensitivity;
+};
 
 function animate() {
     // Render the scene
-    controls.update();
+    currentRotationX = THREE.MathUtils.lerp(currentRotationX, targetRotationX, dampingFactor);
+    currentRotationY = THREE.MathUtils.lerp(currentRotationY, targetRotationY, dampingFactor);
+
+    // Rotate the entire hero cup group instead of individual objects
+    coffeeHero.rotation.x = currentRotationX;
+    coffeeHero.rotation.y = currentRotationY;
+
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 }
