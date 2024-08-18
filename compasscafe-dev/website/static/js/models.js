@@ -1,5 +1,7 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
+import { OutlineEffect } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/effects/OutlineEffect.js';
+import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
 
 // Hero Landing Page
 let cupObject, smileObject, coffeeObject;
@@ -25,6 +27,10 @@ const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerH
 camera.position.set(0, 8, 20);
 camera.lookAt(0, 0, 0);
 
+// Orbit Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan = true;
+
 // Fog
 scene.fog = new THREE.FogExp2(0x5572c9, 0.03);
 
@@ -32,6 +38,10 @@ const loader = new GLTFLoader();
 
 // Function to Apply Basic Material to Object
 const applyBaseMTL = (color) => new THREE.MeshBasicMaterial({ color: color });
+
+const effect = new OutlineEffect(renderer, {
+    defaultThickness: 0.01,
+});
 
 // LANDING PAGE COFFEE CUP MODEL GROUP
 
@@ -95,11 +105,13 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    controls.update();
 }
 
 function animate() {
     // Render the scene
-    renderer.render(scene, camera);
+    controls.update();
+    effect.render(scene, camera);
     requestAnimationFrame(animate);
 }
 
