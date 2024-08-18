@@ -35,6 +35,64 @@ scene.fog = new THREE.FogExp2(0x5572c9, 0.03);
 
 const loader = new GLTFLoader();
 
+// Function to Apply Toon Material to Object
+const applyToonMTL = (color) => {
+    return new THREE.ShaderMaterial({
+        uniforms: {
+            uColor: { value: new THREE.Color(color) },
+            uLightPosition: { value: pointLight.position },
+            uAmbientLightColor: { value: new THREE.Color(0.3, 0.3, 0.3) }
+        },
+        vertexShader: `
+            varying vec3 vNormal;
+            varying vec3 vViewDir;
+            varying vec3 vLightDir;
+
+            uniform vec3 uLightPosition;
+
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                vViewDir = normalize(-mvPosition.xyz);
+                vLightDir = normalize(uLightPosition - mvPosition.xyz); // Direction to the light
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `,
+        fragmentShader: `
+            uniform vec3 uColor;
+            uniform vec3 uAmbientLightColor;
+            varying vec3 vNormal;
+            varying vec3 vViewDir;
+            varying vec3 vLightDir;
+
+            void main() {
+                vec3 normal = normalize(vNormal);
+                vec3 lightDir = normalize(vLightDir);
+                float NdotL = max(dot(normal, lightDir), 0.0);
+
+                // Shadow Tint
+                vec3 shadowColor = vec3(0.7, 0.8, 1.0);
+                vec3 baseColor;
+
+                // Light Level Controller
+                if (NdotL > 0.7) {
+                    baseColor = uColor; // Bright-Level Area
+                } else if (NdotL > 0.4) {
+                    baseColor = mix(uColor, shadowColor, 0.2); // Mid-Level Area
+                } else if (NdotL > 0.2) {
+                    baseColor = mix(uColor, shadowColor, 0.5); // Dark-Level Area
+                } else {
+                    baseColor = shadowColor; // Darker-Level Area
+                }
+
+                // Ambient Light
+                vec3 finalColor = baseColor + uAmbientLightColor * 0.1;
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `
+    });
+};
+
 // Function to Apply Basic Material to Object
 const applyBaseMTL = (color) => new THREE.MeshBasicMaterial({ color: color });
 
@@ -45,8 +103,8 @@ loader.load('/static/assets/objects/cuppa-hero/coffee-cup.glb', function(gltf) {
     cupObject = gltf.scene;
     cupObject.traverse(function (child) {
         if (child.isMesh) {
-            // Solid Material
-            child.material = applyBaseMTL(0xffffff);
+            // Toon Material
+            child.material = applyToonMTL(0xffffff);
         }
     });
 
