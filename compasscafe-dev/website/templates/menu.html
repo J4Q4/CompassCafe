@@ -11,20 +11,29 @@
         <h1>Menu</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-          <a id="direct-selected">menu</a> / <a href="/home">home</a>
+        <a id="direct-selected">menu</a> / <a href="/home">home</a>
       </div>
-      <div class="col">
-        {% for item in menu_items %}
-          <div class="menu-item col-lg-4">
-            <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
-            <h3>{{ item.item }}</h3>
-            <p>{{ item.formatted_price }}</p>
-          </div>
-        {% endfor %}
-        <a class="btn-secondary" href="{{ url_for('views.menuAdd') }}">Add Item</a>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="row mb-4 menu-container">
+          {% for item in menu_items %}
+            <div class="menu-item col-md-6 col-lg-4">
+              <div class="menu-tags">
+                <p>{{ item.formatted_price }}</p>
+                <h3>{{ item.item }}</h3>
+              </div>
+              <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+            </div>
+          {% endfor %}
+        </div>
+        <a class="btn-secondary mt-3" href="{{ url_for('views.menuAdd') }}">Add Item</a>
       </div>
-      <div class="col">
-        displayed item
+
+      <div class="col-lg-6">
+        <!-- Your right column content here -->
+        <div>Displayed item</div>
       </div>
     </div>
   </div>
