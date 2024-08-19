@@ -2134,4 +2134,17 @@ label {
   font-size: 14px;
   margin: 0;
   font-family: "JetBrains Mono";
+}
+
+#hovered-item-display {
+  text-align: right;
+}
+
+#hovered-item-image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=main.css.map */

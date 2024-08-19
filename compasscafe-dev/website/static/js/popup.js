@@ -260,3 +260,25 @@ function showMenuFile() {
         imagePreview.style.display = 'none';
     }
 }
+
+
+// Show Hovered Menu Item Details
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('mouseover', function() {
+        const itemTitle = this.querySelector('h3').innerText;
+        const itemPrice = this.querySelector('p').innerText;
+        const itemImageSrc = this.querySelector('img').src;
+
+        document.getElementById('hovered-item-title').innerText = itemTitle;
+        document.getElementById('hovered-item-price').innerText = itemPrice;
+        const itemImage = document.getElementById('hovered-item-image');
+        itemImage.src = itemImageSrc;
+        itemImage.style.display = 'block';
+    });
+
+    item.addEventListener('mouseout', function() {
+        document.getElementById('hovered-item-image').style.display = 'none';
+        document.getElementById('hovered-item-title').innerText = '';
+        document.getElementById('hovered-item-price').innerText = '';
+    });
+});
