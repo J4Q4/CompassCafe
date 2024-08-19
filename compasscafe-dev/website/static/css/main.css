@@ -1,4 +1,5 @@
 /* TABLE OF CONTENTS */
+/* ----------------- */
 /* Breakpoint Library */
 /* ASSETS */
 /* Custom Cursor */
@@ -2071,4 +2072,31 @@ label {
   display: flex;
 }
 
-/* ## END OF USER LOGIN / SIGN UP ## *//*# sourceMappingURL=main.css.map */
+/* ## END OF USER LOGIN / SIGN UP ## */
+/* Menu */
+#image-preview {
+  display: none;
+  width: 100%;
+  border-radius: 20px;
+  float: right;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.menu-item {
+  display: flex;
+  background-color: red;
+  z-index: 0;
+}
+.menu-item img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+  background-color: var(--main-white);
+  padding: 20px;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  z-index: 1;
+}/*# sourceMappingURL=main.css.map */

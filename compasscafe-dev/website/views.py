@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session, current_app
 from flask_login import login_required, current_user
-from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply
+from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply, Menu
 from .auth import is_validemail
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
 from werkzeug.exceptions import HTTPException
+from werkzeug.utils import secure_filename
 from . import db, baristaEmail, notifyEmail
+import os
 
 views = Blueprint("views", __name__)
 
@@ -26,20 +28,6 @@ def handle_exception(e):
 @views.route("/home")
 def home():
     return render_template("home.html", user=current_user)
-
-
-# MENU ROUTE
-
-@views.route("/menu")
-def menu():
-    return render_template("menu.html", user=current_user)
-
-
-# NEWS ROUTE
-
-@views.route("/news")
-def news():
-    return render_template("news.html", user=current_user)
 
 
 # SETTINGS ROUTE
@@ -555,7 +543,8 @@ def notifyDuty():
         is_week_a = apply_whichweek(today)
 
         # Get all Baristas for the Day
-        duty_applications = Apply.query.filter_by(status='accepted', date_day=weekday_name).all()
+        duty_applications = Apply.query.filter_by(
+            status='accepted', date_day=weekday_name).all()
 
         for baristaGroup in duty_applications:
             # Week A Tuesday
@@ -577,3 +566,55 @@ def notifyDuty():
             elif not is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week B':
                 user_email = baristaGroup.user.email
                 notifyEmail(user_email, 'Week B', 'Thursday')
+
+
+# MENU FUNCTIONS
+
+# MENU ROUTE
+@views.route('/menu')
+def menu():
+    menu_items = Menu.query.all()
+    # Price Formatting
+    for item in menu_items:
+        item_price = int(item.price)
+        item.formatted_price = f"${item_price / 100:.2f}"
+    return render_template('menu.html', menu_items=menu_items, user=current_user)
+
+
+# MENU ADD ROUTE
+
+@views.route('/menu/add_item', methods=['GET', 'POST'])
+@login_required
+def menuAdd():
+    if request.method == 'POST':
+        item_name = request.form['item']
+        price = int(float(request.form['price']) * 100)
+        image_file = request.files['image']
+
+        # Thumbnail Upload
+        def allowed_file(filename):
+            ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+            return '.' in filename and \
+                filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+        if image_file and allowed_file(image_file.filename):
+            image_filename = secure_filename(image_file.filename)
+            image_path = os.path.join(
+                current_app.root_path, 'static/assets/menu', image_filename)
+            image_file.save(image_path)
+        else:
+            image_filename = 'default.jpg'
+
+        # Menu Item Creation
+        menu_item = Menu(
+            item=item_name,
+            price=price,
+            image=image_filename,
+            author=current_user.id
+        )
+        db.session.add(menu_item)
+        db.session.commit()
+        flash('Menu item has been added!', 'success')
+        return redirect(url_for('views.menu', user=current_user))
+
+    return render_template('add_item.html', user=current_user)

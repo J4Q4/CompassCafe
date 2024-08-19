@@ -1,0 +1,25 @@
+#image-preview {
+    display: none; 
+    width: 100%; 
+    border-radius: 20px; 
+    float: right;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.menu-item {
+    display: flex;
+    background-color: red;
+    z-index: 0;
+    img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 20px;
+        background-color: var(--main-white);
+        padding: 20px;
+        box-shadow:  18px 18px 30px #f0f0f0,
+             -18px -18px 30px #ffffff;
+        z-index: 1;
+    }
+}

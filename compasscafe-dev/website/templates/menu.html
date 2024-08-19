@@ -1,4 +1,4 @@
-{% extends "template.html" %}{% block title %}Menu{% endblock %}
+{% extends "template.html" %}{% block title %}Add Item{% endblock %}
 {% block content %}
 
 <!-- Blank Space -->
@@ -6,36 +6,27 @@
   <br>
   <br>
   <div class="preload-fadein">
-    <div class="row mb-4">
+    <div class="row">
       <div class="col-md-12 col-lg-6">
-          <h1>Menu</h1>
+        <h1>Menu</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
           <a id="direct-selected">menu</a> / <a href="/home">home</a>
       </div>
+      <div class="col">
+        {% for item in menu_items %}
+          <div class="menu-item col-lg-4">
+            <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+            <h3>{{ item.item }}</h3>
+            <p>{{ item.formatted_price }}</p>
+          </div>
+        {% endfor %}
+        <a class="btn-secondary" href="{{ url_for('views.menuAdd') }}">Add Item</a>
+      </div>
+      <div class="col">
+        displayed item
+      </div>
     </div>
-    <br>
-    <br>
-    <p>COMING SOON!</p>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <p>COMING SOON!</p>
   </div>
 </section>
 <!-- End of Blank Space -->

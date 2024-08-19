@@ -94,3 +94,17 @@ class Apply(db.Model):
                            author], backref='applications')
     # Visibility
     status = db.Column(db.String(50), default='pending')
+
+
+# MENU INTERFACE
+class Menu(db.Model):
+    # Menu Items
+    id = db.Column(db.Integer, primary_key=True)
+    image = db.Column(db.String(20), nullable=True, default='default.jpg')
+    item = db.Column(db.String(150), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    # Non-visible Inputs
+    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    author = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User', backref='menu', lazy=True)

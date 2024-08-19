@@ -236,3 +236,27 @@ function showAcceptPopup(button) {
 function closeAcceptPopup() {
     document.getElementById('confirm-accept-popup').classList.remove('show-delete-confirm');
 }
+
+
+
+
+// Menu File Selection
+// Preview File Name
+function showMenuFile() {
+    var input = document.getElementById('image');
+    var fileName = input.files[0] ? input.files[0].name : '';
+    document.getElementById('file-name').textContent = fileName;
+    
+    // Preview Image
+    var imagePreview = document.getElementById('image-preview');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+        }
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        imagePreview.style.display = 'none';
+    }
+}
