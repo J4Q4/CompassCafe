@@ -8,7 +8,15 @@ Sancta Maria College  •  **Compass Cafe Project**
 
 ## Overview
 - ☕ View the Menu!
-- ☕ Apply as Barista for Lunchtimes!
+- 📆 Apply as Barista for Lunchtimes!
 - 😭 that's just about it.
    - Everything else is Admin Exclusive.
    - But at least it's fancy.
+
+## Potential Future Updates
+- 🔑 Microsoft Sign-in Integration.
+   - Synced Login Credentials
+
+### Discontinued
+- 😎 Substitute Barista Role System?
+- 🎫 Digital Stamp Card?
