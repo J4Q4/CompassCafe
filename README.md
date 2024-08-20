@@ -9,6 +9,7 @@ Sancta Maria College  •  **Compass Cafe Project**
 ## Overview
 - ☕ View the Menu!
 - 📆 Apply as Barista for Lunchtimes!
+- 💌 Automatic Mailing System
 - 😭 that's just about it.
    - Everything else is Admin Exclusive.
    - But at least it's fancy.
