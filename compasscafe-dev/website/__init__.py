@@ -66,12 +66,6 @@ def create_app():
             'current_day': now.strftime('%d %B %Y')
         }
 
-    # @app.route('/send-email')
-    # def test_email():
-    #     user_email = "18065@my.sanctamaria.school.nz"
-    #     notifyEmail(user_email, 'Week B', 'Thursday')
-    #     return "Email sent to " + user_email
-
     from .models import User
 
     # Ensure Notifications are Working (With Context)
@@ -80,7 +74,14 @@ def create_app():
             notifyDuty()
 
     # Schedule Barista Notifications for Day
-    scheduler.add_job(notifyDuty_context, 'cron', hour=8, minute=30)  #8:30 AM
+    scheduler.add_job(notifyDuty_context, 'cron', hour=8, minute=30)  # 8:30 AM
+
+    # Additional Reminder Before Lunchtime
+    scheduler.add_job(notifyDuty_context, 'cron',
+                      hour=13, minute=30)  # 1:30 PM
+
+    # # Test Duty Reminder
+    # scheduler.add_job(notifyDuty_context, 'cron', hour=19, minute=3)
 
     scheduler.start()
 
@@ -110,13 +111,20 @@ def welcomeEmail(user_email):
 
 # ACCEPTED APPLICANTS
 
-def baristaEmail(user_email, week, day):
+def baristaEmail(user_email, firstname, week, day):
     try:
-        msg = Message("Welcome to the Team! - Compass Cafe",
+        msg = Message("Welcome to the Team! ✧ Compass Cafe",
                       sender="noreply@compasscafesmc.wacky.dev",
                       recipients=[user_email])
-        # Include week and day in the email body
-        msg.body = f"Hello! You've been selected to be part of the barista team at Sancta Maria College on {day} of {week}. Looking forward to seeing you! :)"
+
+        msg.html = f"""
+        <p>Hello, <b>{firstname}</b>!</p>
+        <p>You've been selected to be part of the barista team at Sancta Maria College on <b>{day}</b> of <b>{week}</b>.</p>
+        <p>Please ensure to enable Outlook notifications on your phone if you haven't already.</p>
+        <br>
+        <p>Looking forward to seeing you! :)</p>
+        """
+
         mail.send(msg)
         return "Sent"
     except Exception as errorEmail:
@@ -126,13 +134,21 @@ def baristaEmail(user_email, week, day):
 
 # NOTIFY ON DUTY
 
-def notifyEmail(user_email, week, day):
+def notifyEmail(user_email, firstname, week, day):
     try:
-        msg = Message("You're on duty today! - Compass Cafe",
+        msg = Message("You're on duty today! ✧ Compass Cafe",
                       sender="noreply@compasscafesmc.wacky.dev",
                       recipients=[user_email])
-        msg.body = f"Hello! You're on duty today, {day} of {week}. If there has been an error, please contact your supervisor."
-        # SHOW BUTTON FOR VIEWING SCHEDULE ON THE WEBSITE TO SHOW PROOF.
+
+        msg.html = f"""
+        <p>Hello, <b>{firstname}</b>!</p>
+        <p>You're on duty today, <b>{day}</b> of <b>{week}</b>.</p>
+        <br>
+        <p>Looking forward to seeing you! :)</p>
+        <br>
+        <p>If there has been an error, please contact your supervisor.</p>
+        """
+
         mail.send(msg)
         return "Sent"
     except Exception as errorEmail:

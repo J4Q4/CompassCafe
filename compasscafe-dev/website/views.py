@@ -14,10 +14,10 @@ views = Blueprint("views", __name__)
 
 # 404 PAGE NOT FOUND
 @views.errorhandler(HTTPException)
-def handle_exception(e):
-    if e.code == 404:
+def handle_exception(error):
+    if error.code == 404:
         return render_template('404.html', user=current_user), 404
-    return e.description, e.code
+    return error.description, error.code
 
 
 ## WEBPAGES ##
@@ -532,7 +532,7 @@ def delete_accept(id):
     return redirect(url_for('views.apply'))
 
 
-# NOTIFY ACCEPTED USER BARISTAS
+# NOTIFY USER BARISTAS
 
 def notifyDuty():
     with current_app.app_context():
@@ -547,25 +547,24 @@ def notifyDuty():
             status='accepted', date_day=weekday_name).all()
 
         for baristaGroup in duty_applications:
-            # Week A Tuesday
-            if is_week_a and weekday_name == 'Tuesday' and baristaGroup.date_duty == 'Week A':
+            if baristaGroup.user:
                 user_email = baristaGroup.user.email
-                notifyEmail(user_email, 'Week A', 'Tuesday')
+                firstname = baristaGroup.firstname
+                # Week A Tuesday
+                if is_week_a and weekday_name == 'Tuesday' and baristaGroup.date_duty == 'Week A':
+                    notifyEmail(user_email, firstname, 'Week A', 'Tuesday')
 
-            # Week A Thursday
-            elif is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week A':
-                user_email = baristaGroup.user.email
-                notifyEmail(user_email, 'Week A', 'Thursday')
+                # Week A Thursday
+                elif is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week A':
+                    notifyEmail(user_email, firstname, 'Week A', 'Thursday')
 
-            # Week B Tuesday
-            elif not is_week_a and weekday_name == 'Tuesday' and baristaGroup.date_duty == 'Week B':
-                user_email = baristaGroup.user.email
-                notifyEmail(user_email, 'Week B', 'Tuesday')
+                # Week B Tuesday
+                elif not is_week_a and weekday_name == 'Tuesday' and baristaGroup.date_duty == 'Week B':
+                    notifyEmail(user_email, firstname, 'Week B', 'Tuesday')
 
-            # Week B Thursday
-            elif not is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week B':
-                user_email = baristaGroup.user.email
-                notifyEmail(user_email, 'Week B', 'Thursday')
+                # Week B Thursday
+                elif not is_week_a and weekday_name == 'Thursday' and baristaGroup.date_duty == 'Week B':
+                    notifyEmail(user_email, firstname, 'Week B', 'Thursday')
 
 
 # MENU FUNCTIONS
@@ -593,7 +592,7 @@ def menuAdd():
 
         # Thumbnail Upload
         def allowed_file(filename):
-            ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+            ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'}
             return '.' in filename and \
                 filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -604,6 +603,8 @@ def menuAdd():
             image_file.save(image_path)
         else:
             image_filename = 'default.jpg'
+            flash('Invalid image file.', 'error')
+            return redirect(url_for('views.menuAdd'))
 
         # Menu Item Creation
         menu_item = Menu(

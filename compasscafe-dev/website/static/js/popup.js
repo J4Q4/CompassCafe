@@ -251,8 +251,8 @@ function showMenuFile() {
     var imagePreview = document.getElementById('image-preview');
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(e) {
-            imagePreview.src = e.target.result;
+        reader.onload = function(fileIMG) {
+            imagePreview.src = fileIMG.target.result;
             imagePreview.style.display = 'block';
         }
         reader.readAsDataURL(input.files[0]);
@@ -264,21 +264,27 @@ function showMenuFile() {
 
 // Show Hovered Menu Item Details
 document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('mouseover', function() {
-        const itemTitle = this.querySelector('h3').innerText;
-        const itemPrice = this.querySelector('p').innerText;
-        const itemImageSrc = this.querySelector('img').src;
+    let hoverTimeout;
 
-        document.getElementById('hovered-item-title').innerText = itemTitle;
-        document.getElementById('hovered-item-price').innerText = itemPrice;
-        const itemImage = document.getElementById('hovered-item-image');
-        itemImage.src = itemImageSrc;
-        itemImage.style.display = 'block';
+    item.addEventListener('mouseover', function() {
+        hoverTimeout = setTimeout(() => {
+            const hoveredItemDisplay = document.getElementById('hovered-item-display');
+            hoveredItemDisplay.classList.add('show-hoverMenu');
+
+            // Update content inside #hovered-item-display
+            const itemTitle = this.querySelector('h3').innerText;
+            const itemPrice = this.querySelector('p').innerText;
+            const imgSrc = this.querySelector('img').src;
+
+            document.getElementById('hovered-item-title').innerText = itemTitle;
+            document.getElementById('hovered-item-price').innerText = itemPrice;
+            document.getElementById('hovered-item-image').src = imgSrc;
+        }, 150); // 0.15s delay before showing image on hover
     });
 
     item.addEventListener('mouseout', function() {
-        document.getElementById('hovered-item-image').style.display = 'none';
-        document.getElementById('hovered-item-title').innerText = '';
-        document.getElementById('hovered-item-price').innerText = '';
+        clearTimeout(hoverTimeout);
+        const hoveredItemDisplay = document.getElementById('hovered-item-display');
+        hoveredItemDisplay.classList.remove('show-hoverMenu');
     });
 });

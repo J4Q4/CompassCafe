@@ -2,4 +2,5 @@
 .WINenv
 .SMCenv
 /compasscafe-dev/website/__pycache__
+/compasscafe-dev/website/static/assets/menu
 .DS_Store

@@ -6,9 +6,9 @@
   <br>
   <br>
   <div class="preload-fadein">
-    <div class="row mb-4">
+    <div class="row mb-5">
       <div class="col-md-12 col-lg-6">
-          <h1>Menu</h1>
+        <h1>Add Item</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
           <a id="direct-selected">add item</a> / <a href="/menu">menu</a> / <a href="/home">home</a>
@@ -16,7 +16,7 @@
     </div>
     <form action="{{ url_for('views.menuAdd') }}" method="POST" enctype="multipart/form-data">
         <div class="dashboarduser-table row mb-4">
-            <div>
+            <div class="col-lg-12 col-xl-6">
                 <label for="item">Item Name:</label>
                 <input 
                     class="form-control" 
@@ -26,7 +26,7 @@
                     required>
                 <br>
             </div>
-            <div>
+            <div class="col-lg-12 col-xl-6">
                 <label for="price">Price:</label>
                 <input 
                     class="form-control" 
@@ -43,7 +43,7 @@
         </div>
       <div>
         <div class="dashboarduser-table row">
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-6 col-xl-4">
                 <label for="image">Upload Image:</label>
                 <br>
                 <button class="btn-secondary" type="button" onclick="document.getElementById('image').click()">Select Thumbnail</button>
@@ -52,12 +52,14 @@
                 <input type="file" id="image" name="image" accept="image/*" style="visibility: hidden;" onchange="showMenuFile()" class="mb-4">
                 <br>
                 <div class="mb-4">
-                    <button class="btn-primary" type="submit">Add Item</button>
-                    <a class="btn-secondary" href="{{ url_for('views.menu') }}">Cancel</a>
+                    <button class="btn-primary mb-4 img-preview-btnGap" type="submit">Add Item</button>
+                    <a class="btn-secondary mb-4" href="{{ url_for('views.menu') }}">Cancel</a>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-6">
-                <img class="mb-4" id="image-preview" src="" alt="Image Preview"/>
+            <div class="col-md-12 col-lg-6 col-xl-8 img-preview-container">
+                <div class="img-preview-wrap">
+                    <img id="image-preview" src="" alt="Image Preview"/>
+                </div>
             </div>
         </div>
       </div>

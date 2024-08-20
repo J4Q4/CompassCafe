@@ -1,4 +1,4 @@
-{% extends "template.html" %}{% block title %}Add Item{% endblock %}
+{% extends "template.html" %}{% block title %}Menu{% endblock %}
 {% block content %}
 
 <!-- Blank Space -->
@@ -6,7 +6,7 @@
   <br>
   <br>
   <div class="preload-fadein">
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-md-12 col-lg-6">
         <h1>Menu</h1>
       </div>
@@ -33,10 +33,12 @@
 
       <div class="col-lg-6">
         <!-- Displaying Hovered Thumbnail -->
-        <div id="hovered-item-display" style="padding: 0 0 0 150px;">
-            <img id="hovered-item-image" src="" alt="" style="display:none;">
-            <h3 id="hovered-item-title"></h3>
-            <p id="hovered-item-price"></p>
+        <div id="hovered-item-display">
+            <div id="hovered-item-tags">
+              <h3 id="hovered-item-title"></h3>
+              <p id="hovered-item-price"></p>
+            </div>
+            <img id="hovered-item-image" src="" alt="">
         </div>
     </div>
     </div>
