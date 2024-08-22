@@ -1357,7 +1357,8 @@ h1 {
 }
 
 .bluespace-test {
-  background-color: var(--main-lightblue2);
+  background-image: radial-gradient(#b4cbe5 2px, var(--main-lightblue2) 2px);
+  background-size: 40px 40px;
   padding: 100px 150px;
   margin: 0;
   width: 100%;
@@ -1571,7 +1572,9 @@ h1 {
 }
 #contain404 h1 {
   color: var(--main-white);
-  text-shadow: 6px 0 var(--main-navy), -6px 0 var(--main-navy), 0 6px var(--main-navy), 0 -6px var(--main-navy), 3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
+  -webkit-text-stroke: 15px var(--main-navy);
+  text-shadow: none;
+  paint-order: stroke fill;
   filter: drop-shadow(0 15px 0 var(--main-navy));
   letter-spacing: 5px;
   font-size: 200px !important;
@@ -2162,11 +2165,17 @@ label {
   font-family: "Open Sans";
   font-weight: 700;
   text-transform: capitalize;
+  background-color: #fff;
+  color: #000;
+  padding: 1px 3px;
+  border-radius: 10px;
 }
 .menu-item p {
   font-size: 14px;
   margin: 0;
   font-family: "JetBrains Mono";
+  position: absolute;
+  opacity: 0;
 }
 
 #hovered-item-display {

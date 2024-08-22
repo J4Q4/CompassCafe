@@ -82,15 +82,22 @@
         font-family: 'Open Sans';
         font-weight: 700;
         text-transform: capitalize;
+        background-color: #fff;
+        color: #000;
+        padding: 1px 3px;
+        border-radius: 10px;
     }
     p {
         font-size: 14px;
         margin: 0;
         font-family: 'JetBrains Mono';
+        position: absolute;
+        opacity: 0;
     }
 }
 
 
+// Hover Items
 #hovered-item-display {
     text-align: right;
     padding: 0 0 0 150px;

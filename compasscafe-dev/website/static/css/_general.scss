@@ -62,7 +62,8 @@ h1 {
     overflow-x: hidden;
 }
 .bluespace-test {
-    background-color: var(--main-lightblue2);
+    background-image: radial-gradient(#b4cbe5 2px, var(--main-lightblue2) 2px);
+    background-size: 40px 40px;
     padding: 100px 150px;
     margin: 0;
     width: 100%;

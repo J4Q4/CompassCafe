@@ -5,8 +5,9 @@
     height: 75vh;
     h1 {
         color: var(--main-white);
-        text-shadow: 6px 0 var(--main-navy), -6px 0 var(--main-navy), 0 6px var(--main-navy), 0 -6px var(--main-navy),
-               3px 3px var(--main-navy), -3px -3px var(--main-navy), 3px -3px var(--main-navy), -3px 3px var(--main-navy);
+        -webkit-text-stroke: 15px var(--main-navy);
+        text-shadow: none;
+        paint-order: stroke fill;
         filter: drop-shadow(0 15px 0 var(--main-navy));
         letter-spacing: 5px;
         font-size: 200px !important;
