@@ -146,6 +146,7 @@
 /* Pagination */
 .pagination-row {
     justify-content: center;
+    gap: 20px;
 }
 .pagination-btn {
     width: 40px;
@@ -155,7 +156,6 @@
     align-items: center;
     background-color: var(--main-white);
     color: #000;
-    margin: 0 10px;
     border-radius: 10px;
     border: #000 2px solid;
     text-decoration: none;

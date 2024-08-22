@@ -266,20 +266,22 @@ function showMenuFile() {
 document.querySelectorAll('.menu-item').forEach(item => {
     let hoverTimeout;
 
-    item.addEventListener('mouseover', function() {
-        hoverTimeout = setTimeout(() => {
-            const hoveredItemDisplay = document.getElementById('hovered-item-display');
-            hoveredItemDisplay.classList.add('show-hoverMenu');
+    item.addEventListener('mouseover', function(hoverMenuItem) {
+        if (hoverMenuItem.target.tagName === 'IMG') {
+            hoverTimeout = setTimeout(() => {
+                const hoveredItemDisplay = document.getElementById('hovered-item-display');
+                hoveredItemDisplay.classList.add('show-hoverMenu');
 
-            // Update content inside #hovered-item-display
-            const itemTitle = this.querySelector('h3').innerText;
-            const itemPrice = this.querySelector('p').innerText;
-            const imgSrc = this.querySelector('img').src;
+                // Update content inside #hovered-item-display
+                const itemTitle = this.querySelector('h3').innerText;
+                const itemPrice = this.querySelector('p').innerText;
+                const imgSrc = this.querySelector('img').src;
 
-            document.getElementById('hovered-item-title').innerText = itemTitle;
-            document.getElementById('hovered-item-price').innerText = itemPrice;
-            document.getElementById('hovered-item-image').src = imgSrc;
-        }, 150); // 0.15s delay before showing image on hover
+                document.getElementById('hovered-item-title').innerText = itemTitle;
+                document.getElementById('hovered-item-price').innerText = itemPrice;
+                document.getElementById('hovered-item-image').src = imgSrc;
+            }, 150); // 0.15s delay before showing image on hover
+        }
     });
 
     item.addEventListener('mouseout', function() {

@@ -292,6 +292,7 @@ form #filterPopBTN,
 /* Pagination */
 .pagination-row {
   justify-content: center;
+  gap: 20px;
 }
 
 .pagination-btn {
@@ -302,7 +303,6 @@ form #filterPopBTN,
   align-items: center;
   background-color: var(--main-white);
   color: #000;
-  margin: 0 10px;
   border-radius: 10px;
   border: #000 2px solid;
   text-decoration: none;
@@ -2118,13 +2118,18 @@ label {
   gap: 30px;
 }
 
+.menu-pagination {
+  gap: 20px;
+}
+
 .menu-item {
   position: relative;
   border-radius: 20px;
   padding: 0;
-  max-width: calc(33.333% - 30px);
+  max-width: calc(33.333% - 20px);
   transform: scale(1);
   transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+  /* Menu Item Text */
 }
 .menu-item:hover {
   transform: scale(1.05);
@@ -2158,6 +2163,7 @@ label {
   color: #000;
   z-index: 3;
   padding: 0 0 10px 10px;
+  pointer-events: none;
 }
 .menu-item h3 {
   font-size: 16px;

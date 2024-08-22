@@ -36,11 +36,15 @@
     gap: 30px;
 }
 
+.menu-pagination {
+    gap: 20px;
+}
+
 .menu-item {
     position: relative;
     border-radius: 20px;
     padding: 0;
-    max-width: calc(33.333% - 30px);
+    max-width: calc(33.333% - 20px);
     transform: scale(1);
         transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
         &:hover {
@@ -67,6 +71,7 @@
         box-shadow: 18px 18px 30px #f0f0f0, 
             -18px -18px 30px #ffffff;
     }
+    /* Menu Item Text */
     .menu-tags {
         position: absolute;
         bottom: 10px;
@@ -75,6 +80,7 @@
         color: #000;
         z-index: 3;
         padding: 0 0 10px 10px;
+        pointer-events: none;
     }
     h3 {
         font-size: 16px;

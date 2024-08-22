@@ -17,33 +17,44 @@
 
     <div class="row">
       <div class="col-lg-6">
+
         <div class="row mb-4 menu-container">
           {% for item in paginMenu.items %}
-            <div class="menu-item col-md-6 col-lg-4">
-              <div class="menu-tags">
-                <p>{{ item.formatted_price }}</p>
-                <h3>{{ item.item }}</h3>
-              </div>
-              <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+          <div class="menu-item col-md-6 col-lg-4">
+            <div class="menu-tags">
+              <p>{{ item.formatted_price }}</p>
+              <h3>{{ item.item }}</h3>
             </div>
+            <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+          </div>
           {% endfor %}
+
         </div>
-        <a class="btn-secondary mt-3" href="{{ url_for('views.menuAdd') }}">Add Item</a>
-        <div class="row pagination-row mb-4">
-          <!-- Pagination -->
-          {% for page in paginPages.pages %}
-              {% if page.url and page.num %}
-                  {% if page.current %}
-                      <a class="pagination-btn pgntnbtn-info mb-4 current" href="{{ page.url }}">{{ page.num }}</a>
-                  {% else %}
-                      <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ page.url }}">{{ page.num }}</a>
-                  {% endif %}
-              {% else %}
-                  ...
-              {% endif %}
-          {% endfor %}
-          <!-- End of Pagination -->
+        
+        <!-- Interactable Menu Navigation Buttons -->
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 mb-4 text-center text-sm-start">
+              <a class="btn btn-primary" href="{{ url_for('views.menuAdd') }}">Add Item</a>
+          </div>
+          <div class="col-xs-12 col-sm-6 text-center text-sm-end">
+            <div class="menu-pagination d-inline-flex">
+                <!-- Pagination -->
+                {% for page in paginPages.pages %}
+                    {% if page.url and page.num %}
+                        {% if page.current %}
+                            <a class="pagination-btn pgntnbtn-info mb-0 current" href="{{ page.url }}">{{ page.num }}</a>
+                        {% else %}
+                            <a class="pagination-btn pgntnbtn-outline-info mb-0" href="{{ page.url }}">{{ page.num }}</a>
+                        {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+                {% endfor %}
+                <!-- End of Pagination -->
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div class="col-lg-6">
