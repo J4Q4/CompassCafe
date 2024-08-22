@@ -476,14 +476,15 @@ def accept_application(post_id):
         week = post.date_duty
         # Tuesday or Thursday
         day = post.date_day
+        # First Name of Barista
+        firstname = post.firstname
 
         # Maximum of 4 Baristas on Given Date
         barista_max = 4
         accepted_count = Apply.query.filter_by(
             status='accepted', date_duty=week, date_day=day).count()
         if accepted_count >= barista_max:
-            flash(f'{day}, {week} is full: {
-                  barista_max} baristas max.', category='error')
+            flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
         else:
             post.status = 'accepted'
             db.session.commit()
@@ -492,12 +493,11 @@ def accept_application(post_id):
             user_email = post.user.email
 
             # Send the barista email
-            acceptBarista = baristaEmail(user_email, week, day)
+            acceptBarista = baristaEmail(user_email, firstname, week, day)
             if acceptBarista == "Sent":
                 flash('Barista added and email sent!', category='success')
             else:
-                flash('Barista added, but failed to send email.',
-                      category='warning')
+                flash('Barista added, but failed to send email.',category='warning')
 
         return redirect(url_for('views.apply'))
     return redirect(url_for('views.apply'))
@@ -572,12 +572,18 @@ def notifyDuty():
 # MENU ROUTE
 @views.route('/menu')
 def menu():
-    menu_items = Menu.query.all()
+    page = request.args.get('page', 1, type=int)
+    paginMenu = Menu.query.paginate(page=page, per_page=9)
+
+    # Pagination Pages
+    paginPages = {'pages': [{'url': url_for('views.menu', page=page_num), 'num': page_num, 'current': page_num == paginMenu.page}
+                            for page_num in range(1, paginMenu.pages + 1)]}
+
     # Price Formatting
-    for item in menu_items:
+    for item in paginMenu.items:
         item_price = int(item.price)
         item.formatted_price = f"${item_price / 100:.2f}"
-    return render_template('menu.html', menu_items=menu_items, user=current_user)
+    return render_template('menu.html', user=current_user, paginMenu=paginMenu, paginPages=paginPages)
 
 
 # MENU ADD ROUTE
@@ -594,15 +600,16 @@ def menuAdd():
         def allowed_file(filename):
             ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'}
             return '.' in filename and \
-                filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
         if image_file and allowed_file(image_file.filename):
             image_filename = secure_filename(image_file.filename)
             image_path = os.path.join(
-                current_app.root_path, 'static/assets/menu', image_filename)
+            current_app.root_path, 'static/assets/menu', image_filename)
             image_file.save(image_path)
-        else:
+        elif not image_file:
             image_filename = 'default.jpg'
+        else:
             flash('Invalid image file.', 'error')
             return redirect(url_for('views.menuAdd'))
 

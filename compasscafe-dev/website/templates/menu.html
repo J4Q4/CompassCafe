@@ -18,7 +18,7 @@
     <div class="row">
       <div class="col-lg-6">
         <div class="row mb-4 menu-container">
-          {% for item in menu_items %}
+          {% for item in paginMenu.items %}
             <div class="menu-item col-md-6 col-lg-4">
               <div class="menu-tags">
                 <p>{{ item.formatted_price }}</p>
@@ -29,6 +29,21 @@
           {% endfor %}
         </div>
         <a class="btn-secondary mt-3" href="{{ url_for('views.menuAdd') }}">Add Item</a>
+        <div class="row pagination-row mb-4">
+          <!-- Pagination -->
+          {% for page in paginPages.pages %}
+              {% if page.url and page.num %}
+                  {% if page.current %}
+                      <a class="pagination-btn pgntnbtn-info mb-4 current" href="{{ page.url }}">{{ page.num }}</a>
+                  {% else %}
+                      <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ page.url }}">{{ page.num }}</a>
+                  {% endif %}
+              {% else %}
+                  ...
+              {% endif %}
+          {% endfor %}
+          <!-- End of Pagination -->
+        </div>
       </div>
 
       <div class="col-lg-6">
