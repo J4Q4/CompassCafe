@@ -7,15 +7,17 @@ Sancta Maria College  •  **Compass Cafe Project**
 ![Compass Cafe Github Banner](https://github.com/J4Q4/Compass-Cafe/blob/main/extras/githubbanner2.png)
 
 ## Overview
-- 😭 cbf doing this ngl.
-- ☕ register barista duty during lunchtimes.
-- 🙃 for what ever reason, the **responsiveness doesn't work on opera browsers**;
-  - everywhere it does i.e. chrome, edge... etc.
-  - **but then again,** no one uses opera on mobile or tablet devices.
+- ☕ View the Menu!
+- 📆 Apply as Barista for Lunchtimes!
+- 💌 Automatic Mailing System!
+- 😭 that's just about it.
+   - Everything else is Admin Exclusive.
+   - But at least it's fancy.
 
-## Possible Future Updates
-- 📪 email acceptance notifications.
-- 📱 push notifications on duty.
+## Potential Future Updates
+- 🔑 Microsoft Sign-in Integration.
+   - Synced Login Credentials
 
-- 💳 [optional] digital points.
-- 🎫 digital stamp cards.
+### Discontinued
+- 😎 Substitute Barista Role System?
+- 🎫 Digital Stamp Card?
