@@ -100,8 +100,85 @@
         position: absolute;
         opacity: 0;
     }
+    h6 {
+        font-size: 14px;
+        margin: 0;
+        font-family: 'JetBrains Mono';
+        position: absolute;
+        opacity: 0;
+    }
+    form {
+        pointer-events: visible !important;
+    }
 }
 
+
+// Categories Filter
+.categories-list ul {
+    list-style-type: none;
+    padding: 0;
+    position: relative;
+    display: flex;
+    gap: 40px;
+    font-family: 'JetBrains Mono';
+    font-size: 16px;
+    font-weight: 400;
+    z-index: 3;
+    li {
+        display: inline-block;
+        .selected-category {
+            color: red;
+            font-weight: 700;
+        }
+        a {
+            color: #000;
+            text-decoration: none;
+            transform: translateY(0);
+            display: block;
+            animation: categorylist 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+            &:hover:not(.activeCategory) {
+                animation: categorylist-hover 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+            }
+            @keyframes categorylist {
+                0% {
+                    transform: translateY(-5px);
+                }
+                100% {
+                    transform: translateY(0);
+                }
+            }
+            @keyframes categorylist-hover {
+                0% {
+                    transform: translateY(0);
+                }
+                100% {
+                    transform: translateY(-5px);
+                }
+            }
+            &:not(.activeCategory)::after {
+                content: '';
+                width: 0;
+                height: 1px;
+                background-color: #000;
+                margin: auto;
+                display: block;
+            }
+            &:hover::after {
+                width: 100%;
+                transition: all 0.5s;
+            }
+        }
+    }
+}
+
+.activeCategory {
+    color: var(--main-navy) !important;
+    font-weight: 700;
+    background-color: var(--main-lightblue2);
+    border-radius: 10px;
+    padding: 0 10px;
+    pointer-events: none !important;
+}
 
 // Hover Items
 #hovered-item-display {
@@ -110,8 +187,11 @@
     transform: perspective(1000px) rotateY(-30deg);
     display: none;
     margin-right: 20px;
-    p {
+    h6, p {
         font-family: 'JetBrains Mono';
+        font-size: 16px;
+        z-index: 3;
+        position: relative;
     }
 }
 

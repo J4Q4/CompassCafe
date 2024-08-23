@@ -1474,6 +1474,7 @@ h1 {
   width: 0;
   height: 1px;
   background-color: #000;
+  margin: auto;
   display: block;
 }
 .head-directory a:not(#direct-selected):hover::after {
@@ -2183,6 +2184,82 @@ label {
   position: absolute;
   opacity: 0;
 }
+.menu-item h6 {
+  font-size: 14px;
+  margin: 0;
+  font-family: "JetBrains Mono";
+  position: absolute;
+  opacity: 0;
+}
+.menu-item form {
+  pointer-events: visible !important;
+}
+
+.categories-list ul {
+  list-style-type: none;
+  padding: 0;
+  position: relative;
+  display: flex;
+  gap: 40px;
+  font-family: "JetBrains Mono";
+  font-size: 16px;
+  font-weight: 400;
+  z-index: 3;
+}
+.categories-list ul li {
+  display: inline-block;
+}
+.categories-list ul li .selected-category {
+  color: red;
+  font-weight: 700;
+}
+.categories-list ul li a {
+  color: #000;
+  text-decoration: none;
+  transform: translateY(0);
+  display: block;
+  animation: categorylist 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.categories-list ul li a:hover:not(.activeCategory) {
+  animation: categorylist-hover 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+@keyframes categorylist {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes categorylist-hover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+.categories-list ul li a:not(.activeCategory)::after {
+  content: "";
+  width: 0;
+  height: 1px;
+  background-color: #000;
+  margin: auto;
+  display: block;
+}
+.categories-list ul li a:hover::after {
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.activeCategory {
+  color: var(--main-navy) !important;
+  font-weight: 700;
+  background-color: var(--main-lightblue2);
+  border-radius: 10px;
+  padding: 0 10px;
+  pointer-events: none !important;
+}
 
 #hovered-item-display {
   text-align: right;
@@ -2191,8 +2268,11 @@ label {
   display: none;
   margin-right: 20px;
 }
-#hovered-item-display p {
+#hovered-item-display h6, #hovered-item-display p {
   font-family: "JetBrains Mono";
+  font-size: 16px;
+  z-index: 3;
+  position: relative;
 }
 
 #hovered-item-image {

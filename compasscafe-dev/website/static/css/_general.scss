@@ -186,10 +186,11 @@ h1 {
             animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
         }
         &:not(#direct-selected)::after {
-            content: "";
+            content: '';
             width: 0;
             height: 1px;
             background-color: #000;
+            margin: auto;
             display: block;
         }
         &:not(#direct-selected):hover::after {

@@ -276,10 +276,13 @@ document.querySelectorAll('.menu-item').forEach(item => {
                 const itemTitle = this.querySelector('h3').innerText;
                 const itemPrice = this.querySelector('p').innerText;
                 const imgSrc = this.querySelector('img').src;
+                const itemDescription = this.querySelector('h6').innerText;
 
+                // Render the content
                 document.getElementById('hovered-item-title').innerText = itemTitle;
                 document.getElementById('hovered-item-price').innerText = itemPrice;
                 document.getElementById('hovered-item-image').src = imgSrc;
+                document.getElementById('hovered-item-description').innerText = itemDescription;
             }, 150); // 0.15s delay before showing image on hover
         }
     });

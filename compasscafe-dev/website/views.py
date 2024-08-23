@@ -484,7 +484,8 @@ def accept_application(post_id):
         accepted_count = Apply.query.filter_by(
             status='accepted', date_duty=week, date_day=day).count()
         if accepted_count >= barista_max:
-            flash(f'{day}, {week} is full: {barista_max} baristas max.', category='error')
+            flash(f'{day}, {week} is full: {
+                  barista_max} baristas max.', category='error')
         else:
             post.status = 'accepted'
             db.session.commit()
@@ -497,7 +498,8 @@ def accept_application(post_id):
             if acceptBarista == "Sent":
                 flash('Barista added and email sent!', category='success')
             else:
-                flash('Barista added, but failed to send email.',category='warning')
+                flash('Barista added, but failed to send email.',
+                      category='warning')
 
         return redirect(url_for('views.apply'))
     return redirect(url_for('views.apply'))
@@ -569,21 +571,39 @@ def notifyDuty():
 
 # MENU FUNCTIONS
 
+# Menu Categories
+MENU_CATEGORIES = ["Special", "Hot Drinks", "Cold Drinks"]
+
+
 # MENU ROUTE
+
 @views.route('/menu')
 def menu():
+    category_filter = request.args.get('category')
     page = request.args.get('page', 1, type=int)
-    paginMenu = Menu.query.paginate(page=page, per_page=9)
+
+    if category_filter and category_filter in MENU_CATEGORIES:
+        paginMenu = Menu.query.filter_by(
+            category=category_filter).paginate(page=page, per_page=9)
+    else:
+        paginMenu = Menu.query.paginate(page=page, per_page=9)
 
     # Pagination Pages
-    paginPages = {'pages': [{'url': url_for('views.menu', page=page_num), 'num': page_num, 'current': page_num == paginMenu.page}
+    paginPages = {'pages': [{'url': url_for('views.menu', page=page_num, category=category_filter),
+                             'num': page_num, 'current': page_num == paginMenu.page}
                             for page_num in range(1, paginMenu.pages + 1)]}
 
     # Price Formatting
     for item in paginMenu.items:
         item_price = int(item.price)
         item.formatted_price = f"${item_price / 100:.2f}"
-    return render_template('menu.html', user=current_user, paginMenu=paginMenu, paginPages=paginPages)
+
+    # Display Categories
+    display_categories = ["All Drinks"] + MENU_CATEGORIES
+
+    return render_template('menu.html', user=current_user,
+                           paginMenu=paginMenu, paginPages=paginPages,
+                           categories=display_categories, category_filter=category_filter)
 
 
 # MENU ADD ROUTE
@@ -591,21 +611,27 @@ def menu():
 @views.route('/menu/add_item', methods=['GET', 'POST'])
 @login_required
 def menuAdd():
+    if not current_user.is_staff:
+        flash('You do not have permission to view this page.', 'error')
+        return redirect(url_for('views.menu'))
+    
     if request.method == 'POST':
         item_name = request.form['item']
         price = int(float(request.form['price']) * 100)
         image_file = request.files['image']
+        description = request.form['description']
+        category = request.form['category']
 
         # Thumbnail Upload
         def allowed_file(filename):
             ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'}
             return '.' in filename and \
-            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+                filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
         if image_file and allowed_file(image_file.filename):
             image_filename = secure_filename(image_file.filename)
             image_path = os.path.join(
-            current_app.root_path, 'static/assets/menu', image_filename)
+                current_app.root_path, 'static/assets/menu', image_filename)
             image_file.save(image_path)
         elif not image_file:
             image_filename = 'default.jpg'
@@ -618,11 +644,29 @@ def menuAdd():
             item=item_name,
             price=price,
             image=image_filename,
-            author=current_user.id
+            author=current_user.id,
+            description=description,
+            category=category
         )
         db.session.add(menu_item)
         db.session.commit()
         flash('Menu item has been added!', 'success')
         return redirect(url_for('views.menu', user=current_user))
 
-    return render_template('add_item.html', user=current_user)
+    return render_template('add_item.html', user=current_user, categories=MENU_CATEGORIES)
+
+
+# MENU DELETE ROUTE
+
+@views.route('/menu/delete_item/<int:item_id>', methods=['POST'])
+@login_required
+def delete_menu(item_id):
+    menu_item = Menu.query.get_or_404(item_id)
+    if not current_user.is_staff:
+        flash('You do not have permission to delete this item.', 'error')
+    else:
+        db.session.delete(menu_item)
+        db.session.commit()
+        flash('Menu item has been deleted.', 'success')
+
+    return redirect(url_for('views.menu'))

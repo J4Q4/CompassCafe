@@ -1,4 +1,4 @@
-{% extends "template.html" %}{% block title %}Add Item{% endblock %}
+{% extends "template.html" %}{% block title %}Edit Menu {% endblock %}
 {% block content %}
 
 <!-- Blank Space -->
@@ -11,13 +11,17 @@
         <h1>Add Item</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-          <a id="direct-selected">add item</a> / <a href="/menu">menu</a> / <a href="/home">home</a>
+          <a id="direct-selected">edit menu</a> / <a href="/menu">menu</a> / <a href="/home">home</a>
       </div>
     </div>
+
+    <!-- Add Item -->
     <form action="{{ url_for('views.menuAdd') }}" method="POST" enctype="multipart/form-data">
-        <div class="dashboarduser-table row mb-4">
+        <div class="dashboarduser-table row mb-5">
+
+            <!-- Item Name -->
             <div class="col-lg-12 col-xl-6">
-                <label for="item">Item Name:</label>
+                <label for="item">Item Name</label>
                 <input 
                     class="form-control" 
                     type="text" 
@@ -26,8 +30,10 @@
                     required>
                 <br>
             </div>
+
+            <!-- Price -->
             <div class="col-lg-12 col-xl-6">
-                <label for="price">Price:</label>
+                <label for="price">Price</label>
                 <input 
                     class="form-control" 
                     type="number" 
@@ -40,6 +46,31 @@
                     required>
                 <br>
             </div>
+
+            <!-- Category -->
+            <div class="col-12">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" name="category" required>
+                <option value="" disabled selected>Select a Category</option>
+                {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+              </select>
+              <br>
+            </div>
+          
+            <!-- Description -->
+            <div class="col-12">
+              <label for="description">Description</label>
+              <textarea
+                class="form-control" 
+                id="description" 
+                name="description"
+                rows="4" 
+                maxlength="250"
+                required></textarea>
+            </div>
+            
         </div>
       <div>
         <div class="dashboarduser-table row">
@@ -64,6 +95,32 @@
         </div>
       </div>
     </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Edit Menu -->
+    <div class="row mb-5 mt-5">
+      <div class="col-md-12 col-lg-6">
+        <h1>Edit Menu</h1>
+      </div>
+    </div>
+
+    <form>
+      <div class="dashboarduser-table row mt-5">
+       <h3 style="padding-left: 0">Menu Items</h3>
+        <ul>
+          <li>Edit Item</li>
+          <li>Delete Item</li>
+        </ul>
+        <div style="padding-left: 0;">
+          <a class="btn-secondary mb-4" href="{{ url_for('views.menu') }}">Back</a>
+        </div>
+      </div>
+    </form>
+
   </div>
 </section>
 <!-- End of Blank Space -->
