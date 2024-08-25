@@ -575,21 +575,16 @@ def notifyDuty():
 MENU_CATEGORIES = ["Special", "Hot Drinks", "Cold Drinks"]
 
 
-# MENU ROUTE
-
-@views.route('/menu')
-def menu():
-    category_filter = request.args.get('category')
-    page = request.args.get('page', 1, type=int)
-
+# MENU GRID
+def menuGrid(category_filter=None, page=1, per_page=9, current_view='views.menu'):
     if category_filter and category_filter in MENU_CATEGORIES:
         paginMenu = Menu.query.filter_by(
-            category=category_filter).paginate(page=page, per_page=9)
+            category=category_filter).paginate(page=page, per_page=per_page)
     else:
-        paginMenu = Menu.query.paginate(page=page, per_page=9)
+        paginMenu = Menu.query.paginate(page=page, per_page=per_page)
 
     # Pagination Pages
-    paginPages = {'pages': [{'url': url_for('views.menu', page=page_num, category=category_filter),
+    paginPages = {'pages': [{'url': url_for(current_view, page=page_num, category=category_filter),
                              'num': page_num, 'current': page_num == paginMenu.page}
                             for page_num in range(1, paginMenu.pages + 1)]}
 
@@ -601,6 +596,19 @@ def menu():
     # Display Categories
     display_categories = ["All Drinks"] + MENU_CATEGORIES
 
+    return paginMenu, paginPages, display_categories
+
+
+# MENU ROUTE
+
+@views.route('/menu')
+def menu():
+    category_filter = request.args.get('category')
+    page = request.args.get('page', 1, type=int)
+
+    paginMenu, paginPages, display_categories = menuGrid(
+        category_filter, page, per_page=9, current_view='views.menu')
+
     return render_template('menu.html', user=current_user,
                            paginMenu=paginMenu, paginPages=paginPages,
                            categories=display_categories, category_filter=category_filter)
@@ -608,13 +616,16 @@ def menu():
 
 # MENU ADD ROUTE
 
-@views.route('/menu/add_item', methods=['GET', 'POST'])
+@views.route('/menu/add-item', methods=['GET', 'POST'])
 @login_required
 def menuAdd():
+    category_filter = request.args.get('category')
+    page = request.args.get('page', 1, type=int)
+
     if not current_user.is_staff:
         flash('You do not have permission to view this page.', 'error')
         return redirect(url_for('views.menu'))
-    
+
     if request.method == 'POST':
         item_name = request.form['item']
         price = int(float(request.form['price']) * 100)
@@ -653,20 +664,38 @@ def menuAdd():
         flash('Menu item has been added!', 'success')
         return redirect(url_for('views.menu', user=current_user))
 
-    return render_template('add_item.html', user=current_user, categories=MENU_CATEGORIES)
+    paginMenu, paginPages, display_categories = menuGrid(
+        category_filter, page, per_page=10, current_view='views.menuAdd')
+
+    return render_template('add_item.html', user=current_user, categories=display_categories,
+                           paginMenu=paginMenu, paginPages=paginPages, category_filter=category_filter)
 
 
 # MENU DELETE ROUTE
 
-@views.route('/menu/delete_item/<int:item_id>', methods=['POST'])
+@views.route('/menu/add-item/delete-item/<int:item_id>', methods=['POST'])
 @login_required
 def delete_menu(item_id):
     menu_item = Menu.query.get_or_404(item_id)
-    if not current_user.is_staff:
-        flash('You do not have permission to delete this item.', 'error')
-    else:
-        db.session.delete(menu_item)
-        db.session.commit()
-        flash('Menu item has been deleted.', 'success')
 
-    return redirect(url_for('views.menu'))
+    if not menu_item:
+        flash('Menu item does not exist.', 'error')
+        return redirect(url_for('views.menuAdd'))
+    elif not current_user.is_staff:
+        flash('You do not have permission to delete this item.', 'error')
+        return redirect(url_for('views.menuAdd'))
+    else:
+        session['pending_delete'] = item_id
+
+        if 'confirm_delete_submit' in request.form:
+            item_id = session.pop('pending_delete', None)
+
+            if item_id:
+                menu_item = Menu.query.get_or_404(item_id)
+                db.session.delete(menu_item)
+                db.session.commit()
+                flash('Menu item deleted successfully!', 'success')
+            else:
+                flash('Menu item not found.', 'error')
+
+    return redirect(url_for('views.menuAdd'))
