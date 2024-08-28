@@ -1333,6 +1333,17 @@ h1 {
   }
 }
 
+h3 {
+  font-family: "JetBrains Mono";
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.row {
+  margin: 0;
+}
+
 .content-space {
   padding: 150px;
   overflow-x: hidden;
@@ -1379,11 +1390,35 @@ h1 {
   z-index: 950;
 }
 
+.panel-sidetable {
+  border: 2px solid var(--main-white);
+  background-color: var(--main-white);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  width: 100%;
+  transition: all 0.3s ease-out;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  padding: 50px;
+  z-index: 1000;
+}
+.panel-sidetable ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.panel-sidetable h2 {
+  font-family: "Bungee";
+  text-transform: uppercase;
+  font-size: 40px;
+}
+.panel-sidetable:hover {
+  border: 2px solid #f0f0f0;
+}
+
 @media screen and (min-width: 1400px) {
   .beigespace-test {
     padding: 100px 150px;
   }
-  .dashboarduser-table {
+  .dashboarduser-table, .panel-sidetable {
     padding: 50px;
   }
   .dash-showmobile {
@@ -1397,7 +1432,7 @@ h1 {
   .beigespace-test {
     padding: 100px 100px;
   }
-  .dashboarduser-table {
+  .dashboarduser-table, .panel-sidetable {
     padding: 20px;
   }
   .dash-showmobile {
@@ -1406,12 +1441,15 @@ h1 {
   .dash-showmain {
     visibility: inline-block;
   }
+  .mobile-nopadding {
+    padding: 0;
+  }
 }
 @media screen and (max-width: 992px) {
   .beigespace-test {
     padding: 100px 50px;
   }
-  .dashboarduser-table {
+  .dashboarduser-table, .panel-sidetable {
     padding: 20px;
   }
   .dash-showmobile {
@@ -1423,6 +1461,9 @@ h1 {
   .bluespace-test {
     padding: 100px 50px;
   }
+  .mobile-nopadding {
+    padding: 0;
+  }
 }
 @media screen and (max-width: 768px) {
   .content-space {
@@ -1431,7 +1472,7 @@ h1 {
   .beigespace-test {
     padding: 100px 0;
   }
-  .dashboarduser-table {
+  .dashboarduser-table, .panel-sidetable {
     padding: 20px;
   }
   .dash-showmobile {
@@ -1442,6 +1483,9 @@ h1 {
   }
   .bluespace-test {
     padding: 100px 0;
+  }
+  .mobile-nopadding {
+    padding: 0;
   }
 }
 .head-directory {
@@ -1852,14 +1896,6 @@ h1 {
   max-width: 300px;
 }
 
-.dash-sides {
-  transform: scale(1);
-}
-
-.dash-sides:hover {
-  transform: scale(1.03);
-}
-
 .dash-sides h6 {
   font-family: "JetBrains Mono";
   text-transform: uppercase;
@@ -1953,19 +1989,24 @@ input[type=checkbox] {
   margin-right: 10px;
 }
 
-#filterjsPopup .popup-content ul, #sortjsPopup .popup-content ul {
+#filterjsPopup .popup-content ul, #sortjsPopup .popup-content ul,
+#menufilterjsPopup .popup-content ul, #menusortjsPopup .popup-content ul {
   padding: 20px;
 }
-#filterjsPopup .popup-content ul li, #sortjsPopup .popup-content ul li {
+#filterjsPopup .popup-content ul li, #sortjsPopup .popup-content ul li,
+#menufilterjsPopup .popup-content ul li, #menusortjsPopup .popup-content ul li {
   margin-bottom: 20px;
 }
-#filterjsPopup .popup-content ul li input, #sortjsPopup .popup-content ul li input {
+#filterjsPopup .popup-content ul li input, #sortjsPopup .popup-content ul li input,
+#menufilterjsPopup .popup-content ul li input, #menusortjsPopup .popup-content ul li input {
   margin: 0;
 }
-#filterjsPopup .popup-content ul li input[type=select], #sortjsPopup .popup-content ul li input[type=select] {
+#filterjsPopup .popup-content ul li input[type=select], #sortjsPopup .popup-content ul li input[type=select],
+#menufilterjsPopup .popup-content ul li input[type=select], #menusortjsPopup .popup-content ul li input[type=select] {
   padding: 20px;
 }
-#filterjsPopup .popup-content ul li select, #sortjsPopup .popup-content ul li select {
+#filterjsPopup .popup-content ul li select, #sortjsPopup .popup-content ul li select,
+#menufilterjsPopup .popup-content ul li select, #menusortjsPopup .popup-content ul li select {
   padding: 15px;
   border: #000 1px solid;
   border-radius: 5px;
@@ -2215,6 +2256,7 @@ label {
   font-size: 16px;
   font-weight: 400;
   z-index: 3;
+  overflow: scroll;
 }
 .categories-list ul li {
   display: inline-block;
@@ -2228,6 +2270,7 @@ label {
   text-decoration: none;
   transform: translateY(0);
   display: block;
+  white-space: nowrap;
   animation: categorylist 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 .categories-list ul li a:hover:not(.activeCategory) {
@@ -2387,4 +2430,38 @@ label {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.categories-list-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.categories-list {
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding: 0 30px;
+}
+
+.scroll-btn {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: absolute;
+  z-index: 1000;
+  top: -50%;
+  transform: translateY(70%);
+  display: flex;
+}
+
+.scroll-btn.left {
+  left: 0;
+}
+
+.scroll-btn.right {
+  right: 0;
 }/*# sourceMappingURL=main.css.map */

@@ -76,3 +76,20 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     });
 });
+
+
+
+// Category Mobile Slider
+function scrollLeftBtn() {
+    const container = document.getElementById('category-list');
+    const maxScrollLeft = container.scrollLeft;
+
+    if (maxScrollLeft > 0) {
+        container.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+}
+
+function scrollRightBtn() {
+    const container = document.getElementById('category-list');
+    container.scrollBy({ left: 200, behavior: 'smooth' });
+}

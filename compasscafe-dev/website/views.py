@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, session, current_app, jsonify
 from flask_login import login_required, current_user
-from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply, Menu, EditMenu
+from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply, Menu, EditMenu, SortMenu, FilterMenu
 from .auth import is_validemail
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
@@ -627,8 +627,61 @@ def menuEdit():
     category_filter = request.args.get('category')
     page = request.args.get('page', 1, type=int)
 
-    paginMenu, paginPages, display_categories = menuGrid(
-        category_filter, page, per_page=10, current_view='views.menuEdit')
+    # Filter and Sort Functions
+    sort_by = request.args.get('sort_by', 'item_asc')
+    item_filter = request.args.get('item', '')
+
+    sort_form = SortMenu(data={'sort_by': sort_by})
+    filter_form = FilterMenu(data={'item': item_filter})
+
+    # Base Query
+    query = Menu.query
+
+    # Item Name Search
+    if item_filter:
+        query = query.filter(Menu.item.contains(item_filter))
+
+    # Category Filter Function
+    if category_filter and category_filter in MENU_CATEGORIES:
+        query = query.filter_by(category=category_filter)
+
+    # Apply Sort Functions
+    if sort_by == 'item_asc':
+        query = query.order_by(Menu.item.asc())
+    elif sort_by == 'item_desc':
+        query = query.order_by(Menu.item.desc())
+    elif sort_by == 'price_asc':
+        query = query.order_by(Menu.price.asc())
+    elif sort_by == 'price_desc':
+        query = query.order_by(Menu.price.desc())
+    elif sort_by == 'date_asc':
+        query = query.order_by(Menu.date_created.asc())
+    elif sort_by == 'date_desc':
+        query = query.order_by(Menu.date_created.desc())
+
+    # Paginate the filtered and sorted query
+    paginated_query = query.paginate(page=page, per_page=10)
+
+    # Get display categories from menuGrid
+    _, paginPages, display_categories = menuGrid(
+        category_filter, page, current_view='views.menuEdit'
+    )
+
+    # Apply formatted price to the paginated items
+    for item in paginated_query.items:
+        item.formatted_price = f"${item.price / 100:.2f}"
+
+    # Retain Filter and Sort Parameters for Pagination Links
+    filterprmtrs = {
+        'sort_by': sort_by,
+        'item': item_filter,
+        'category': category_filter,
+    }
+
+    # Prepare pagination with retained parameters
+    paginPages = {'pages': [{'url': url_for('views.menuEdit', page=page_num, **filterprmtrs),
+                             'num': page_num, 'current': page_num == paginated_query.page}
+                            for page_num in paginated_query.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)]}
 
     edit_menu_id = request.args.get('edit_menu_id')
     menu_item = None
@@ -639,10 +692,10 @@ def menuEdit():
             menu_item = Menu.query.get(edit_menu_id)
             if not menu_item:
                 flash('Menu item not found.', 'error')
-                return redirect(url_for('views.menuEdit', category=category_filter, page=page, user=current_user))
+                return redirect(url_for('views.menuEdit', page=page, **filterprmtrs))
         except ValueError:
             flash('Invalid menu item ID.', 'error')
-            return redirect(url_for('views.menuEdit', category=category_filter, page=page, user=current_user))
+            return redirect(url_for('views.menuEdit', page=page, **filterprmtrs))
 
     # Price Formatting for Edit - Float
     if menu_item:
@@ -686,13 +739,14 @@ def menuEdit():
 
                 db.session.commit()
                 flash('Menu item updated successfully!', 'success')
-                return redirect(url_for('views.menuEdit', category=category_filter, page=page, user=current_user))
+                return redirect(url_for('views.menuEdit', page=page, **filterprmtrs))
             else:
                 flash('Invalid input.', 'error')
 
     return render_template('edit_menu.html', user=current_user, categories=display_categories,
-                           paginMenu=paginMenu, paginPages=paginPages, category_filter=category_filter,
-                           edit_menu=edit_menu, edit_item=menu_item)
+                           paginMenu=paginated_query, paginPages=paginPages, category_filter=category_filter,
+                           edit_menu=edit_menu, edit_item=menu_item,
+                           sort_form=sort_form, filter_form=filter_form)
 
 
 # MENU ADD ROUTE

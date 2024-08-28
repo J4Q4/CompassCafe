@@ -14,7 +14,7 @@ function togglePassword() {
 
 
 
-// Dashboard Popups
+// Dashboard + Menu Popups
 document.addEventListener('DOMContentLoaded', () => {
     
     // Show Popup
@@ -55,6 +55,54 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (event) => {
         if (event.target != filterBtn && !filterPopup.contains(event.target)) {
             closePopup(filterPopup);
+        }
+    });
+
+});
+
+
+
+// Mobile Menu Popups
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Show Popup
+    function togglePopup(popup) {
+        if (popup.classList.contains("dash-popupjs")) {
+            popup.classList.remove("dash-popupjs");
+        } else {
+            popup.classList.add("dash-popupjs");
+        }
+    }
+
+    // Click out of Range – Close Popup
+    function closePopup(popup) {
+        popup.classList.remove("dash-popupjs");
+    }
+    // Sort Popup
+    const menusortPopup = document.getElementById("menusortjsPopup");
+    const menusortBtn = document.getElementById("menusortPopBTN");
+
+    menusortBtn.addEventListener('click', () => {
+        togglePopup(menusortPopup);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target != menusortBtn && !menusortPopup.contains(event.target)) {
+            closePopup(menusortPopup);
+        }
+    });
+
+    // Filter Popup
+    const menufilterPopup = document.getElementById("menufilterjsPopup");
+    const menufilterBtn = document.getElementById("menufilterPopBTN");
+
+    menufilterBtn.addEventListener('click', () => {
+        togglePopup(menufilterPopup);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target != menufilterBtn && !menufilterPopup.contains(event.target)) {
+            closePopup(menufilterPopup);
         }
     });
 

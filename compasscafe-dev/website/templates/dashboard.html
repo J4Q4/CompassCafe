@@ -17,7 +17,7 @@
         <br>
         <div class="row">
             <div class="col-lg-12 col-xl-3">
-                <div class="dashboarduser-table dash-sides mb-4">
+                <div class="panel-sidetable dash-sides mb-4">
                     <div class="logas-dash">
                         <label id="loggedinas-dash" title="{{ user.email }}">
                             <strong>Logged in as: {{ user.schoolid }}</strong><br>
@@ -25,7 +25,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="dashboarduser-table dash-sides mb-4">
+                <div class="panel-sidetable dash-sides mb-4">
                     <ul>
                         <ul>
                             <h6>Admin Settings</h3>
@@ -39,7 +39,7 @@
                         </ul>
                     </ul>
                 </div>
-                <div class="dashboarduser-table dash-sides">
+                <div class="panel-sidetable dash-sides">
                     <ul>
                         <h6>Site Settings</h3>
                         <li><a href="{{ url_for('views.menuEdit') }}">menu</a></li>

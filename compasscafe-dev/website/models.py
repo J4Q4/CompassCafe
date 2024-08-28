@@ -35,7 +35,7 @@ class EditUser(FlaskForm):
             Optional(), EqualTo('password', message='Passwords must match')],
         render_kw={"placeholder": "Re-Enter New password"})
     is_staff = BooleanField()
-    submit = SubmitField('Update User', render_kw={"class": "btn btn-primary"})
+    submit = SubmitField('Update User', render_kw={"class": "btn-primary"})
 
 
 # Filter User
@@ -47,27 +47,14 @@ class FilterForm(FlaskForm):
     is_staff_true = BooleanField('Is Admin')
     is_staff_false = BooleanField('Not Admin')
     # Submit Button
-    submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
-
-
-# Filter Apply
-
-class FilterApply(FlaskForm):
-    schoolid = StringField('School ID', validators=[Optional()])
-    date_duty = SelectField('Week', validators=[Optional()], render_kw={
-                            "class": "apply-selectfilter"})
-    date_day = SelectField('Day', validators=[Optional()], render_kw={
-                           "class": "apply-selectfilter"})
-    yearlevel = SelectField('Year Level', validators=[Optional()], render_kw={
-                            "class": "apply-selectfilter"})
-    submit = SubmitField('Filter', render_kw={"class": "btn btn-primary"})
+    submit = SubmitField('Filter', render_kw={"class": "btn-primary"})
 
 
 # Sort User
 
 class SortForm(FlaskForm):
     sort_by = SelectField(validators=[Optional()])
-    submit = SubmitField('Sort', render_kw={"class": "btn btn-primary"})
+    submit = SubmitField('Sort', render_kw={"class": "btn-primary"})
 
 
 # USER ACTIONS
@@ -96,6 +83,19 @@ class Apply(db.Model):
     status = db.Column(db.String(50), default='pending')
 
 
+# Filter Apply
+
+class FilterApply(FlaskForm):
+    schoolid = StringField('School ID', validators=[Optional()])
+    date_duty = SelectField('Week', validators=[Optional()], render_kw={
+                            "class": "apply-selectfilter"})
+    date_day = SelectField('Day', validators=[Optional()], render_kw={
+                           "class": "apply-selectfilter"})
+    yearlevel = SelectField('Year Level', validators=[Optional()], render_kw={
+                            "class": "apply-selectfilter"})
+    submit = SubmitField('Filter', render_kw={"class": "btn-primary"})
+
+
 # MENU INTERFACE
 class Menu(db.Model):
     # Menu Items
@@ -121,3 +121,17 @@ class EditMenu(FlaskForm):
                                 Optional()], render_kw={"maxlength": "150"})
     category = SelectField('Category', choices=[], validators=[DataRequired()])
     image = FileField('Menu Item Image', validators=[Optional()])
+
+
+# Filter Menu
+
+class FilterMenu(FlaskForm):
+    item = StringField('Item Name', validators=[Optional()])
+    submit = SubmitField('Filter', render_kw={"class": "btn-primary"})
+
+
+# Sort Menu
+
+class SortMenu(FlaskForm):
+    sort_by = SelectField('Sort By', validators=[Optional()])
+    submit = SubmitField('Sort', render_kw={"class": "btn-primary"})

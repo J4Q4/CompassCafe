@@ -132,6 +132,7 @@
     font-size: 16px;
     font-weight: 400;
     z-index: 3;
+    overflow: scroll;
     li {
         display: inline-block;
         .selected-category {
@@ -143,6 +144,7 @@
             text-decoration: none;
             transform: translateY(0);
             display: block;
+            white-space: nowrap;
             animation: categorylist 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
             &:hover:not(.activeCategory) {
                 animation: categorylist-hover 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
@@ -314,4 +316,41 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+}
+
+
+
+
+.categories-list-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.categories-list {
+    overflow-x: scroll;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    padding: 0 30px;
+}
+
+.scroll-btn {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000;
+    top: -50%;
+    transform: translateY(70%);
+    display: flex;
+}
+
+.scroll-btn.left {
+    left: 0;
+}
+
+.scroll-btn.right {
+    right: 0;
 }

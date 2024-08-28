@@ -37,6 +37,17 @@ h1 {
     }
 }
 
+h3 {
+    font-family: "JetBrains Mono";
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.row {
+    margin: 0;
+}
+
 .content-space {
     padding: 150px;
     overflow-x: hidden;
@@ -86,12 +97,40 @@ h1 {
 
 
 
+.panel-sidetable {
+    border: 2px solid var(--main-white);
+    background-color: var(--main-white);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    width: 100%;
+    transition: all 0.3s ease-out;
+    box-shadow:  18px 18px 30px #f0f0f0,
+             -18px -18px 30px #ffffff;
+    padding: 50px;
+    z-index: 1000;
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    h2 {
+        font-family: "Bungee";
+        text-transform: uppercase;
+        font-size: 40px;
+    }
+    &:hover {
+        border: 2px solid #f0f0f0;
+    }
+}
+
+
+
+
 // More than Extra Large
 @media screen and (min-width: map-get($grid-breakpoints, xxl)) {
     .beigespace-test {
         padding: 100px 150px;
     }
-    .dashboarduser-table {
+    .dashboarduser-table, .panel-sidetable {
         padding: 50px;
     }
     .dash-showmobile {
@@ -107,7 +146,7 @@ h1 {
     .beigespace-test {
         padding: 100px 100px;
     }
-    .dashboarduser-table {
+    .dashboarduser-table, .panel-sidetable {
         padding: 20px;
     }
     .dash-showmobile {
@@ -115,6 +154,9 @@ h1 {
     }
     .dash-showmain {
         visibility: inline-block;
+    }
+    .mobile-nopadding {
+        padding: 0;
     }
     
 } 
@@ -124,7 +166,7 @@ h1 {
     .beigespace-test {
         padding: 100px 50px;
     }
-    .dashboarduser-table {
+    .dashboarduser-table, .panel-sidetable {
         padding: 20px;
     }
     .dash-showmobile {
@@ -135,6 +177,9 @@ h1 {
     }
     .bluespace-test {
         padding: 100px 50px;
+    }
+    .mobile-nopadding {
+        padding: 0;
     }
 }
 
@@ -146,7 +191,7 @@ h1 {
     .beigespace-test {
         padding: 100px 0;
     }
-    .dashboarduser-table {
+    .dashboarduser-table, .panel-sidetable {
         padding: 20px;
     }
     .dash-showmobile {
@@ -157,6 +202,9 @@ h1 {
     }
     .bluespace-test {
         padding: 100px 0;
+    }
+    .mobile-nopadding {
+        padding: 0;
     }
 }
 

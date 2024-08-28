@@ -84,13 +84,85 @@
 
             <div class="row">
 
-                <div class="col-3">
-                    <div class="dashboarduser-table">
+                <div class="col-xl-12 col-xxl-3 d-none d-xxl-block">
+                    <div class="panel-sidetable">
                         <!-- Category List -->
                         <div class="categories-drop">
+                
+                            <!-- Menu Edit with Sort and Filter Pop-ups -->
+                            <div id="sortbuttons">
+                                <h3>Menu Items</h3>
+                                <ul class="buttonclass">
+                
+                                    <!-- Sort Menu -->
+                                    <li>
+                                        <form method="GET" action="{{ url_for('views.menuEdit') }}">
+                                            {{ sort_form.hidden_tag() }}
+                                            <button id="sortPopBTN" class="btn-secondary mb-4" type="button">Sort</button> <!-- Pop Up Sort Button -->
+                
+                                            <div id="sortjsPopup" class="filterpopup">
+                                                <div class="popup-content">
+                                                    <ul>
+                                                        <li>
+                                                            <label>Sort By</label><br>
+                                                            <select name="sort_by" id="sort_by" class="form-control">
+                                                                <option value="">None</option>
+                                                                <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
+                                                                <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
+                                                                <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
+                                                                <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
+                                                                <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
+                                                                <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
+                                                            </select>
+                                                            <!-- Retain Filter Values -->
+                                                            <input type="hidden" name="item" value="{{ request.args.get('item', '') }}">
+                                                            <input type="hidden" name="category" value="{{ category_filter }}">
+                                                        </li>
+                                                        <br>
+                                                        <li class="last-list">
+                                                            <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Sort Button -->
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <!-- End of Sort Menu -->
+                
+                                    <!-- Filter Menu -->
+                                    <li>
+                                        <form method="GET" action="{{ url_for('views.menuEdit') }}">
+                                            {{ filter_form.hidden_tag() }}
+                                            <button id="filterPopBTN" class="btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
+                
+                                            <div id="filterjsPopup" class="filterpopup">
+                                                <div class="popup-content">
+                                                    <ul>
+                                                        <li>
+                                                            <label>Item Name</label><br>
+                                                            <input type="text" name="item" value="{{ request.args.get('item', '') }}" placeholder="Enter item name" class="form-control">
+                                                            <!-- Retain Sort Values -->
+                                                            <input type="hidden" name="sort_by" value="{{ request.args.get('sort_by', 'item_asc') }}">
+                                                            <input type="hidden" name="category" value="{{ category_filter }}">
+                                                        </li>
+                                                        <br>
+                                                        <li class="last-list">
+                                                            <button type="submit" name="filter_submit" class="btn-primary">Filter</button> <!-- Submit Filter Button -->
+                                                        </li>
+                                                        <li style="display: inline-block;" class="last-list">
+                                                            <a href="{{ url_for('views.menuEdit', category=category_filter) }}" class="btn-secondary">Clear Filters</a> <!-- Clear Filter Button -->
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </li>
+                                    <!-- End of Filter Menu -->
+                
+                                </ul>
+                            </div>
 
-                            <!-- Future Filter and Sort Buttons -->
-                             
+
                             <a class="btn-primary mb-4" href="/menu/edit-item/add-item">
                                 <i class="fa fa-plus"></i>
                                 Add Drink
@@ -111,18 +183,123 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Mobile Buttons -->
+                <div id="sortbuttons" class="d-xl-block d-xxl-none">
+                    <ul class="buttonclass">
+                        
+                        <a class="btn-primary mb-4" href="/menu/edit-item/add-item">
+                            <i class="fa fa-plus"></i>
+                            Add Drink
+                        </a>
+
+                        <br>
+
+                        <!-- Sort Menu -->
+                        <li style="display: inline-block;">
+                            <form method="GET" action="{{ url_for('views.menuEdit') }}">
+                                {{ sort_form.hidden_tag() }}
+                                <button id="menusortPopBTN" class="btn-secondary mb-4" type="button">Sort</button> <!-- Pop Up Sort Button -->
+
+                                <div id="menusortjsPopup" class="filterpopup">
+                                    <div class="popup-content">
+                                        <ul>
+                                            <li>
+                                                <label>Sort By</label><br>
+                                                <select name="sort_by" id="sort_by" class="form-control">
+                                                    <option value="">None</option>
+                                                    <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
+                                                    <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
+                                                    <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
+                                                    <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
+                                                    <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
+                                                    <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
+                                                </select>
+                                                <!-- Retain Filter Values -->
+                                                <input type="hidden" name="item" value="{{ request.args.get('item', '') }}">
+                                                <input type="hidden" name="category" value="{{ category_filter }}">
+                                            </li>
+                                            <br>
+                                            <li class="last-list">
+                                                <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Sort Button -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <!-- End of Sort Menu -->
+
+                        <!-- Filter Menu -->
+                        <li style="display: inline-block;">
+                            <form method="GET" action="{{ url_for('views.menuEdit') }}">
+                                {{ filter_form.hidden_tag() }}
+                                <button id="menufilterPopBTN" class="btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
+
+                                <div id="menufilterjsPopup" class="filterpopup">
+                                    <div class="popup-content">
+                                        <ul>
+                                            <li>
+                                                <label>Item Name</label><br>
+                                                <input type="text" name="item" value="{{ request.args.get('item', '') }}" placeholder="Enter item name" class="form-control">
+                                                <!-- Retain Sort Values -->
+                                                <input type="hidden" name="sort_by" value="{{ request.args.get('sort_by', 'item_asc') }}">
+                                                <input type="hidden" name="category" value="{{ category_filter }}">
+                                            </li>
+                                            <br>
+                                            <li class="last-list">
+                                                <button type="submit" name="filter_submit" class="btn-primary">Filter</button> <!-- Submit Filter Button -->
+                                            </li>
+                                            <li style="display: inline-block;" class="last-list">
+                                                <a href="{{ url_for('views.menuEdit', category=category_filter) }}" class="btn-secondary">Clear Filters</a> <!-- Clear Filter Button -->
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <!-- End of Filter Menu -->
+
+                    </ul>
+                </div>
+
+
+                <!-- Mobile Category View -->
+                <div class="categories-list-container d-xl-block d-xxl-none">
+                    <div class="categories-list mb-4">
+                        <button class="scroll-btn left" onclick="scrollLeftBtn()">
+                            <i class="fa-solid fa-caret-left"></i>
+                        </button>
+                        <ul id="category-list">
+                            {% for category in categories %}
+                                <li>
+                                    <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
+                                        class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
+                                        {{ category }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <button class="scroll-btn right" onclick="scrollRightBtn()">
+                            <i class="fa-solid fa-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                
                 
 
-                <div class="col-9">
-                    <div class="dashboarduser-table">
+                <div class="mobile-nopadding col-xl-12 col-xxl-9">
+                    <div class="mobile-nopadding dashboarduser-table">
 
                         <!-- Menu Items -->
                         <div class="row menurow mb-4">
                             {% for item in paginMenu.items %}
-                            <div class="col-md-12 col-lg-6 d-flex">
+                            <div class="mobile-nopadding col-md-12 col-lg-6 d-flex">
                                 <div class="card menu-item-card mb-4">
                                     <div class="row">
-                                        <div class="col-5">
+                                        <div class="mobile-nopadding col-5">
                                             <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
                                         </div>
                                         <div class="text-wrap col-7">
@@ -170,15 +347,15 @@
                                 <div class="menu-pagination d-inline-flex">
                                     <!-- Pagination -->
                                     {% for page in paginPages.pages %}
-                                        {% if page.url and page.num %}
-                                            {% if page.current %}
-                                                <a class="pagination-btn pgntnbtn-info mb-0 current" href="{{ page.url }}">{{ page.num }}</a>
-                                            {% else %}
-                                                <a class="pagination-btn pgntnbtn-outline-info mb-0" href="{{ page.url }}">{{ page.num }}</a>
-                                            {% endif %}
+                                    {% if page.url and page.num %}
+                                        {% if page.current %}
+                                            <a class="pagination-btn pgntnbtn-info mb-0 current" href="{{ page.url }}">{{ page.num }}</a>
                                         {% else %}
-                                            ...
+                                            <a class="pagination-btn pgntnbtn-outline-info mb-0" href="{{ page.url }}">{{ page.num }}</a>
                                         {% endif %}
+                                    {% else %}
+                                        ...
+                                    {% endif %}
                                     {% endfor %}
                                     <!-- End of Pagination -->
                                 </div>

@@ -66,12 +66,6 @@
     max-width: 300px;
 }
 
-.dash-sides {
-    transform: scale(1);
-}
-.dash-sides:hover {
-    transform: scale(1.03);
-}
 .dash-sides h6 {
     font-family: "JetBrains Mono";
     text-transform: uppercase;
@@ -164,7 +158,8 @@ input[type="checkbox"] {
         margin-right: 10px;
     }
 }
-#filterjsPopup .popup-content, #sortjsPopup .popup-content {
+#filterjsPopup .popup-content, #sortjsPopup .popup-content, 
+#menufilterjsPopup .popup-content, #menusortjsPopup .popup-content {
     ul {
         padding: 20px;
     }
