@@ -4,8 +4,8 @@ from flask_login import UserMixin
 from . import db
 # User Admin Handling
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, DateField
-from wtforms.validators import DataRequired, Email, EqualTo, Optional
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, FloatField, TextAreaField, FileField
+from wtforms.validators import DataRequired, Email, EqualTo, Optional, NumberRange
 
 ## DATABASE ENTRY CLASSES ##
 
@@ -85,10 +85,13 @@ class Apply(db.Model):
     # Non-visible Inputs
     id = db.Column(db.Integer, primary_key=True)
     schoolid = db.Column(db.Integer, nullable=False)
-    email = db.Column(db.String(150), db.ForeignKey('user.email', ondelete='CASCADE'), nullable=False)
+    email = db.Column(db.String(150), db.ForeignKey(
+        'user.email', ondelete='CASCADE'), nullable=False)
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
-    author = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    user = db.relationship('User', foreign_keys=[author], backref='applications')
+    author = db.Column(db.Integer, db.ForeignKey(
+        'user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship('User', foreign_keys=[
+                           author], backref='applications')
     # Visibility
     status = db.Column(db.String(50), default='pending')
 
@@ -100,10 +103,21 @@ class Menu(db.Model):
     image = db.Column(db.String(150), nullable=True, default='default.jpg')
     item = db.Column(db.String(150), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(250), nullable=True)
+    description = db.Column(db.String(150), nullable=True)
     category = db.Column(db.String(50), nullable=False)
     # Non-visible Inputs
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
     author = db.Column(db.Integer, db.ForeignKey(
         'user.id', ondelete='CASCADE'), nullable=False)
     user = db.relationship('User', backref='menu', lazy=True)
+
+
+# Edit Menu
+class EditMenu(FlaskForm):
+    item = StringField('Item Name', validators=[DataRequired()])
+    price = FloatField('Price', validators=[
+                       DataRequired(), NumberRange(min=0.0)])
+    description = TextAreaField('Description', validators=[
+                                Optional()], render_kw={"maxlength": "150"})
+    category = SelectField('Category', choices=[], validators=[DataRequired()])
+    image = FileField('Menu Item Image', validators=[Optional()])

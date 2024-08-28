@@ -159,12 +159,12 @@ gsap.fromTo(".sideText",
 document.querySelectorAll('.dropdown-toggle').forEach(button => {
     button.addEventListener('click', function() {
         // Find Parent of Dropdown - Card
-        const dropdown = this.closest('.dashboarduser-table');
+        const dropdown = this.closest('.dashboarduser-table, .menu-item-card');
         dropdown.style.zIndex = '3';
     });
     button.addEventListener('hidden.bs.dropdown', function() {
         // Find Parent of Dropdown - Card
-        const dropdown = this.closest('.dashboarduser-table');
+        const dropdown = this.closest('.dashboarduser-table, .menu-item-card');
         dropdown.style.zIndex = '';
     });
 });
@@ -193,7 +193,8 @@ function showDeletePopup(button) {
     const routes = {
         user: `/dashboard/delete_user/${itemId}`,
         pending_application: `/apply/delete-apply/${itemId}`,
-        accepted_application: `/apply/delete-duty/${itemId}`
+        accepted_application: `/apply/delete-duty/${itemId}`,
+        menu_item: `/menu/edit-item/delete-item/${itemId}`
     };
 
     deleteForm.action = routes[itemType] || '';
@@ -266,30 +267,31 @@ function showMenuFile() {
 document.querySelectorAll('.menu-item').forEach(item => {
     let hoverTimeout;
 
-    item.addEventListener('mouseover', function(hoverMenuItem) {
-        if (hoverMenuItem.target.tagName === 'IMG') {
-            hoverTimeout = setTimeout(() => {
-                const hoveredItemDisplay = document.getElementById('hovered-item-display');
-                hoveredItemDisplay.classList.add('show-hoverMenu');
+    item.addEventListener('mouseover', function() {
+        hoverTimeout = setTimeout(() => {
+            const hoveredItemDisplay = document.getElementById('hovered-item-display');
+            hoveredItemDisplay.classList.add('show-hoverMenu');
 
-                // Update content inside #hovered-item-display
-                const itemTitle = this.querySelector('h3').innerText;
-                const itemPrice = this.querySelector('p').innerText;
-                const imgSrc = this.querySelector('img').src;
-                const itemDescription = this.querySelector('h6').innerText;
+            // Update content inside #hovered-item-display
+            const itemTitle = this.querySelector('h3').innerText;
+            const itemPrice = this.querySelector('p').innerText;
+            const imgSrc = this.querySelector('img').src;
+            const itemDescription = this.querySelector('h6').innerText;
 
-                // Render the content
-                document.getElementById('hovered-item-title').innerText = itemTitle;
-                document.getElementById('hovered-item-price').innerText = itemPrice;
-                document.getElementById('hovered-item-image').src = imgSrc;
-                document.getElementById('hovered-item-description').innerText = itemDescription;
-            }, 150); // 0.15s delay before showing image on hover
-        }
+            // Render the content
+            document.getElementById('hovered-item-title').innerText = itemTitle;
+            document.getElementById('hovered-item-price').innerText = itemPrice;
+            document.getElementById('hovered-item-image').src = imgSrc;
+            document.getElementById('hovered-item-description').innerText = itemDescription;
+        }, 150); // 0.15s delay before showing image on hover
     });
 
-    item.addEventListener('mouseout', function() {
-        clearTimeout(hoverTimeout);
-        const hoveredItemDisplay = document.getElementById('hovered-item-display');
-        hoveredItemDisplay.classList.remove('show-hoverMenu');
+    item.addEventListener('mouseout', function(event) {
+        // Mouse Unhover Item
+        if (!item.contains(event.relatedTarget)) {
+            clearTimeout(hoverTimeout);
+            const hoveredItemDisplay = document.getElementById('hovered-item-display');
+            hoveredItemDisplay.classList.remove('show-hoverMenu');
+        }
     });
 });

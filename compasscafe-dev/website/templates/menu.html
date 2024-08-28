@@ -6,62 +6,52 @@
   <br>
   <br>
   <div class="preload-fadein">
+
     <div class="row mb-5">
       <div class="col-md-12 col-lg-6">
-        <h1>Menu</h1>
+      <h1>Menu</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-        <a id="direct-selected">menu</a> / <a href="/home">home</a>
+      <a id="direct-selected">menu</a> / <a href="/home">home</a>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-6">
-
-        <!-- Category List -->
-        <div class="categories-list mb-4">
+  
+      <!-- Category List -->
+      <div class="categories-list mb-4">
           <ul>
-            {% for category in categories %}
-                <li>
-                    <a href="{{ url_for('views.menu', category=(category if category != 'All Drinks' else None)) }}"
-                       class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
-                        {{ category }}
-                    </a>
-                </li>
-            {% endfor %}
+          {% for category in categories %}
+              <li>
+                  <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
+                      class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
+                      {{ category }}
+                  </a>
+              </li>
+          {% endfor %}
           </ul>
-        </div>
-        
-        <!-- Menu Items -->
-        <div class="row mb-4 menu-container">
+      </div>
+      
+      <!-- Menu Items -->
+      <div class="row mb-4 menu-container">
           {% for item in paginMenu.items %}
           <div class="menu-item col-md-6 col-lg-4">
-            <div class="menu-tags">
+          <div class="menu-tags">
               <div class="menu-text">
-                <p>{{ item.formatted_price }}</p>
-                <h3>{{ item.item }}</h3>
-                <h6>{{ item.description }}</h6>
+                  <p>{{ item.formatted_price }}</p>
+                  <h3>{{ item.item }}</h3>
+                  <h6>{{ item.description }}</h6>
               </div>
-              <!--
-              <! - - Trigger Menu Item Delete - - >
-              <form action="{{ url_for('views.delete_menu', item_id=item.id) }}" method="POST" style="display:inline;">
-                <button type="submit" class="delete-item" title="Delete Item">
-                    <i class="fa fa-trash" title="Delete User"></i>
-                </button>
-              </form>
-              -->
-            </div>
-            <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+          </div>
+          <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
           </div>
           {% endfor %}
-        </div>
-        
-        <!-- Interactable Menu Navigation Buttons -->
-        <div class="row">
+      </div>
+      
+      <!-- Interactable Menu Navigation Buttons -->
+      <div class="row">
           <div class="col-xs-12 col-sm-6 mb-4 text-center text-sm-start">
-              <a class="btn btn-primary" href="{{ url_for('views.menuAdd') }}">Edit Menu</a>
-          </div>
-          <div class="col-xs-12 col-sm-6 text-center text-sm-end">
             <div class="menu-pagination d-inline-flex">
                 <!-- Pagination -->
                 {% for page in paginPages.pages %}
@@ -78,22 +68,28 @@
                 <!-- End of Pagination -->
             </div>
           </div>
-        </div>
-
+          {% if user.is_staff %}
+          <div class="col-xs-12 col-sm-6 text-center text-sm-end">
+            <a class="btn-primary" href="{{ url_for('views.menuEdit') }}">Edit Menu</a>
+          </div>
+          {% endif %}
       </div>
-
+  
+      </div>
+  
       <div class="col-lg-6">
-        <!-- Displaying Hovered Thumbnail -->
-        <div id="hovered-item-display">
-            <div id="hovered-item-tags">
+      <!-- Displaying Hovered Thumbnail -->
+      <div id="hovered-item-display">
+          <div id="hovered-item-tags">
               <h3 id="hovered-item-title"></h3>
               <p id="hovered-item-price"></p>
-            </div>
-            <img id="hovered-item-image" src="" alt="" class="mb-4">
-            <h6 id="hovered-item-description"></h6>
-        </div>
-    </div>
-    </div>
+          </div>
+          <img id="hovered-item-image" src="" alt="" class="mb-4">
+          <h6 id="hovered-item-description"></h6>
+      </div>
+      </div>
+  </div>
+
   </div>
 </section>
 <!-- End of Blank Space -->

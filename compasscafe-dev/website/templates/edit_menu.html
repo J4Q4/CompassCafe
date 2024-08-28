@@ -1,0 +1,196 @@
+{% extends "template.html" %}{% block title %}Edit Menu{% endblock %}
+{% block content %}
+
+<div class="row">
+
+    <!-- Blank Space -->
+    <section class="beigespace-test">
+        <br>
+        <br>
+        <div class="preload-fadein">
+            <div class="row mb-5">
+                <div class="col-md-12 col-lg-6">
+                    <h1>Edit Menu</h1>
+                </div>
+                <div class="head-directory col-md-12 col-lg-6 justify-content-end">
+                    <a id="direct-selected">edit menu</a> / <a href="/menu">menu</a> / <a href="/home">home</a>
+                </div>
+            </div>
+
+            {% if edit_item %}
+            <div class="row">
+                <div class="col mb-5">
+                    <div class="dashboarduser-table">
+                        
+                        <div class="menu-edit-popup mb-5">
+                            <h3>Edit Menu Item</h3>
+                            <br>
+                            <form action="{{ url_for('views.menuEdit', edit_menu_id=edit_item.id) }}" method="POST" enctype="multipart/form-data">
+                                {{ edit_menu.hidden_tag() }}
+                                <! - - Item Name Input - - >
+                                <p>
+                                    {{ edit_menu.item.label }}<br>
+                                    {{ edit_menu.item(class="form-control") }}
+                                </p>
+                            
+                                <! - - Price Input - - >
+                                <p>
+                                    {{ edit_menu.price.label }}<br>
+                                    {{ edit_menu.price(class="form-control", value="{:.2f}".format(edit_menu.price.data)) }}
+                                </p>
+                            
+                                <! - - Category Input - - >
+                                <p>
+                                    {{ edit_menu.category.label }}<br>
+                                    {{ edit_menu.category(class="form-control") }}
+                                </p>
+                                
+                            
+                                <! - - Description Input - - >
+                                <p>
+                                    {{ edit_menu.description.label }}<br>
+                                    {{ edit_menu.description(class="form-control") }}
+                                </p>
+                            
+                                <! - - Image Upload Input - - >
+                                <p>
+                                    {{ edit_menu.image.label }}<br>
+                                    {{ edit_menu.image(class="form-control", onchange="showMenuFile()") }}
+                                </p>
+                                <div class="row" style="padding: 0 13px;">
+                                    <div class="col-md-12 col-lg-6 col-xl-4">
+                                        <br>
+                                        <button class="btn-secondary" type="button" style="display: none" onclick="document.getElementById('image').click()">Select Thumbnail</button>
+                                        <span style="display: none" id="file-name"></span>
+                                    </div>
+                                    <div class="col-12 img-preview-container">
+                                        <div class="img-preview-wrap">
+                                            <img id="image-preview" src="{{ edit_item.image_url }}" alt="Image Preview"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <! - - Submit Buttons - - >
+                                <br>
+                                <button type="submit" name="edit_submit" class="btn-primary">Update Item</button>
+                                <a class="btn-secondary" href="{{ url_for('views.menuEdit') }}" style="margin-left: 10px;">Cancel</a>
+                            </form>
+                                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row">
+
+                <div class="col-3">
+                    <div class="dashboarduser-table">
+                        <!-- Category List -->
+                        <div class="categories-drop">
+
+                            <!-- Future Filter and Sort Buttons -->
+                             
+                            <a class="btn-primary mb-4" href="/menu/edit-item/add-item">
+                                <i class="fa fa-plus"></i>
+                                Add Drink
+                            </a>
+                            <br>
+                            <br>
+                            <h3>Categories</h3>
+                            <ul class="category-class" style="margin-bottom: 0;">
+                            {% for category in categories %}
+                                <li>
+                                    <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
+                                        class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
+                                        {{ category }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-9">
+                    <div class="dashboarduser-table">
+
+                        <!-- Menu Items -->
+                        <div class="row menurow mb-4">
+                            {% for item in paginMenu.items %}
+                            <div class="col-md-12 col-lg-6 d-flex">
+                                <div class="card menu-item-card mb-4">
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+                                        </div>
+                                        <div class="text-wrap col-7">
+
+                                            <!-- Dropdown Button -->
+                                            <div class="btn-group" id="apply-delete">
+                                                <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
+                                                <ul class="dropdown-menu">
+                                                    <h6 class="dropdown-header">Menu Actions</h6>
+                                                    <!-- Edit Button -->
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ url_for('views.menuEdit', edit_menu_id=item.id) }}">
+                                                            Edit
+                                                        </a>
+                                                    </li>    
+                                                    <!-- Delete Button (Trigger the Confirmation Popup) -->                        
+                                                    <li>
+                                                        <a class="dropdown-item"
+                                                        onclick="showDeletePopup(this)" 
+                                                        data-item-type="menu_item" 
+                                                        data-item-id="{{ item.id }}" 
+                                                        data-item-description="Item: {{ item.item }}">
+                                                            Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <h3>{{ item.item }}</h3>
+                                            <p>{{ item.formatted_price }}</p>
+                                            <p>{{ item.description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    
+                    
+                    
+                    
+                        <!-- Interactable Menu Navigation Buttons -->
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="menu-pagination d-inline-flex">
+                                    <!-- Pagination -->
+                                    {% for page in paginPages.pages %}
+                                        {% if page.url and page.num %}
+                                            {% if page.current %}
+                                                <a class="pagination-btn pgntnbtn-info mb-0 current" href="{{ page.url }}">{{ page.num }}</a>
+                                            {% else %}
+                                                <a class="pagination-btn pgntnbtn-outline-info mb-0" href="{{ page.url }}">{{ page.num }}</a>
+                                            {% endif %}
+                                        {% else %}
+                                            ...
+                                        {% endif %}
+                                    {% endfor %}
+                                    <!-- End of Pagination -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

@@ -95,6 +95,8 @@
     transform: translateY(0);
     animation: btn-unhover .2s ease-in-out;
     text-decoration: none;
+    position: relative;
+    display: inline-block;
 }
 
 .btn-primary:hover {

@@ -1,4 +1,4 @@
-{% extends "template.html" %}{% block title %}Edit Menu {% endblock %}
+{% extends "template.html" %}{% block title %}Add Drink {% endblock %}
 {% block content %}
 
 <!-- Blank Space -->
@@ -11,7 +11,7 @@
         <h1>Add Item</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-          <a id="direct-selected">edit menu</a> / <a href="/menu">menu</a> / <a href="/home">home</a>
+          <a id="direct-selected">add item</a> / <a href="/menu/edit-item">edit menu</A> / <a href="/menu">menu</a> / <a href="/home">home</a>
       </div>
     </div>
 
@@ -53,7 +53,9 @@
               <select class="form-control" id="category" name="category" required>
                 <option value="" disabled selected>Select a Category</option>
                 {% for category in categories %}
+                  {% if category != 'All Drinks'%}
                     <option value="{{ category }}">{{ category }}</option>
+                  {% endif %}
                 {% endfor %}
               </select>
               <br>
@@ -72,7 +74,6 @@
             </div>
             
         </div>
-      <div>
         <div class="dashboarduser-table row">
             <div class="col-md-12 col-lg-6 col-xl-4">
                 <label for="image">Upload Image:</label>
@@ -84,7 +85,7 @@
                 <br>
                 <div class="mb-4">
                     <button class="btn-primary mb-4 img-preview-btnGap" type="submit">Add Item</button>
-                    <a class="btn-secondary mb-4" href="{{ url_for('views.menu') }}">Cancel</a>
+                    <a class="btn-secondary mb-4" href="{{ url_for('views.menuEdit') }}">Cancel</a>
                 </div>
             </div>
             <div class="col-md-12 col-lg-6 col-xl-8 img-preview-container">
@@ -93,33 +94,12 @@
                 </div>
             </div>
         </div>
-      </div>
     </form>
 
     <br>
     <br>
     <br>
     <br>
-
-    <!-- Edit Menu -->
-    <div class="row mb-5 mt-5">
-      <div class="col-md-12 col-lg-6">
-        <h1>Edit Menu</h1>
-      </div>
-    </div>
-
-    <form>
-      <div class="dashboarduser-table row mt-5">
-       <h3 style="padding-left: 0">Menu Items</h3>
-        <ul>
-          <li>Edit Item</li>
-          <li>Delete Item</li>
-        </ul>
-        <div style="padding-left: 0;">
-          <a class="btn-secondary mb-4" href="{{ url_for('views.menu') }}">Back</a>
-        </div>
-      </div>
-    </form>
 
   </div>
 </section>

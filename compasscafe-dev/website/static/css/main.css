@@ -244,6 +244,8 @@ form #filterPopBTN,
   transform: translateY(0);
   animation: btn-unhover 0.2s ease-in-out;
   text-decoration: none;
+  position: relative;
+  display: inline-block;
 }
 
 .btn-primary:hover {
@@ -2194,6 +2196,14 @@ label {
 .menu-item form {
   pointer-events: visible !important;
 }
+.menu-item button {
+  background-color: var(--main-white);
+  padding: 2px 8px;
+  border-radius: 50%;
+  border: none;
+  top: 0 !important;
+  position: relative;
+}
 
 .categories-list ul {
   list-style-type: none;
@@ -2299,4 +2309,82 @@ label {
     transform: perspective(1000px) rotateY(-10deg);
     opacity: 1;
   }
+}
+.menu-item-card {
+  border: 2px solid var(--main-white);
+  background-color: var(--main-white);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  width: 100%;
+  transition: all 0.3s ease-out;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  transform: scale(1);
+  transition: all 0.3s ease-out;
+  z-index: 1;
+}
+.menu-item-card .row {
+  height: 100%;
+}
+.menu-item-card img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+}
+.menu-item-card .text-wrap {
+  padding: 40px 50px 20px 20px;
+}
+.menu-item-card:hover {
+  border: 2px solid #f0f0f0;
+  transform: scale(1.01);
+  z-index: 2;
+}
+
+.category-class {
+  font-family: "Jetbrains Mono";
+}
+.category-class li {
+  padding: 15px 0;
+  background-color: transparent;
+  transform: translateX(0);
+}
+.category-class li a {
+  text-decoration: none;
+  color: #000;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.category-class li:hover {
+  background-color: #efefef;
+  transition: background-color 0.5s;
+}
+.category-class li:hover a {
+  transform: translateX(20px);
+}
+.category-class li::before {
+  content: "";
+  width: 0px;
+  height: 100%;
+  background-color: #000;
+  margin: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.category-class li:hover::before {
+  width: 4px;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.menurow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menu-item-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }/*# sourceMappingURL=main.css.map */

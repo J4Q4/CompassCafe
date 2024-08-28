@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for, session, current_app
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session, current_app, jsonify
 from flask_login import login_required, current_user
-from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply, Menu
+from .models import User, EditUser, FilterForm, SortForm, Apply, FilterApply, Menu, EditMenu
 from .auth import is_validemail
 from werkzeug.security import generate_password_hash
 from datetime import datetime, timedelta
@@ -614,9 +614,90 @@ def menu():
                            categories=display_categories, category_filter=category_filter)
 
 
+# MENU EDIT ROUTE
+
+@views.route('/menu/edit-item', methods=['GET', 'POST'])
+@login_required
+def menuEdit():
+
+    if not current_user.is_staff:
+        flash('You do not have permission to view this page.', 'error')
+        return redirect(url_for('views.menu'))
+
+    category_filter = request.args.get('category')
+    page = request.args.get('page', 1, type=int)
+
+    paginMenu, paginPages, display_categories = menuGrid(
+        category_filter, page, per_page=10, current_view='views.menuEdit')
+
+    edit_menu_id = request.args.get('edit_menu_id')
+    menu_item = None
+
+    # Menu Item after Edit
+    if edit_menu_id:
+        try:
+            menu_item = Menu.query.get(edit_menu_id)
+            if not menu_item:
+                flash('Menu item not found.', 'error')
+                return redirect(url_for('views.menuEdit', category=category_filter, page=page, user=current_user))
+        except ValueError:
+            flash('Invalid menu item ID.', 'error')
+            return redirect(url_for('views.menuEdit', category=category_filter, page=page, user=current_user))
+
+    # Price Formatting for Edit - Float
+    if menu_item:
+        menu_item.price = menu_item.price / 100.0
+
+    # Autofill Subject Input
+    edit_menu = EditMenu(obj=menu_item)
+
+    # Category Choices
+    edit_menu.category.choices = [(cat, cat) for cat in MENU_CATEGORIES]
+
+    # Update Menu Item Button Action
+    if request.method == 'POST' and 'edit_submit' in request.form:
+        if menu_item:
+            if edit_menu.validate_on_submit():
+                menu_item.item = edit_menu.item.data
+                menu_item.price = int(float(edit_menu.price.data) * 100)
+                menu_item.description = edit_menu.description.data
+                menu_item.category = edit_menu.category.data
+
+                # Image Upload and Update
+                if edit_menu.image.data:
+
+                    image_file = edit_menu.image.data
+                    filename = secure_filename(image_file.filename)
+                    image_path = os.path.join(
+                        current_app.root_path, 'static/assets/menu', filename)
+                    image_file.save(image_path)
+                    menu_item.image = filename
+
+                    # Delete Old Image if no Duplicate Files
+                    oldIMG = menu_item.image
+                    if oldIMG:
+                        oldIMGCount = Menu.query.filter_by(
+                            image=oldIMG).count()
+                        if oldIMGCount == 0:
+                            oldIMGPath = os.remove(os.path.join(
+                                current_app.root_path, 'static/assets/menu', oldIMG))
+                            if os.path.exists(os.path.join(current_app.root_path, 'static/assets/menu', oldIMG)):
+                                os.remove(oldIMGPath)
+
+                db.session.commit()
+                flash('Menu item updated successfully!', 'success')
+                return redirect(url_for('views.menuEdit', category=category_filter, page=page, user=current_user))
+            else:
+                flash('Invalid input.', 'error')
+
+    return render_template('edit_menu.html', user=current_user, categories=display_categories,
+                           paginMenu=paginMenu, paginPages=paginPages, category_filter=category_filter,
+                           edit_menu=edit_menu, edit_item=menu_item)
+
+
 # MENU ADD ROUTE
 
-@views.route('/menu/add-item', methods=['GET', 'POST'])
+@views.route('/menu/edit-item/add-item', methods=['GET', 'POST'])
 @login_required
 def menuAdd():
     category_filter = request.args.get('category')
@@ -625,6 +706,9 @@ def menuAdd():
     if not current_user.is_staff:
         flash('You do not have permission to view this page.', 'error')
         return redirect(url_for('views.menu'))
+
+    _, _, display_categories = menuGrid(
+        category_filter, page, per_page=10, current_view='views.menuAdd')
 
     if request.method == 'POST':
         item_name = request.form['item']
@@ -662,28 +746,24 @@ def menuAdd():
         db.session.add(menu_item)
         db.session.commit()
         flash('Menu item has been added!', 'success')
-        return redirect(url_for('views.menu', user=current_user))
+        return redirect(url_for('views.menuEdit', user=current_user))
 
-    paginMenu, paginPages, display_categories = menuGrid(
-        category_filter, page, per_page=10, current_view='views.menuAdd')
-
-    return render_template('add_item.html', user=current_user, categories=display_categories,
-                           paginMenu=paginMenu, paginPages=paginPages, category_filter=category_filter)
+    return render_template('add_item.html', user=current_user, categories=display_categories)
 
 
 # MENU DELETE ROUTE
 
-@views.route('/menu/add-item/delete-item/<int:item_id>', methods=['POST'])
+@views.route('/menu/edit-item/delete-item/<int:item_id>', methods=['POST'])
 @login_required
 def delete_menu(item_id):
     menu_item = Menu.query.get_or_404(item_id)
 
     if not menu_item:
         flash('Menu item does not exist.', 'error')
-        return redirect(url_for('views.menuAdd'))
+        return redirect(url_for('views.menuEdit'))
     elif not current_user.is_staff:
         flash('You do not have permission to delete this item.', 'error')
-        return redirect(url_for('views.menuAdd'))
+        return redirect(url_for('views.menuEdit'))
     else:
         session['pending_delete'] = item_id
 
@@ -698,4 +778,4 @@ def delete_menu(item_id):
             else:
                 flash('Menu item not found.', 'error')
 
-    return redirect(url_for('views.menuAdd'))
+    return redirect(url_for('views.menuEdit'))
