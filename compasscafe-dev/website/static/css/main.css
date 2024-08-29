@@ -1533,6 +1533,62 @@ h3 {
   transform: translateY(20px);
 }
 
+.mobilefilterpopup {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100000;
+  background-color: var(--main-white);
+  display: none;
+  padding: 50px;
+  border-radius: 20px 20px 0 0;
+  border: 1px solid #ddd;
+}
+.mobilefilterpopup ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+.mobilefilterpopup input[type=text] {
+  width: 100%;
+}
+.mobilefilterpopup #filterPopClose, .mobilefilterpopup #mobisortPopClose, .mobilefilterpopup #mobifilterPopClose {
+  right: 50px;
+  top: 50px;
+  transform: translate(30%, -20%) scale(1.5);
+  border: 0;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #000;
+  position: absolute;
+}
+
+@media screen and (min-width: 576px) {
+  .mobi-popupjs {
+    display: none;
+  }
+}
+@media screen and (max-width: 576px) {
+  .mobi-popupjs {
+    display: block;
+  }
+  .mobi-popupjs .btn-primary {
+    margin-bottom: 1.5rem;
+  }
+}
+.mobi-popupjs {
+  animation: mobi-popupanim 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes mobi-popupanim {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 /* PAGES */
 /* Home */
 /* ## HOME ## */
@@ -1827,6 +1883,18 @@ h3 {
 }
 
 /* End of Apply Table */
+/* Apply Filter Popup Spacing */
+@media screen and (min-width: 576px) {
+  #mobile-applyjsPopup .spacer {
+    margin-top: 0;
+  }
+}
+@media screen and (max-width: 576px) {
+  #mobile-applyjsPopup .spacer {
+    margin-top: 1.5rem;
+  }
+}
+
 /* Dashboard */
 /* Dashboard User Interface */
 .dashboarduser-header {
@@ -2034,12 +2102,21 @@ input[type=checkbox] {
 }
 
 .dash-popupjs {
-  display: block;
   background-color: var(--main-white);
   transform: translateY(0);
   animation: dash-popupanim 0.3s ease-out;
 }
 
+@media screen and (min-width: 576px) {
+  .dash-popupjs {
+    display: block;
+  }
+}
+@media screen and (max-width: 576px) {
+  .dash-popupjs {
+    display: none;
+  }
+}
 @keyframes dash-popupanim {
   0% {
     opacity: 0;

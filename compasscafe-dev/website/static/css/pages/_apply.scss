@@ -105,3 +105,19 @@
     }
 }
 /* End of Apply Table */
+
+
+/* Apply Filter Popup Spacing */
+#mobile-applyjsPopup {
+    @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+        .spacer {
+            margin-top: 0;
+        }
+        
+    }
+    @media screen and (max-width: map-get($grid-breakpoints, sm)) {
+        .spacer {
+            margin-top: 1.5rem;
+        }
+    }
+}

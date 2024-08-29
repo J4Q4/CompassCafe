@@ -200,10 +200,20 @@ input[type="checkbox"] {
 }
 
 .dash-popupjs {
-    display: block;
     background-color: var(--main-white);
     transform: translateY(0);
     animation: dash-popupanim 0.3s ease-out;
+}
+@media screen and (min-width: map-get($grid-breakpoints, sm)) {
+    .dash-popupjs {
+        display: block;
+    }
+    
+}
+@media screen and (max-width: map-get($grid-breakpoints, sm)) {
+    .dash-popupjs {
+        display: none;
+    }
 }
 @keyframes dash-popupanim {
     0% {

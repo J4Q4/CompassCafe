@@ -1,6 +1,71 @@
 {% extends "template.html" %}{% block title %}Dashboard{% endblock %}
 {% block content %}
 
+
+<!- - Sort User - ->
+<form method="GET" action="{{ url_for('views.dashboard') }}">
+    {{ sort_form.hidden_tag() }}
+    <div id="mobile-sortjsPopup" class="mobilefilterpopup">
+        <button id="mobisortPopClose" type="button"><i class="fa fa-times"></i></button> <!- - Close Button - ->
+        <div class="popup-content">
+            <ul>
+                <li>
+                    <label>Sort By</label><br>
+                    <select name="sort_by" id="sort_by" class="form-control">
+                        <option value="">None</option>
+                        <option value="email_asc" {% if request.args.get('sort_by') == 'email_asc' %}selected{% endif %}>Email (Ascending)</option>
+                        <option value="email_desc" {% if request.args.get('sort_by') == 'email_desc' %}selected{% endif %}>Email (Descending)</option>
+                        <option value="is_staff_asc" {% if request.args.get('sort_by') == 'is_staff_asc' %}selected{% endif %}>Admin Status (Ascending)</option>
+                        <option value="is_staff_desc" {% if request.args.get('sort_by') == 'is_staff_desc' %}selected{% endif %}>Admin Status (Descending)</option>
+                    </select>
+                    <! - - Retain Filter Values - ->
+                    <input type="hidden" name="email" value="{{ request.args.get('email', '') }}">
+                    <input type="hidden" name="is_staff_true" value="{{ request.args.get('is_staff_true', '') }}">
+                    <input type="hidden" name="is_staff_false" value="{{ request.args.get('is_staff_false', '') }}">
+                </li>
+                <br>
+                <li class="last-list">
+                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!- - Submit Sort Button - ->
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+<!- - End of Sort - ->
+
+<!- - Filter User - ->
+<form method="POST" action="{{ url_for('views.dashboard', sort_by=request.args.get('sort_by')) }}">
+    {{ filter_form.hidden_tag() }}
+    <div id="mobile-filterjsPopup" class="mobilefilterpopup">
+        <button id="mobifilterPopClose" type="button"><i class="fa fa-times"></i></button> <!- - Close Button - ->
+        <div class="popup-content">
+            <ul>
+                <li>
+                    <label>Email</label><br>
+                    {{ filter_form.email(size=32) }}
+                </li>
+                <br>
+                <li>
+                    {{ filter_form.is_staff_true() }} Is Admin
+                </li>
+                <br>
+                <li>
+                    {{ filter_form.is_staff_false() }} Not Admin
+                </li>
+                <br>
+                <li class="last-list">
+                    <button type="submit" name="filter_submit" class="btn-primary">Filter</button> <! - - Submit Filter Button - - >
+                </li>
+                <li style="display: inline-block;" class="last-list">
+                    <a href="{{ url_for('views.dashboard') }}" class="btn-secondary">Clear Filters</a> <! - - Clear Filter Button - - >
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+<!- - End of Filter User - ->
+
+
 <!-- Blank Space -->
 <section class="beigespace-test">
     <br>

@@ -254,3 +254,63 @@ h3 {
     opacity: 0;
     transform: translateY(20px);
 }
+
+
+
+
+.mobilefilterpopup {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100000;
+    background-color: var(--main-white);
+    display: none;
+    padding: 50px;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid #ddd;
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    input[type="text"] {
+        width: 100%;
+    }
+    #filterPopClose, #mobisortPopClose, #mobifilterPopClose {
+        right: 50px;
+        top: 50px;
+        transform: translate(30%, -20%) scale(1.5);
+        border: 0;
+        padding: 10px 20px;
+        background-color: transparent;
+        color: #000;
+        position: absolute;
+    }
+}
+
+@media screen and (min-width: map-get($grid-breakpoints, sm)) {
+    .mobi-popupjs {
+        display: none;
+    }
+}
+@media screen and (max-width: map-get($grid-breakpoints, sm)) {
+    .mobi-popupjs {
+        display: block;
+        .btn-primary {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
+.mobi-popupjs {
+    animation: mobi-popupanim 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes mobi-popupanim {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

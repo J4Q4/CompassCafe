@@ -1,6 +1,58 @@
 {% extends "template.html" %}{% block title %}Apply{% endblock %}
 {% block content %}
 
+
+<! - - Filter User - - >
+<form method="GET" action="{{ url_for('views.apply') }}">
+    {{ applyform.hidden_tag() }}
+    <div id="mobile-applyjsPopup" class="mobilefilterpopup">
+        <button id="filterPopClose" type="button"><i class="fa fa-times"></i></button> <!- - Close Button - ->
+        <div class="popup-content">
+            <div class="form-group mb-4">
+                <label for="schoolid">School ID</label>
+                <input type="text" name="schoolid" class="form-control" placeholder="00000" value="{{ request.args.get('schoolid', '') }}" size="32" data-maxlength="5" oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))">
+            </div>
+            <div class="form-group mb-4">
+                <label for="date_duty">Week</label>
+                <select name="date_duty" class="form-control">
+                    <option value="None" {% if request.args.get('date_duty') == 'None' %}selected{% endif %}>None</option>
+                    <option value="Week A" {% if request.args.get('date_duty') == 'Week A' %}selected{% endif %}>Week A</option>
+                    <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <label for="date_day">Day</label>
+                <select name="date_day" class="form-control">
+                    <option value="None" {% if request.args.get('date_day') == 'None' %}selected{% endif %}>None</option>
+                    <option value="Tuesday" {% if request.args.get('date_day') == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+                    <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
+                </select>
+            </div>
+            <div class="form-group mb-4">
+                <label for="yearlevel">Year Level</label>
+                <select name="yearlevel" class="form-control">
+                    <option value="None" {% if request.args.get('yearlevel') == 'None' %}selected{% endif %}>None</option>
+                    <option value="11" {% if request.args.get('yearlevel') == '11' %}selected{% endif %}>Year 11</option>
+                    <option value="12" {% if request.args.get('yearlevel') == '12' %}selected{% endif %}>Year 12</option>
+                    <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <ul class="buttonclass">
+                    <li style="display: inline-block;" class="last-list">
+                        <button type="submit" class="btn-primary me-2" style="margin-bottom: 0;">Filter</button> <!- - Submit Filter Button - ->
+                    </li>
+                    <li style="display: inline-block;" class="last-list spacer">
+                        <a href="{{ url_for('views.apply') }}" class="btn-secondary">Clear Filters</a> <!- - Clear Filter Button - - >
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>
+<! - - End of Filter User - - >
+
+
 <section class="beigespace-test">
     <br>
     <br>

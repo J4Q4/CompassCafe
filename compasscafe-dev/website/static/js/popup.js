@@ -62,47 +62,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Mobile Menu Popups
+
+// Mobile General Popups
 document.addEventListener('DOMContentLoaded', () => {
     
     // Show Popup
     function togglePopup(popup) {
-        if (popup.classList.contains("dash-popupjs")) {
-            popup.classList.remove("dash-popupjs");
+        if (popup.classList.contains("mobi-popupjs")) {
+            popup.classList.remove("mobi-popupjs");
         } else {
-            popup.classList.add("dash-popupjs");
+            popup.classList.add("mobi-popupjs");
         }
     }
 
     // Click out of Range – Close Popup
     function closePopup(popup) {
-        popup.classList.remove("dash-popupjs");
+        popup.classList.remove("mobi-popupjs");
     }
     // Sort Popup
-    const menusortPopup = document.getElementById("menusortjsPopup");
-    const menusortBtn = document.getElementById("menusortPopBTN");
+    const mobilesortPopup = document.getElementById("mobile-sortjsPopup");
+    const sortBtn = document.getElementById("sortPopBTN");
+    const sortCloseBtn = document.getElementById("mobisortPopClose");
 
-    menusortBtn.addEventListener('click', () => {
-        togglePopup(menusortPopup);
+    sortBtn.addEventListener('click', () => {
+        togglePopup(mobilesortPopup);
+    });
+
+    sortCloseBtn.addEventListener('click', () => {
+        closePopup(mobilesortPopup);
     });
 
     document.addEventListener('click', (event) => {
-        if (event.target != menusortBtn && !menusortPopup.contains(event.target)) {
-            closePopup(menusortPopup);
+        if (event.target != sortBtn && !mobilesortPopup.contains(event.target)) {
+            closePopup(mobilesortPopup);
         }
     });
 
     // Filter Popup
-    const menufilterPopup = document.getElementById("menufilterjsPopup");
-    const menufilterBtn = document.getElementById("menufilterPopBTN");
+    const mobilefilterPopup = document.getElementById("mobile-filterjsPopup");
+    const filterBtn = document.getElementById("filterPopBTN");
+    const filterCloseBtn = document.getElementById("mobifilterPopClose");
 
-    menufilterBtn.addEventListener('click', () => {
-        togglePopup(menufilterPopup);
+    filterBtn.addEventListener('click', () => {
+        togglePopup(mobilefilterPopup);
+    });
+
+    filterCloseBtn.addEventListener('click', () => {
+        closePopup(mobilefilterPopup);
     });
 
     document.addEventListener('click', (event) => {
-        if (event.target != menufilterBtn && !menufilterPopup.contains(event.target)) {
-            closePopup(menufilterPopup);
+        if (event.target != filterBtn && !mobilefilterPopup.contains(event.target)) {
+            closePopup(mobilefilterPopup);
         }
     });
 
@@ -142,6 +153,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+});
+
+
+
+
+// Mobile Apply Popup
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Show Popup
+    function togglePopup(popup) {
+        if (popup.classList.contains("mobi-popupjs")) {
+            popup.classList.remove("mobi-popupjs");
+        } else {
+            popup.classList.add("mobi-popupjs");
+        }
+    }
+
+    // Click out of Range – Close Popup
+    function closePopup(popup) {
+        popup.classList.remove("mobi-popupjs");
+    }
+    // Sort Popup
+    const mobilesortPopup = document.getElementById("mobile-applyjsPopup");
+    const mobileapplyBtn = document.getElementById("applyPopBTN");
+    const mobileapplyCloseBtn = document.getElementById("filterPopClose");
+
+    mobileapplyBtn.addEventListener('click', () => {
+        togglePopup(mobilesortPopup);
+    });
+
+    mobileapplyCloseBtn.addEventListener('click', () => {
+        closePopup(mobilesortPopup);
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target != mobileapplyBtn && !mobilesortPopup.contains(event.target)) {
+            closePopup(mobilesortPopup);
+        }
+    });
 });
 
 
