@@ -17,6 +17,8 @@
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
       <!--Popper JS -->
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <!-- Menu Carousel Splide -->
+      <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
       <!-- Personalised CSS -->
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   
@@ -242,7 +244,7 @@
                 <li id="firstfooter-link"><a class="footer-links" href="/apply">apply</a></li>
                 <li><a class="footer-links" href="/menu">menu</a></li>
                 <!-- <li><a class="footer-links" href="/news">news</a></li> -->
-                <li><a class="footer-links" href="/account">account</a></li>
+                <li><a class="footer-links" href="/settings">account</a></li>
             </ul>
           </div>
           <div class="row upperfooter-down">
@@ -291,6 +293,9 @@
     </div>
     </footer>
     <!-- End of Footer Lower -->
+
+    <!-- Menu Carousel Splide -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     
     <!-- Scroll Effects  |  DISABLE SMOOTH SCROLLING TO WORK -->
     <!-- Scroll Object Animations Library-->
@@ -299,9 +304,9 @@
     <script src="https://assets.codepen.io/16327/ScrollTrigger.min.js"></script>
     <!-- Lenis Scroll Library-->
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
-    <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
 
-    <!-- Dashboard Popup -->
+    <!-- Custom JS-->
+    <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
     <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
 
     <!-- Load Screen -->

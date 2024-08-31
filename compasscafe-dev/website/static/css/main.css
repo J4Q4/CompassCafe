@@ -412,7 +412,7 @@ input[type=password]:focus,
 /* Warning Container - DELETE */
 /* Background Popup */
 .confirm-container {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   z-index: 1000000;
   top: 0;
@@ -421,19 +421,19 @@ input[type=password]:focus,
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Confirmation Popup */
 .confirm-content {
-  background-color: white;
-  padding: 50px; /* Ensures adequate padding */
+  background-color: var(--main-white);
+  padding: 50px;
   border-radius: 20px;
   text-align: center;
-  z-index: 1001; /* Stays above the overlay */
+  z-index: 1001;
   display: flex;
-  flex-direction: column; /* Stacks content vertically */
-  align-items: center; /* Centers content horizontally */
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Buttons */
@@ -446,7 +446,7 @@ input[type=password]:focus,
 
 /* Show and Animate Confirmation Popup */
 .confirm-container.show-delete-confirm {
-  display: flex !important; /* Make the popup visible */
+  display: flex !important;
 }
 
 .confirm-container.show-delete-confirm .confirm-content {
@@ -1661,11 +1661,51 @@ h3 {
   border-radius: 25px;
 }
 
-.home-wrap {
-  padding: 100px 0;
+/* ## END OF HOME ## */
+/* MENU CAROUSEL */
+.contents-wrapper {
+  margin: 0 200px;
 }
 
-/* ## END OF HOME ## */
+.splide__slide {
+  padding: 0 12px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.splide__slide img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+}
+
+.splide__pagination {
+  bottom: -50px;
+}
+
+#carousel-info {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#carousel-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#carousel-description {
+  font-size: 16px;
+  color: #555;
+}
+
 /* Error */
 /* ## 404 PAGE NOT FOUND ## */
 #contain404 {
@@ -2285,8 +2325,15 @@ label {
   z-index: 3;
   padding: 0 0 10px 10px;
   pointer-events: none;
+  overflow: hidden;
+  max-width: 85%;
 }
-.menu-item h3 {
+.menu-item .menu-tags h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  box-sizing: border-box;
   font-size: 16px;
   margin: 0;
   font-family: "Open Sans";
@@ -2297,14 +2344,14 @@ label {
   padding: 1px 3px;
   border-radius: 10px;
 }
-.menu-item p {
+.menu-item .menu-tags p {
   font-size: 14px;
   margin: 0;
   font-family: "JetBrains Mono";
   position: absolute;
   opacity: 0;
 }
-.menu-item h6 {
+.menu-item .menu-tags h6 {
   font-size: 14px;
   margin: 0;
   font-family: "JetBrains Mono";
@@ -2460,6 +2507,9 @@ label {
   border: 2px solid #f0f0f0;
   transform: scale(1.01);
   z-index: 2;
+}
+.menu-item-card .mobile-nopadding {
+  padding: 0;
 }
 
 .category-class {

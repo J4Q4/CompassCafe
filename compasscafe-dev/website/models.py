@@ -118,7 +118,7 @@ class EditMenu(FlaskForm):
     price = FloatField('Price', validators=[
                        DataRequired(), NumberRange(min=0.0)])
     description = TextAreaField('Description', validators=[
-                                Optional()], render_kw={"maxlength": "150"})
+                                Optional()], render_kw={"maxlength": "100"})
     category = SelectField('Category', choices=[], validators=[DataRequired()])
     image = FileField('Menu Item Image', validators=[Optional()])
 

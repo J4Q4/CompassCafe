@@ -20,8 +20,8 @@
 <!-- Blank Space -->
 <section class="blankspace-test fade-in">
   <div class="home-wrap">
-    <div class="container px-4 content-space">
-      <div class="row gx-5">
+    <div class="content-space">
+      <div class="row">
         <div class="col-md-12 col-lg-6">
           <span style="text-align:justify">
             <h1>HELLO!</h1>
@@ -44,8 +44,8 @@
 <!-- White Space -->
 <section class="whitespace-test fade-in">
   <div class="home-wrap">
-    <div class="container px-4 content-space">
-      <div class="row gx-5">
+    <div class="content-space">
+      <div class="row">
         <div class="col-md-12 col-lg-6 mb-4 home-img">
           <img src="/static/assets/media/placeholder.jpg" alt="HeroTitle" style="width: 100%; height: 450px;" draggable="false">
         </div>
@@ -70,22 +70,37 @@
   <div class="home-wrap">
     <div class="content-space text-center">
       <p>
+        <h1>What's New</h1>
         <br>
+        <h3>LATEST DRINKS ON BOARD!</h3>
         <br>
-        <br>
-        <h1>The BEVS</h1>
-        <br>
-        <h3><strong>[ !! THIS IS A WORK IN PROGRESS !! ]</strong></h3>
-        <br>
-        <p><strong>M</strong>an <strong>I</strong> <strong>L</strong>ove <strong>F</strong>rappuccinos.</p>
-        <br>
-        <a class="btn-primary" href="/menu" type="button">Dive Deeper</a>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <div>
+          <div id="image-carousel" class="splide">
+            <div class="splide__track">
+              <ul class="splide__list">
+                {% for item in menu_items %}
+                  <li class="splide__slide">
+                    <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <br><br><br><br>
+          <div class="splide__arrows">
+            <button class="btn-primary splidebtn-menuprev">
+              <i class="fa-solid fa-caret-left"></i>
+            </button>
+            <a class="btn-primary" href="/menu" type="button">Dive Deeper</a>
+            <button class="btn-primary splidebtn-menunext">
+              <i class="fa-solid fa-caret-right"></i>
+            </button>
+          </div>
+          <div id="carousel-info">
+            <h3 id="carousel-title"></h3>
+            <p id="carousel-description"></p>
+          </div> 
+        </div>        
       </p>
     </div>
   </div>
@@ -93,3 +108,39 @@
 <!-- End of Blank Space -->
 
 {% endblock %}
+
+
+<!-- <div class="container-carousel">
+          {% for item in menu_items %}
+              <div class="menucarousel-card">
+                <div>
+                  <div>
+                    <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
+                  </div>
+                  <div>
+                    <h3>{{ item.item }}</h3>
+                    <p>{{ item.description }}</p>
+                  </div>
+                </div>
+              </div>
+          {% endfor %}
+        </div>
+        <br>
+        <br> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,9 @@ def handle_exception(error):
 @views.route("/")
 @views.route("/home")
 def home():
-    return render_template("home.html", user=current_user)
+    menu_items = Menu.query.order_by(Menu.date_created.desc()).limit(5).all()
+
+    return render_template('home.html', user=current_user, menu_items=menu_items)
 
 
 # SETTINGS ROUTE

@@ -50,7 +50,7 @@
 /* Warning Container - DELETE */
 /* Background Popup */
 .confirm-container {
-    display: none;  /* Hidden by default */
+    display: none;
     position: fixed;
     z-index: 1000000;
     top: 0;
@@ -59,19 +59,19 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);  /* Dark overlay */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Confirmation Popup */
 .confirm-content {
-    background-color: white;
-    padding: 50px;  /* Ensures adequate padding */
+    background-color: var(--main-white);
+    padding: 50px; 
     border-radius: 20px;
     text-align: center;
-    z-index: 1001;  /* Stays above the overlay */
+    z-index: 1001;
     display: flex;
-    flex-direction: column;  /* Stacks content vertically */
-    align-items: center;  /* Centers content horizontally */
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Buttons */
@@ -84,7 +84,7 @@
 
 /* Show and Animate Confirmation Popup */
 .confirm-container.show-delete-confirm {
-    display: flex !important;  /* Make the popup visible */
+    display: flex !important;
 }
 
 .confirm-container.show-delete-confirm .confirm-content {

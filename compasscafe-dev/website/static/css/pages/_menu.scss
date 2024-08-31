@@ -81,31 +81,38 @@
         z-index: 3;
         padding: 0 0 10px 10px;
         pointer-events: none;
-    }
-    h3 {
-        font-size: 16px;
-        margin: 0;
-        font-family: 'Open Sans';
-        font-weight: 700;
-        text-transform: capitalize;
-        background-color: #fff;
-        color: #000;
-        padding: 1px 3px;
-        border-radius: 10px;
-    }
-    p {
-        font-size: 14px;
-        margin: 0;
-        font-family: 'JetBrains Mono';
-        position: absolute;
-        opacity: 0;
-    }
-    h6 {
-        font-size: 14px;
-        margin: 0;
-        font-family: 'JetBrains Mono';
-        position: absolute;
-        opacity: 0;
+        overflow: hidden;
+        max-width: 85%;
+        h3 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin: 0;
+            font-family: 'Open Sans';
+            font-weight: 700;
+            text-transform: capitalize;
+            background-color: #fff;
+            color: #000;
+            padding: 1px 3px;
+            border-radius: 10px;
+        }
+        p {
+            font-size: 14px;
+            margin: 0;
+            font-family: 'JetBrains Mono';
+            position: absolute;
+            opacity: 0;
+        }
+        h6 {
+            font-size: 14px;
+            margin: 0;
+            font-family: 'JetBrains Mono';
+            position: absolute;
+            opacity: 0;
+        }
     }
     form {
         pointer-events: visible !important;
@@ -265,6 +272,9 @@
         border: 2px solid #f0f0f0;
         transform: scale(1.01);
         z-index: 2;
+    }
+    .mobile-nopadding {
+        padding: 0;
     }
 }
 

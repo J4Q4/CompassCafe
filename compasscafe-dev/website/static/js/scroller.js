@@ -49,6 +49,64 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
+// Category Mobile Slider
+function scrollLeftBtn() {
+    const container = document.getElementById('category-list');
+    const maxScrollLeft = container.scrollLeft;
+
+    if (maxScrollLeft > 0) {
+        container.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+}
+
+function scrollRightBtn() {
+    const container = document.getElementById('category-list');
+    container.scrollBy({ left: 200, behavior: 'smooth' });
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialize the Splide carousel
+    var splide = new Splide('#image-carousel', {
+      type   : 'loop',
+      perPage: 3,
+      perMove: 1,
+      gap    : '20rem',
+      focus  : 'center',
+      pagination: true,
+      arrows: false,
+      speed: 1000,
+      autoplay: true,
+      interval: 5000,
+      breakpoints: {
+        768: {
+          perPage: 2,
+        },
+        640: {
+          perPage: 1,
+        },
+      },
+    }).mount();
+  
+    // Previous Button
+    document.querySelector('.splidebtn-menuprev').addEventListener('click', function () {
+      splide.go('<');
+    });
+  
+    // Next Button
+    document.querySelector('.splidebtn-menunext').addEventListener('click', function () {
+      splide.go('>');
+    });
+    
+  });
+
+
+
+
 // Content Fade In on Scroll
 document.addEventListener('DOMContentLoaded', function () {
     gsap.registerPlugin(ScrollTrigger);
@@ -68,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: fadeContent,
-                    start: "top 100%",
+                    start: "top 120%",
                     toggleActions: "play none none none", 
                     once: true 
                 }
@@ -76,20 +134,3 @@ document.addEventListener('DOMContentLoaded', function () {
         );
     });
 });
-
-
-
-// Category Mobile Slider
-function scrollLeftBtn() {
-    const container = document.getElementById('category-list');
-    const maxScrollLeft = container.scrollLeft;
-
-    if (maxScrollLeft > 0) {
-        container.scrollBy({ left: -200, behavior: 'smooth' });
-    }
-}
-
-function scrollRightBtn() {
-    const container = document.getElementById('category-list');
-    container.scrollBy({ left: 200, behavior: 'smooth' });
-}

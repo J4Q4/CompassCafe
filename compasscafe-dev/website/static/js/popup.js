@@ -393,3 +393,32 @@ document.querySelectorAll('.menu-item').forEach(item => {
         }
     });
 });
+
+
+
+
+// Show Menu Item Contents Popup
+function showMenuDescPopup(button) {
+    // Confirm Popup
+    const confirmPopup = document.getElementById('menudesc-popup');
+
+    // If Error
+    if (!confirmPopup) return;
+
+    // Get User Attributes
+    const itemId = button.getAttribute('data-item-id');
+    const itemImage = button.getAttribute('data-item-image');
+    const itemTitle = button.getAttribute('data-item-title');
+    const itemPrice = button.getAttribute('data-item-price');
+    const itemDescription = button.getAttribute('data-item-description');
+
+    acceptForm.action = `/apply/accept-apply/${itemId}`;
+    descriptionSpan.textContent = itemDescription;
+    // Show Popup
+    confirmPopup.classList.add('show-delete-confirm');
+}
+
+// Close Popup
+function closeMenuDescPopup() {
+    document.getElementById('menudesc-popup').classList.remove('show-delete-confirm');
+}
