@@ -23,6 +23,7 @@ textarea:hover,
 #sideMenu i:hover,
 form #filterPopBTN,
 #sortPopBTN:hover,
-.sideToggle1 {
-    cursor: url('/static/assets/img/cursor-ok.png'), pointer;
+.sideToggle1,
+button:hover {
+    cursor: url('/static/assets/img/cursor-ok.png'), pointer !important;
 }

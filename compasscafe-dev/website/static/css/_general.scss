@@ -40,7 +40,7 @@ h1 {
 h3 {
     font-family: "JetBrains Mono";
     font-weight: 600;
-    font-size: 18px;
+    font-size: 24px;
     text-transform: uppercase;
 }
 
@@ -67,6 +67,8 @@ h3 {
 }
 .beigespace-test {
     background-color: var(--main-white);
+    background-image: radial-gradient(#EBEBEB 0.9px, var(--main-white) 0.9px);
+    background-size: 18px 18px;
     margin: 0;
     width: 100%;
     margin-bottom: 0;

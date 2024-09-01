@@ -70,39 +70,109 @@ function scrollRightBtn() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize the Splide carousel
+    // Initialise Splide Carousel
     var splide = new Splide('#image-carousel', {
-      type   : 'loop',
-      perPage: 3,
-      perMove: 1,
-      gap    : '20rem',
-      focus  : 'center',
-      pagination: true,
-      arrows: false,
-      speed: 1000,
-      autoplay: true,
-      interval: 5000,
-      breakpoints: {
-        768: {
-          perPage: 2,
+        type   : 'loop',
+        perPage: 3,
+        perMove: 1,
+        gap: '18rem',
+        focus: 'center',
+        pagination: false,
+        arrows: false,
+        speed: 500,
+        breakpoints: {
+            1400: { 
+                perPage: 3,
+                gap: '20rem',
+            },
+            1200: {
+                perPage: 2,
+                gap: '12rem',
+            },
+            992: {
+                perPage: 2,
+            },
+            768: {
+                perPage: 2,
+                gap: '8rem',
+            },
+            576: {
+                perPage: 1,
+            },
         },
-        640: {
-          perPage: 1,
-        },
-      },
     }).mount();
-  
+
+
+    // Active Carousel Details - Mobile View
+    var menuCarouselTitle = document.getElementById('menucarousel-title');
+    var menuCarouselDescription = document.getElementById('menucarousel-description');
+    var carouselInfo = document.getElementById('carousel-info');
+
+    // Grab Carousel Info
+    function updateSlideInfo() {
+        var activeSlide = splide.Components.Slides.getAt(splide.index).slide;
+        var title = activeSlide.getAttribute('data-title');
+        var description = activeSlide.getAttribute('data-description');
+        
+        menuCarouselTitle.textContent = title;
+        menuCarouselDescription.textContent = description;
+
+        // CSS Active Animation
+        carouselInfo.classList.add('active');
+    }
+
+    function hideSlideInfo() {
+        // Remove CSS Active Animation
+        carouselInfo.classList.remove('active');
+    }
+
+    splide.on('move', hideSlideInfo);
+
+    splide.on('moved', function () {
+        updateSlideInfo();
+    });
+
+    // Initial Animation Status Setup
+    updateSlideInfo();
+    carouselInfo.classList.add('active');
+
+
+    // Custom Pagination
+    var pagination = document.querySelector('#custom-pagination');
+    var maxDots = 5;
+
+    for (let i = 0; i < maxDots; i++) {
+        var button = document.createElement('button');
+        button.className = 'pagination-dot';
+        button.type = 'button';
+
+        // Event listener for pagination dot click
+        button.addEventListener('click', () => splide.go(i));
+
+        pagination.appendChild(button);
+    }
+
+    // Update Active Pagination Node
+    splide.on('move', function () {
+        document.querySelectorAll('.pagination-dot').forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === splide.index % maxDots);
+        });
+    });
+
+    // Initialise Active Pagination Node
+    splide.emit('move');
+    
     // Previous Button
     document.querySelector('.splidebtn-menuprev').addEventListener('click', function () {
-      splide.go('<');
+        splide.go('<');
     });
-  
+
     // Next Button
     document.querySelector('.splidebtn-menunext').addEventListener('click', function () {
-      splide.go('>');
+        splide.go('>');
     });
-    
-  });
+
+});
 
 
 

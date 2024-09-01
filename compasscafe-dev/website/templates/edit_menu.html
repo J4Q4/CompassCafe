@@ -280,7 +280,7 @@
                         <!-- Menu Items -->
                         <div class="row menurow mb-4">
                             {% for item in paginMenu.items %}
-                            <div class="mobile-nopadding col-md-12 col-lg-6 d-flex">
+                            <div class="mobile-nopadding col-12 col-md-6 d-flex">
                                 <div class="card menu-item-card mb-4">
                                     <div class="row">
                                         <div class="mobile-nopadding col-5">
@@ -312,7 +312,7 @@
                                                 </ul>
                                             </div>
 
-                                            <h3>{{ item.item }}</h3>
+                                            <h3 style="font-size: 16px;">{{ item.item }}</h3>
                                             <p>{{ item.formatted_price }}</p>
                                             <p>{{ item.description }}</p>
                                         </div>
@@ -327,7 +327,7 @@
                     
                         <!-- Interactable Menu Navigation Buttons -->
                         <div class="row">
-                            <div class="col text-center">
+                            <div class="col text-center mb-5">
                                 <div class="menu-pagination d-inline-flex">
                                     <!-- Pagination -->
                                     {% for page in paginPages.pages %}
