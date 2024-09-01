@@ -32,8 +32,26 @@
     margin-right: 10px;
 }
 
-.menu-container {
-    gap: 30px;
+@media screen and (min-width: map-get($grid-breakpoints, md)) {
+    .menu-container {
+        gap: 30px;
+    }
+    .menu-item {
+        max-width: calc(33.333% - 20px);
+        img {
+            box-shadow: 18px 18px 30px #f0f0f0, 
+            -18px -18px 30px #ffffff;
+        }
+    }
+    
+}
+@media screen and (max-width: map-get($grid-breakpoints, md)) {
+    .menu-container {
+        gap: 10px;
+    }
+    .menu-item {
+        max-width: calc(33.333% - 7px);
+    }
 }
 
 .menu-pagination {
@@ -44,7 +62,6 @@
     position: relative;
     border-radius: 20px;
     padding: 0;
-    max-width: calc(33.333% - 20px);
     transform: scale(1);
         transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
         &:hover {
@@ -68,8 +85,6 @@
         display: block;
         border-radius: 20px;
         z-index: 1;
-        box-shadow: 18px 18px 30px #f0f0f0, 
-            -18px -18px 30px #ffffff;
     }
     /* Menu Item Text */
     .menu-tags {

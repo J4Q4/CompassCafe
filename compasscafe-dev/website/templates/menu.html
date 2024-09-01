@@ -63,7 +63,7 @@
             <!-- Menu Items -->
 
                 <!-- Large View Menu Items -->
-                <div class="row mb-4 menu-container">
+                <div class="row mb-4 menu-container d-none d-lg-flex">
                     {% for item in paginMenu.items %}
                     <div class="menu-item col-md-6 col-lg-4">
                         <div class="menu-tags">
@@ -75,6 +75,29 @@
                         </div>
                         <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
                     </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Mobile View Menu Items -->
+                <div class="row mb-4 menu-container d-flex d-lg-none">
+                    {% for item in paginMenu.items %}
+                    <div class="menu-item col-md-6 col-lg-4">
+                        <div class="menu-tags">
+                            <div class="menu-text">
+                                <p>{{ item.formatted_price }}</p>
+                                <h3>{{ item.item }}</h3>
+                                <h6>{{ item.description }}</h6>
+                            </div>
+                        </div>
+                        <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}"
+                            class="menu-item-image"
+                            onclick="showMenuDescPopup(this)" 
+                            data-item-id="{{ item.id }}" 
+                            data-item-title="{{ item.item }}" 
+                            data-item-price="{{ item.formatted_price }}"
+                            data-item-image="{{ url_for('static', filename='assets/menu/' + item.image) }}"
+                            data-item-description="{{ item.description }}">
+                    </div>                                    
                     {% endfor %}
                 </div>
         

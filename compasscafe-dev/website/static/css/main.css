@@ -450,7 +450,8 @@ input[type=password]:focus,
   display: flex !important;
 }
 
-.confirm-container.show-delete-confirm .confirm-content {
+.confirm-container.show-delete-confirm .confirm-content,
+.confirm-container.show-delete-confirm .menupop-content {
   animation: showDeleteConfirm 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards !important;
 }
 
@@ -464,6 +465,46 @@ input[type=password]:focus,
     transform: translateY(0);
   }
 }
+/* Menu Details Popup */
+.menupop-content {
+  background-color: var(--main-white);
+  border-radius: 20px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+.menupop-content img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.menupop-content h3 {
+  font-size: 16px;
+  padding-right: 50px;
+}
+.menupop-content button {
+  padding: 10px 20px;
+  background-color: transparent;
+  border: none;
+  color: #000;
+  transform: scale(1.5);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.menupop-content > * {
+  text-align: left;
+}
+
+.menupop-info {
+  width: 100%;
+  padding: 20px;
+}
+
 /* Dropdown Menu : GENERAL */
 .dropdown-menu {
   animation: dropdown-anim 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
@@ -2397,10 +2438,25 @@ label {
   margin-right: 10px;
 }
 
-.menu-container {
-  gap: 30px;
+@media screen and (min-width: 768px) {
+  .menu-container {
+    gap: 30px;
+  }
+  .menu-item {
+    max-width: calc(33.333% - 20px);
+  }
+  .menu-item img {
+    box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  }
 }
-
+@media screen and (max-width: 768px) {
+  .menu-container {
+    gap: 10px;
+  }
+  .menu-item {
+    max-width: calc(33.333% - 7px);
+  }
+}
 .menu-pagination {
   gap: 20px;
 }
@@ -2409,7 +2465,6 @@ label {
   position: relative;
   border-radius: 20px;
   padding: 0;
-  max-width: calc(33.333% - 20px);
   transform: scale(1);
   transition: transform 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
   /* Menu Item Text */
@@ -2436,7 +2491,6 @@ label {
   display: block;
   border-radius: 20px;
   z-index: 1;
-  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
 }
 .menu-item .menu-tags {
   position: absolute;

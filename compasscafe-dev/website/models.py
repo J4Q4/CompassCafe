@@ -101,9 +101,9 @@ class Menu(db.Model):
     # Menu Items
     id = db.Column(db.Integer, primary_key=True)
     image = db.Column(db.String(150), nullable=True, default='default.jpg')
-    item = db.Column(db.String(150), nullable=False)
+    item = db.Column(db.String(35), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(150), nullable=True)
+    description = db.Column(db.String(100), nullable=True)
     category = db.Column(db.String(50), nullable=False)
     # Non-visible Inputs
     date_created = db.Column(db.DateTime(timezone=True), default=func.now())
@@ -114,7 +114,8 @@ class Menu(db.Model):
 
 # Edit Menu
 class EditMenu(FlaskForm):
-    item = StringField('Item Name', validators=[DataRequired()])
+    item = StringField('Item Name', validators=[
+                       DataRequired()], render_kw={"maxlength": "35"})
     price = FloatField('Price', validators=[
                        DataRequired(), NumberRange(min=0.0)])
     description = TextAreaField('Description', validators=[

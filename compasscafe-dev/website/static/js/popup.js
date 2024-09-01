@@ -412,8 +412,12 @@ function showMenuDescPopup(button) {
     const itemPrice = button.getAttribute('data-item-price');
     const itemDescription = button.getAttribute('data-item-description');
 
-    acceptForm.action = `/apply/accept-apply/${itemId}`;
-    descriptionSpan.textContent = itemDescription;
+    // Set the popup content
+    confirmPopup.querySelector('.popup-item-title').textContent = itemTitle;
+    confirmPopup.querySelector('.popup-item-price').textContent = itemPrice;
+    confirmPopup.querySelector('.popup-item-description').textContent = itemDescription;
+    confirmPopup.querySelector('.popup-item-image').src = itemImage;
+
     // Show Popup
     confirmPopup.classList.add('show-delete-confirm');
 }
