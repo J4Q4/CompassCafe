@@ -5,6 +5,9 @@ from datetime import datetime
 import atexit
 from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
+from sqlalchemy import text
+import pymysql
+pymysql.install_as_MySQLdb()
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -16,8 +19,17 @@ scheduler = BackgroundScheduler()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = "XZ.x_+hiZZs!y9T"
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+
+    # SQLite Initialisation
+    # app.config['SECRET_KEY'] = "XZ.x_+hiZZs!y9T"
+    # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+
+    # MySQL Initialisation
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://wackydev_waka:WAKABAKA123@wacky.dev:3306/wackydev_compasscafedb'
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'pool_recycle': 299, 'pool_pre_ping': True}
+    app.config["SECRET_KEY"] = "XZ.x_+hiZZs!y9T"
 
     # Flask-Mail configuration
     app.config['MAIL_SERVER'] = 'compasscafesmc.wacky.dev'
@@ -33,6 +45,14 @@ def create_app():
 
     db.init_app(app)
     mail.init_app(app)
+
+    try:
+        with app.app_context():
+            connection = db.engine.connect()
+            result = connection.execute(text("SELECT 1"))
+        print("database connection successful")
+    except Exception as e:
+        print(f"database connection failed: {e}")
 
     from .views import views, notifyDuty
     from .auth import auth
@@ -80,8 +100,8 @@ def create_app():
     scheduler.add_job(notifyDuty_context, 'cron',
                       hour=13, minute=30)  # 1:30 PM
 
-    # # Test Duty Reminder
-    # scheduler.add_job(notifyDuty_context, 'cron', hour=19, minute=3)
+    # Test Duty Reminder
+    scheduler.add_job(notifyDuty_context, 'cron', hour=10, minute=53)
 
     scheduler.start()
 
@@ -113,7 +133,7 @@ def welcomeEmail(user_email):
 
 def baristaEmail(user_email, firstname, week, day):
     try:
-        msg = Message("Welcome to the Team! ✧ Compass Cafe",
+        msg = Message("Welcome to the Crew! ✧ Compass Cafe",
                       sender="noreply@compasscafesmc.wacky.dev",
                       recipients=[user_email])
 
