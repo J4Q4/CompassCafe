@@ -5,7 +5,7 @@ from . import db
 # User Admin Handling
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, FloatField, TextAreaField, FileField
-from wtforms.validators import DataRequired, Email, EqualTo, Optional, NumberRange
+from wtforms.validators import DataRequired, Email, EqualTo, Optional, NumberRange, Regexp
 
 ## DATABASE ENTRY CLASSES ##
 
@@ -28,12 +28,19 @@ class User(db.Model, UserMixin):
 class EditUser(FlaskForm):
     email = StringField('Change Email', validators=[
         DataRequired(), Email()], render_kw={"placeholder": "Email"})
+    schoolid = StringField('School ID', validators=[
+        DataRequired(message="School ID is required"),
+        Regexp(r'^\d{5}$', message="School ID must be exactly 5 digits")
+    ], render_kw={
+        "placeholder": "00000",
+        "maxlength": "5",
+        "oninput": "this.value = this.value.replace(/[^0-9]/g,'').slice(0,5);",
+    })
     password = PasswordField('Change Password', render_kw={
                              "placeholder": "Enter New Password"})
-    confirm_password = PasswordField(
-        'Confirm Password', validators=[
-            Optional(), EqualTo('password', message='Passwords must match')],
-        render_kw={"placeholder": "Re-Enter New password"})
+    confirm_password = PasswordField('Confirm Password', validators=[
+        Optional(), EqualTo('password', message='Passwords must match')
+    ], render_kw={"placeholder": "Re-Enter New password"})
     is_staff = BooleanField()
     submit = SubmitField('Update User', render_kw={"class": "btn-primary"})
 

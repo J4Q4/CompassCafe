@@ -11,6 +11,11 @@
     form {
         padding: 100px;
     }
+    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+        form {
+            padding: 50px 20px 0px 20px;
+        }
+    }
 }
 .user-signupui {
     background-color: var(--main-white);
@@ -23,6 +28,11 @@
              -18px -18px 30px #ffffff;
     form {
         padding: 100px;
+    }
+    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
+        form {
+            padding: 50px 20px 0px 20px;
+        }
     }
     col {
         margin: 0;

@@ -57,7 +57,7 @@
           <div class="dashboarduser-table dash-sides">
             <ul>
               <h6>Site Settings</h3>
-              <li><a href="#">menu</a></li>
+              <li><a href="{{ url_for('views.menuEdit') }}">menu</a></li>
             </ul>
           </div>
           {% endif %}
@@ -86,6 +86,15 @@
                         {{ edit_form.email(size=32, disabled=True) }}
                     {% else %}
                         {{ edit_form.email(size=32) }}
+                    {% endif %}
+                </p>
+                <! - - School ID Input - - >
+                <p>
+                    {{ edit_form.schoolid.label }}<br>
+                    {% if user.email == 'admin@sanctamaria.school.nz' %}
+                        {{ edit_form.schoolid(size=32, disabled=True) }}
+                    {% else %}
+                      {{ edit_form.schoolid(size=32) }}
                     {% endif %}
                 </p>
                 <! - - Password Input - - >
@@ -118,7 +127,7 @@
                         Update Profile
                     {% endif %}
                 </button>
-                <a class="btn-secondary mb-4" href="{{ url_for('views.settings') }}" style="margin-left: 10px;">Cancel</a>
+                <a class="btn-secondary mb-4" href="{{ url_for('views.settings') }}" style="margin-left: 10px;">Cancel Changes</a>
                 {% if user.email == 'admin@sanctamaria.school.nz' %}
                     <p><strong>Please note:</strong> You cannot edit this admin account.</p>
                 {% endif %}
@@ -134,7 +143,7 @@
                       data-item-type="user" 
                       data-item-id="{{ user.id }}" 
                       data-item-description="User: {{ user.email }}">
-                      Delete <i class="fa fa-exclamation-triangle"></i>
+                      Delete Account<i class="fa fa-exclamation-triangle"></i>
                   </button>
                 </form>
                 <p><strong>Please note:</strong> If an applied barista, please notify your supervisor first.</p>

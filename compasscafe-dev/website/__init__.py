@@ -100,9 +100,6 @@ def create_app():
     scheduler.add_job(notifyDuty_context, 'cron',
                       hour=13, minute=30)  # 1:30 PM
 
-    # Test Duty Reminder
-    scheduler.add_job(notifyDuty_context, 'cron', hour=10, minute=53)
-
     scheduler.start()
 
     # Scheduler Off on App Exit

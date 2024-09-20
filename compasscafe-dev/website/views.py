@@ -45,8 +45,8 @@ def settings():
 
     return render_template("settings.html", user=current_user, edit_form=edit_form)
 
-# DELETE ACCOUNT IN SETTINGS ROUTE
 
+# DELETE ACCOUNT IN SETTINGS ROUTE
 
 @views.route('/settings/delete_account', methods=['POST'])
 @login_required
@@ -74,26 +74,68 @@ def edit_userfn(edit_form, user):
         if existing_user and existing_user.id != user.id:
             flash('Email is already in use.', category='error')
             return False
+
+        # EXISTING SCHOOL ID CHECK
+        existing_id_user = User.query.filter_by(
+            schoolid=edit_form.schoolid.data).first()
+        if existing_id_user and existing_id_user.id != user.id:
+            flash('School ID is already in use.', category='error')
+            return False
+
         # SANCTA EMAIL DOMAIN VERIFICATION
-        elif not is_validemail(edit_form.email.data):
+        if not is_validemail(edit_form.email.data):
             flash('Please use a valid school email.', category='error')
             return False
 
-        # UPDATE EMAIL
-        user.email = edit_form.email.data
-
-        # UPDATE VALID PASSWORD INPUTS
+        # ENSURE PASSWORDS MATCH + LONGER THAN 8 CHARACTERS
         if edit_form.password.data:
-            if edit_form.password.data == edit_form.confirm_password.data:
-                user.password = generate_password_hash(edit_form.password.data)
-            else:
+            if len(edit_form.password.data) < 8:
+                flash('Password must be at least 8 characters long.',
+                      category='error')
+                return False
+
+            if edit_form.password.data != edit_form.confirm_password.data:
                 flash('Passwords do not match!', category='error')
                 return False
 
-        # ADD CHANGES
-        db.session.commit()
-        flash('User updated successfully!', category='success')
-        return True
+        # ENSURE EMAIL IS FOUND IN USER THEN IN APPLY
+        try:
+            # UPDATE EMAIL AND SCHOOL ID IN USER
+            user.email = edit_form.email.data
+            user.schoolid = edit_form.schoolid.data
+            db.session.add(user)
+            db.session.flush()
+
+            # UPDATE EMAIL AND SCHOOL ID IN APPLY
+            applications = Apply.query.filter_by(author=user.id).all()
+            for application in applications:
+                application.email = edit_form.email.data
+                application.schoolid = edit_form.schoolid.data
+                db.session.add(application)
+
+            # UPDATE PASSWORD ONLY IF PROVIDED + VALIDATED
+            if edit_form.password.data:
+                user.password = generate_password_hash(edit_form.password.data)
+
+            # ADD CHANGES TO THE DATABASE
+            db.session.commit()
+            flash('User updated successfully!', category='success')
+            return True
+
+        except Exception as e:
+            # ROLL BACK IF ANY OTHER ERROR OCCURS
+            db.session.rollback()
+            flash(f'An error occurred: {str(e)}', category='error')
+            return False
+
+    else:
+        # HANDLE SPECIFIC ERRORS
+        # INCORRECT SCHOOL ID FORMATTING
+        if 'schoolid' in edit_form.errors:
+            flash("School ID must be exactly 5 digits.", category='error')
+        # PASSWORD MISMATCH
+        if 'confirm_password' in edit_form.errors:
+            flash("Passwords must match.", category='error')
 
     return False
 

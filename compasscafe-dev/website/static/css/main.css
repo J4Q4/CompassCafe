@@ -2351,6 +2351,11 @@ input[type=checkbox] {
 .user-loginui form {
   padding: 100px;
 }
+@media screen and (max-width: 576px) {
+  .user-loginui form {
+    padding: 50px 20px 0px 20px;
+  }
+}
 
 .user-signupui {
   background-color: var(--main-white);
@@ -2363,6 +2368,11 @@ input[type=checkbox] {
 }
 .user-signupui form {
   padding: 100px;
+}
+@media screen and (max-width: 576px) {
+  .user-signupui form {
+    padding: 50px 20px 0px 20px;
+  }
 }
 .user-signupui col {
   margin: 0;

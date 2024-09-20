@@ -103,10 +103,8 @@
         
                 <!-- Interactable Menu Navigation Buttons -->
                 <div class="row">
-                    <div class="col-xs-12 col-sm-6 mb-4 text-center text-sm-start">
-                        <a class="btn-primary" href="{{ url_for('views.menuEdit') }}">Edit Menu</a>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 text-center text-sm-end">
+
+                    <div class="col-xs-12 col-sm-8 mb-4 text-center text-sm-start">
                         <div class="menu-pagination d-inline-flex">
                             <!-- Pagination -->
                             {% for page in paginPages.pages %}
@@ -123,6 +121,13 @@
                             <!-- End of Pagination -->
                         </div>
                     </div>
+
+                    {% if user.is_staff %}
+                    <div class="col-xs-12 col-sm-4 text-center text-sm-end">
+                        <a class="btn-primary" href="{{ url_for('views.menuEdit') }}">Edit Menu</a>
+                    </div>
+                    {% endif %}
+
                 </div>
     
             </div>
