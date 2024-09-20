@@ -144,7 +144,7 @@ content %}
             <!-- Submit Buttons -->
             <br />
             <br />
-            <button type="submit" name="edit_submit" class="btn-primary mb-4">
+            <button type="submit" name="edit_submit" class="btn-primary mb-4"
               {% if user.email == 'admin@sanctamaria.school.nz' %}disabled{%
               endif %}> {% if user.email == 'admin@sanctamaria.school.nz' %}
               Disabled {% else %} Update Profile {% endif %}
@@ -181,7 +181,7 @@ content %}
                 data-item-id="{{ user.id }}"
                 data-item-description="User: {{ user.email }}"
               >
-                Delete Account<i class="fa fa-exclamation-triangle"></i>
+                Delete Account <i class="fa fa-exclamation-triangle"></i>
               </button>
             </form>
             <!-- If Applied Barista, Notify Supervisor -->

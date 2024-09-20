@@ -1,73 +1,75 @@
 /* ## USER LOGIN / SIGN UP ## */
 .user-loginui {
-    background-color: var(--main-white);
-    border: 2px solid #e5e6e6;
-    border-radius: 10px;
-    height: 720px;
-    margin: 80px auto;
-    overflow: hidden;
-    box-shadow:  18px 18px 30px #f0f0f0,
-             -18px -18px 30px #ffffff;
+  background-color: var(--main-white);
+  border: 2px solid #e5e6e6;
+  border-radius: 10px;
+  height: 720px;
+  margin: 80px auto;
+  overflow: hidden;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  form {
+    padding: 100px;
+  }
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
     form {
-        padding: 100px;
+      padding: 50px 20px 0px 20px;
     }
-    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
-        form {
-            padding: 50px 20px 0px 20px;
-        }
-    }
+  }
 }
+
+/* User Login / Signup Form */
 .user-signupui {
-    background-color: var(--main-white);
-    border: 2px solid #e5e6e6;
-    border-radius: 10px;
-    height: 1000px;
-    margin: 80px auto;
-    overflow: hidden;
-    box-shadow:  18px 18px 30px #f0f0f0,
-             -18px -18px 30px #ffffff;
+  background-color: var(--main-white);
+  border: 2px solid #e5e6e6;
+  border-radius: 10px;
+  height: 1000px;
+  margin: 80px auto;
+  overflow: hidden;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  form {
+    padding: 100px;
+  }
+  @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
     form {
-        padding: 100px;
+      padding: 50px 20px 0px 20px;
     }
-    @media screen and (max-width: map-get($grid-breakpoints, "sm")) {
-        form {
-            padding: 50px 20px 0px 20px;
-        }
-    }
-    col {
-        margin: 0;
-    }
+  }
+  col {
+    margin: 0;
+  }
 }
 
-
-.user-inuibtn button, .user-inuibtn a {
-    width: 100%;
-    text-decoration: none;
+/* User Login / Signup Form */
+.user-inuibtn button,
+.user-inuibtn a {
+  width: 100%;
+  text-decoration: none;
 }
 
+/* User Login / Signup Form */
 label {
-    font-family: "Open Sans";
-    text-transform: capitalize;
-    font-weight: 600;
-    font-size: 14px;
-    color: #000;
+  font-family: "Open Sans";
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
 }
 
-
+/* User Login / Signup Form */
 .user-inui .col {
-    padding: 0;
+  padding: 0;
 }
 
 /* Temporary User Login / Signup Image */
 .user-inui-img {
-    background-image: url(/static/assets/media/carson.gif);
-    background-color: var(--main-lightblue2);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-left: 1px solid #000;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
+  background-image: url(/static/assets/media/carson.gif);
+  background-color: var(--main-lightblue2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-left: 1px solid #000;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
 }
 /* ## END OF USER LOGIN / SIGN UP ## */

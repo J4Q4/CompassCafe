@@ -1,123 +1,131 @@
 /* APPLY TABLE */
-#posts h3, .dashboarduser-table h3, .lunch-sched h3 {
-    font-family: "JetBrains Mono";
+#posts h3,
+.dashboarduser-table h3,
+.lunch-sched h3 {
+  font-family: "JetBrains Mono";
 }
-
+/* Apply Table */
 .table {
-    table-layout: fixed;
-    width: 100%;
+  table-layout: fixed;
+  width: 100%;
 }
-.table th, .table td {
-    background-color: transparent;
-    text-align: center;
+.table th,
+.table td {
+  background-color: transparent;
+  text-align: center;
 }
-
+/* Apply Table Buttons */
 #apply-delete {
-    float: right;
+  float: right;
 }
 
 /* Set individual table grid height */
 .table tr {
-    height: 40px;
+  height: 40px;
 }
-
+/* Apply Table */
 .card-apply {
-    padding: 20px;
-    .card-body {
-        text-transform: capitalize;
-    }
+  padding: 20px;
+  .card-body {
+    text-transform: capitalize;
+  }
 }
-
+/* Apply Table */
 #apply-barista {
-    display: flex;
-    justify-content: space-between;
-    #week-desc {
-        text-align: right;
-    }
-    h3 {
-        font-family: "JetBrains Mono";
-        text-transform: capitalize;
-    }
+  display: flex;
+  justify-content: space-between;
+  #week-desc {
+    text-align: right;
+  }
+  /* Apply Table Heading*/
+  h3 {
+    font-family: "JetBrains Mono";
+    text-transform: capitalize;
+  }
 }
+/* Buttons */
+/*  Button Apply New */
 #btn-applynew {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+/*  Button Apply Submit */
 #btn-applysubmit {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .submitapply-btn > * {
-    width: 100% !important;
-    margin: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 /* Apply Schedule Calendar Today */
-.datetoday-selected span{
-    background-color: var(--main-lightblue2) !important;
-    color: var(--main-navy) !important;
-    padding: 5px;
-    border-radius: 15px;
+.datetoday-selected span {
+  background-color: var(--main-lightblue2) !important;
+  color: var(--main-navy) !important;
+  padding: 5px;
+  border-radius: 15px;
 }
+/* Apply Schedule Calendar Week */
 .weektoday-selected {
-    background-color: var(--main-lightblue2) !important;
-    color: var(--main-navy) !important;
-    padding: 10px;
-    border-radius: 15px;
+  background-color: var(--main-lightblue2) !important;
+  color: var(--main-navy) !important;
+  padding: 10px;
+  border-radius: 15px;
 }
-
+/* Apply Schedule Calendar Day */
 .schedulegrayed {
-    color: gray !important;
+  color: gray !important;
 }
-
 
 /* Center User Table Contents */
-.applysched-table, .applysched-table th, .applysched-table td {
-    text-align: center;
-    vertical-align: middle;
+.applysched-table,
+.applysched-table th,
+.applysched-table td {
+  text-align: center;
+  vertical-align: middle;
 }
-
 
 /* Delete Barista Animation */
 #baristadelete {
-    position: relative;
-    animation: btn-unhover .2s ease-in-out;
-    i {
-        transform: rotate(0deg);
-        transition: all 0.3s;
-    }
+  position: relative;
+  animation: btn-unhover 0.2s ease-in-out;
+  i {
+    transform: rotate(0deg);
+    transition: all 0.3s;
+  }
 }
+/* Hover Delete Barista Animation */
 #baristadelete:hover {
-    animation: btn-hover .4s ease-in-out forwards;
-    i {
-        transform: rotate(90deg);
-    }
+  animation: btn-hover 0.4s ease-in-out forwards;
+  i {
+    transform: rotate(90deg);
+  }
 }
 
+/* Apply Table */
 #applyjsPopup .popup-content {
-    padding: 20px;
-    select {
-        padding: 15px 20px;
-        border: 1px solid #000;
-        font-family: "JetBrains Mono";
-    }
+  padding: 20px;
+  select {
+    padding: 15px 20px;
+    border: 1px solid #000;
+    font-family: "JetBrains Mono";
+  }
 }
 /* End of Apply Table */
 
-
 /* Apply Filter Popup Spacing */
 #mobile-applyjsPopup {
-    @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-        .spacer {
-            margin-top: 0;
-        }
-        
+  @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+    .spacer {
+      margin-top: 0;
     }
-    @media screen and (max-width: map-get($grid-breakpoints, sm)) {
-        .spacer {
-            margin-top: 1.5rem;
-        }
+  }
+  @media screen and (max-width: map-get($grid-breakpoints, sm)) {
+    .spacer {
+      margin-top: 1.5rem;
     }
+  }
 }

@@ -182,6 +182,7 @@ def dashboard():
 
     query = User.query
 
+    # SORT AND FILTER FORMS
     sort_by = request.args.get('sort_by', 'email_asc')
     sort_form = SortForm(data={'sort_by': sort_by})
 
@@ -276,9 +277,6 @@ def dashboard():
 @views.route('/dashboard/delete_user/<int:user_id>', methods=['POST'])
 @login_required
 def delete_user(user_id):
-    # if not current_user.is_staff:
-    #     flash('Access denied!', 'danger')
-    #     return redirect(url_for('views.home'))
 
     # Call the helper function
     if 'confirm_delete_submit' in request.form:
@@ -309,6 +307,7 @@ def apply_whichweek(date):
 
 
 # WEEK DEFITION DICTIONARY FOR EASY USE
+# WEEK OFFSET
 def determine_week(today):
     current_week = today.isocalendar()[1]
     WeekANow = (current_week % 2 == 0)
@@ -412,6 +411,7 @@ def create_dutydate():
         flash('You cannot apply as admin.', category='error')
         return redirect(url_for('views.apply'))
 
+    # APPLY FORM
     if request.method == "POST":
         firstname = request.form.get('firstname')
         lastname = request.form.get('lastname')
@@ -781,6 +781,7 @@ def menuEdit():
                             if os.path.exists(os.path.join(current_app.root_path, 'static/assets/menu', oldIMG)):
                                 os.remove(oldIMGPath)
 
+                # Commit Changes
                 db.session.commit()
                 flash('Menu item updated successfully!', 'success')
                 return redirect(url_for('views.menuEdit', page=page, **filterprmtrs))
@@ -801,6 +802,7 @@ def menuAdd():
     category_filter = request.args.get('category')
     page = request.args.get('page', 1, type=int)
 
+    # Admin Check
     if not current_user.is_staff:
         flash('You do not have permission to view this page.', 'error')
         return redirect(url_for('views.menu'))
@@ -856,12 +858,14 @@ def menuAdd():
 def delete_menu(item_id):
     menu_item = Menu.query.get_or_404(item_id)
 
+    # Item Check
     if not menu_item:
         flash('Menu item does not exist.', 'error')
         return redirect(url_for('views.menuEdit'))
     elif not current_user.is_staff:
         flash('You do not have permission to delete this item.', 'error')
         return redirect(url_for('views.menuEdit'))
+    # Pending Delete for Confirmation
     else:
         session['pending_delete'] = item_id
 

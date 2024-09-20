@@ -1,236 +1,251 @@
 /* Dashboard User Interface */
 .dashboarduser-header {
-    border-bottom: 2px solid #cbcbcb;
+  border-bottom: 2px solid #cbcbcb;
 }
+/* Dashboard User Edit */
 .dashboarduseredit {
-    color: #000;
+  color: #000;
 }
+/* Dashboard User Table */
 .dashboarduser-table {
-    border: 2px solid var(--main-white);
-    background-color: var(--main-white);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
-    border-radius: 25px;
-    width: 100%;
-    transform: scale(1);
-    transition: all 0.3s ease-out;
-    z-index: 1;
-    box-shadow:  18px 18px 30px #f0f0f0,
-             -18px -18px 30px #ffffff;
-    ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    h2 {
-        font-family: "Bungee";
-        text-transform: uppercase;
-        font-size: 40px;
-    }
+  border: 2px solid var(--main-white);
+  background-color: var(--main-white);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  width: 100%;
+  transform: scale(1);
+  transition: all 0.3s ease-out;
+  z-index: 1;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  h2 {
+    font-family: "Bungee";
+    text-transform: uppercase;
+    font-size: 40px;
+  }
 }
+/* Hover Table */
 .dashboarduser-table:hover {
-    border: 2px solid #f0f0f0;
-    transform: scale(1.01);
-    z-index: 2;
+  border: 2px solid #f0f0f0;
+  transform: scale(1.01);
+  z-index: 2;
 }
-
+/* Dashboard User Table Header */
 .dash-hello {
-    background: linear-gradient(145deg, var(--main-lightblue2), #f1fbff);
-    box-shadow: inset 14px 14px 29px #d1dbe7,
-            inset -14px -14px 29px #f1fbff;
-    img {
-        position: absolute;
-        height: 140%;
-        bottom: 0;
-        z-index: 2;
-        right: 50px;
-        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
-        animation: cuppadash 0.5s cubic-bezier(1, 0, 0, 1) infinite !important;
+  background: linear-gradient(145deg, var(--main-lightblue2), #f1fbff);
+  box-shadow: inset 14px 14px 29px #d1dbe7, inset -14px -14px 29px #f1fbff;
+  /* Cuppa Chino */
+  img {
+    position: absolute;
+    height: 140%;
+    bottom: 0;
+    z-index: 2;
+    right: 50px;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
+    animation: cuppadash 0.5s cubic-bezier(1, 0, 0, 1) infinite !important;
+  }
+  /* Cuppa Dash */
+  @keyframes cuppadash {
+    0% {
+      transform: translateY(0) scaleY(0.89);
     }
-
-    @keyframes cuppadash {
-        0% {
-            transform: translateY(0) scaleY(0.89);
-        }
-        72% {
-            transform: translateY(-40px) scaleY(1);
-        }
-        100% {
-            transform: translateY(0) scaleY(0.89);
-        }
+    72% {
+      transform: translateY(-40px) scaleY(1);
     }
+    100% {
+      transform: translateY(0) scaleY(0.89);
+    }
+  }
 }
 
+/* Dashboard User Login Info Display */
 .loggedinas-headdash {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
 }
 
+/* Dashboard User Side Menu */
 .dash-sides h6 {
-    font-family: "JetBrains Mono";
-    text-transform: uppercase;
-    font-weight: 800;
-    font-size: 18px;
+  font-family: "JetBrains Mono";
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 18px;
 }
+/* Dashboard User Side Menu List */
 .dash-sides ul li a {
-    font-family: "Open Sans";
-    color: black;
-    font-weight: 600;
-    text-decoration: none;
-    text-transform: uppercase;
+  font-family: "Open Sans";
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
 }
+/* Hover Side Menu List */
 .dash-sides ul li {
-    transform: translateX(0px);
-    transition: all 0.3s ease-out;
+  transform: translateX(0px);
+  transition: all 0.3s ease-out;
 }
+/* Hover Side Menu List */
 .dash-sides ul li:hover {
-    transform: translateX(10px);
+  transform: translateX(10px);
 }
+/* Dashboard User Side Menu Icons */
 #configicon {
-    text-align: center;
+  text-align: center;
 }
+
+/* Email Configuration */
 #emailconfig {
-    transform: translateX(0);
-    transition: transform 0.3s ease-out;
-    text-decoration: none;
-    font-family: "JetBrains Mono";
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+  text-decoration: none;
+  font-family: "JetBrains Mono";
 }
 
+/* Dashboard User List */
 #dashboard-list {
-    border-bottom: 1px solid #ddd;
-    transition: all 0.3s ease-out;
+  border-bottom: 1px solid #ddd;
+  transition: all 0.3s ease-out;
 }
 
+/* Hover Dashboard User List */
 #dashboard-list:hover {
-    background-color: #ededed;
-    #emailconfig {
-        transform: translateX(10px);
-    }
+  background-color: #ededed;
+  #emailconfig {
+    transform: translateX(10px);
+  }
 }
 
+/* Dashboard User Edit */
 .dashboarduseredit {
-    border: 0;
-    background-color: transparent;
+  border: 0;
+  background-color: transparent;
 }
 
 #edituser_dash {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .btn-close:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
-
+/* Dashboard User Interface */
 #loggedinas-dash {
-    font-family: "JetBrains Mono";
-    font-size: 14px;
-    text-transform: none !important;
-    color: #000;
+  font-family: "JetBrains Mono";
+  font-size: 14px;
+  text-transform: none !important;
+  color: #000;
 }
 .logas-dash {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
 
 /* End of Dashboard User Interface */
 
 input[type="checkbox"] {
-    transform: scale(1.4);
-    margin: 0 5px !important;
+  transform: scale(1.4);
+  margin: 0 5px !important;
 }
-
 
 /* DASHBOARD USER FILTER */
 #sortbuttons {
-    .buttonclass {
-        list-style-type: none;
-        padding-left: 0;
-        margin-left: 0;
-    }
-    .buttonclass li {
-        display: inline-block;
-        margin-right: 10px;
-    }
+  .buttonclass {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+  }
+  .buttonclass li {
+    display: inline-block;
+    margin-right: 10px;
+  }
 }
-#filterjsPopup .popup-content, #sortjsPopup .popup-content, 
-#menufilterjsPopup .popup-content, #menusortjsPopup .popup-content {
-    ul {
-        padding: 20px;
+#filterjsPopup .popup-content,
+#sortjsPopup .popup-content,
+#menufilterjsPopup .popup-content,
+#menusortjsPopup .popup-content {
+  ul {
+    padding: 20px;
+  }
+  ul li {
+    margin-bottom: 20px;
+    input {
+      margin: 0;
     }
-    ul li {
-        margin-bottom: 20px;
-        input {
-            margin: 0;
-        }
-        input[type="select"] {
-            padding: 20px;
-        }
-        select {
-            padding: 15px;
-            border: #000 1px solid;
-            border-radius: 5px;
-            width: 100%;
-            font-family: "JetBrains Mono";
-        }
+    input[type="select"] {
+      padding: 20px;
     }
+    select {
+      padding: 15px;
+      border: #000 1px solid;
+      border-radius: 5px;
+      width: 100%;
+      font-family: "JetBrains Mono";
+    }
+  }
 }
 
 .last-list {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .dash-filter input[type="checkbox"] {
-    transform: scale(1.4);
-}
-.filterpopup {
-	display: none;
-    position: absolute;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    margin-top: 10px;
-    padding: 15px;
-    background-color: #fff;
-    z-index: 10000;
+  transform: scale(1.4);
 }
 
+/* Dashboard Popup */
+.filterpopup {
+  display: none;
+  position: absolute;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 15px;
+  background-color: #fff;
+  z-index: 10000;
+}
+
+/* Dashboard Popup */
 .dash-popupjs {
-    background-color: var(--main-white);
-    transform: translateY(0);
-    animation: dash-popupanim 0.3s ease-out;
+  background-color: var(--main-white);
+  transform: translateY(0);
+  animation: dash-popupanim 0.3s ease-out;
 }
 @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-    .dash-popupjs {
-        display: block;
-    }
-    
+  .dash-popupjs {
+    display: block;
+  }
 }
 @media screen and (max-width: map-get($grid-breakpoints, sm)) {
-    .dash-popupjs {
-        display: none;
-    }
+  .dash-popupjs {
+    display: none;
+  }
 }
 @keyframes dash-popupanim {
-    0% {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-
+/* Email Run out of Space */
 .emailelipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10px;
 }
 /* End of Dashboard Popup */

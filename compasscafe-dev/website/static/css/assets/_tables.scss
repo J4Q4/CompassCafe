@@ -1,13 +1,16 @@
 /* Spreadsheet User Interface */
 /* Global */
 
-table, th, td {
-    padding: 20px;
-    border-collapse: collapse;
-    width: 100%;
-    font-family: "Open Sans";
+/* Table */
+table,
+th,
+td {
+  padding: 20px;
+  border-collapse: collapse;
+  width: 100%;
+  font-family: "Open Sans";
 }
 table {
-    padding: 0;
-    border-radius: 10px;
+  padding: 0;
+  border-radius: 10px;
 }

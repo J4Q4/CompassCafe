@@ -1,318 +1,319 @@
 /* Beninging of Being Fancy */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Override Bootstrap's Default Padding */
 .container-fluid {
-    padding: 0;
+  padding: 0;
 }
 
 /* Remove Scrollbar */
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* Disable Browser's Native Scroll
 To Enable Lenis Smooth Scroll */
 html {
-    scroll-behavior: auto !important;
+  scroll-behavior: auto !important;
 }
-
 
 /* ## Cover Fixed Footer with Container ## */
 /* User UI Header */
 h1 {
-    font-family: "Bungee";
-    font-weight: 600;
-    font-size: 64px !important;
-    text-transform: uppercase;
-    text-shadow: 2px 5px var(--main-lightblue2);
-    filter: drop-shadow(2px 5px 0 var(--main-beige));
-    @media screen and (max-width: map-get($grid-breakpoints, md)) {
-        font-size: 48px !important;
-    }
+  font-family: "Bungee";
+  font-weight: 600;
+  font-size: 64px !important;
+  text-transform: uppercase;
+  text-shadow: 2px 5px var(--main-lightblue2);
+  filter: drop-shadow(2px 5px 0 var(--main-beige));
+  @media screen and (max-width: map-get($grid-breakpoints, md)) {
+    font-size: 48px !important;
+  }
 }
 
+/* User UI Header */
 h3 {
-    font-family: "JetBrains Mono";
-    font-weight: 600;
-    font-size: 24px;
-    text-transform: uppercase;
+  font-family: "JetBrains Mono";
+  font-weight: 600;
+  font-size: 24px;
+  text-transform: uppercase;
 }
 
 .row {
-    margin: 0;
+  margin: 0;
 }
 
+/* ## Cover Fixed Footer with Container ## */
 .content-space {
-    padding: 150px;
-    overflow-x: hidden;
+  padding: 150px;
+  overflow-x: hidden;
 }
 
+/* White Space Testing Background */
 .blankspace-test {
-    p {
-        margin: 0;
-        width: 100%;
-    }
+  p {
+    margin: 0;
+    width: 100%;
+  }
 }
+
+/* White Space Testing Background */
 .whitespace-test {
-    background-color: #fff;
-    margin: 0;
-    width: 100%;
-    overflow-x: hidden;
+  background-color: #fff;
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
+/* Beige Space Testing Background */
 .beigespace-test {
-    background-color: var(--main-white);
-    background-image: radial-gradient(#EBEBEB 0.9px, var(--main-white) 0.9px);
-    background-size: 18px 18px;
-    margin: 0;
-    width: 100%;
-    margin-bottom: 0;
-    overflow-x: hidden;
+  background-color: var(--main-white);
+  background-image: radial-gradient(#ebebeb 0.9px, var(--main-white) 0.9px);
+  background-size: 18px 18px;
+  margin: 0;
+  width: 100%;
+  margin-bottom: 0;
+  overflow-x: hidden;
 }
+/* Blue Space Testing Background */
 .bluespace-test {
-    background-image: radial-gradient(#b4cbe5 2px, var(--main-lightblue2) 2px);
-    background-size: 40px 40px;
-    padding: 100px 150px;
-    margin: 0;
-    width: 100%;
-    overflow-x: hidden;
+  background-image: radial-gradient(#b4cbe5 2px, var(--main-lightblue2) 2px);
+  background-size: 40px 40px;
+  padding: 100px 150px;
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
-
-
+/* ## Cover Fixed Footer with Container ## */
 .col-md-3 {
-    padding-right: 15px;
-    position: relative;
-    z-index: 1000;
+  padding-right: 15px;
+  position: relative;
+  z-index: 1000;
 }
 .col-md-9 {
-    padding-left: 15px;
-    position: relative;
-    z-index: 950;
+  padding-left: 15px;
+  position: relative;
+  z-index: 950;
 }
 
-
-
-
+/* ## Sidebar ## */
 .panel-sidetable {
-    border: 2px solid var(--main-white);
-    background-color: var(--main-white);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
-    border-radius: 25px;
-    width: 100%;
-    transition: all 0.3s ease-out;
-    box-shadow:  18px 18px 30px #f0f0f0,
-             -18px -18px 30px #ffffff;
-    padding: 50px;
-    z-index: 1000;
-    ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    h2 {
-        font-family: "Bungee";
-        text-transform: uppercase;
-        font-size: 40px;
-    }
-    &:hover {
-        border: 2px solid #f0f0f0;
-    }
+  border: 2px solid var(--main-white);
+  background-color: var(--main-white);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  width: 100%;
+  transition: all 0.3s ease-out;
+  box-shadow: 18px 18px 30px #f0f0f0, -18px -18px 30px #ffffff;
+  padding: 50px;
+  z-index: 1000;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  h2 {
+    font-family: "Bungee";
+    text-transform: uppercase;
+    font-size: 40px;
+  }
+  &:hover {
+    border: 2px solid #f0f0f0;
+  }
 }
-
-
-
 
 // More than Extra Large
 @media screen and (min-width: map-get($grid-breakpoints, xxl)) {
-    .beigespace-test {
-        padding: 100px 150px;
-    }
-    .dashboarduser-table, .panel-sidetable {
-        padding: 50px;
-    }
-    .dash-showmobile {
-        display: none;
-    }
-    .dash-showmain {
-        visibility: inline-block;
-    }
+  .beigespace-test {
+    padding: 100px 150px;
+  }
+  .dashboarduser-table,
+  .panel-sidetable {
+    padding: 50px;
+  }
+  .dash-showmobile {
+    display: none;
+  }
+  .dash-showmain {
+    visibility: inline-block;
+  }
 }
 
 // Less than Extra Large
 @media screen and (max-width: map-get($grid-breakpoints, xxl)) {
-    .beigespace-test {
-        padding: 100px 100px;
-    }
-    .dashboarduser-table, .panel-sidetable {
-        padding: 20px;
-    }
-    .dash-showmobile {
-        display: none;
-    }
-    .dash-showmain {
-        visibility: inline-block;
-    }
-    .mobile-nopadding {
-        padding: 0;
-    }
-    
-} 
+  .beigespace-test {
+    padding: 100px 100px;
+  }
+  .dashboarduser-table,
+  .panel-sidetable {
+    padding: 20px;
+  }
+  .dash-showmobile {
+    display: none;
+  }
+  .dash-showmain {
+    visibility: inline-block;
+  }
+  .mobile-nopadding {
+    padding: 0;
+  }
+}
 
 // Less than Large
 @media screen and (max-width: map-get($grid-breakpoints, lg)) {
-    .beigespace-test {
-        padding: 100px 50px;
-    }
-    .dashboarduser-table, .panel-sidetable {
-        padding: 20px;
-    }
-    .dash-showmobile {
-        display: none;
-    }
-    .dash-showmain {
-        visibility: inline-block;
-    }
-    .bluespace-test {
-        padding: 100px 50px;
-    }
-    .mobile-nopadding {
-        padding: 0;
-    }
+  .beigespace-test {
+    padding: 100px 50px;
+  }
+  .dashboarduser-table,
+  .panel-sidetable {
+    padding: 20px;
+  }
+  .dash-showmobile {
+    display: none;
+  }
+  .dash-showmain {
+    visibility: inline-block;
+  }
+  .bluespace-test {
+    padding: 100px 50px;
+  }
+  .mobile-nopadding {
+    padding: 0;
+  }
 }
 
 // Less than Medium
 @media screen and (max-width: map-get($grid-breakpoints, md)) {
-    .content-space {
-        padding: 100px 0;
-    }
-    .beigespace-test {
-        padding: 100px 0;
-    }
-    .dashboarduser-table, .panel-sidetable {
-        padding: 20px;
-    }
-    .dash-showmobile {
-        display: inline-block;
-    }
-    .dash-showmain {
-        display: none;
-    }
-    .bluespace-test {
-        padding: 100px 0;
-    }
-    .mobile-nopadding {
-        padding: 0;
-    }
+  .content-space {
+    padding: 100px 0;
+  }
+  .beigespace-test {
+    padding: 100px 0;
+  }
+  .dashboarduser-table,
+  .panel-sidetable {
+    padding: 20px;
+  }
+  .dash-showmobile {
+    display: inline-block;
+  }
+  .dash-showmain {
+    display: none;
+  }
+  .bluespace-test {
+    padding: 100px 0;
+  }
+  .mobile-nopadding {
+    padding: 0;
+  }
 }
-
 
 // Head Directory
 .head-directory {
-    gap: 20px;
-    display: flex;
-    z-index: 1000;
-    text-shadow: #fff 0 3px 0px;
-    @media screen and (max-width: map-get($grid-breakpoints, lg)) {
-        flex-direction: row-reverse;
+  gap: 20px;
+  display: flex;
+  z-index: 1000;
+  text-shadow: #fff 0 3px 0px;
+  @media screen and (max-width: map-get($grid-breakpoints, lg)) {
+    flex-direction: row-reverse;
+  }
+  #direct-selected {
+    font-weight: 600;
+  }
+  a {
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+    display: inline-block;
+    animation: nav-linkunhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    &:hover:not(#direct-selected) {
+      animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
     }
-    #direct-selected {
-        font-weight: 600;
+    &:not(#direct-selected)::after {
+      content: "";
+      width: 0;
+      height: 1px;
+      background-color: #000;
+      margin: auto;
+      display: block;
     }
-    a {
-        font-family: "JetBrains Mono";
-        font-weight: 300;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: #000;
-        font-size: 1rem;
-        display: inline-block;
-        animation: nav-linkunhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-        &:hover:not(#direct-selected) {
-            animation: nav-linkhover 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-        }
-        &:not(#direct-selected)::after {
-            content: '';
-            width: 0;
-            height: 1px;
-            background-color: #000;
-            margin: auto;
-            display: block;
-        }
-        &:not(#direct-selected):hover::after {
-            width: 100%;
-            transition: width 0.3s ease-in-out;
-            
-        }
+    &:not(#direct-selected):hover::after {
+      width: 100%;
+      transition: width 0.3s ease-in-out;
     }
+  }
 }
 
 // Fade In Effect
 .fade-in div > * {
-    opacity: 0;
-    transform: translateY(20px);
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-
-
-
+// Mobile Filter Popup
 .mobilefilterpopup {
-    position: fixed;
-    bottom: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100000;
+  background-color: var(--main-white);
+  display: none;
+  padding: 50px;
+  border-radius: 20px 20px 0 0;
+  border: 1px solid #ddd;
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  input[type="text"] {
     width: 100%;
-    z-index: 100000;
-    background-color: var(--main-white);
-    display: none;
-    padding: 50px;
-    border-radius: 20px 20px 0 0;
-    border: 1px solid #ddd;
-    ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    input[type="text"] {
-        width: 100%;
-    }
-    #filterPopClose, #mobisortPopClose, #mobifilterPopClose {
-        right: 50px;
-        top: 50px;
-        transform: translate(30%, -20%) scale(1.5);
-        border: 0;
-        padding: 10px 20px;
-        background-color: transparent;
-        color: #000;
-        position: absolute;
-    }
+  }
+  #filterPopClose,
+  #mobisortPopClose,
+  #mobifilterPopClose {
+    right: 50px;
+    top: 50px;
+    transform: translate(30%, -20%) scale(1.5);
+    border: 0;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #000;
+    position: absolute;
+  }
 }
 
+// Mobile Filter Breakpoints
 @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-    .mobi-popupjs {
-        display: none;
-    }
+  .mobi-popupjs {
+    display: none;
+  }
 }
 @media screen and (max-width: map-get($grid-breakpoints, sm)) {
-    .mobi-popupjs {
-        display: block;
-        .btn-primary {
-            margin-bottom: 1.5rem;
-        }
+  .mobi-popupjs {
+    display: block;
+    .btn-primary {
+      margin-bottom: 1.5rem;
     }
+  }
 }
 .mobi-popupjs {
-    animation: mobi-popupanim 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation: mobi-popupanim 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 @keyframes mobi-popupanim {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

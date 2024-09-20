@@ -97,8 +97,7 @@ def create_app():
     scheduler.add_job(notifyDuty_context, 'cron', hour=8, minute=30)  # 8:30 AM
 
     # Additional Reminder Before Lunchtime
-    scheduler.add_job(notifyDuty_context, 'cron',
-                      hour=13, minute=30)  # 1:30 PM
+    scheduler.add_job(notifyDuty_context, 'cron', hour=13, minute=30)  # 1:30 PM
 
     scheduler.start()
 

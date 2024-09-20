@@ -1,72 +1,74 @@
 /* Dropdown Menu : GENERAL */
 .dropdown-menu {
-    animation: dropdown-anim 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-    border-radius: 15px;
-    border: 2px solid var(--main-white);
-    transition: border 0.3s ease-in-out;
-    position: absolute;
+  animation: dropdown-anim 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  border-radius: 15px;
+  border: 2px solid var(--main-white);
+  transition: border 0.3s ease-in-out;
+  position: absolute;
 }
-
+/* Hover Dropdown Menu */
 .dropdown-menu:hover {
-    border: 2px solid #ddd;
+  border: 2px solid #ddd;
 }
-
+/* Dropdown Animation */
 @keyframes dropdown-anim {
-    0% {
-        transform: translateY(70px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(50px);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(50px);
+    opacity: 1;
+  }
 }
 
 /* Dropdown Items */
 .adminusersheet .dropdown-menu li {
-    text-align: end;
+  text-align: end;
 }
 .dropdown-menu li {
-    position: relative;
-    overflow-x: hidden;
+  position: relative;
+  overflow-x: hidden;
 }
 /* Black Block on Hover */
 .dropdown-menu li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0px;
-    background-color: #000;
-    transition: all 0.1s ease-out;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0px;
+  background-color: #000;
+  transition: all 0.1s ease-out;
 }
 .dropdown-menu li:hover::before {
-    display: block;
-    width: 4px;
+  display: block;
+  width: 4px;
 }
 
 /* Dropdown Actions */
 .dropdown-menu li {
-    a, form {
-        font-family: "JetBrains Mono";
-        font-weight: 300;
-        text-transform: capitalize;
-        color: #000;
-        text-decoration: none;
-        padding: 10px 20px;
-        display: block;
-        transform: translateX(0);
-        transition: all 0.3s ease-out;
-    }
+  a,
+  form {
+    font-family: "JetBrains Mono";
+    font-weight: 300;
+    text-transform: capitalize;
+    color: #000;
+    text-decoration: none;
+    padding: 10px 20px;
+    display: block;
+    transform: translateX(0);
+    transition: all 0.3s ease-out;
+  }
 }
 
 .dropdown-menu li:hover {
+  background-color: #ddd;
+  a,
+  form {
+    transform: translateX(10px);
     background-color: #ddd;
-    a, form {
-        transform: translateX(10px);
-        background-color: #ddd;
-    }
+  }
 }
 
 /* End of Dropdown Menu : GENERAL */

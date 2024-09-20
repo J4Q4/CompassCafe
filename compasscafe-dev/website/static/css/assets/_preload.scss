@@ -1,113 +1,117 @@
 /* Pre-load Screen */
-#loadscreen{
-    display: block;
-    width: 100%;
-    height: calc(100% + 500px);
-    background-color: var(--main-white);
-    z-index: 100000000;
-    position: fixed;
-    .cupshadow {
-        position: absolute;
-        background-color: #ddd;
-        width: 200px;
-        height: 50px;
-        left: 50vw;
-        top: 60vh;
-        z-index: 1000000000 !important;
-        border-radius: 50%;
-        transform: translateX(-50%);
-        animation: shadow-size 0.2s cubic-bezier(1, 0, 0, 1) infinite;
-    }
-    
-    @keyframes shadow-size {
-        0% {
-            transform: translateX(-50%) scale(1);
-        }
-        72% {
-            transform: translateX(-50%) scale(1.2);
-        }
-        100% {
-            transform: translateX(-50%) scale(1);
-        }
-    }
-    
-    img {
-        width: 20rem;
-        position: relative !important;
-        left: 50vw;
-        top: 50vh;
-        z-index: 1000000001;
-        animation: cuppaload 0.2s cubic-bezier(1, 0, 0, 1) infinite !important;
-    }
-    @keyframes cuppaload {
-        0% {
-            transform: translateY(0) scaleY(0.85) translate(-50%, -70%);
-        }
-        72% {
-            transform: translateY(-20px) scaleY(1) translate(-50%, -70%);
-        }
-        100% {
-            transform: translateY(0) scaleY(0.85) translate(-50%, -70%);
-        }
-    }
-    
-}
-#loadscreen.loadtrigger {
-    animation: preload 1.5s cubic-bezier(0.5, 0.1, 0.1, 1.0) forwards;
-    animation-delay: 0.2s;
-}
-@keyframes preload {
+#loadscreen {
+  display: block;
+  width: 100%;
+  height: calc(100% + 500px);
+  background-color: var(--main-white);
+  z-index: 100000000;
+  position: fixed;
+  .cupshadow {
+    position: absolute;
+    background-color: #ddd;
+    width: 200px;
+    height: 50px;
+    left: 50vw;
+    top: 60vh;
+    z-index: 1000000000 !important;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    animation: shadow-size 0.2s cubic-bezier(1, 0, 0, 1) infinite;
+  }
+  /* Shadow Size */
+  @keyframes shadow-size {
     0% {
-        transform: translateY(0);
-        border-bottom: 500px solid var(--main-navy);
+      transform: translateX(-50%) scale(1);
+    }
+    72% {
+      transform: translateX(-50%) scale(1.2);
     }
     100% {
-        transform: translateY(-100%);
-        border-bottom: 50px solid var(--main-navy);
+      transform: translateX(-50%) scale(1);
     }
+  }
+  /* Cuppa Load */
+  img {
+    width: 20rem;
+    position: relative !important;
+    left: 50vw;
+    top: 50vh;
+    z-index: 1000000001;
+    animation: cuppaload 0.2s cubic-bezier(1, 0, 0, 1) infinite !important;
+  }
+  @keyframes cuppaload {
+    0% {
+      transform: translateY(0) scaleY(0.85) translate(-50%, -70%);
+    }
+    72% {
+      transform: translateY(-20px) scaleY(1) translate(-50%, -70%);
+    }
+    100% {
+      transform: translateY(0) scaleY(0.85) translate(-50%, -70%);
+    }
+  }
+}
+/* Load Trigger */
+#loadscreen.loadtrigger {
+  animation: preload 1.5s cubic-bezier(0.5, 0.1, 0.1, 1) forwards;
+  animation-delay: 0.2s;
+}
+@keyframes preload {
+  0% {
+    transform: translateY(0);
+    border-bottom: 500px solid var(--main-navy);
+  }
+  100% {
+    transform: translateY(-100%);
+    border-bottom: 50px solid var(--main-navy);
+  }
 }
 
 /* REMOVED FUNCTIONALITY */
 // NO SCROLL ON LOAD
 // Only Work on non Mobile Devices
 @media screen and (min-width: 768px) {
-    html, body {
-        overflow-y: hidden;
-        height: 100%;
-    }
-    // Add Class to Scroll 
-    html.noscroll, body.noscroll {
-        overflow-y: visible;
-        height: auto;
-    }
+  html,
+  body {
+    overflow-y: hidden;
+    height: 100%;
+  }
+  // Add Class to Scroll
+  html.noscroll,
+  body.noscroll {
+    overflow-y: visible;
+    height: auto;
+  }
 }
-
+// Add Class to Body for Fade
 .preload-fadein {
-    animation: preload-fadein 0.8s ease-out forwards;
-    opacity: 0;
+  animation: preload-fadein 0.8s ease-out forwards;
+  opacity: 0;
 }
-
+/* Delay Animation */
 .preload-fadein.initiate {
-    animation-delay: 0.9s;
-    animation-play-state: running;
+  animation-delay: 0.9s;
+  animation-play-state: running;
 }
+/* Animation */
 @keyframes preload-fadein {
-    0% {
-        transform: translateY(5%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  0% {
+    transform: translateY(5%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
+/* Progress Bar */
 #progressBar {
-    width: 0;
-    background-color: var(--main-navy);
-    text-align: center;
-    color: #fff;
-    transition: width 1s cubic-bezier(0.6, 0.8, 1.0, 0.8);
-    font-family: "JetBrains Mono";
+  width: 0;
+  background-color: var(--main-navy);
+  text-align: center;
+  color: #fff;
+  transition: width 1s cubic-bezier(0.6, 0.8, 1, 0.8);
+  font-family: "JetBrains Mono";
 }
 /* End of Pre-load Screen */

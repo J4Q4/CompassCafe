@@ -1,7 +1,7 @@
 /* Custom Cursor */
 body {
-    cursor: url('/static/assets/img/cursor-point.png'), auto;
-/* Everything Interactable - Hover */
+  cursor: url("/static/assets/img/cursor-point.png"), auto;
+  /* Everything Interactable - Hover */
 }
 a:hover,
 i:hover,
@@ -25,5 +25,5 @@ form #filterPopBTN,
 #sortPopBTN:hover,
 .sideToggle1,
 button:hover {
-    cursor: url('/static/assets/img/cursor-ok.png'), pointer !important;
+  cursor: url("/static/assets/img/cursor-ok.png"), pointer !important;
 }

@@ -12,6 +12,8 @@ auth = Blueprint("auth", __name__)
 ACCEPTED_EMAIL_DOMAINS = ["sanctamaria.school.nz", "my.sanctamaria.school.nz"]
 
 
+# EMAIL VALIDATION FUNCTION
+
 def is_validemail(email):
     local_part, domain = email.split('@')
 
@@ -60,28 +62,39 @@ def login():
 @auth.route("/signup", methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
+        # Get Form Data
         email = request.form.get("email")
         schoolid = request.form.get("schoolid")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
+        # Check if User Exists
         email_exists = User.query.filter_by(email=email).first()
         schoolid_exists = User.query.filter_by(schoolid=schoolid).first()
 
+        # Validation
+        # If Email Exists
         if email_exists:
             flash('Email is already in use.', category='error')
+        # If School ID Exists
         elif schoolid_exists:
             flash('School ID is already in use.', category='error')
+        # If Passwords Don't Match
         elif password1 != password2:
             flash('Passwords don\'t match!', category='error')
+        # If School ID is Too Short
         elif schoolid and len(schoolid) < 5:
             flash('School ID is too short.', category='error')
+        # If Password is Too Short
         elif len(password1) < 8:
             flash('Password must be at least 8 characters.', category='error')
+        # If Email is Too Short
         elif len(email) < 4:
             flash('Email is invalid', category='error')
+        # If Email Domain is Invalid
         elif not is_validemail(email):
             flash('Please use your school email.', category='error')
+        # If No Errors
         else:
             new_user = User(email=email, schoolid=schoolid, password=generate_password_hash(
                 password1, method='scrypt:32768:8:1'))
