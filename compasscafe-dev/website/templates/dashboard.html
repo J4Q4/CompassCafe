@@ -1,36 +1,45 @@
+<!-- Dashboard Page Extension -->
 {% extends "template.html" %}{% block title %}Dashboard{% endblock %} {% block
 content %}
 
-<!- - Sort User - ->
+<!-- Mobile Users Filter Popup -->
+<!-- Sort User -->
 <form method="GET" action="{{ url_for('views.dashboard') }}">
   {{ sort_form.hidden_tag() }}
   <div id="mobile-sortjsPopup" class="mobilefilterpopup">
     <button id="mobisortPopClose" type="button">
       <i class="fa fa-times"></i>
     </button>
-    <!- - Close Button - ->
+    <!-- Close Button -->
     <div class="popup-content">
+      <!-- Sort By -->
       <ul>
         <li>
           <label>Sort By</label><br />
           <select name="sort_by" id="sort_by" class="form-control">
             <option value="">None</option>
+            <!-- Sort Options -->
+            <!-- Email -->
             <option value="email_asc" {% if request.args.get('sort_by') == 'email_asc' %}selected{% endif %}>Email (Ascending)</option>
             <option value="email_desc" {% if request.args.get('sort_by') == 'email_desc' %}selected{% endif %}>Email (Descending)</option>
+            <!-- Admin Status -->
             <option value="is_staff_asc" {% if request.args.get('sort_by') == 'is_staff_asc' %}selected{% endif %}>Admin Status (Ascending)</option>
             <option value="is_staff_desc" {% if request.args.get('sort_by') == 'is_staff_desc' %}selected{% endif %}>Admin Status (Descending)</option>
           </select>
-          <! - - Retain Filter Values - ->
+          <!-- Retain Filter Values -->
+          <!-- Email -->
           <input
             type="hidden"
             name="email"
             value="{{ request.args.get('email', '') }}"
           />
+          <!-- Admin Status -->
           <input
             type="hidden"
             name="is_staff_true"
             value="{{ request.args.get('is_staff_true', '') }}"
           />
+          <!-- Not Admin Status -->
           <input
             type="hidden"
             name="is_staff_false"
@@ -38,19 +47,21 @@ content %}
           />
         </li>
         <br />
+        <!-- Submit Sort Button -->
         <li class="last-list">
           <button type="submit" class="btn-primary">
             {{ sort_form.submit.label.text }}
           </button>
-          <!- - Submit Sort Button - ->
+          <!-- Submit Sort Button -->
         </li>
       </ul>
     </div>
   </div>
 </form>
-<!- - End of Sort - ->
+<!-- End of Sort -->
 
-<!- - Filter User - ->
+<!-- Filter Popup for Larger Screens -->
+<!-- Filter User -->
 <form
   method="POST"
   action="{{ url_for('views.dashboard', sort_by=request.args.get('sort_by')) }}"
@@ -60,35 +71,39 @@ content %}
     <button id="mobifilterPopClose" type="button">
       <i class="fa fa-times"></i>
     </button>
-    <!- - Close Button - ->
+    <!-- Close Button -->
     <div class="popup-content">
       <ul>
+        <!-- Email -->
         <li>
           <label>Email</label><br />
           {{ filter_form.email(size=32) }}
         </li>
         <br />
+        <!-- Admin Status -->
         <li>{{ filter_form.is_staff_true() }} Is Admin</li>
         <br />
+        <!-- Not Admin Status -->
         <li>{{ filter_form.is_staff_false() }} Not Admin</li>
         <br />
+        <!-- Submit Filter Button -->
         <li class="last-list">
           <button type="submit" name="filter_submit" class="btn-primary">
             Filter
           </button>
-          <! - - Submit Filter Button - - >
+          <!-- Submit Filter Button -->
         </li>
         <li style="display: inline-block" class="last-list">
           <a href="{{ url_for('views.dashboard') }}" class="btn-secondary"
             >Clear Filters</a
           >
-          <! - - Clear Filter Button - - >
+          <!-- Clear Filter Button -->
         </li>
       </ul>
     </div>
   </div>
 </form>
-<!- - End of Filter User - ->
+<!-- End of Filter User -->
 
 <!-- Blank Space -->
 <section class="beigespace-test">
@@ -97,17 +112,21 @@ content %}
   <div class="preload-fadein">
     <div class="row mb-4">
       <div class="col-md-12 col-lg-6">
+        <!-- Page Title -->
         <h1>Dashboard</h1>
       </div>
+      <!-- Directory -->
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
         <a id="direct-selected">users</a> / <a href="/dashboard">dashboard</a> /
         <a href="/home">home</a>
       </div>
     </div>
     <br />
+    <!-- User Interactives -->
     <div class="row">
       <div class="col-lg-12 col-xl-3">
         <div class="panel-sidetable dash-sides mb-4">
+          <!-- Logged In As -->
           <div class="logas-dash">
             <label id="loggedinas-dash" title="{{ user.email }}">
               <strong>Logged in as: {{ user.schoolid }}</strong><br />
@@ -115,6 +134,7 @@ content %}
             </label>
           </div>
         </div>
+        <!-- Admin Settings -->
         <div class="panel-sidetable dash-sides mb-4">
           <ul>
             <ul>
@@ -123,6 +143,7 @@ content %}
               <li><a href="/apply">applications</a></li>
             </ul>
             <br />
+            <!-- User Settings -->
             <ul>
               <h6>User Settings</h6>
               <li><a href="/settings">account</a></li>
@@ -130,6 +151,7 @@ content %}
           </ul>
         </div>
         <div class="panel-sidetable dash-sides">
+          <!-- Site Settings -->
           <ul>
             <h6>Site Settings</h6>
             <li><a href="{{ url_for('views.menuEdit') }}">menu</a></li>
@@ -137,14 +159,18 @@ content %}
         </div>
         <br />
       </div>
+      <!-- Dashboard Hello Banner -->
       <div class="col-lg-12 col-xl-9">
         <div class="dashboarduser-table dash-hello mb-4">
+          <!-- Hello User -->
           <h2>Hello, {{ user.schoolid }}! 👋</h2>
           <p>
+            <!-- Welcome Message -->
             <strong>Welcome to the admin dashboard.</strong> <br />Here you can
             manage users and applications.
           </p>
           <p>
+            <!-- Cuppa-Chino -->
             <img
               class="d-none d-sm-block"
               src="/static/assets/media/coffeebounce.gif"
@@ -155,7 +181,7 @@ content %}
           </p>
         </div>
 
-        <!- - User Interactives - ->
+        <!-- User Interactives -->
         {% if edit_user_id %}
         <div class="dashboarduser-table">
           <h3>Edit User</h3>
@@ -165,36 +191,36 @@ content %}
             action="{{ url_for('views.dashboard', edit_user_id=edit_user_id) }}"
           >
             {{ edit_form.hidden_tag() }}
-            <! - - Email Input - - >
+            <!-- Email Input -->
             <p>
               {{ edit_form.email.label }}<br />
               {{ edit_form.email(size=32) }}
             </p>
-            <! - - School ID Input - - >
+            <!-- School ID Input -->
             <p>
               {{ edit_form.schoolid.label }}<br />
               {{ edit_form.schoolid(size=32) }}
             </p>
-            <! - - Password Input - - >
+            <!-- Password Input -->
             <p>
               {{ edit_form.password.label }}<br />
               {{ edit_form.password(size=32) }}<br />
             </p>
-            <! - - Confirm Password Input - - >
+            <!-- Confirm Password Input -->
             <p>
               {{ edit_form.confirm_password.label }}<br />
               {{ edit_form.confirm_password(size=32, id="confirm_password") }}
             </p>
-            <! - - Show Password Checkbox - - >
+            <!-- Show Password Checkbox -->
             <input
               type="checkbox"
               id="showPassword"
               onclick="togglePassword()"
             />
             Show Password
-            <! - - Admin Status Boolean - - >
+            <!-- Admin Status Boolean -->
             <p>{{ edit_form.is_staff() }} Admin Privileges</p>
-            <! - - Submit Buttons - - >
+            <!-- Submit Buttons -->
             <br />
             <button type="submit" name="edit_submit" class="btn-primary">
               Update User
@@ -210,44 +236,51 @@ content %}
         <br />
         {% endif %}
 
-        <!- - User List with Interactables - ->
+        <!-- User List with Interactables -->
         <div class="dashboarduser-table adminusersheet">
-          <!- - User Views - ->
+          <!-- User Views -->
           <div id="sortbuttons">
             <h3>Users</h3>
             <ul class="buttonclass">
-              <!- - Sort User - ->
+              <!-- Sort User -->
               <li>
                 <form method="GET" action="{{ url_for('views.dashboard') }}">
                   {{ sort_form.hidden_tag() }}
                   <button id="sortPopBTN" class="btn-secondary" type="button">
                     Sort
                   </button>
-                  <!- - Pop Up Sort Button - ->
+                  <!-- Pop Up Sort Button -->
 
                   <div id="sortjsPopup" class="filterpopup">
                     <div class="popup-content">
                       <ul>
                         <li>
+                          <!-- Sort By -->
                           <label>Sort By</label><br />
                           <select name="sort_by" id="sort_by" class="form-control">
                             <option value="">None</option>
+                            <!-- Sort Options -->
+                            <!-- Email -->
                             <option value="email_asc" {% if request.args.get('sort_by') == 'email_asc' %}selected{% endif %}>Email (Ascending)</option>
                             <option value="email_desc" {% if request.args.get('sort_by') == 'email_desc' %}selected{% endif %}>Email (Descending)</option>
+                            <!-- Admin Status -->
                             <option value="is_staff_asc" {% if request.args.get('sort_by') == 'is_staff_asc' %}selected{% endif %}>Admin Status (Ascending)</option>
                             <option value="is_staff_desc" {% if request.args.get('sort_by') == 'is_staff_desc' %}selected{% endif %}>Admin Status (Descending)</option>
                           </select>
-                          <! - - Retain Filter Values - ->
+                          <!-- Retain Filter Values -->
+                          <!-- Email -->
                           <input
                             type="hidden"
                             name="email"
                             value="{{ request.args.get('email', '') }}"
                           />
+                          <!-- Admin Status -->
                           <input
                             type="hidden"
                             name="is_staff_true"
                             value="{{ request.args.get('is_staff_true', '') }}"
                           />
+                          <!-- Not Admin Status -->
                           <input
                             type="hidden"
                             name="is_staff_false"
@@ -259,16 +292,16 @@ content %}
                           <button type="submit" class="btn-primary">
                             {{ sort_form.submit.label.text }}
                           </button>
-                          <!- - Submit Sort Button - ->
+                          <!-- Submit Sort Button -->
                         </li>
                       </ul>
                     </div>
                   </div>
                 </form>
               </li>
-              <!- - End of Sort - ->
+              <!-- End of Sort -->
 
-              <!- - Filter User - ->
+              <!-- Filter User -->
               <li>
                 <form
                   method="POST"
@@ -278,18 +311,21 @@ content %}
                   <button id="filterPopBTN" class="btn-secondary" type="button">
                     Filter
                   </button>
-                  <! - - Pop Up Filter Button - - >
+                  <!-- Pop Up Filter Button -->
 
                   <div id="filterjsPopup" class="filterpopup">
                     <div class="popup-content">
                       <ul>
+                        <!-- Email -->
                         <li>
                           <label>Email</label><br />
                           {{ filter_form.email(size=32) }}
                         </li>
                         <br />
+                        <!-- Admin Status -->
                         <li>{{ filter_form.is_staff_true() }} Is Admin</li>
                         <br />
+                        <!-- Not Admin Status -->
                         <li>{{ filter_form.is_staff_false() }} Not Admin</li>
                         <br />
                         <li class="last-list">
@@ -300,7 +336,7 @@ content %}
                           >
                             Filter
                           </button>
-                          <! - - Submit Filter Button - - >
+                          <!-- Submit Filter Button -->
                         </li>
                         <li style="display: inline-block" class="last-list">
                           <a
@@ -308,18 +344,19 @@ content %}
                             class="btn-secondary"
                             >Clear Filters</a
                           >
-                          <! - - Clear Filter Button - - >
+                          <!-- Clear Filter Button -->
                         </li>
                       </ul>
                     </div>
                   </div>
                 </form>
               </li>
-              <!- - End of Filter User - ->
+              <!-- End of Filter User -->
             </ul>
           </div>
 
           <table class="mb-4">
+            <!-- Table Headers -->
             <tr class="dashboarduser-header">
               <th>Email</th>
               <th class="dash-showmain">Admin</th>
@@ -329,9 +366,9 @@ content %}
             </tr>
             {% for user in paginUsers.items %}
             <tr id="dashboard-list">
-              <! - - User Email - ->
+              <!-- User Email -->
               <td id="emailconfig" class="emailelipsis">{{ user.email }}</td>
-              <! - - Admin Status - ->
+              <!-- Admin Status -->
               <td id="configicon" class="dash-showmain">
                 {% if user.is_staff %}
                 <i class="fas fa-check" title="Admin User"></i>
@@ -339,7 +376,7 @@ content %}
                 <i class="fas fa-times" title="Regular User"></i>
                 {% endif %}
               </td>
-              <! - - Edit User - ->
+              <!-- Edit User -->
               <td id="configicon" class="dash-showmain">
                 <a
                   id="edituser_dash"
@@ -350,9 +387,9 @@ content %}
                   </button>
                 </a>
               </td>
-              <! - - Delete User - - >
+              <!-- Delete User -->
               <td id="configicon" class="dash-showmain">
-                <! - - Trigger Confirmation Popup - - >
+                <!-- Trigger Confirmation Popup -->
                 <button
                   class="dashboarduseredit"
                   onclick="showDeletePopup(this)"
@@ -360,11 +397,12 @@ content %}
                   data-item-id="{{ user.id }}"
                   data-item-description="User: {{ user.email }}"
                 >
+                <!-- Delete User Icon -->
                   <i class="fa fa-trash" title="Delete User"></i>
                 </button>
               </td>
 
-              <! - - Dropdown Button - Visible on Smaller Screens - ->
+              <!-- Dropdown Button - Visible on Smaller Screens -->
               <td class="dash-showmobile">
                 <div class="btn-group" id="apply-delete">
                   <button
@@ -375,14 +413,17 @@ content %}
                   <ul class="dropdown-menu">
                     <h6 class="dropdown-header">{{ user.email }}</h6>
                     <li>
+                      <!-- If User is Staff-->
                       <a class="dropdown-item">
                         {% if user.is_staff %}
                         <i class="fas fa-check" title="Admin User"></i>
                         {% else %}
+                        <!-- If User is Not Staff-->
                         <i class="fas fa-times" title="Regular User"></i>
                         {% endif %} Admin
                       </a>
                     </li>
+                    <!-- Configure User -->
                     <li>
                       <a
                         class="dropdown-item"
@@ -392,13 +433,14 @@ content %}
                         Configure
                       </a>
                     </li>
+                    <!-- Delete User -->
                     <li>
                       <form
                         action="{{ url_for('views.delete_user', user_id=user.id) }}"
                         method="POST"
                         onsubmit="return false;"
                       >
-                        <! - - Trigger Confirmation Popup - - >
+                        <!-- Trigger Confirmation Popup -->
                         <button
                           class="dashboarduseredit"
                           onclick="showDeletePopup(this)"

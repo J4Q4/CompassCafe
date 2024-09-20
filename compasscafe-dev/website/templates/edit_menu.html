@@ -1,28 +1,36 @@
+<!-- Edit Menu Page Extension -->
 {% extends "template.html" %}{% block title %}Edit Menu{% endblock %} {% block
 content %}
 
-<!- - Sort User - ->
+<!-- For Mobile Screens -->
+<!-- Sort User -->
 <form method="GET" action="{{ url_for('views.menuEdit') }}">
   {{ sort_form.hidden_tag() }}
   <div id="mobile-sortjsPopup" class="mobilefilterpopup">
     <button id="mobisortPopClose" type="button">
       <i class="fa fa-times"></i>
     </button>
-    <!- - Close Button - ->
+    <!-- Close Button -->
     <div class="popup-content">
       <ul>
         <li>
+          <!-- Sort By Dropdown -->
           <label>Sort By</label><br />
           <select name="sort_by" id="sort_by" class="form-control">
             <option value="">None</option>
+            <!-- Sort Options -->
+            <!-- Item Name -->
             <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
             <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
+            <!-- Price -->
             <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
             <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
+            <!-- Date -->
             <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
             <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
           </select>
           <!-- Retain Filter Values -->
+          <!-- Item Name -->
           <input
             type="hidden"
             name="item"
@@ -32,18 +40,18 @@ content %}
         </li>
         <br />
         <li class="last-list">
+          <!-- Submit Sort Button -->
           <button type="submit" class="btn-primary">
             {{ sort_form.submit.label.text }}
           </button>
-          <!-- Submit Sort Button -->
         </li>
       </ul>
     </div>
   </div>
 </form>
-<!- - End of Sort - ->
+<!-- End of Sort -->
 
-<!- - Filter User - ->
+<!-- Filter User -->
 <form
   method="POST"
   action="{{ url_for('views.menuEdit', sort_by=request.args.get('sort_by')) }}"
@@ -53,7 +61,7 @@ content %}
     <button id="mobifilterPopClose" type="button">
       <i class="fa fa-times"></i>
     </button>
-    <!- - Close Button - ->
+    <!-- Close Button -->
     <div class="popup-content">
       <ul>
         <li>
@@ -92,7 +100,7 @@ content %}
     </div>
   </div>
 </form>
-<!- - End of Filter User - ->
+<!-- End of Filter User -->
 
 <div class="row">
   <!-- Blank Space -->
@@ -102,8 +110,10 @@ content %}
     <div class="preload-fadein">
       <div class="row mb-5">
         <div class="col-md-12 col-lg-6">
+          <!-- Page Title -->
           <h1>Edit Menu</h1>
         </div>
+        <!-- Directory -->
         <div class="head-directory col-md-12 col-lg-6 justify-content-end">
           <a id="direct-selected">edit menu</a> / <a href="/menu">menu</a> /
           <a href="/home">home</a>
@@ -117,43 +127,45 @@ content %}
             <div class="menu-edit-popup mb-5">
               <h3>Edit Menu Item</h3>
               <br />
+              <!-- Edit Menu Item Form -->
               <form
                 action="{{ url_for('views.menuEdit', edit_menu_id=edit_item.id) }}"
                 method="POST"
                 enctype="multipart/form-data"
               >
                 {{ edit_menu.hidden_tag() }}
-                <! - - Item Name Input - - >
+                <!-- Item Name Input -->
                 <p>
                   {{ edit_menu.item.label }}<br />
                   {{ edit_menu.item(class="form-control") }}
                 </p>
 
-                <! - - Price Input - - >
+                <!-- Price Input -->
                 <p>
                   {{ edit_menu.price.label }}<br />
                   {{ edit_menu.price(class="form-control",
                   value="{:.2f}".format(edit_menu.price.data)) }}
                 </p>
 
-                <! - - Category Input - - >
+                <!-- Category Input -->
                 <p>
                   {{ edit_menu.category.label }}<br />
                   {{ edit_menu.category(class="form-control") }}
                 </p>
 
-                <! - - Description Input - - >
+                <!-- Description Input -->
                 <p>
                   {{ edit_menu.description.label }}<br />
                   {{ edit_menu.description(class="form-control") }}
                 </p>
 
-                <! - - Image Upload Input - - >
+                <!-- Image Upload Input -->
                 <p>
                   {{ edit_menu.image.label }}<br />
                   {{ edit_menu.image(class="form-control",
                   onchange="showMenuFile()") }}
                 </p>
+                <!-- Image Preview -->
                 <div class="row" style="padding: 0 13px">
                   <div class="col-md-12 col-lg-6 col-xl-4">
                     <br />
@@ -178,7 +190,7 @@ content %}
                   </div>
                 </div>
 
-                <! - - Submit Buttons - - >
+                <!-- Submit Buttons -->
                 <br />
                 <button type="submit" name="edit_submit" class="btn-primary">
                   Update Item
@@ -225,25 +237,32 @@ content %}
                               <label>Sort By</label><br />
                               <select name="sort_by" id="sort_by" class="form-control">
                                 <option value="">None</option>
+                                <!-- Sort Options -->
+                                <!-- Item Name -->
                                 <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
                                 <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
+                                <!-- Price -->
                                 <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
                                 <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
+                                <!-- Date -->
                                 <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
                                 <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
                               </select>
                               <!-- Retain Filter Values -->
+                              <!-- Item Name -->
                               <input
                                 type="hidden"
                                 name="item"
                                 value="{{ request.args.get('item', '') }}"
                               />
+                              <!-- Category -->
                               <input
                                 type="hidden"
                                 name="category"
                                 value="{{ category_filter }}"
                               />
                             </li>
+                            <!-- Submit Sort Button -->
                             <br />
                             <li class="last-list">
                               <button type="submit" class="btn-primary">
@@ -284,11 +303,13 @@ content %}
                                 class="form-control"
                               />
                               <!-- Retain Sort Values -->
+                              <!-- Item Name -->
                               <input
                                 type="hidden"
                                 name="sort_by"
                                 value="{{ request.args.get('sort_by', 'item_asc') }}"
                               />
+                              <!-- Category -->
                               <input
                                 type="hidden"
                                 name="category"
@@ -296,6 +317,7 @@ content %}
                               />
                             </li>
                             <br />
+                            <!-- Submit Filter Button -->
                             <li class="last-list">
                               <button
                                 type="submit"
@@ -323,12 +345,14 @@ content %}
                 </ul>
               </div>
 
+              <!-- Add Drink Button -->
               <a class="btn-primary" href="/menu/edit-item/add-item">
                 <i class="fa fa-plus"></i>
                 Add Drink
               </a>
               <br />
               <br />
+              <!-- Category List -->
               <div class="d-none d-xxl-block mt-4">
                 <h3>Categories</h3>
                 <ul class="category-class" style="margin-bottom: 0">
@@ -352,6 +376,8 @@ content %}
         <!-- Mobile Category View -->
         <div class="categories-list-container d-xl-block d-xxl-none">
           <div class="categories-list mb-4">
+            <!-- Category List -->
+            <!-- Move Left -->
             <button class="scroll-btn left" onclick="scrollLeftBtn()">
               <i class="fa-solid fa-caret-left"></i>
             </button>
@@ -368,6 +394,7 @@ content %}
               </li>
               {% endfor %}
             </ul>
+            <!-- Move Right -->
             <button class="scroll-btn right" onclick="scrollRightBtn()">
               <i class="fa-solid fa-caret-right"></i>
             </button>
@@ -422,6 +449,7 @@ content %}
                         </ul>
                       </div>
 
+                      <!-- Item Information -->
                       <h3 style="font-size: 16px">{{ item.item }}</h3>
                       <p>{{ item.formatted_price }}</p>
                       <p>{{ item.description }}</p>

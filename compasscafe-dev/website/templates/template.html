@@ -2,6 +2,7 @@
 <html lang="en">
   <html lang="en">
     <head>
+      <!-- Page Title -->
       <title>Compass Café &#x2727; {% block title %}{% endblock %}</title>
       <link
         rel="icon"
@@ -62,7 +63,7 @@
       <!-- Apply Confirmation Popup On Top -->
       {% include 'confirm_config.html' %}
 
-      <!-- Notice -->
+      <!-- Notice | Infinite Marquee -->
       <div class="noticeinf">
         <a
           class="noticeinf-conveyor"
@@ -111,6 +112,7 @@
                 draggable="false"
                 oncontextmenu="return false;"
               />
+              <!-- Hover Logo -->
               <img
                 id="hover-logo"
                 src="/static/assets/img/LogoSmile-White.svg"
@@ -128,6 +130,7 @@
             <label for="openSide-sm" class="sideToggle nav-link sideToggle-sm">
               <i class="fa-regular fa-user d-sm-none"></i>
             </label>
+            <!-- Side Menu -->
             <div id="sideMenu">
               <ul class="sideMenu-contents">
                 <li>
@@ -143,29 +146,34 @@
                 <!-- User Logged In -->
                 {% if user.is_staff %}
                 <li class="sideNav sideText">
+                  <!-- Admin Dashboard -->
                   <a class="dropdown-item" href="/dashboard">dashboard</a>
                 </li>
                 {% else %}
                 <li class="sideNav sideText">
+                  <!-- User Settings -->
                   <a class="dropdown-item" href="/settings">settings</a>
                 </li>
                 {% endif %}
                 <li class="sideNav sideText">
+                  <!-- Quick Login -->
                   <a class="dropdown-item" href="/login">quick login</a>
                 </li>
                 <li class="sideNav sideText">
+                  <!-- Logout -->
                   <a class="dropdown-item" href="/logout">logout</a>
                 </li>
                 {% else %}
                 <!-- User Not Logged In -->
                 <li class="sideNav sideText">
+                  <!-- Login -->
                   <a class="dropdown-item" href="/login">login</a>
                 </li>
                 <li class="sideNav sideText">
+                  <!-- Sign Up -->
                   <a class="dropdown-item" href="/signup">sign up</a>
                 </li>
                 {% endif %}
-                <!-- <li class="sideNav sideText"><a class="dropdown-item" href="/contact">contact</a></li> -->
                 <li id="sideCredits">
                   <p class="sideHeader sideText">
                     © Compass Cafe SMC | {{ current_year }}
@@ -201,10 +209,6 @@
               <li class="nav-item">
                 <a class="nav-link nav-linkmain" href="/menu">menu</a>
               </li>
-              <!-- News Page -->
-              <!-- <li class="nav-item">
-              <a class="nav-link nav-linkmain last-mini-linknav" href="/news">news</a>
-            </li> -->
 
               <!-- Account Page - Dropdown [Big Screen] -->
               <li class="nav-item d-none d-sm-block">
@@ -212,6 +216,7 @@
                 <label for="openSide-md" class="sideToggle1 nav-link">
                   <i class="fa-regular fa-user"></i>
                 </label>
+                <!-- Side Menu -->
                 <div id="sideMenu">
                   <ul class="sideMenu-contents">
                     <li>
@@ -225,18 +230,22 @@
                     <br />
                     {% if user.is_authenticated %}
                     <!-- User Logged In -->
+                    <!-- Admin User | Dashboard -->
                     {% if user.is_staff %}
                     <li class="sideNav sideText1">
                       <a class="dropdown-item" href="/dashboard">dashboard</a>
                     </li>
                     {% else %}
+                    <!-- Non-Admin User | Settings -->
                     <li class="sideNav sideText1">
                       <a class="dropdown-item" href="/settings">settings</a>
                     </li>
                     {% endif %}
+                    <!-- User Logged In | Quick Login -->
                     <li class="sideNav sideText1">
                       <a class="dropdown-item" href="/login">quick login</a>
                     </li>
+                    <!-- User Logged In | Logout -->
                     <li class="sideNav sideText1">
                       <a class="dropdown-item" href="/logout">logout</a>
                     </li>
@@ -245,11 +254,12 @@
                     <li class="sideNav sideText1">
                       <a class="dropdown-item" href="/login">login</a>
                     </li>
+                    <!-- User Not Logged In -->
                     <li class="sideNav sideText1">
                       <a class="dropdown-item" href="/signup">sign up</a>
                     </li>
                     {% endif %}
-                    <!-- <li class="sideNav sideText1"><a class="dropdown-item" href="/contact">contact</a></li> -->
+                    <!-- Credits -->
                     <li id="sideCredits">
                       <p class="sideHeader sideText1">
                         © Compass Cafe SMC | {{ current_year }}
@@ -275,6 +285,7 @@
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
         {{ message }}
+        <!-- Close Button -->
         <button
           type="button"
           class="fa fa-times"
@@ -289,6 +300,7 @@
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <i class="fa fa-check-circle" aria-hidden="true"></i>
         {{ message }}
+        <!-- Close Button -->
         <button
           type="button"
           class="fa fa-times"
@@ -306,11 +318,13 @@
       </div>
 
       <!-- Footer Upper -->
+      <!-- Footer Left -->
       <footer class="container-fluid footer-upper">
         <div class="row row-upper">
           <div class="col-md-12 col-lg-7 col-xl-6 upperfooter-left">
             <ul>
               <li>
+                <!-- Compass Cafe Logo -->
                 <img
                   src="/static/assets/img/LogoDesign.svg"
                   width="60px"
@@ -319,6 +333,7 @@
                   oncontextmenu="return false;"
                 />
               </li>
+              <!-- Footer Text -->
               <li id="footerleft-text">
                 <h5>compass cafe</h5>
                 <p>
@@ -328,25 +343,34 @@
               </li>
             </ul>
           </div>
+          <!-- Footer Right -->
           <div class="col-md-12 col-lg-5 col-xl-6 upperfooter-right">
             <div class="row upperfooter-up">
               <ul>
                 <li id="firstfooter-link">
+                  <!-- Apply Page -->
                   <a class="footer-links" href="/apply">apply</a>
                 </li>
-                <li><a class="footer-links" href="/menu">menu</a></li>
-                <!-- <li><a class="footer-links" href="/news">news</a></li> -->
-                <li><a class="footer-links" href="/settings">account</a></li>
+                <li>
+                  <!-- Menu Page -->
+                  <a class="footer-links" href="/menu">menu</a>
+                </li>
+                <li>
+                  <!-- Account Page -->
+                  <a class="footer-links" href="/settings">account</a>
+                </li>
               </ul>
             </div>
             <div class="row upperfooter-down">
               <ul>
                 <li>
+                  <!-- Instagram -->
                   <a
                     href="https://www.instagram.com/sanctamariacollege/"
                     class="footer-socials"
                     target="”_blank”"
                   >
+                    <!-- Instagram Logo -->
                     <img
                       src="/static/assets/img/instagram.svg"
                       href=""
@@ -355,12 +379,14 @@
                     />
                   </a>
                 </li>
+                <!-- Facebook -->
                 <li>
                   <a
                     href="https://www.facebook.com/sanctamariacollege/"
                     class="footer-socials"
                     target="”_blank”"
                   >
+                    <!-- Facebook Logo -->
                     <img
                       src="/static/assets/img/facebook.svg"
                       alt="Compass Logo"
@@ -381,6 +407,7 @@
           <div class="row">
             <div class="col lowerfooter-upper">
               <div class="cuppa-hover">
+                <!-- Cuppa-Chino -->
                 <img
                   src="/static/assets/media/coffeebounce.gif"
                   alt="Cup of Tea Guy"
@@ -388,6 +415,7 @@
                   draggable="false"
                   oncontextmenu="return false;"
                 />
+                <!-- Cuppa-Chino Fast -->
                 <img
                   src="/static/assets/media/coffeerun.gif"
                   alt="cup of coffee"
@@ -396,6 +424,7 @@
                   oncontextmenu="return false;"
                 />
               </div>
+              <!-- Footer Logo -->
               <img
                 src="/static/assets/img/lowerfooter.svg"
                 alt="FooterLogo"
@@ -406,8 +435,10 @@
             </div>
           </div>
 
+          <!-- Lower Footer -->
           <div class="row lowerfooter-container">
             <div class="col-xs-12 col-sm-6 lowerfooter lowerfooter-left">
+              <!-- Compass Cafe Text -->
               <img
                 src="/static/assets/img/SMC-White.svg"
                 width="50px"
@@ -416,6 +447,8 @@
                 oncontextmenu="return false;"
               />
             </div>
+            <!-- Current Year -->
+            <!-- Credits -->
             <div class="col-xs-12 col-sm-6 lowerfooter lowerfooter-right">
               <p>
                 &copy; Compass Cafe SMC | {{ current_year }} <br />Website by
@@ -448,6 +481,7 @@
       {% if request.path == '/home' or request.path == '/' %}
       <!-- If Home Webpage -->
       <script>
+        // Load Screen Trigger
         window.addEventListener("load", function () {
           setTimeout(function () {
             document.getElementById("loadscreen").classList.add("loadtrigger");
@@ -458,6 +492,7 @@
       {% elif is_404 %}
       <!-- Non-Existent -->
       <script>
+        // Load Screen Trigger
         window.addEventListener("load", function () {
           setTimeout(function () {
             document.getElementById("loadscreen").classList.add("loadtrigger");
@@ -468,11 +503,13 @@
       {% else %}
       <!-- If Other Webpage -->
       <script>
+        // Load Screen Trigger
         window.addEventListener("load", function () {
           document.getElementById("loadscreen").classList.add("loadtrigger");
           document.documentElement.classList.add("noscroll");
           document.querySelector(".preload-fadein").classList.add("initiate");
 
+          // Progress Bar
           var progressBar = document.getElementById("progressBar");
           var progress = 0;
           var interval = setInterval(function () {

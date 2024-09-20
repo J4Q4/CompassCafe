@@ -1,15 +1,20 @@
+<!-- Add Item Page Extension -->
 {% extends "template.html" %}{% block title %}Add Drink {% endblock %} {% block
 content %}
 
 <!-- Blank Space -->
+<!-- White Background -->
 <section class="beigespace-test">
   <br />
   <br />
+  <!-- Fade In Load -->
   <div class="preload-fadein">
     <div class="row mb-5">
       <div class="col-md-12 col-lg-6">
+        <!-- Add Menu Item Heading Title -->
         <h1>Add Item</h1>
       </div>
+      <!-- Directory -->
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
         <a id="direct-selected">add item</a> /
         <a href="/menu/edit-item">edit menu</a> / <a href="/menu">menu</a> /
@@ -79,10 +84,13 @@ content %}
           ></textarea>
         </div>
       </div>
+
+      <!-- Upload Image -->
       <div class="dashboarduser-table row">
         <div class="col-md-12 col-lg-6 col-xl-4">
           <label for="image">Upload Image:</label>
           <br />
+          <!-- Select Thumbnail Button -->
           <button
             class="btn-secondary"
             type="button"
@@ -103,14 +111,17 @@ content %}
           />
           <br />
           <div class="mb-4">
+            <!-- Add Item Button -->
             <button class="btn-primary mb-4 img-preview-btnGap" type="submit">
               Add Item
             </button>
+            <!-- Cancel Button -->
             <a class="btn-secondary mb-4" href="{{ url_for('views.menuEdit') }}"
               >Cancel</a
             >
           </div>
         </div>
+        <!-- Image Preview -->
         <div class="col-md-12 col-lg-6 col-xl-8 img-preview-container">
           <div class="img-preview-wrap">
             <img id="image-preview" src="" alt="Image Preview" />

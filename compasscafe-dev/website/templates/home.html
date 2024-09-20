@@ -1,20 +1,24 @@
+<!-- Home Page Extension -->
 {% extends "template.html" %}{% block title %}Home{% endblock %} {% block
 content %}
 
 <!-- Hero Section -->
 <section class="hero-background" id="heroic-bg">
+  <!-- Hero Title Outline -->
   <img
     id="hero-title2"
     src="/static/assets/img/hero-title-fg2.svg"
     alt="HeroTitle"
     draggable="false"
   />
+  <!-- Hero Title Fill -->
   <img
     id="hero-title1"
     src="/static/assets/img/hero-title-bg.svg"
     alt="HeroTitle"
     draggable="false"
   />
+  <!-- Hero Cuppa-Chino 3D Model -->
   <div class="hero3dviewer">
     <canvas id="herocanvas"></canvas>
     <!-- THREE.js -->
@@ -24,7 +28,9 @@ content %}
     ></script>
   </div>
 </section>
+<!-- End of Hero Section-->
 
+<!-- Hero Wave -->
 <div class="container-fluid herowave-container">
   <img
     src="/static/assets/img/hero-wave.svg"
@@ -42,6 +48,7 @@ content %}
       <div class="row">
         <div class="col-md-12 col-lg-6 pe-lg-5">
           <span style="text-align: justify">
+            <!-- Home Page Welcome -->
             <h1>HEY YOU!</h1>
             <br />
             <h3>Welcome to the website of<br />Compass Cafe!</h3>
@@ -57,6 +64,7 @@ content %}
           </span>
         </div>
         <div class="col-md-12 col-lg-6 home-img ps-lg-5">
+          <!-- Home Page Image -->
           <img
             src="/static/assets/media/placeholder.jpg"
             alt="HeroTitle"
@@ -70,9 +78,11 @@ content %}
 </section>
 <!-- End of Blank Space -->
 
+<!-- Carousel Section -->
 <section class="homespace-test fade-in">
   <div class="home-wrap">
     <div class="text-center">
+      <!-- Carousel Title -->
       <h1>What's New?</h1>
       <br />
       <h3>LATEST DRINKS ON BOARD!</h3>
@@ -82,16 +92,19 @@ content %}
         <div id="image-carousel" class="splide">
           <div class="splide__track">
             <ul class="splide__list">
+              <!-- Carousel Items -->
               {% for item in menu_items %}
               <li
                 class="splide__slide"
                 data-title="{{ item.item }}"
                 data-description="{{ item.description }}"
               >
+                <!-- Carousel Image -->
                 <img
                   src="{{ url_for('static', filename='assets/menu/' + item.image) }}"
                   alt="{{ item.item }}"
                 />
+                <!-- Carousel Text -->
                 <div class="menucarousel-text d-none d-xl-block">
                   <h3>{{ item.item }}</h3>
                   <p>{{ item.description }}</p>
@@ -107,6 +120,7 @@ content %}
         </div>
         <div id="carousel-info" class="text-container d-block d-xl-none">
           <br />
+          <!-- Carousel Text -->
           <h3 id="menucarousel-title"></h3>
           <p id="menucarousel-description"></p>
         </div>
@@ -127,6 +141,7 @@ content %}
     </div>
   </div>
 </section>
+<!-- End of Carousel Section -->
 
 <!-- Blank Space -->
 <section class="blankspace-test fade-in">
@@ -134,6 +149,7 @@ content %}
     <div>
       <div class="row">
         <div class="col-md-12 col-lg-6 mb-4 home-img pe-lg-5">
+          <!-- Home Page Image -->
           <img
             src="/static/assets/media/placeholder.jpg"
             alt="HeroTitle"
@@ -141,6 +157,7 @@ content %}
             draggable="false"
           />
         </div>
+        <!-- Baristas Welcome -->
         <div class="col-md-12 col-lg-6 ps-lg-5">
           <span>
             <h1 class="text-align: left;">Join our Crew!</h1>
@@ -160,6 +177,7 @@ content %}
             </p>
           </span>
           <div>
+            <!-- Apply Button -->
             <a class="btn-primary mt-4" href="/signup" type="button"
               >Create an Account</a
             >

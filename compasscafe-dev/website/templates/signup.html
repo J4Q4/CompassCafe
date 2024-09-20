@@ -11,7 +11,9 @@ content %}
             <h1>Welcome!</h1>
             <h6>Create an account.</h6>
             <br />
+            <!-- Form -->
             <div class="form-group">
+              <!-- School Email -->
               <label for="email">School Email</label>
               <input
                 type="text"
@@ -22,6 +24,7 @@ content %}
                 required
               />
               <br />
+              <!-- 5 digits school ID -->
               <label for="username">School ID</label>
               <input
                 type="number"
@@ -33,8 +36,8 @@ content %}
                 oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))"
                 required
               />
-              <!-- 5 digits school ID -->
               <br />
+              <!-- Password -->
               <label for="password1">Password</label>
               <input
                 type="password"
@@ -45,6 +48,7 @@ content %}
                 required
               />
               <br />
+              <!-- Password Confirmation -->
               <label for="password2">Confirm Password</label>
               <input
                 type="password"
@@ -54,11 +58,12 @@ content %}
                 placeholder="Confirm Password"
                 required
               />
+              <!-- Password Validation Notes -->
               <p>Passwords <strong>must match</strong></p>
               <p class="mb-2">
                 Passwords must have <strong>8 characters minimum</strong>
               </p>
-              <! - - Show Password Checkbox - - >
+              <!-- Show Password Checkbox -->
               <input
                 class="mb-4"
                 type="checkbox"
@@ -68,10 +73,12 @@ content %}
               Show Password
               <br />
               <br />
+              <!-- Submit Button -->
               <div class="user-inuibtn" align="center">
                 <button class="btn-primary" type="submit">Sign Up</button>
               </div>
               <br />
+              <!-- Existing Account | Log In -->
               <div class="user-inuibtn" align="center">
                 <a class="btn-secondary" href="/login" type="button"
                   >Existing Account? <strong>Log In</strong></a
@@ -80,6 +87,7 @@ content %}
             </div>
           </form>
         </div>
+        <!-- Sign Up Image -->
         <div class="col d-none d-lg-block user-inui-img"></div>
       </div>
     </div>

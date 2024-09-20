@@ -1,17 +1,21 @@
+<!-- Login Page Extension -->
 {% extends "template.html" %}{% block title %}Login{% endblock %} {% block
 content %}
 
 <!-- Blank Space -->
+<!-- Login Page-->
 <section class="blankspace-test">
   <section class="beigespace-test">
     <div class="preload-fadein">
       <div class="row user-inui user-loginui">
         <div class="col">
           <form method="POST">
+            <!-- Login Form -->
             <h1>Hello!</h1>
             <h6>Log in to your account.</h6>
             <br />
             <div class="form-group">
+              <!-- Email Input -->
               <label for="email">School Email</label>
               <input
                 type="text"
@@ -22,6 +26,7 @@ content %}
                 autocomplete="off"
               />
               <br />
+              <!-- Password Input -->
               <label for="password">Password</label>
               <input
                 type="password"
@@ -31,7 +36,7 @@ content %}
                 placeholder="Password [Required]"
                 autocomplete="off"
               />
-              <! - - Show Password Checkbox - - >
+              <!-- Show Password Checkbox -->
               <input
                 type="checkbox"
                 id="showPassword"
@@ -52,6 +57,7 @@ content %}
             </div>
           </form>
         </div>
+        <!-- Login Image -->
         <div class="col d-none d-lg-block user-inui-img"></div>
       </div>
     </div>

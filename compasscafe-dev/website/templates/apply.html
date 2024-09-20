@@ -1,14 +1,16 @@
+<!-- Apply Page Extension -->
 {% extends "template.html" %}{% block title %}Apply{% endblock %} {% block
 content %}
 
-<! - - Filter User - - >
+<!-- Mobile Filter Popup -->
+<!-- Filter User -->
 <form method="GET" action="{{ url_for('views.apply') }}">
   {{ applyform.hidden_tag() }}
   <div id="mobile-applyjsPopup" class="mobilefilterpopup">
     <button id="filterPopClose" type="button">
       <i class="fa fa-times"></i>
     </button>
-    <!- - Close Button - ->
+    <!-- Close Button -->
     <div class="popup-content">
       <div class="form-group mb-4">
         <label for="schoolid">School ID</label>
@@ -23,6 +25,7 @@ content %}
           oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))"
         />
       </div>
+      <!-- Choose Week Dropdown -->
       <div class="form-group mb-4">
         <label for="date_duty">Week</label>
         <select name="date_duty" class="form-control">
@@ -31,6 +34,7 @@ content %}
             <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
         </select>
       </div>
+      <!-- Choose Day Dropdown -->
       <div class="form-group mb-4">
         <label for="date_day">Day</label>
         <select name="date_day" class="form-control">
@@ -39,6 +43,7 @@ content %}
             <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
         </select>
       </div>
+      <!-- Choose Year Level Dropdown -->
       <div class="form-group mb-4">
         <label for="yearlevel">Year Level</label>
         <select name="yearlevel" class="form-control">
@@ -48,9 +53,11 @@ content %}
             <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
         </select>
       </div>
+      <!-- Filter Interactives -->
       <div class="form-group">
         <ul class="buttonclass">
           <li style="display: inline-block" class="last-list">
+            <!-- Submit Filter Button -->
             <button
               type="submit"
               class="btn-primary me-2"
@@ -58,44 +65,51 @@ content %}
             >
               Filter
             </button>
-            <!- - Submit Filter Button - ->
           </li>
+          <!-- Clear Filter Button -->
           <li style="display: inline-block" class="last-list spacer">
             <a href="{{ url_for('views.apply') }}" class="btn-secondary"
               >Clear Filters</a
             >
-            <!- - Clear Filter Button - - >
+            <!-- Clear Filter Button -->
           </li>
         </ul>
       </div>
     </div>
   </div>
 </form>
-<! - - End of Filter User - - >
+<!-- End of Filter User -->
 
+<!-- White Background -->
 <section class="beigespace-test">
   <br />
   <br />
+  <!-- Fade In After Loading Screen-->
   <div class="preload-fadein">
     <div class="row mb-4">
       <div class="col-md-12 col-lg-9">
+        <!-- Title -->
         <h1>Lunch Schedules</h1>
       </div>
+      <!-- Directory -->
       <div class="head-directory col-md-12 col-lg-3 justify-content-end">
         <a id="direct-selected">apply</a> / <a href="/home">home</a>
       </div>
     </div>
     <br />
 
+    <!-- Sub Title -->
     <div class="row">
       <div class="col-xl-12 col-xxl-12">
         <div id="posts">
+          <!-- User is Staff -->
           {% if not user.is_staff %}
           <h3 class="mb-4"><strong>Your Applications</strong></h3>
+          <!-- User is not staff -->
           {% else %}
           <h3 class="mb-4"><strong>All Applications</strong></h3>
 
-          <! - - Filter User - - >
+          <!-- Filter User -->
           <div id="sortbuttons">
             <ul class="buttonclass">
               <li>
@@ -104,8 +118,8 @@ content %}
                   <button id="applyPopBTN" class="btn-secondary" type="button">
                     Filter
                   </button>
-                  <!-- Pop Up Filter Button -->
 
+                  <!-- Pop Up Filter Button -->
                   <div id="applyjsPopup" class="filterpopup">
                     <div class="popup-content">
                       <div class="form-group mb-4">
@@ -121,6 +135,7 @@ content %}
                           oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))"
                         />
                       </div>
+                      <!-- Choose Week Dropdown -->
                       <div class="form-group mb-4">
                         <label for="date_duty">Week</label>
                         <select name="date_duty" class="form-control">
@@ -129,6 +144,7 @@ content %}
                             <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
                         </select>
                       </div>
+                      <!-- Choose Day Dropdown -->
                       <div class="form-group mb-4">
                         <label for="date_day">Day</label>
                         <select name="date_day" class="form-control">
@@ -137,6 +153,7 @@ content %}
                             <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
                         </select>
                       </div>
+                      <!-- Choose Year Level Dropdown -->
                       <div class="form-group mb-4">
                         <label for="yearlevel">Year Level</label>
                         <select name="yearlevel" class="form-control">
@@ -146,13 +163,14 @@ content %}
                             <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
                         </select>
                       </div>
+                      <!-- Filter Interactives -->
                       <div class="form-group">
                         <ul class="buttonclass">
                           <li style="display: inline-block" class="last-list">
                             <button type="submit" class="btn-primary">
                               Filter
                             </button>
-                            <!- - Submit Filter Button - ->
+                            <!-- Submit Filter Button -->
                           </li>
                           <li style="display: inline-block" class="last-list">
                             <a
@@ -160,7 +178,7 @@ content %}
                               class="btn-secondary"
                               >Clear Filters</a
                             >
-                            <!- - Clear Filter Button - - >
+                            <!-- Clear Filter Button -->
                           </li>
                         </ul>
                       </div>
@@ -170,7 +188,7 @@ content %}
               </li>
             </ul>
           </div>
-          <! - - End of Filter User - - >
+          <!-- End of Filter User -->
 
           {% endif %}
           <br />
@@ -183,11 +201,13 @@ content %}
               <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <div class="card dashboarduser-table mb-4">
                   <div class="card-body">
+                    <!-- User -->
                     <a href="/posts/{{ post.user.username }}"
                       >{{ post.user.username }}</a
                     >
                     {% if user.id == post.author or user.is_staff %}
                     <div class="btn-group" id="apply-delete">
+                      <!-- Dropdown Button -->
                       <button
                         type="button"
                         class="btn-secondary dropdown-toggle"
@@ -195,6 +215,7 @@ content %}
                       ></button>
                       <ul class="dropdown-menu">
                         <h6 class="dropdown-header">User Actions</h6>
+                        <!-- Delete Button (Trigger the Confirmation Popup) -->
                         <li>
                           <a
                             class="dropdown-item"
@@ -205,6 +226,7 @@ content %}
                           >
                             Delete
                           </a>
+                        <!-- Accept Button (Trigger the Confirmation Popup) -->
                         </li>
                         {% if user.is_staff %}
                         <li>
@@ -223,17 +245,21 @@ content %}
                     </div>
                     {% endif %}
                     <div class="card-text">
+                      <!-- School ID -->
                       <h3>{{ post.schoolid }}</h3>
                       <p>
+                        <!-- Full Name -->
                         <strong
                           >{{ post.firstname }}<br />{{ post.lastname }}</strong
                         >
                       </p>
                       <p>
+                        <!-- Date of Barista Duty -->
                         <strong
                           >{{ post.date_day }}, {{ post.date_duty }}</strong
                         >
                       </p>
+                      <!-- Year Level -->
                       <p><strong>Year Level:</strong> {{ post.yearlevel }}</p>
                     </div>
                   </div>
@@ -264,6 +290,7 @@ content %}
         </div>
         {% if not user.is_staff %}
         <br />
+        <!-- New Application Button -->
         <div id="btn-applynew">
           <a href="/apply/submit_duty"
             ><button type="button" class="btn-primary">
@@ -275,6 +302,7 @@ content %}
         {% endif %}
       </div>
 
+      <!-- Barista Roster -->
       <div class="col-xl-12 col-xxl-12 lunch-sched">
         <h3 class="mb-4"><strong>Barista Roster</strong></h3>
         {% include 'applytable.html' %}

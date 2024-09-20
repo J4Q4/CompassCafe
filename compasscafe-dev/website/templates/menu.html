@@ -1,3 +1,4 @@
+<!-- Menu Page Extension -->
 {% extends "template.html" %}{% block title %}Menu{% endblock %} {% block
 content %}
 
@@ -12,8 +13,10 @@ content %}
   <div class="preload-fadein">
     <div class="row mb-5">
       <div class="col-md-12 col-lg-6">
+        <!-- Add Menu Item Heading Title -->
         <h1>Menu</h1>
       </div>
+      <!-- Directory -->
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
         <a id="direct-selected">menu</a> / <a href="/home">home</a>
       </div>
@@ -40,10 +43,12 @@ content %}
       <!-- Mobile Category View -->
       <div class="categories-list-container d-block d-sm-none">
         <div class="categories-list mb-4">
+          <!-- Move Left -->
           <button class="scroll-btn left" onclick="scrollLeftBtn()">
             <i class="fa-solid fa-caret-left"></i>
           </button>
           <ul id="category-list">
+            <!-- Category List -->
             {% for category in categories %}
             <li>
               <a
@@ -56,6 +61,7 @@ content %}
             </li>
             {% endfor %}
           </ul>
+          <!-- Move Right -->
           <button class="scroll-btn right" onclick="scrollRightBtn()">
             <i class="fa-solid fa-caret-right"></i>
           </button>
@@ -69,6 +75,7 @@ content %}
         <div class="row mb-4 menu-container d-none d-lg-flex">
           {% for item in paginMenu.items %}
           <div class="menu-item col-md-6 col-lg-4">
+            <!-- Menu Item Details -->
             <div class="menu-tags">
               <div class="menu-text">
                 <p>{{ item.formatted_price }}</p>
@@ -90,11 +97,13 @@ content %}
           <div class="menu-item col-md-6 col-lg-4">
             <div class="menu-tags">
               <div class="menu-text">
+                <!-- Menu Item Details -->
                 <p>{{ item.formatted_price }}</p>
                 <h3>{{ item.item }}</h3>
                 <h6>{{ item.description }}</h6>
               </div>
             </div>
+            <!-- Menu Item Image -->
             <img
               src="{{ url_for('static', filename='assets/menu/' + item.image) }}"
               alt="{{ item.item }}"
@@ -117,12 +126,14 @@ content %}
               <!-- Pagination -->
               {% for page in paginPages.pages %} {% if page.url and page.num %}
               {% if page.current %}
+              <!-- Current Page -->
               <a
                 class="pagination-btn pgntnbtn-info mb-0 current"
                 href="{{ page.url }}"
                 >{{ page.num }}</a
               >
               {% else %}
+              <!-- Other Pages -->
               <a
                 class="pagination-btn pgntnbtn-outline-info mb-0"
                 href="{{ page.url }}"
@@ -133,6 +144,7 @@ content %}
             </div>
           </div>
 
+          <!-- Edit Menu Button -->
           {% if user.is_staff %}
           <div class="col-xs-12 col-sm-4 text-center text-sm-end">
             <a class="btn-primary" href="{{ url_for('views.menuEdit') }}"

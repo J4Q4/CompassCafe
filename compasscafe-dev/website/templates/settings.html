@@ -1,3 +1,4 @@
+<!-- Settings Page Extension -->
 {% extends "template.html" %}{% block title %}Settings{% endblock %} {% block
 content %}
 
@@ -5,11 +6,14 @@ content %}
 <section class="beigespace-test">
   <br />
   <br />
+  <!-- Fade In Load -->
   <div class="preload-fadein">
     <div class="row mb-4">
       <div class="col-md-12 col-lg-6">
+        <!-- Add Menu Item Heading Title -->
         <h1>Profile</h1>
       </div>
+      <!-- Directory -->
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
         {% if user.is_staff %}
         <a id="direct-selected">profile</a> /
@@ -21,6 +25,7 @@ content %}
       </div>
     </div>
     <br />
+    <!-- User Account Settings (Individual)-->
     <div class="row">
       <div class="col-lg-12 col-xl-3">
         <div class="dashboarduser-table dash-sides mb-4">
@@ -31,21 +36,26 @@ content %}
             </label>
           </div>
         </div>
+        <!-- User Dashboard Navigation -->
         <div class="dashboarduser-table dash-sides mb-4">
+          <!-- If User is Admin, Display as Dashboard-->
           <ul>
             {% if user.is_staff %}
             <ul>
+              <!-- If User is Admin, Display as Applications -->
               <h6>Admin Settings</h6>
               <li><a href="/dashboard">users</a></li>
               <li><a href="/apply">applications</a></li>
             </ul>
             <br />
             {% endif %}
+            <!-- If User is Non-Admin, Display as Settings -->
             <ul>
               <ul class="mb-4">
                 <h6>User Settings</h6>
                 <li><a href="/settings">account</a></li>
               </ul>
+              <!-- If User is Non-Admin, Display as Your Applications -->
               {% if not user.is_staff %}
               <ul>
                 <h6>Submissions</h6>
@@ -58,6 +68,7 @@ content %}
         {% if user.is_staff %}
         <div class="dashboarduser-table dash-sides">
           <ul>
+            <!-- If User is Admin, Display as Site Settings -->
             <h6>Site Settings</h6>
             <li><a href="{{ url_for('views.menuEdit') }}">menu</a></li>
           </ul>
@@ -67,12 +78,15 @@ content %}
       </div>
       <div class="col-lg-12 col-xl-9">
         <div class="dashboarduser-table dash-hello mb-4">
+          <!-- User Greeting -->
           <h2>Hello, {{ user.schoolid }}! 👋</h2>
           <p>
+            <!-- User Settings Description -->
             <strong>Welcome to the user settings.</strong> <br />Here you can
             manage your own account.
           </p>
           <p>
+            <!-- Cuppa-Chino -->
             <img
               src="/static/assets/media/coffeebounce.gif"
               alt="cup of coffee"
@@ -89,21 +103,21 @@ content %}
           <br />
           <form method="POST">
             {{ edit_form.hidden_tag() }}
-            <! - - Email Input - - >
+            <!-- Email Input -->
             <p>
               {{ edit_form.email.label }}<br />
               {% if user.email == 'admin@sanctamaria.school.nz' %} {{
               edit_form.email(size=32, disabled=True) }} {% else %} {{
               edit_form.email(size=32) }} {% endif %}
             </p>
-            <! - - School ID Input - - >
+            <!-- School ID Input -->
             <p>
               {{ edit_form.schoolid.label }}<br />
               {% if user.email == 'admin@sanctamaria.school.nz' %} {{
               edit_form.schoolid(size=32, disabled=True) }} {% else %} {{
               edit_form.schoolid(size=32) }} {% endif %}
             </p>
-            <! - - Password Input - - >
+            <!-- Password Input -->
             <p>
               {{ edit_form.password.label }}<br />
               {% if user.email == 'admin@sanctamaria.school.nz' %} {{
@@ -111,7 +125,7 @@ content %}
               {% else %} {{ edit_form.password(size=32) }}<br />
               {% endif %}
             </p>
-            <! - - Confirm Password Input - - >
+            <!-- Confirm Password Input -->
             <p>
               {{ edit_form.confirm_password.label }}<br />
               {% if user.email == 'admin@sanctamaria.school.nz' %} {{
@@ -120,13 +134,14 @@ content %}
               edit_form.confirm_password(size=32, id="confirm_password") }} {%
               endif %}
             </p>
+            <!-- Show Password Checkbox -->
             <input
               type="checkbox"
               id="showPassword"
               onclick="togglePassword()"
             />
             Show Password
-            <! - - Submit Buttons - - >
+            <!-- Submit Buttons -->
             <br />
             <br />
             <button type="submit" name="edit_submit" class="btn-primary mb-4">
@@ -140,21 +155,24 @@ content %}
               style="margin-left: 10px"
               >Cancel Changes</a
             >
+            <!-- If Original Admin, Cannot Edit Own Account -->
             {% if user.email == 'admin@sanctamaria.school.nz' %}
             <p>
               <strong>Please note:</strong> You cannot edit this admin account.
             </p>
             {% endif %}
-            <! - - Trigger Confirmation Popup - - >
+            <!-- Trigger Confirmation Popup -->
             {% if user.email != 'admin@sanctamaria.school.nz' %}
             <br />
             <br />
+            <!-- Deletion Context-->
             <h3>Danger Zone</h3>
             <p>Proceed with caution.</p>
             <form
               action="{{ url_for('views.delete_user', user_id=user.id) }}"
               method="POST"
             >
+              <!-- Delete Account Button -->
               <button
                 class="btn-danger"
                 type="button"
@@ -166,6 +184,7 @@ content %}
                 Delete Account<i class="fa fa-exclamation-triangle"></i>
               </button>
             </form>
+            <!-- If Applied Barista, Notify Supervisor -->
             <p>
               <strong>Please note:</strong> If an applied barista, please notify
               your supervisor first.
