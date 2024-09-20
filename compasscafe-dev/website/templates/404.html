@@ -1,25 +1,38 @@
-{% extends "template.html" %}{% block title %}Error{% endblock %}
-{% block content %}
+{% extends "template.html" %}{% block title %}Error{% endblock %} {% block
+content %}
 
 <section class="bluespace-test">
-    <div class="preload-fadein" id="contain404">
-        <div id="div404" class="row">
-            <div class="col-md-lg col-xl-5" id="error404_contents">
-                <div class="text-error404">
-                    <h1 style="font-size: 150px;">404</h1>
-                    <p style="font-size: 30px"><strong>Womp Womp!</strong></p>
-                    <p style="font-size: 20px;">It appears that you got lost... :(</p>
-                    <br>
-                    <button class="btn-secondary" onclick="window.location.href='/home'" type="button" id="home404btn">Go Back Home</button>
-                </div>
-            </div>
-            <div class="col-lg-12 col-xl-7 d-none d-xl-block" id="brokeglass_contents">
-                <canvas id="errorcanvas"></canvas>
-                <!-- THREE.js -->
-                <script type="module" src="{{ url_for('static', filename='js/error.js') }}"></script>
-            </div>
+  <div class="preload-fadein" id="contain404">
+    <div id="div404" class="row">
+      <div class="col-md-lg col-xl-5" id="error404_contents">
+        <div class="text-error404">
+          <h1 style="font-size: 150px">404</h1>
+          <p style="font-size: 30px"><strong>Womp Womp!</strong></p>
+          <p style="font-size: 20px">It appears that you got lost... :(</p>
+          <br />
+          <button
+            class="btn-secondary"
+            onclick="window.location.href='/home'"
+            type="button"
+            id="home404btn"
+          >
+            Go Back Home
+          </button>
         </div>
+      </div>
+      <div
+        class="col-lg-12 col-xl-7 d-none d-xl-block"
+        id="brokeglass_contents"
+      >
+        <canvas id="errorcanvas"></canvas>
+        <!-- THREE.js -->
+        <script
+          type="module"
+          src="{{ url_for('static', filename='js/error.js') }}"
+        ></script>
+      </div>
     </div>
+  </div>
 </section>
 
 {% endblock %}

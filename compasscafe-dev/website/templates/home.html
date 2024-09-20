@@ -1,19 +1,37 @@
-{% extends "template.html" %}{% block title %}Home{% endblock %}
-{% block content %}
+{% extends "template.html" %}{% block title %}Home{% endblock %} {% block
+content %}
 
 <!-- Hero Section -->
 <section class="hero-background" id="heroic-bg">
-  <img id="hero-title2" src="/static/assets/img/hero-title-fg2.svg" alt="HeroTitle" draggable="false">
-  <img id="hero-title1" src="/static/assets/img/hero-title-bg.svg" alt="HeroTitle" draggable="false">
+  <img
+    id="hero-title2"
+    src="/static/assets/img/hero-title-fg2.svg"
+    alt="HeroTitle"
+    draggable="false"
+  />
+  <img
+    id="hero-title1"
+    src="/static/assets/img/hero-title-bg.svg"
+    alt="HeroTitle"
+    draggable="false"
+  />
   <div class="hero3dviewer">
     <canvas id="herocanvas"></canvas>
     <!-- THREE.js -->
-    <script type="module" src="{{ url_for('static', filename='js/hero.js') }}"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/hero.js') }}"
+    ></script>
   </div>
 </section>
 
 <div class="container-fluid herowave-container">
-  <img src="/static/assets/img/hero-wave.svg" alt="WaveAnimation" id="hero-wave" draggable="false">
+  <img
+    src="/static/assets/img/hero-wave.svg"
+    alt="WaveAnimation"
+    id="hero-wave"
+    draggable="false"
+  />
 </div>
 <!-- End of Hero Section -->
 
@@ -23,16 +41,29 @@
     <div>
       <div class="row">
         <div class="col-md-12 col-lg-6 pe-lg-5">
-          <span style="text-align:justify">
+          <span style="text-align: justify">
             <h1>HEY YOU!</h1>
-            <br>
-            <h3>Welcome to the website of<br>Compass Cafe!</h3>
-            <p>The website for Compass Café, exclusively available to Sancta Maria College students, offers information on operating hours, lunch-time coffee selections, and schedules for applying to work at the café. Whether you're looking to grab a refreshing coffee during your break or inquire about available opportunities, you'll find everything you need here.</p>
-            <br>
+            <br />
+            <h3>Welcome to the website of<br />Compass Cafe!</h3>
+            <p>
+              The website for Compass Café, exclusively available to Sancta
+              Maria College students, offers information on operating hours,
+              lunch-time coffee selections, and schedules for applying to work
+              at the café. Whether you're looking to grab a refreshing coffee
+              during your break or inquire about available opportunities, you'll
+              find everything you need here.
+            </p>
+            <br />
           </span>
         </div>
         <div class="col-md-12 col-lg-6 home-img ps-lg-5">
-          <img src="/static/assets/media/placeholder.jpg" alt="HeroTitle" style="width: 100%;" draggable="false">
+          <img
+            src="/static/assets/media/placeholder.jpg"
+            alt="HeroTitle"
+            style="width: 100%"
+            draggable="false"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -43,36 +74,43 @@
   <div class="home-wrap">
     <div class="text-center">
       <h1>What's New?</h1>
-      <br>
+      <br />
       <h3>LATEST DRINKS ON BOARD!</h3>
-      <br>
+      <br />
       <div>
         <!-- Carousel Container -->
         <div id="image-carousel" class="splide">
           <div class="splide__track">
             <ul class="splide__list">
               {% for item in menu_items %}
-                <li class="splide__slide" data-title="{{ item.item }}" data-description="{{ item.description }}">
-                  <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
-                  <div class="menucarousel-text d-none d-xl-block">
-                    <h3>{{ item.item }}</h3>
-                    <p>{{ item.description }}</p>
-                  </div>
-                </li>
+              <li
+                class="splide__slide"
+                data-title="{{ item.item }}"
+                data-description="{{ item.description }}"
+              >
+                <img
+                  src="{{ url_for('static', filename='assets/menu/' + item.image) }}"
+                  alt="{{ item.item }}"
+                />
+                <div class="menucarousel-text d-none d-xl-block">
+                  <h3>{{ item.item }}</h3>
+                  <p>{{ item.description }}</p>
+                </div>
+              </li>
               {% endfor %}
             </ul>
           </div>
-          <br><br>
+          <br /><br />
           <div id="custom-pagination">
             <!-- Pagination Dots -->
           </div>
         </div>
         <div id="carousel-info" class="text-container d-block d-xl-none">
-          <br>
+          <br />
           <h3 id="menucarousel-title"></h3>
           <p id="menucarousel-description"></p>
         </div>
-        <br><br>
+        <br /><br />
         <!-- Carousel Navigations -->
         <div class="splide__arrows">
           <!-- Previous -->
@@ -85,7 +123,7 @@
             <i class="fa-solid fa-caret-right"></i>
           </button>
         </div>
-      </div>        
+      </div>
     </div>
   </div>
 </section>
@@ -96,34 +134,41 @@
     <div>
       <div class="row">
         <div class="col-md-12 col-lg-6 mb-4 home-img pe-lg-5">
-          <img src="/static/assets/media/placeholder.jpg" alt="HeroTitle" style="width: 100%; height: 450px;" draggable="false">
+          <img
+            src="/static/assets/media/placeholder.jpg"
+            alt="HeroTitle"
+            style="width: 100%; height: 450px"
+            draggable="false"
+          />
         </div>
         <div class="col-md-12 col-lg-6 ps-lg-5">
           <span>
             <h1 class="text-align: left;">Join our Crew!</h1>
-            <br>
-            <h3>Become a Lunchtime Barista of <br><strong>Compass Cafe!</strong></h3>
+            <br />
+            <h3>
+              Become a Lunchtime Barista of <br /><strong>Compass Cafe!</strong>
+            </h3>
             <!--<p>Here you can find information about our schedules to which you can apply, and also the menu of our cafe.</p>-->
-            <p style="text-align:justify">Are you a senior with energy and passion for serving others? Compass Café is looking for enthusiastic students to join our barista team! Bring your vibrant spirit and love for coffee as we brew up fun during lunch hours. You can apply on Tuesdays and Thursdays for both Week A and Week B. Don’t miss your chance to be part of something special – sign up today and help serve your peers with pride!</p>
+            <p style="text-align: justify">
+              Are you a senior with energy and passion for serving others?
+              Compass Café is looking for enthusiastic students to join our
+              barista team! Bring your vibrant spirit and love for coffee as we
+              brew up fun during lunch hours. You can apply on Tuesdays and
+              Thursdays for both Week A and Week B. Don’t miss your chance to be
+              part of something special – sign up today and help serve your
+              peers with pride!
+            </p>
           </span>
           <div>
-            <a class="btn-primary mt-4" href="/signup" type="button">Create an Account</a>
+            <a class="btn-primary mt-4" href="/signup" type="button"
+              >Create an Account</a
+            >
           </div>
         </div>
+      </div>
     </div>
   </div>
 </section>
 <!-- End of Blank Space-->
 
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-

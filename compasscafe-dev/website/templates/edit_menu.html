@@ -1,357 +1,465 @@
-{% extends "template.html" %}{% block title %}Edit Menu{% endblock %}
-{% block content %}
-
+{% extends "template.html" %}{% block title %}Edit Menu{% endblock %} {% block
+content %}
 
 <!- - Sort User - ->
 <form method="GET" action="{{ url_for('views.menuEdit') }}">
-    {{ sort_form.hidden_tag() }}
-    <div id="mobile-sortjsPopup" class="mobilefilterpopup">
-        <button id="mobisortPopClose" type="button"><i class="fa fa-times"></i></button> <!- - Close Button - ->
-        <div class="popup-content">
-            <ul>
-                <li>
-                    <label>Sort By</label><br>
-                    <select name="sort_by" id="sort_by" class="form-control">
-                        <option value="">None</option>
-                        <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
-                        <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
-                        <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
-                        <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
-                        <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
-                        <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
-                    </select>
-                    <!-- Retain Filter Values -->
-                    <input type="hidden" name="item" value="{{ request.args.get('item', '') }}">
-                    <input type="hidden" name="category" value="{{ category_filter }}">
-                </li>
-                <br>
-                <li class="last-list">
-                    <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Sort Button -->
-                </li>
-            </ul>
-        </div>
+  {{ sort_form.hidden_tag() }}
+  <div id="mobile-sortjsPopup" class="mobilefilterpopup">
+    <button id="mobisortPopClose" type="button">
+      <i class="fa fa-times"></i>
+    </button>
+    <!- - Close Button - ->
+    <div class="popup-content">
+      <ul>
+        <li>
+          <label>Sort By</label><br />
+          <select name="sort_by" id="sort_by" class="form-control">
+            <option value="">None</option>
+            <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
+            <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
+            <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
+            <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
+            <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
+            <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
+          </select>
+          <!-- Retain Filter Values -->
+          <input
+            type="hidden"
+            name="item"
+            value="{{ request.args.get('item', '') }}"
+          />
+          <input type="hidden" name="category" value="{{ category_filter }}" />
+        </li>
+        <br />
+        <li class="last-list">
+          <button type="submit" class="btn-primary">
+            {{ sort_form.submit.label.text }}
+          </button>
+          <!-- Submit Sort Button -->
+        </li>
+      </ul>
     </div>
+  </div>
 </form>
 <!- - End of Sort - ->
 
 <!- - Filter User - ->
-<form method="POST" action="{{ url_for('views.menuEdit', sort_by=request.args.get('sort_by')) }}">
-    {{ filter_form.hidden_tag() }}
-    <div id="mobile-filterjsPopup" class="mobilefilterpopup">
-        <button id="mobifilterPopClose" type="button"><i class="fa fa-times"></i></button> <!- - Close Button - ->
-        <div class="popup-content">
-            <ul>
-                <li>
-                    <label>Item Name</label><br>
-                    <input type="text" name="item" value="{{ request.args.get('item', '') }}" placeholder="Enter item name" class="form-control">
-                    <!-- Retain Sort Values -->
-                    <input type="hidden" name="sort_by" value="{{ request.args.get('sort_by', 'item_asc') }}">
-                    <input type="hidden" name="category" value="{{ category_filter }}">
-                </li>
-                <br>
-                <li class="last-list">
-                    <button type="submit" name="filter_submit" class="btn-primary">Filter</button> <!-- Submit Filter Button -->
-                </li>
-                <li style="display: inline-block;" class="last-list">
-                    <a href="{{ url_for('views.menuEdit', category=category_filter) }}" class="btn-secondary">Clear Filters</a> <!-- Clear Filter Button -->
-                </li>
-            </ul>
-        </div>
+<form
+  method="POST"
+  action="{{ url_for('views.menuEdit', sort_by=request.args.get('sort_by')) }}"
+>
+  {{ filter_form.hidden_tag() }}
+  <div id="mobile-filterjsPopup" class="mobilefilterpopup">
+    <button id="mobifilterPopClose" type="button">
+      <i class="fa fa-times"></i>
+    </button>
+    <!- - Close Button - ->
+    <div class="popup-content">
+      <ul>
+        <li>
+          <label>Item Name</label><br />
+          <input
+            type="text"
+            name="item"
+            value="{{ request.args.get('item', '') }}"
+            placeholder="Enter item name"
+            class="form-control"
+          />
+          <!-- Retain Sort Values -->
+          <input
+            type="hidden"
+            name="sort_by"
+            value="{{ request.args.get('sort_by', 'item_asc') }}"
+          />
+          <input type="hidden" name="category" value="{{ category_filter }}" />
+        </li>
+        <br />
+        <li class="last-list">
+          <button type="submit" name="filter_submit" class="btn-primary">
+            Filter
+          </button>
+          <!-- Submit Filter Button -->
+        </li>
+        <li style="display: inline-block" class="last-list">
+          <a
+            href="{{ url_for('views.menuEdit', category=category_filter) }}"
+            class="btn-secondary"
+            >Clear Filters</a
+          >
+          <!-- Clear Filter Button -->
+        </li>
+      </ul>
     </div>
+  </div>
 </form>
 <!- - End of Filter User - ->
 
-
-
 <div class="row">
-
-    <!-- Blank Space -->
-    <section class="beigespace-test">
-        <br>
-        <br>
-        <div class="preload-fadein">
-            <div class="row mb-5">
-                <div class="col-md-12 col-lg-6">
-                    <h1>Edit Menu</h1>
-                </div>
-                <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-                    <a id="direct-selected">edit menu</a> / <a href="/menu">menu</a> / <a href="/home">home</a>
-                </div>
-            </div>
-
-            {% if edit_item %}
-            <div class="row">
-                <div class="col mb-5">
-                    <div class="dashboarduser-table">
-                        
-                        <div class="menu-edit-popup mb-5">
-                            <h3>Edit Menu Item</h3>
-                            <br>
-                            <form action="{{ url_for('views.menuEdit', edit_menu_id=edit_item.id) }}" method="POST" enctype="multipart/form-data">
-                                {{ edit_menu.hidden_tag() }}
-                                <! - - Item Name Input - - >
-                                <p>
-                                    {{ edit_menu.item.label }}<br>
-                                    {{ edit_menu.item(class="form-control") }}
-                                </p>
-                            
-                                <! - - Price Input - - >
-                                <p>
-                                    {{ edit_menu.price.label }}<br>
-                                    {{ edit_menu.price(class="form-control", value="{:.2f}".format(edit_menu.price.data)) }}
-                                </p>
-                            
-                                <! - - Category Input - - >
-                                <p>
-                                    {{ edit_menu.category.label }}<br>
-                                    {{ edit_menu.category(class="form-control") }}
-                                </p>
-                                
-                            
-                                <! - - Description Input - - >
-                                <p>
-                                    {{ edit_menu.description.label }}<br>
-                                    {{ edit_menu.description(class="form-control") }}
-                                </p>
-                            
-                                <! - - Image Upload Input - - >
-                                <p>
-                                    {{ edit_menu.image.label }}<br>
-                                    {{ edit_menu.image(class="form-control", onchange="showMenuFile()") }}
-                                </p>
-                                <div class="row" style="padding: 0 13px;">
-                                    <div class="col-md-12 col-lg-6 col-xl-4">
-                                        <br>
-                                        <button class="btn-secondary" type="button" style="display: none" onclick="document.getElementById('image').click()">Select Thumbnail</button>
-                                        <span style="display: none" id="file-name"></span>
-                                    </div>
-                                    <div class="col-12 img-preview-container">
-                                        <div class="img-preview-wrap">
-                                            <img id="image-preview" src="{{ edit_item.image_url }}" alt="Image Preview"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <! - - Submit Buttons - - >
-                                <br>
-                                <button type="submit" name="edit_submit" class="btn-primary">Update Item</button>
-                                <a class="btn-secondary" href="{{ url_for('views.menuEdit') }}" style="margin-left: 10px;">Cancel</a>
-                            </form>
-                                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
-            <div class="row">
-
-                <div class="col-xl-12 col-xxl-3">
-                    <div class="panel-sidetable mb-5">
-                        <!-- Category List -->
-                        <div class="categories-drop">
-                
-                            <!-- Menu Edit with Sort and Filter Pop-ups -->
-                            <div id="sortbuttons">
-                                <h3>Menu Items</h3>
-                                <ul class="buttonclass">
-                
-                                    <!-- Sort Menu -->
-                                    <li>
-                                        <form method="GET" action="{{ url_for('views.menuEdit') }}">
-                                            {{ sort_form.hidden_tag() }}
-                                            <button id="sortPopBTN" class="btn-secondary" type="button">Sort</button> <!-- Pop Up Sort Button -->
-                
-                                            <div id="sortjsPopup" class="filterpopup">
-                                                <div class="popup-content">
-                                                    <ul>
-                                                        <li>
-                                                            <label>Sort By</label><br>
-                                                            <select name="sort_by" id="sort_by" class="form-control">
-                                                                <option value="">None</option>
-                                                                <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
-                                                                <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
-                                                                <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
-                                                                <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
-                                                                <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
-                                                                <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
-                                                            </select>
-                                                            <!-- Retain Filter Values -->
-                                                            <input type="hidden" name="item" value="{{ request.args.get('item', '') }}">
-                                                            <input type="hidden" name="category" value="{{ category_filter }}">
-                                                        </li>
-                                                        <br>
-                                                        <li class="last-list">
-                                                            <button type="submit" class="btn-primary">{{ sort_form.submit.label.text }}</button> <!-- Submit Sort Button -->
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </li>
-                                    <!-- End of Sort Menu -->
-                
-                                    <!-- Filter Menu -->
-                                    <li>
-                                        <form method="GET" action="{{ url_for('views.menuEdit') }}">
-                                            {{ filter_form.hidden_tag() }}
-                                            <button id="filterPopBTN" class="btn-secondary mt-3" type="button">Filter</button> <!-- Pop Up Filter Button -->
-                
-                                            <div id="filterjsPopup" class="filterpopup">
-                                                <div class="popup-content">
-                                                    <ul>
-                                                        <li>
-                                                            <label>Item Name</label><br>
-                                                            <input type="text" name="item" value="{{ request.args.get('item', '') }}" placeholder="Enter item name" class="form-control">
-                                                            <!-- Retain Sort Values -->
-                                                            <input type="hidden" name="sort_by" value="{{ request.args.get('sort_by', 'item_asc') }}">
-                                                            <input type="hidden" name="category" value="{{ category_filter }}">
-                                                        </li>
-                                                        <br>
-                                                        <li class="last-list">
-                                                            <button type="submit" name="filter_submit" class="btn-primary">Filter</button> <!-- Submit Filter Button -->
-                                                        </li>
-                                                        <li style="display: inline-block;" class="last-list">
-                                                            <a href="{{ url_for('views.menuEdit', category=category_filter) }}" class="btn-secondary">Clear Filters</a> <!-- Clear Filter Button -->
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </li>
-                                    <!-- End of Filter Menu -->
-                
-                                </ul>
-                            </div>
-
-
-                            <a class="btn-primary" href="/menu/edit-item/add-item">
-                                <i class="fa fa-plus"></i>
-                                Add Drink
-                            </a>
-                            <br>
-                            <br>
-                            <div class="d-none d-xxl-block mt-4">
-                                <h3>Categories</h3>
-                                <ul class="category-class" style="margin-bottom: 0;">
-                                {% for category in categories %}
-                                    <li>
-                                        <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
-                                            class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
-                                            {{ category }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Mobile Category View -->
-                <div class="categories-list-container d-xl-block d-xxl-none">
-                    <div class="categories-list mb-4">
-                        <button class="scroll-btn left" onclick="scrollLeftBtn()">
-                            <i class="fa-solid fa-caret-left"></i>
-                        </button>
-                        <ul id="category-list">
-                            {% for category in categories %}
-                                <li>
-                                    <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
-                                        class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
-                                        {{ category }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <button class="scroll-btn right" onclick="scrollRightBtn()">
-                            <i class="fa-solid fa-caret-right"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                
-                
-
-                <div class="mobile-nopadding col-xl-12 col-xxl-9">
-                    <div class="mobile-nopadding dashboarduser-table">
-
-                        <!-- Menu Items -->
-                        <div class="row menurow mb-4">
-                            {% for item in paginMenu.items %}
-                            <div class="mobile-nopadding col-12 col-md-6 d-flex">
-                                <div class="card menu-item-card mb-4">
-                                    <div class="row">
-                                        <div class="mobile-nopadding col-5">
-                                            <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
-                                        </div>
-                                        <div class="text-wrap col-7">
-
-                                            <!-- Dropdown Button -->
-                                            <div class="btn-group" id="apply-delete">
-                                                <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
-                                                <ul class="dropdown-menu">
-                                                    <h6 class="dropdown-header">Menu Actions</h6>
-                                                    <!-- Edit Button -->
-                                                    <li>
-                                                        <a class="dropdown-item" href="{{ url_for('views.menuEdit', edit_menu_id=item.id) }}">
-                                                            Edit
-                                                        </a>
-                                                    </li>    
-                                                    <!-- Delete Button (Trigger the Confirmation Popup) -->                        
-                                                    <li>
-                                                        <a class="dropdown-item"
-                                                        onclick="showDeletePopup(this)" 
-                                                        data-item-type="menu_item" 
-                                                        data-item-id="{{ item.id }}" 
-                                                        data-item-description="Item: {{ item.item }}">
-                                                            Delete
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <h3 style="font-size: 16px;">{{ item.item }}</h3>
-                                            <p>{{ item.formatted_price }}</p>
-                                            <p>{{ item.description }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    
-                    
-                    
-                    
-                        <!-- Interactable Menu Navigation Buttons -->
-                        <div class="row">
-                            <div class="col text-center mb-5">
-                                <div class="menu-pagination d-inline-flex">
-                                    <!-- Pagination -->
-                                    {% for page in paginPages.pages %}
-                                    {% if page.url and page.num %}
-                                        {% if page.current %}
-                                            <a class="pagination-btn pgntnbtn-info mb-0 current" href="{{ page.url }}">{{ page.num }}</a>
-                                        {% else %}
-                                            <a class="pagination-btn pgntnbtn-outline-info mb-0" href="{{ page.url }}">{{ page.num }}</a>
-                                        {% endif %}
-                                    {% else %}
-                                        ...
-                                    {% endif %}
-                                    {% endfor %}
-                                    <!-- End of Pagination -->
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
+  <!-- Blank Space -->
+  <section class="beigespace-test">
+    <br />
+    <br />
+    <div class="preload-fadein">
+      <div class="row mb-5">
+        <div class="col-md-12 col-lg-6">
+          <h1>Edit Menu</h1>
         </div>
-    </section>
+        <div class="head-directory col-md-12 col-lg-6 justify-content-end">
+          <a id="direct-selected">edit menu</a> / <a href="/menu">menu</a> /
+          <a href="/home">home</a>
+        </div>
+      </div>
+
+      {% if edit_item %}
+      <div class="row">
+        <div class="col mb-5">
+          <div class="dashboarduser-table">
+            <div class="menu-edit-popup mb-5">
+              <h3>Edit Menu Item</h3>
+              <br />
+              <form
+                action="{{ url_for('views.menuEdit', edit_menu_id=edit_item.id) }}"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                {{ edit_menu.hidden_tag() }}
+                <! - - Item Name Input - - >
+                <p>
+                  {{ edit_menu.item.label }}<br />
+                  {{ edit_menu.item(class="form-control") }}
+                </p>
+
+                <! - - Price Input - - >
+                <p>
+                  {{ edit_menu.price.label }}<br />
+                  {{ edit_menu.price(class="form-control",
+                  value="{:.2f}".format(edit_menu.price.data)) }}
+                </p>
+
+                <! - - Category Input - - >
+                <p>
+                  {{ edit_menu.category.label }}<br />
+                  {{ edit_menu.category(class="form-control") }}
+                </p>
+
+                <! - - Description Input - - >
+                <p>
+                  {{ edit_menu.description.label }}<br />
+                  {{ edit_menu.description(class="form-control") }}
+                </p>
+
+                <! - - Image Upload Input - - >
+                <p>
+                  {{ edit_menu.image.label }}<br />
+                  {{ edit_menu.image(class="form-control",
+                  onchange="showMenuFile()") }}
+                </p>
+                <div class="row" style="padding: 0 13px">
+                  <div class="col-md-12 col-lg-6 col-xl-4">
+                    <br />
+                    <button
+                      class="btn-secondary"
+                      type="button"
+                      style="display: none"
+                      onclick="document.getElementById('image').click()"
+                    >
+                      Select Thumbnail
+                    </button>
+                    <span style="display: none" id="file-name"></span>
+                  </div>
+                  <div class="col-12 img-preview-container">
+                    <div class="img-preview-wrap">
+                      <img
+                        id="image-preview"
+                        src="{{ edit_item.image_url }}"
+                        alt="Image Preview"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <! - - Submit Buttons - - >
+                <br />
+                <button type="submit" name="edit_submit" class="btn-primary">
+                  Update Item
+                </button>
+                <a
+                  class="btn-secondary"
+                  href="{{ url_for('views.menuEdit') }}"
+                  style="margin-left: 10px"
+                  >Cancel</a
+                >
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="row">
+        <div class="col-xl-12 col-xxl-3">
+          <div class="panel-sidetable mb-5">
+            <!-- Category List -->
+            <div class="categories-drop">
+              <!-- Menu Edit with Sort and Filter Pop-ups -->
+              <div id="sortbuttons">
+                <h3>Menu Items</h3>
+                <ul class="buttonclass">
+                  <!-- Sort Menu -->
+                  <li>
+                    <form method="GET" action="{{ url_for('views.menuEdit') }}">
+                      {{ sort_form.hidden_tag() }}
+                      <button
+                        id="sortPopBTN"
+                        class="btn-secondary"
+                        type="button"
+                      >
+                        Sort
+                      </button>
+                      <!-- Pop Up Sort Button -->
+
+                      <div id="sortjsPopup" class="filterpopup">
+                        <div class="popup-content">
+                          <ul>
+                            <li>
+                              <label>Sort By</label><br />
+                              <select name="sort_by" id="sort_by" class="form-control">
+                                <option value="">None</option>
+                                <option value="item_asc" {% if request.args.get('sort_by') == 'item_asc' %}selected{% endif %}>Item Name (Ascending)</option>
+                                <option value="item_desc" {% if request.args.get('sort_by') == 'item_desc' %}selected{% endif %}>Item Name (Descending)</option>
+                                <option value="price_asc" {% if request.args.get('sort_by') == 'price_asc' %}selected{% endif %}>Price (Lowest)</option>
+                                <option value="price_desc" {% if request.args.get('sort_by') == 'price_desc' %}selected{% endif %}>Price (Highest)</option>
+                                <option value="date_asc" {% if request.args.get('sort_by') == 'date_asc' %}selected{% endif %}>Oldest</option>
+                                <option value="date_desc" {% if request.args.get('sort_by') == 'date_desc' %}selected{% endif %}>Newest</option>
+                              </select>
+                              <!-- Retain Filter Values -->
+                              <input
+                                type="hidden"
+                                name="item"
+                                value="{{ request.args.get('item', '') }}"
+                              />
+                              <input
+                                type="hidden"
+                                name="category"
+                                value="{{ category_filter }}"
+                              />
+                            </li>
+                            <br />
+                            <li class="last-list">
+                              <button type="submit" class="btn-primary">
+                                {{ sort_form.submit.label.text }}
+                              </button>
+                              <!-- Submit Sort Button -->
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </li>
+                  <!-- End of Sort Menu -->
+
+                  <!-- Filter Menu -->
+                  <li>
+                    <form method="GET" action="{{ url_for('views.menuEdit') }}">
+                      {{ filter_form.hidden_tag() }}
+                      <button
+                        id="filterPopBTN"
+                        class="btn-secondary mt-3"
+                        type="button"
+                      >
+                        Filter
+                      </button>
+                      <!-- Pop Up Filter Button -->
+
+                      <div id="filterjsPopup" class="filterpopup">
+                        <div class="popup-content">
+                          <ul>
+                            <li>
+                              <label>Item Name</label><br />
+                              <input
+                                type="text"
+                                name="item"
+                                value="{{ request.args.get('item', '') }}"
+                                placeholder="Enter item name"
+                                class="form-control"
+                              />
+                              <!-- Retain Sort Values -->
+                              <input
+                                type="hidden"
+                                name="sort_by"
+                                value="{{ request.args.get('sort_by', 'item_asc') }}"
+                              />
+                              <input
+                                type="hidden"
+                                name="category"
+                                value="{{ category_filter }}"
+                              />
+                            </li>
+                            <br />
+                            <li class="last-list">
+                              <button
+                                type="submit"
+                                name="filter_submit"
+                                class="btn-primary"
+                              >
+                                Filter
+                              </button>
+                              <!-- Submit Filter Button -->
+                            </li>
+                            <li style="display: inline-block" class="last-list">
+                              <a
+                                href="{{ url_for('views.menuEdit', category=category_filter) }}"
+                                class="btn-secondary"
+                                >Clear Filters</a
+                              >
+                              <!-- Clear Filter Button -->
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </form>
+                  </li>
+                  <!-- End of Filter Menu -->
+                </ul>
+              </div>
+
+              <a class="btn-primary" href="/menu/edit-item/add-item">
+                <i class="fa fa-plus"></i>
+                Add Drink
+              </a>
+              <br />
+              <br />
+              <div class="d-none d-xxl-block mt-4">
+                <h3>Categories</h3>
+                <ul class="category-class" style="margin-bottom: 0">
+                  {% for category in categories %}
+                  <li>
+                    <a
+                      href="{{ url_for(request.endpoint, category=category, page=1) }}"
+                      type="button"
+                      class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}"
+                    >
+                      {{ category }}
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Category View -->
+        <div class="categories-list-container d-xl-block d-xxl-none">
+          <div class="categories-list mb-4">
+            <button class="scroll-btn left" onclick="scrollLeftBtn()">
+              <i class="fa-solid fa-caret-left"></i>
+            </button>
+            <ul id="category-list">
+              {% for category in categories %}
+              <li>
+                <a
+                  href="{{ url_for(request.endpoint, category=category, page=1) }}"
+                  type="button"
+                  class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}"
+                >
+                  {{ category }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+            <button class="scroll-btn right" onclick="scrollRightBtn()">
+              <i class="fa-solid fa-caret-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="mobile-nopadding col-xl-12 col-xxl-9">
+          <div class="mobile-nopadding dashboarduser-table">
+            <!-- Menu Items -->
+            <div class="row menurow mb-4">
+              {% for item in paginMenu.items %}
+              <div class="mobile-nopadding col-12 col-md-6 d-flex">
+                <div class="card menu-item-card mb-4">
+                  <div class="row">
+                    <div class="mobile-nopadding col-5">
+                      <img
+                        src="{{ url_for('static', filename='assets/menu/' + item.image) }}"
+                        alt="{{ item.item }}"
+                      />
+                    </div>
+                    <div class="text-wrap col-7">
+                      <!-- Dropdown Button -->
+                      <div class="btn-group" id="apply-delete">
+                        <button
+                          type="button"
+                          class="btn-secondary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                        ></button>
+                        <ul class="dropdown-menu">
+                          <h6 class="dropdown-header">Menu Actions</h6>
+                          <!-- Edit Button -->
+                          <li>
+                            <a
+                              class="dropdown-item"
+                              href="{{ url_for('views.menuEdit', edit_menu_id=item.id) }}"
+                            >
+                              Edit
+                            </a>
+                          </li>
+                          <!-- Delete Button (Trigger the Confirmation Popup) -->
+                          <li>
+                            <a
+                              class="dropdown-item"
+                              onclick="showDeletePopup(this)"
+                              data-item-type="menu_item"
+                              data-item-id="{{ item.id }}"
+                              data-item-description="Item: {{ item.item }}"
+                            >
+                              Delete
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <h3 style="font-size: 16px">{{ item.item }}</h3>
+                      <p>{{ item.formatted_price }}</p>
+                      <p>{{ item.description }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <!-- Interactable Menu Navigation Buttons -->
+            <div class="row">
+              <div class="col text-center mb-5">
+                <div class="menu-pagination d-inline-flex">
+                  <!-- Pagination -->
+                  {% for page in paginPages.pages %} {% if page.url and page.num
+                  %} {% if page.current %}
+                  <a
+                    class="pagination-btn pgntnbtn-info mb-0 current"
+                    href="{{ page.url }}"
+                    >{{ page.num }}</a
+                  >
+                  {% else %}
+                  <a
+                    class="pagination-btn pgntnbtn-outline-info mb-0"
+                    href="{{ page.url }}"
+                    >{{ page.num }}</a
+                  >
+                  {% endif %} {% else %} ... {% endif %} {% endfor %}
+                  <!-- End of Pagination -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 {% endblock %}

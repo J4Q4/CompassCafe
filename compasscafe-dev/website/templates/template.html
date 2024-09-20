@@ -1,352 +1,490 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <html lang="en">
-  <head>
-      <title>Compass Café  &#x2727;  {% block title %}{% endblock %}</title>
-      <link rel="icon" type="image/x-icon" href="/static/assets/img/favicon.ico">
+    <head>
+      <title>Compass Café &#x2727; {% block title %}{% endblock %}</title>
+      <link
+        rel="icon"
+        type="image/x-icon"
+        href="/static/assets/img/favicon.ico"
+      />
       <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
       <!-- Bootstrap CSS -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
       <!-- Custom Icons -->
-      <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'> 
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      />
       <!--jQuery library -->
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
       <!--Popper JS -->
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
       <!-- Menu Carousel Splide -->
-      <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+      <link
+        href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css"
+        rel="stylesheet"
+      />
       <!-- Personalised CSS -->
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-  
-  </head>
-  <body>
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+      />
+    </head>
+    <body>
+      <!-- Load Screen -->
+      <div class="container-fluid" id="loadscreen">
+        <div id="progressBar">0%</div>
+        <img
+          src="/static/assets/media/coffeerun.gif"
+          alt="Compass Logo"
+          id="loadscreen-logo"
+          draggable="false"
+          oncontextmenu="return false;"
+        />
+        <div class="cupshadow"></div>
+      </div>
 
-    <!-- Load Screen -->
-    <div class="container-fluid" id="loadscreen">
-      <div id="progressBar">0%</div>
-      <img src="/static/assets/media/coffeerun.gif" alt="Compass Logo" id="loadscreen-logo" draggable="false" oncontextmenu="return false;">
-      <div class="cupshadow"></div>
-    </div>
+      <button onclick="scrollToTop()" id="resetButton" title="Go to top">
+        <i class="fa fa-angle-up"></i>
+      </button>
 
-    <button onclick="scrollToTop()" id="resetButton" title="Go to top">
-      <i class="fa fa-angle-up"></i>
-    </button>
+      <!-- Warning Popups -->
+      <!-- Delete Confirmation Popup On Top -->
+      {% include 'confirm_delete.html' %}
+      <!-- Apply Confirmation Popup On Top -->
+      {% include 'confirm_config.html' %}
 
+      <!-- Notice -->
+      <div class="noticeinf">
+        <a
+          class="noticeinf-conveyor"
+          href="https://www.sanctamaria.school.nz/"
+          target="”_blank”"
+        >
+          <ul>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+          </ul>
+        </a>
+        <a
+          class="noticeinf-conveyor"
+          href="https://www.sanctamaria.school.nz/"
+          target="”_blank”"
+        >
+          <ul>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+            <li>sancta maria college <u>website</u>!</li>
+          </ul>
+        </a>
+      </div>
+      <!-- Notice End -->
 
-    <!-- Warning Popups -->
-    <!-- Delete Confirmation Popup On Top -->
-    {% include 'confirm_delete.html' %}
-    <!-- Apply Confirmation Popup On Top -->
-    {% include 'confirm_config.html' %}
-
-
-    <!-- Notice -->
-    <div class="noticeinf">
-      <a class="noticeinf-conveyor" href="https://www.sanctamaria.school.nz/" target=”_blank”>
-        <ul>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-        </ul>
-      </a>
-      <a class="noticeinf-conveyor" href="https://www.sanctamaria.school.nz/" target=”_blank”>
-        <ul>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-          <li>sancta maria college <u>website</u>!</li>
-        </ul>
-      </a>
-    </div>
-    <!-- Notice End -->
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm home-navbar" id="nav-home">
-      <div class="container-fluid d-flex align-items-center justify-content-between nav-container">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-sm home-navbar" id="nav-home">
+        <div
+          class="container-fluid d-flex align-items-center justify-content-between nav-container"
+        >
           <!-- Logo -->
           <a class="navbar-brand" href="/home">
             <div class="logo-container">
-              <img id="original-logo" src="/static/assets/img/LogoDesign-White.svg" alt="Logo" class="rounded-pill" draggable="false" oncontextmenu="return false;">
-              <img id="hover-logo" src="/static/assets/img/LogoSmile-White.svg" alt="Logo" class="rounded-pill" draggable="false" oncontextmenu="return false;">
+              <img
+                id="original-logo"
+                src="/static/assets/img/LogoDesign-White.svg"
+                alt="Logo"
+                class="rounded-pill"
+                draggable="false"
+                oncontextmenu="return false;"
+              />
+              <img
+                id="hover-logo"
+                src="/static/assets/img/LogoSmile-White.svg"
+                alt="Logo"
+                class="rounded-pill"
+                draggable="false"
+                oncontextmenu="return false;"
+              />
             </div>
           </a>
-          
+
           <!-- Account Page - Dropdown [Small Screen] -->
           <li class="nav-item">
-            <input type="checkbox" id="openSide-sm">
-              <label for="openSide-sm" class="sideToggle nav-link sideToggle-sm">
-                <i class="fa-regular fa-user d-sm-none"></i>
-              </label>
-              <div id="sideMenu">
-                <ul class="sideMenu-contents">
-                  <li>
-                    <label for="openSide-sm" class="sideToggle">
-                      <i class="fa fa-times"></i>
-                    </label>
-                  </li>
-                  <br>
-                  <!-- Admin User-->
-                  <h3 class="sideHeader sideText">Account</h3>
-                  <br>
-                  {% if user.is_authenticated %}
-                  <!-- User Logged In -->
-                  {% if user.is_staff %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-                  {% else %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/settings">settings</a></li>
-                  {% endif %}
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/login">quick login</a></li>
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/logout">logout</a></li>
-                  {% else %}
-                  <!-- User Not Logged In -->
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/login">login</a></li>
-                  <li class="sideNav sideText"><a class="dropdown-item" href="/signup">sign up</a></li>
-                  {% endif %}
-                  <!-- <li class="sideNav sideText"><a class="dropdown-item" href="/contact">contact</a></li> -->
-                  <li id="sideCredits">
-                    <p class="sideHeader sideText">© Compass Cafe SMC | {{ current_year }}</p>
-                  </li>
-                </ul>
-              </div>
-              <!-- Darkened Screen -->
-              <div class="darkened-SideScreen"></div>
-            </li>
+            <input type="checkbox" id="openSide-sm" />
+            <label for="openSide-sm" class="sideToggle nav-link sideToggle-sm">
+              <i class="fa-regular fa-user d-sm-none"></i>
+            </label>
+            <div id="sideMenu">
+              <ul class="sideMenu-contents">
+                <li>
+                  <label for="openSide-sm" class="sideToggle">
+                    <i class="fa fa-times"></i>
+                  </label>
+                </li>
+                <br />
+                <!-- Admin User-->
+                <h3 class="sideHeader sideText">Account</h3>
+                <br />
+                {% if user.is_authenticated %}
+                <!-- User Logged In -->
+                {% if user.is_staff %}
+                <li class="sideNav sideText">
+                  <a class="dropdown-item" href="/dashboard">dashboard</a>
+                </li>
+                {% else %}
+                <li class="sideNav sideText">
+                  <a class="dropdown-item" href="/settings">settings</a>
+                </li>
+                {% endif %}
+                <li class="sideNav sideText">
+                  <a class="dropdown-item" href="/login">quick login</a>
+                </li>
+                <li class="sideNav sideText">
+                  <a class="dropdown-item" href="/logout">logout</a>
+                </li>
+                {% else %}
+                <!-- User Not Logged In -->
+                <li class="sideNav sideText">
+                  <a class="dropdown-item" href="/login">login</a>
+                </li>
+                <li class="sideNav sideText">
+                  <a class="dropdown-item" href="/signup">sign up</a>
+                </li>
+                {% endif %}
+                <!-- <li class="sideNav sideText"><a class="dropdown-item" href="/contact">contact</a></li> -->
+                <li id="sideCredits">
+                  <p class="sideHeader sideText">
+                    © Compass Cafe SMC | {{ current_year }}
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <!-- Darkened Screen -->
+            <div class="darkened-SideScreen"></div>
+          </li>
 
           <!-- Collapse -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavbar"
+          >
             <span class="navbar-toggler-icon"></span>
           </button>
-        
-        <!-- Expandable Links -->
-        <div class="collapse navbar-collapse navshow-links" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <!-- Apply Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="/apply">apply</a>
-            </li>
-            <!-- Menu Page -->
-            <li class="nav-item">
-              <a class="nav-link nav-linkmain" href="/menu">menu</a>
-            </li>
-            <!-- News Page -->
-            <!-- <li class="nav-item">
+
+          <!-- Expandable Links -->
+          <div
+            class="collapse navbar-collapse navshow-links"
+            id="collapsibleNavbar"
+          >
+            <ul class="navbar-nav">
+              <!-- Apply Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/apply">apply</a>
+              </li>
+              <!-- Menu Page -->
+              <li class="nav-item">
+                <a class="nav-link nav-linkmain" href="/menu">menu</a>
+              </li>
+              <!-- News Page -->
+              <!-- <li class="nav-item">
               <a class="nav-link nav-linkmain last-mini-linknav" href="/news">news</a>
             </li> -->
 
-            <!-- Account Page - Dropdown [Big Screen] -->
-            <li class="nav-item d-none d-sm-block">
-              <input type="checkbox" id="openSide-md">
-              <label for="openSide-md" class="sideToggle1 nav-link">
-                <i class="fa-regular fa-user"></i>
-              </label>
-              <div id="sideMenu">
-                <ul class="sideMenu-contents">
-                  <li>
-                    <label for="openSide-md" class="sideToggle1">
-                      <i class="fa fa-times"></i>
-                    </label>
-                  </li>
-                  <br>
-                  <!-- Admin User-->
-                  <h3 class="sideHeader sideText1">Account</h3>
-                  <br>
-                  {% if user.is_authenticated %}
-                  <!-- User Logged In -->
-                  {% if user.is_staff %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/dashboard">dashboard</a></li>
-                  {% else %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/settings">settings</a></li>
-                  {% endif %}
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/login">quick login</a></li>
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/logout">logout</a></li>
-                  {% else %}
-                  <!-- User Not Logged In -->
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/login">login</a></li>
-                  <li class="sideNav sideText1"><a class="dropdown-item" href="/signup">sign up</a></li>
-                  {% endif %}
-                  <!-- <li class="sideNav sideText1"><a class="dropdown-item" href="/contact">contact</a></li> -->
-                  <li id="sideCredits">
-                    <p class="sideHeader sideText1">© Compass Cafe SMC | {{ current_year }}</p>
-                  </li>
-                </ul>
-              </div>
-              <!-- Darkened Screen -->
-              <div class="darkened-SideScreen"></div>
-            </li>
-            <!-- End of Account Page - Dropdown [Big Screen] -->
-            
-          </ul>
-        </div>
-        <!-- End of Expandable Links -->
-      </div>
-    </nav>
-    <!-- End of Navbar -->
-
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %} {% if category =='error' %}
-    <!--Error Pop-up Message-->
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-      {{ message }}
-      <button type="button" class="fa fa-times" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true"></span>
-      </button>
-    </div>
-    <!--Success Pop-up Message-->
-    {% else %}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <i class="fa fa-check-circle" aria-hidden="true"></i>
-      {{ message }}
-      <button type="button" class="fa fa-times" data-bs-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true"></span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
-
-
-    <!-- Body Sections-->
-    <div class="container-fluid container-middle">
-      {% block content %}{% endblock %}
-    </div>
-
-    
-    <!-- Footer Upper -->
-    <footer class="container-fluid footer-upper">
-      <div class="row row-upper">
-        <div class="col-md-12 col-lg-7 col-xl-6 upperfooter-left">
-            <ul>
-                <li>
-                    <img src="/static/assets/img/LogoDesign.svg" width="60px" alt="Compass Logo" draggable="false" oncontextmenu="return false;">
-                </li>
-                <li id="footerleft-text">
-                    <h5>compass cafe</h5>
-                    <p>Sancta Maria College [CG4]
-                    <br>319 Te Irirangi Drive, Flat Bush, Auckland 2016
-                    <br>(09) 274 4061
-                    </p>
-                </li>
+              <!-- Account Page - Dropdown [Big Screen] -->
+              <li class="nav-item d-none d-sm-block">
+                <input type="checkbox" id="openSide-md" />
+                <label for="openSide-md" class="sideToggle1 nav-link">
+                  <i class="fa-regular fa-user"></i>
+                </label>
+                <div id="sideMenu">
+                  <ul class="sideMenu-contents">
+                    <li>
+                      <label for="openSide-md" class="sideToggle1">
+                        <i class="fa fa-times"></i>
+                      </label>
+                    </li>
+                    <br />
+                    <!-- Admin User-->
+                    <h3 class="sideHeader sideText1">Account</h3>
+                    <br />
+                    {% if user.is_authenticated %}
+                    <!-- User Logged In -->
+                    {% if user.is_staff %}
+                    <li class="sideNav sideText1">
+                      <a class="dropdown-item" href="/dashboard">dashboard</a>
+                    </li>
+                    {% else %}
+                    <li class="sideNav sideText1">
+                      <a class="dropdown-item" href="/settings">settings</a>
+                    </li>
+                    {% endif %}
+                    <li class="sideNav sideText1">
+                      <a class="dropdown-item" href="/login">quick login</a>
+                    </li>
+                    <li class="sideNav sideText1">
+                      <a class="dropdown-item" href="/logout">logout</a>
+                    </li>
+                    {% else %}
+                    <!-- User Not Logged In -->
+                    <li class="sideNav sideText1">
+                      <a class="dropdown-item" href="/login">login</a>
+                    </li>
+                    <li class="sideNav sideText1">
+                      <a class="dropdown-item" href="/signup">sign up</a>
+                    </li>
+                    {% endif %}
+                    <!-- <li class="sideNav sideText1"><a class="dropdown-item" href="/contact">contact</a></li> -->
+                    <li id="sideCredits">
+                      <p class="sideHeader sideText1">
+                        © Compass Cafe SMC | {{ current_year }}
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Darkened Screen -->
+                <div class="darkened-SideScreen"></div>
+              </li>
+              <!-- End of Account Page - Dropdown [Big Screen] -->
             </ul>
+          </div>
+          <!-- End of Expandable Links -->
         </div>
-        <div class="col-md-12 col-lg-5 col-xl-6 upperfooter-right">
-          <div class="row upperfooter-up">
+      </nav>
+      <!-- End of Navbar -->
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %} {% if category
+      =='error' %}
+      <!--Error Pop-up Message-->
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        {{ message }}
+        <button
+          type="button"
+          class="fa fa-times"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <!--Success Pop-up Message-->
+      {% else %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fa fa-check-circle" aria-hidden="true"></i>
+        {{ message }}
+        <button
+          type="button"
+          class="fa fa-times"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+      <!-- Body Sections-->
+      <div class="container-fluid container-middle">
+        {% block content %}{% endblock %}
+      </div>
+
+      <!-- Footer Upper -->
+      <footer class="container-fluid footer-upper">
+        <div class="row row-upper">
+          <div class="col-md-12 col-lg-7 col-xl-6 upperfooter-left">
             <ul>
-                <li id="firstfooter-link"><a class="footer-links" href="/apply">apply</a></li>
+              <li>
+                <img
+                  src="/static/assets/img/LogoDesign.svg"
+                  width="60px"
+                  alt="Compass Logo"
+                  draggable="false"
+                  oncontextmenu="return false;"
+                />
+              </li>
+              <li id="footerleft-text">
+                <h5>compass cafe</h5>
+                <p>
+                  Sancta Maria College [CG4] <br />319 Te Irirangi Drive, Flat
+                  Bush, Auckland 2016 <br />(09) 274 4061
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-12 col-lg-5 col-xl-6 upperfooter-right">
+            <div class="row upperfooter-up">
+              <ul>
+                <li id="firstfooter-link">
+                  <a class="footer-links" href="/apply">apply</a>
+                </li>
                 <li><a class="footer-links" href="/menu">menu</a></li>
                 <!-- <li><a class="footer-links" href="/news">news</a></li> -->
                 <li><a class="footer-links" href="/settings">account</a></li>
-            </ul>
-          </div>
-          <div class="row upperfooter-down">
-            <ul>
-              <li>
-                <a href="https://www.instagram.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
-                  <img src="/static/assets/img/instagram.svg" href="" alt="Compass Logo" draggable="false">
-                </a>
-              </li>
-              <li>
-                <a href="https://www.facebook.com/sanctamariacollege/" class="footer-socials" target=”_blank”>
-                  <img src="/static/assets/img/facebook.svg" alt="Compass Logo" draggable="false">
-                </a>
-              </li>
-            </ul>
+              </ul>
+            </div>
+            <div class="row upperfooter-down">
+              <ul>
+                <li>
+                  <a
+                    href="https://www.instagram.com/sanctamariacollege/"
+                    class="footer-socials"
+                    target="”_blank”"
+                  >
+                    <img
+                      src="/static/assets/img/instagram.svg"
+                      href=""
+                      alt="Compass Logo"
+                      draggable="false"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/sanctamariacollege/"
+                    class="footer-socials"
+                    target="”_blank”"
+                  >
+                    <img
+                      src="/static/assets/img/facebook.svg"
+                      alt="Compass Logo"
+                      draggable="false"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
-    <!-- End of Footer Upper-->
+      </footer>
+      <!-- End of Footer Upper-->
 
-    <!-- Footer Lower -->
-    <footer class="container-fluid lower-overflow">
-    <div class="container-fluid footer-lower">
-        <div class="row">
+      <!-- Footer Lower -->
+      <footer class="container-fluid lower-overflow">
+        <div class="container-fluid footer-lower">
+          <div class="row">
             <div class="col lowerfooter-upper">
               <div class="cuppa-hover">
-                <img src="/static/assets/media/coffeebounce.gif" alt="Cup of Tea Guy" id="footer-cuppa" draggable="false" oncontextmenu="return false;">
-                <img src="/static/assets/media/coffeerun.gif" alt="cup of coffee" id="footer-cuppa-fast" draggable="false" oncontextmenu="return false;">
+                <img
+                  src="/static/assets/media/coffeebounce.gif"
+                  alt="Cup of Tea Guy"
+                  id="footer-cuppa"
+                  draggable="false"
+                  oncontextmenu="return false;"
+                />
+                <img
+                  src="/static/assets/media/coffeerun.gif"
+                  alt="cup of coffee"
+                  id="footer-cuppa-fast"
+                  draggable="false"
+                  oncontextmenu="return false;"
+                />
               </div>
-              <img src="/static/assets/img/lowerfooter.svg" alt="FooterLogo" id="footer-logo" draggable="false" oncontextmenu="return false;">
+              <img
+                src="/static/assets/img/lowerfooter.svg"
+                alt="FooterLogo"
+                id="footer-logo"
+                draggable="false"
+                oncontextmenu="return false;"
+              />
             </div>
-        </div>
+          </div>
 
-        <div class="row lowerfooter-container">
+          <div class="row lowerfooter-container">
             <div class="col-xs-12 col-sm-6 lowerfooter lowerfooter-left">
-              <img src="/static/assets/img/SMC-White.svg" width="50px" alt="SMCLogo" draggable="false" oncontextmenu="return false;">
+              <img
+                src="/static/assets/img/SMC-White.svg"
+                width="50px"
+                alt="SMCLogo"
+                draggable="false"
+                oncontextmenu="return false;"
+              />
             </div>
             <div class="col-xs-12 col-sm-6 lowerfooter lowerfooter-right">
-              <p>&copy; Compass Cafe SMC | {{ current_year }}
-              <br>Website by joqa</p>
+              <p>
+                &copy; Compass Cafe SMC | {{ current_year }} <br />Website by
+                joqa
+              </p>
             </div>
+          </div>
+          <br />
+          <br />
         </div>
-              <br>
-              <br>
-    </div>
-    </footer>
-    <!-- End of Footer Lower -->
+      </footer>
+      <!-- End of Footer Lower -->
 
-    <!-- Menu Carousel Splide -->
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    
-    <!-- Scroll Effects  |  DISABLE SMOOTH SCROLLING TO WORK -->
-    <!-- Scroll Object Animations Library-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-    <!-- Scroll Object Animations Trigger -->
-    <script src="https://assets.codepen.io/16327/ScrollTrigger.min.js"></script>
-    <!-- Lenis Scroll Library-->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
+      <!-- Menu Carousel Splide -->
+      <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
-    <!-- Custom JS-->
-    <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+      <!-- Scroll Effects  |  DISABLE SMOOTH SCROLLING TO WORK -->
+      <!-- Scroll Object Animations Library-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+      <!-- Scroll Object Animations Trigger -->
+      <script src="https://assets.codepen.io/16327/ScrollTrigger.min.js"></script>
+      <!-- Lenis Scroll Library-->
+      <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@latest/bundled/lenis.js"></script>
 
-    <!-- Load Screen -->
-    {% if request.path == '/home' or request.path == '/' %} <!-- If Home Webpage -->
-    <script>
-      window.addEventListener('load', function () {
-      setTimeout(function() {
-      document.getElementById('loadscreen').classList.add('loadtrigger');
-      document.documentElement.classList.add('noscroll');
-      }, 1000); //1s Delay
-      });
-    </script>
-    {% elif is_404 %} <!-- Non-Existent -->
-    <script>
-      window.addEventListener('load', function () {
-        setTimeout(function() {
-        document.getElementById('loadscreen').classList.add('loadtrigger');
-        document.documentElement.classList.add('noscroll');
-        }, 500); //0.5s Delay
+      <!-- Custom JS-->
+      <script src="{{ url_for('static', filename='js/scroller.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/popup.js') }}"></script>
+
+      <!-- Load Screen -->
+      {% if request.path == '/home' or request.path == '/' %}
+      <!-- If Home Webpage -->
+      <script>
+        window.addEventListener("load", function () {
+          setTimeout(function () {
+            document.getElementById("loadscreen").classList.add("loadtrigger");
+            document.documentElement.classList.add("noscroll");
+          }, 1000); //1s Delay
         });
-    </script>
-    {% else %} <!-- If Other Webpage -->
-    <script>
-      window.addEventListener('load', function () {
-      document.getElementById('loadscreen').classList.add('loadtrigger');
-      document.documentElement.classList.add('noscroll');
-      document.querySelector('.preload-fadein').classList.add('initiate');
-      
-      var progressBar = document.getElementById('progressBar');
-      var progress = 0;
-      var interval = setInterval(function() {
-        progress += 10;
-        progressBar.style.width = progress + '%';
-        if (progress >= 100) {
-        clearInterval(interval);
-        }
-      }, 300);
-      });
-    </script>
-    {% endif %}
+      </script>
+      {% elif is_404 %}
+      <!-- Non-Existent -->
+      <script>
+        window.addEventListener("load", function () {
+          setTimeout(function () {
+            document.getElementById("loadscreen").classList.add("loadtrigger");
+            document.documentElement.classList.add("noscroll");
+          }, 500); //0.5s Delay
+        });
+      </script>
+      {% else %}
+      <!-- If Other Webpage -->
+      <script>
+        window.addEventListener("load", function () {
+          document.getElementById("loadscreen").classList.add("loadtrigger");
+          document.documentElement.classList.add("noscroll");
+          document.querySelector(".preload-fadein").classList.add("initiate");
 
-  </body>
+          var progressBar = document.getElementById("progressBar");
+          var progress = 0;
+          var interval = setInterval(function () {
+            progress += 10;
+            progressBar.style.width = progress + "%";
+            if (progress >= 100) {
+              clearInterval(interval);
+            }
+          }, 300);
+        });
+      </script>
+      {% endif %}
+    </body>
+  </html>
 </html>

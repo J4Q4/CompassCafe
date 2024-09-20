@@ -1,106 +1,128 @@
-{% extends "template.html" %}{% block title %}Add Drink {% endblock %}
-{% block content %}
+{% extends "template.html" %}{% block title %}Add Drink {% endblock %} {% block
+content %}
 
 <!-- Blank Space -->
 <section class="beigespace-test">
-  <br>
-  <br>
+  <br />
+  <br />
   <div class="preload-fadein">
     <div class="row mb-5">
       <div class="col-md-12 col-lg-6">
         <h1>Add Item</h1>
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-          <a id="direct-selected">add item</a> / <a href="/menu/edit-item">edit menu</A> / <a href="/menu">menu</a> / <a href="/home">home</a>
+        <a id="direct-selected">add item</a> /
+        <a href="/menu/edit-item">edit menu</a> / <a href="/menu">menu</a> /
+        <a href="/home">home</a>
       </div>
     </div>
 
     <!-- Add Item -->
-    <form action="{{ url_for('views.menuAdd') }}" method="POST" enctype="multipart/form-data">
-        <div class="dashboarduser-table row mb-5">
-
-            <!-- Item Name -->
-            <div class="col-lg-12 col-xl-6">
-                <label for="item">Item Name</label>
-                <input 
-                    class="form-control" 
-                    type="text" 
-                    id="item" 
-                    name="item" 
-                    required>
-                <br>
-            </div>
-
-            <!-- Price -->
-            <div class="col-lg-12 col-xl-6">
-                <label for="price">Price</label>
-                <input 
-                    class="form-control" 
-                    type="number" 
-                    id="price" 
-                    name="price" 
-                    placeholder="$0.00" 
-                    min="0.00" 
-                    max="100.00" 
-                    step="0.01" 
-                    required>
-                <br>
-            </div>
-
-            <!-- Category -->
-            <div class="col-12">
-              <label for="category">Category</label>
-              <select class="form-control" id="category" name="category" required>
-                <option value="" disabled selected>Select a Category</option>
-                {% for category in categories %}
-                  {% if category != 'All Drinks'%}
-                    <option value="{{ category }}">{{ category }}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
-              <br>
-            </div>
-          
-            <!-- Description -->
-            <div class="col-12">
-              <label for="description">Description</label>
-              <textarea
-                class="form-control" 
-                id="description" 
-                name="description"
-                rows="4" 
-                maxlength="250"
-                required></textarea>
-            </div>
-            
+    <form
+      action="{{ url_for('views.menuAdd') }}"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <div class="dashboarduser-table row mb-5">
+        <!-- Item Name -->
+        <div class="col-lg-12 col-xl-6">
+          <label for="item">Item Name</label>
+          <input
+            class="form-control"
+            type="text"
+            id="item"
+            name="item"
+            required
+          />
+          <br />
         </div>
-        <div class="dashboarduser-table row">
-            <div class="col-md-12 col-lg-6 col-xl-4">
-                <label for="image">Upload Image:</label>
-                <br>
-                <button class="btn-secondary" type="button" onclick="document.getElementById('image').click()">Select Thumbnail</button>
-                <br>
-                <span id="file-name"></span>
-                <input type="file" id="image" name="image" accept="image/*" style="visibility: hidden;" onchange="showMenuFile()" class="mb-4">
-                <br>
-                <div class="mb-4">
-                    <button class="btn-primary mb-4 img-preview-btnGap" type="submit">Add Item</button>
-                    <a class="btn-secondary mb-4" href="{{ url_for('views.menuEdit') }}">Cancel</a>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-6 col-xl-8 img-preview-container">
-                <div class="img-preview-wrap">
-                    <img id="image-preview" src="" alt="Image Preview"/>
-                </div>
-            </div>
+
+        <!-- Price -->
+        <div class="col-lg-12 col-xl-6">
+          <label for="price">Price</label>
+          <input
+            class="form-control"
+            type="number"
+            id="price"
+            name="price"
+            placeholder="$0.00"
+            min="0.00"
+            max="100.00"
+            step="0.01"
+            required
+          />
+          <br />
         </div>
+
+        <!-- Category -->
+        <div class="col-12">
+          <label for="category">Category</label>
+          <select class="form-control" id="category" name="category" required>
+            <option value="" disabled selected>Select a Category</option>
+            {% for category in categories %} {% if category != 'All Drinks'%}
+            <option value="{{ category }}">{{ category }}</option>
+            {% endif %} {% endfor %}
+          </select>
+          <br />
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="4"
+            maxlength="250"
+            required
+          ></textarea>
+        </div>
+      </div>
+      <div class="dashboarduser-table row">
+        <div class="col-md-12 col-lg-6 col-xl-4">
+          <label for="image">Upload Image:</label>
+          <br />
+          <button
+            class="btn-secondary"
+            type="button"
+            onclick="document.getElementById('image').click()"
+          >
+            Select Thumbnail
+          </button>
+          <br />
+          <span id="file-name"></span>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            style="visibility: hidden"
+            onchange="showMenuFile()"
+            class="mb-4"
+          />
+          <br />
+          <div class="mb-4">
+            <button class="btn-primary mb-4 img-preview-btnGap" type="submit">
+              Add Item
+            </button>
+            <a class="btn-secondary mb-4" href="{{ url_for('views.menuEdit') }}"
+              >Cancel</a
+            >
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-8 img-preview-container">
+          <div class="img-preview-wrap">
+            <img id="image-preview" src="" alt="Image Preview" />
+          </div>
+        </div>
+      </div>
     </form>
 
-    <br>
-    <br>
-    <br>
-    <br>
-
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </section>
 <!-- End of Blank Space -->

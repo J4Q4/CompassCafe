@@ -1,150 +1,161 @@
-{% extends "template.html" %}{% block title %}Menu{% endblock %}
-{% block content %}
+{% extends "template.html" %}{% block title %}Menu{% endblock %} {% block
+content %}
 
 <!-- Mobile View Menu Items -->
-{% include  'menu_popup.html' %}
+{% include 'menu_popup.html' %}
 <!-- Popup Open instead of Hover-->
 
 <!-- Blank Space -->
 <section class="beigespace-test">
-    <br>
-    <br>
-    <div class="preload-fadein">
-
-        <div class="row mb-5">
-            <div class="col-md-12 col-lg-6">
-                <h1>Menu</h1>
-            </div>
-            <div class="head-directory col-md-12 col-lg-6 justify-content-end">
-                <a id="direct-selected">menu</a> / <a href="/home">home</a>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <!-- Category List -->
-            <div class="categories-list mb-4 d-none d-sm-block" style="padding: 0;">
-                <ul>
-                {% for category in categories %}
-                    <li>
-                        <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
-                            class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
-                            {{ category }}
-                        </a>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-
-            <!-- Mobile Category View -->
-            <div class="categories-list-container d-block d-sm-none">
-                <div class="categories-list mb-4">
-                    <button class="scroll-btn left" onclick="scrollLeftBtn()">
-                        <i class="fa-solid fa-caret-left"></i>
-                    </button>
-                    <ul id="category-list">
-                        {% for category in categories %}
-                            <li>
-                                <a href="{{ url_for(request.endpoint, category=category, page=1) }}" type="button"
-                                    class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}">
-                                    {{ category }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <button class="scroll-btn right" onclick="scrollRightBtn()">
-                        <i class="fa-solid fa-caret-right"></i>
-                    </button>
-                </div>
-            </div>
-        
-            <div class="col-lg-6">
-        
-            <!-- Menu Items -->
-
-                <!-- Large View Menu Items -->
-                <div class="row mb-4 menu-container d-none d-lg-flex">
-                    {% for item in paginMenu.items %}
-                    <div class="menu-item col-md-6 col-lg-4">
-                        <div class="menu-tags">
-                            <div class="menu-text">
-                                <p>{{ item.formatted_price }}</p>
-                                <h3>{{ item.item }}</h3>
-                                <h6>{{ item.description }}</h6>
-                            </div>
-                        </div>
-                        <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}">
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Mobile View Menu Items -->
-                <div class="row mb-4 menu-container d-flex d-lg-none">
-                    {% for item in paginMenu.items %}
-                    <div class="menu-item col-md-6 col-lg-4">
-                        <div class="menu-tags">
-                            <div class="menu-text">
-                                <p>{{ item.formatted_price }}</p>
-                                <h3>{{ item.item }}</h3>
-                                <h6>{{ item.description }}</h6>
-                            </div>
-                        </div>
-                        <img src="{{ url_for('static', filename='assets/menu/' + item.image) }}" alt="{{ item.item }}"
-                            class="menu-item-image"
-                            onclick="showMenuDescPopup(this)" 
-                            data-item-id="{{ item.id }}" 
-                            data-item-title="{{ item.item }}" 
-                            data-item-price="{{ item.formatted_price }}"
-                            data-item-image="{{ url_for('static', filename='assets/menu/' + item.image) }}"
-                            data-item-description="{{ item.description }}">
-                    </div>                                    
-                    {% endfor %}
-                </div>
-        
-                <!-- Interactable Menu Navigation Buttons -->
-                <div class="row">
-
-                    <div class="col-xs-12 col-sm-8 mb-4 text-center text-sm-start">
-                        <div class="menu-pagination d-inline-flex">
-                            <!-- Pagination -->
-                            {% for page in paginPages.pages %}
-                                {% if page.url and page.num %}
-                                    {% if page.current %}
-                                        <a class="pagination-btn pgntnbtn-info mb-0 current" href="{{ page.url }}">{{ page.num }}</a>
-                                    {% else %}
-                                        <a class="pagination-btn pgntnbtn-outline-info mb-0" href="{{ page.url }}">{{ page.num }}</a>
-                                    {% endif %}
-                                {% else %}
-                                    ...
-                                {% endif %}
-                            {% endfor %}
-                            <!-- End of Pagination -->
-                        </div>
-                    </div>
-
-                    {% if user.is_staff %}
-                    <div class="col-xs-12 col-sm-4 text-center text-sm-end">
-                        <a class="btn-primary" href="{{ url_for('views.menuEdit') }}">Edit Menu</a>
-                    </div>
-                    {% endif %}
-
-                </div>
-    
-            </div>
-    
-            <div class="col-lg-6 d-none d-lg-block">
-                <!-- Displaying Hovered Thumbnail -->
-                <div id="hovered-item-display">
-                    <div id="hovered-item-tags">
-                        <h3 id="hovered-item-title"></h3>
-                        <p id="hovered-item-price"></p>
-                    </div>
-                    <img id="hovered-item-image" src="" alt="" class="mb-4">
-                    <h6 id="hovered-item-description"></h6>
-                </div>
-            </div>
-        </div>
+  <br />
+  <br />
+  <div class="preload-fadein">
+    <div class="row mb-5">
+      <div class="col-md-12 col-lg-6">
+        <h1>Menu</h1>
+      </div>
+      <div class="head-directory col-md-12 col-lg-6 justify-content-end">
+        <a id="direct-selected">menu</a> / <a href="/home">home</a>
+      </div>
     </div>
+
+    <div class="row">
+      <!-- Category List -->
+      <div class="categories-list mb-4 d-none d-sm-block" style="padding: 0">
+        <ul>
+          {% for category in categories %}
+          <li>
+            <a
+              href="{{ url_for(request.endpoint, category=category, page=1) }}"
+              type="button"
+              class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}"
+            >
+              {{ category }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Mobile Category View -->
+      <div class="categories-list-container d-block d-sm-none">
+        <div class="categories-list mb-4">
+          <button class="scroll-btn left" onclick="scrollLeftBtn()">
+            <i class="fa-solid fa-caret-left"></i>
+          </button>
+          <ul id="category-list">
+            {% for category in categories %}
+            <li>
+              <a
+                href="{{ url_for(request.endpoint, category=category, page=1) }}"
+                type="button"
+                class="{% if category == category_filter or (category_filter is none and category == 'All Drinks') %}activeCategory{% endif %}"
+              >
+                {{ category }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          <button class="scroll-btn right" onclick="scrollRightBtn()">
+            <i class="fa-solid fa-caret-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <!-- Menu Items -->
+
+        <!-- Large View Menu Items -->
+        <div class="row mb-4 menu-container d-none d-lg-flex">
+          {% for item in paginMenu.items %}
+          <div class="menu-item col-md-6 col-lg-4">
+            <div class="menu-tags">
+              <div class="menu-text">
+                <p>{{ item.formatted_price }}</p>
+                <h3>{{ item.item }}</h3>
+                <h6>{{ item.description }}</h6>
+              </div>
+            </div>
+            <img
+              src="{{ url_for('static', filename='assets/menu/' + item.image) }}"
+              alt="{{ item.item }}"
+            />
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Mobile View Menu Items -->
+        <div class="row mb-4 menu-container d-flex d-lg-none">
+          {% for item in paginMenu.items %}
+          <div class="menu-item col-md-6 col-lg-4">
+            <div class="menu-tags">
+              <div class="menu-text">
+                <p>{{ item.formatted_price }}</p>
+                <h3>{{ item.item }}</h3>
+                <h6>{{ item.description }}</h6>
+              </div>
+            </div>
+            <img
+              src="{{ url_for('static', filename='assets/menu/' + item.image) }}"
+              alt="{{ item.item }}"
+              class="menu-item-image"
+              onclick="showMenuDescPopup(this)"
+              data-item-id="{{ item.id }}"
+              data-item-title="{{ item.item }}"
+              data-item-price="{{ item.formatted_price }}"
+              data-item-image="{{ url_for('static', filename='assets/menu/' + item.image) }}"
+              data-item-description="{{ item.description }}"
+            />
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Interactable Menu Navigation Buttons -->
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 mb-4 text-center text-sm-start">
+            <div class="menu-pagination d-inline-flex">
+              <!-- Pagination -->
+              {% for page in paginPages.pages %} {% if page.url and page.num %}
+              {% if page.current %}
+              <a
+                class="pagination-btn pgntnbtn-info mb-0 current"
+                href="{{ page.url }}"
+                >{{ page.num }}</a
+              >
+              {% else %}
+              <a
+                class="pagination-btn pgntnbtn-outline-info mb-0"
+                href="{{ page.url }}"
+                >{{ page.num }}</a
+              >
+              {% endif %} {% else %} ... {% endif %} {% endfor %}
+              <!-- End of Pagination -->
+            </div>
+          </div>
+
+          {% if user.is_staff %}
+          <div class="col-xs-12 col-sm-4 text-center text-sm-end">
+            <a class="btn-primary" href="{{ url_for('views.menuEdit') }}"
+              >Edit Menu</a
+            >
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="col-lg-6 d-none d-lg-block">
+        <!-- Displaying Hovered Thumbnail -->
+        <div id="hovered-item-display">
+          <div id="hovered-item-tags">
+            <h3 id="hovered-item-title"></h3>
+            <p id="hovered-item-price"></p>
+          </div>
+          <img id="hovered-item-image" src="" alt="" class="mb-4" />
+          <h6 id="hovered-item-description"></h6>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <!-- End of Blank Space -->
 

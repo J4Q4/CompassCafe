@@ -1,10 +1,10 @@
-{% extends "template.html" %}{% block title %}Settings{% endblock %}
-{% block content %}
+{% extends "template.html" %}{% block title %}Settings{% endblock %} {% block
+content %}
 
 <!-- Blank Space -->
 <section class="beigespace-test">
-  <br>
-  <br>
+  <br />
+  <br />
   <div class="preload-fadein">
     <div class="row mb-4">
       <div class="col-md-12 col-lg-6">
@@ -12,152 +12,170 @@
       </div>
       <div class="head-directory col-md-12 col-lg-6 justify-content-end">
         {% if user.is_staff %}
-        <a id="direct-selected">profile</a> / <a href="/dashboard">dashboard</a> / <a href="/home">home</a>
+        <a id="direct-selected">profile</a> /
+        <a href="/dashboard">dashboard</a> / <a href="/home">home</a>
         {% else %}
-        <a id="direct-selected">profile</a> / <a href="/settings">settings</a> / <a href="/home">home</a>
+        <a id="direct-selected">profile</a> / <a href="/settings">settings</a> /
+        <a href="/home">home</a>
         {% endif %}
       </div>
     </div>
-    <br>
+    <br />
     <div class="row">
       <div class="col-lg-12 col-xl-3">
         <div class="dashboarduser-table dash-sides mb-4">
           <div class="logas-dash">
             <label id="loggedinas-dash" title="{{ user.email }}">
-              <strong>Logged in as: {{ user.schoolid }}</strong><br>
+              <strong>Logged in as: {{ user.schoolid }}</strong><br />
               {{ user.email }}
-              </label>
-            </div>
-          </div>
-          <div class="dashboarduser-table dash-sides mb-4">
-            <ul>
-              {% if user.is_staff %}
-              <ul>
-                <h6>Admin Settings</h3>
-                <li><a href="/dashboard">users</a></li>
-                <li><a href="/apply">applications</a></li>
-              </ul>
-              <br>
-              {% endif %}
-              <ul>
-                <ul class="mb-4">
-                    <h6>User Settings</h3>
-                    <li><a href="/settings">account</a></li>
-                </ul>
-                {% if not user.is_staff %}
-                <ul>
-                    <h6>Submissions</h6>
-                    <li><a href="/apply">your applications</a></li>
-                </ul>
-                {% endif %}
-            </ul>
-            </ul>
-          </div>
-          {% if user.is_staff %}
-          <div class="dashboarduser-table dash-sides">
-            <ul>
-              <h6>Site Settings</h3>
-              <li><a href="{{ url_for('views.menuEdit') }}">menu</a></li>
-            </ul>
-          </div>
-          {% endif %}
-          <br>
-          </div>
-          <div class="col-lg-12 col-xl-9">
-            <div class="dashboarduser-table dash-hello mb-4">
-              <h2>Hello, {{ user.schoolid }}! 👋</h2>
-              <p><strong>Welcome to the user settings.</strong>
-              <br>Here you can manage your own account.<p>
-              <img src="/static/assets/media/coffeebounce.gif" alt="cup of coffee" draggable="false" oncontextmenu="return false;">
-            </div>
-
-
-            <!-- User Account Settings (Individual)-->
-            <div class="dashboarduser-table">
-              <h3>Edit Profile</h3>
-              <p>Update your account details below.</p>
-              <br>
-              <form method="POST">
-                {{ edit_form.hidden_tag() }}
-                <! - - Email Input - - >
-                <p>
-                    {{ edit_form.email.label }}<br>
-                    {% if user.email == 'admin@sanctamaria.school.nz' %}
-                        {{ edit_form.email(size=32, disabled=True) }}
-                    {% else %}
-                        {{ edit_form.email(size=32) }}
-                    {% endif %}
-                </p>
-                <! - - School ID Input - - >
-                <p>
-                    {{ edit_form.schoolid.label }}<br>
-                    {% if user.email == 'admin@sanctamaria.school.nz' %}
-                        {{ edit_form.schoolid(size=32, disabled=True) }}
-                    {% else %}
-                      {{ edit_form.schoolid(size=32) }}
-                    {% endif %}
-                </p>
-                <! - - Password Input - - >
-                <p>
-                    {{ edit_form.password.label }}<br>
-                    {% if user.email == 'admin@sanctamaria.school.nz' %}
-                        {{ edit_form.password(size=32, disabled=True) }}<br>
-                    {% else %}
-                        {{ edit_form.password(size=32) }}<br>
-                    {% endif %}
-                </p>
-                <! - - Confirm Password Input - - >
-                <p>
-                    {{ edit_form.confirm_password.label }}<br>
-                    {% if user.email == 'admin@sanctamaria.school.nz' %}
-                        {{ edit_form.confirm_password(size=32, id="confirm_password", disabled=True) }}
-                    {% else %}
-                        {{ edit_form.confirm_password(size=32, id="confirm_password") }}
-                    {% endif %}
-                </p>
-                <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
-                <! - - Submit Buttons - - >
-                <br>
-                <br>
-                <button type="submit" name="edit_submit" class="btn-primary mb-4"
-                  {% if user.email == 'admin@sanctamaria.school.nz' %}disabled{% endif %}>
-                    {% if user.email == 'admin@sanctamaria.school.nz' %}
-                        Disabled
-                    {% else %}
-                        Update Profile
-                    {% endif %}
-                </button>
-                <a class="btn-secondary mb-4" href="{{ url_for('views.settings') }}" style="margin-left: 10px;">Cancel Changes</a>
-                {% if user.email == 'admin@sanctamaria.school.nz' %}
-                    <p><strong>Please note:</strong> You cannot edit this admin account.</p>
-                {% endif %}
-                <! - - Trigger Confirmation Popup - - >
-                {% if user.email != 'admin@sanctamaria.school.nz' %}
-                <br>
-                <br>
-                <h3>Danger Zone</h3>
-                <p>Proceed with caution.</p>
-                <form action="{{ url_for('views.delete_user', user_id=user.id) }}" method="POST">
-                  <button class="btn-danger" type="button"
-                      onclick="showDeletePopup(this)" 
-                      data-item-type="user" 
-                      data-item-id="{{ user.id }}" 
-                      data-item-description="User: {{ user.email }}">
-                      Delete Account<i class="fa fa-exclamation-triangle"></i>
-                  </button>
-                </form>
-                <p><strong>Please note:</strong> If an applied barista, please notify your supervisor first.</p>
-                {% endif %}
-            </form>
-             
-          </div>
-
-            
+            </label>
           </div>
         </div>
+        <div class="dashboarduser-table dash-sides mb-4">
+          <ul>
+            {% if user.is_staff %}
+            <ul>
+              <h6>Admin Settings</h6>
+              <li><a href="/dashboard">users</a></li>
+              <li><a href="/apply">applications</a></li>
+            </ul>
+            <br />
+            {% endif %}
+            <ul>
+              <ul class="mb-4">
+                <h6>User Settings</h6>
+                <li><a href="/settings">account</a></li>
+              </ul>
+              {% if not user.is_staff %}
+              <ul>
+                <h6>Submissions</h6>
+                <li><a href="/apply">your applications</a></li>
+              </ul>
+              {% endif %}
+            </ul>
+          </ul>
+        </div>
+        {% if user.is_staff %}
+        <div class="dashboarduser-table dash-sides">
+          <ul>
+            <h6>Site Settings</h6>
+            <li><a href="{{ url_for('views.menuEdit') }}">menu</a></li>
+          </ul>
+        </div>
+        {% endif %}
+        <br />
+      </div>
+      <div class="col-lg-12 col-xl-9">
+        <div class="dashboarduser-table dash-hello mb-4">
+          <h2>Hello, {{ user.schoolid }}! 👋</h2>
+          <p>
+            <strong>Welcome to the user settings.</strong> <br />Here you can
+            manage your own account.
+          </p>
+          <p>
+            <img
+              src="/static/assets/media/coffeebounce.gif"
+              alt="cup of coffee"
+              draggable="false"
+              oncontextmenu="return false;"
+            />
+          </p>
+        </div>
+
+        <!-- User Account Settings (Individual)-->
+        <div class="dashboarduser-table">
+          <h3>Edit Profile</h3>
+          <p>Update your account details below.</p>
+          <br />
+          <form method="POST">
+            {{ edit_form.hidden_tag() }}
+            <! - - Email Input - - >
+            <p>
+              {{ edit_form.email.label }}<br />
+              {% if user.email == 'admin@sanctamaria.school.nz' %} {{
+              edit_form.email(size=32, disabled=True) }} {% else %} {{
+              edit_form.email(size=32) }} {% endif %}
+            </p>
+            <! - - School ID Input - - >
+            <p>
+              {{ edit_form.schoolid.label }}<br />
+              {% if user.email == 'admin@sanctamaria.school.nz' %} {{
+              edit_form.schoolid(size=32, disabled=True) }} {% else %} {{
+              edit_form.schoolid(size=32) }} {% endif %}
+            </p>
+            <! - - Password Input - - >
+            <p>
+              {{ edit_form.password.label }}<br />
+              {% if user.email == 'admin@sanctamaria.school.nz' %} {{
+              edit_form.password(size=32, disabled=True) }}<br />
+              {% else %} {{ edit_form.password(size=32) }}<br />
+              {% endif %}
+            </p>
+            <! - - Confirm Password Input - - >
+            <p>
+              {{ edit_form.confirm_password.label }}<br />
+              {% if user.email == 'admin@sanctamaria.school.nz' %} {{
+              edit_form.confirm_password(size=32, id="confirm_password",
+              disabled=True) }} {% else %} {{
+              edit_form.confirm_password(size=32, id="confirm_password") }} {%
+              endif %}
+            </p>
+            <input
+              type="checkbox"
+              id="showPassword"
+              onclick="togglePassword()"
+            />
+            Show Password
+            <! - - Submit Buttons - - >
+            <br />
+            <br />
+            <button type="submit" name="edit_submit" class="btn-primary mb-4">
+              {% if user.email == 'admin@sanctamaria.school.nz' %}disabled{%
+              endif %}> {% if user.email == 'admin@sanctamaria.school.nz' %}
+              Disabled {% else %} Update Profile {% endif %}
+            </button>
+            <a
+              class="btn-secondary mb-4"
+              href="{{ url_for('views.settings') }}"
+              style="margin-left: 10px"
+              >Cancel Changes</a
+            >
+            {% if user.email == 'admin@sanctamaria.school.nz' %}
+            <p>
+              <strong>Please note:</strong> You cannot edit this admin account.
+            </p>
+            {% endif %}
+            <! - - Trigger Confirmation Popup - - >
+            {% if user.email != 'admin@sanctamaria.school.nz' %}
+            <br />
+            <br />
+            <h3>Danger Zone</h3>
+            <p>Proceed with caution.</p>
+            <form
+              action="{{ url_for('views.delete_user', user_id=user.id) }}"
+              method="POST"
+            >
+              <button
+                class="btn-danger"
+                type="button"
+                onclick="showDeletePopup(this)"
+                data-item-type="user"
+                data-item-id="{{ user.id }}"
+                data-item-description="User: {{ user.email }}"
+              >
+                Delete Account<i class="fa fa-exclamation-triangle"></i>
+              </button>
+            </form>
+            <p>
+              <strong>Please note:</strong> If an applied barista, please notify
+              your supervisor first.
+            </p>
+            {% endif %}
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-
 </section>
 <!-- End of Blank Space -->
 

@@ -1,355 +1,371 @@
 <!-- WEEK A TABLE INPUTS -->
 <div class="dashboarduser-table mb-5" id="applytable">
-    <ul id="apply-barista">
-        <li>
-            <h3>{{ current_month }}</h3>
-            <span>
-                {{ current_day }}
+  <ul id="apply-barista">
+    <li>
+      <h3>{{ current_month }}</h3>
+      <span> {{ current_day }} </span>
+    </li>
+    <li id="week-desc">
+      <h6>
+        <strong class="{% if WeekANow %} weektoday-selected {% endif %}"
+          >Week A</strong
+        >
+      </h6>
+      <p>Lunch : 1:30 PM<br />2:10 PM</p>
+    </li>
+  </ul>
+  <table class="table applysched-table">
+    <thead>
+      <tr>
+        <th class="schedulegrayed">MON</th>
+        <th>TUE</th>
+        <th class="schedulegrayed">WED</th>
+        <th>THU</th>
+        <th class="schedulegrayed">FRI</th>
+      </tr>
+      <tr>
+        <td>
+          <strong
+            class="{% if datesWeekA['Monday'] == today %} datetoday-selected {% endif %} schedulegrayed"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekA['Monday'].strftime('%d %B') }}
             </span>
-        </li>
-        <li id="week-desc">
-            <h6><strong class="
-                {% if WeekANow %}
-                weektoday-selected
-                {% endif %}
-                ">Week A</strong>
-            </h6>
-            <p>Lunch : 1:30 PM<br>2:10 PM</p>
-        </li>
-    </ul>
-    <table class="table applysched-table">
-        <thead>
-            <tr>
-                <th class="schedulegrayed">MON</th>
-                <th>TUE</th>
-                <th class="schedulegrayed">WED</th>
-                <th>THU</th>
-                <th class="schedulegrayed">FRI</th>
-            </tr>
-            <tr>
-                <td>
-                    <strong class="{% if datesWeekA['Monday'] == today %}
-                    datetoday-selected
-                    {% endif %} schedulegrayed">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekA['Monday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekA['Monday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekA['Tuesday'] == today %}
-                    datetoday-selected
-                    {% endif %}">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekA['Tuesday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekA['Tuesday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekA['Wednesday'] == today %}
-                    datetoday-selected
-                    {% endif %} schedulegrayed">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekA['Wednesday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekA['Wednesday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekA['Thursday'] == today %}
-                    datetoday-selected
-                    {% endif %}">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekA['Thursday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekA['Thursday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekA['Friday'] == today %}
-                    datetoday-selected
-                    {% endif %} schedulegrayed">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekA['Friday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekA['Friday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <! - - Store Varied Applications : WEEK A - - >
-            {% set week_a = {'tuesday': [], 'thursday': []} %}
-            {% for post in post_accept %}
-                {% if post.date_duty == 'Week A' %}
-                    {% set day = post.date_day.lower() %}
-                    {% if day in week_a %}
-                        {% set _ = week_a[day].append(post) %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-    
-            <! - - Check Number of Applications - - >
-            <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
-            {% set max_entries = [week_a.tuesday|length, week_a.thursday|length, 4]|max %}
-    
-            <! - - Update Rows on Number of Applications - - >
-            {% for applylvl in range(max_entries) %}
-            <tr>
-                <td> </td>
-                <td>
-                    <! - - List of Baristas: Week A Tuesday - - >
-                    {% if applylvl < week_a.tuesday|length %}
-                        <p>{{ week_a.tuesday[applylvl].firstname }}<br>{{ week_a.tuesday[applylvl].lastname }}</p>
-                        <! - - To Delete if Barista: Accepted Application - - >
-                        {% for application in post_accept %}
-                            {% if application.firstname == week_a.tuesday[applylvl].firstname and application.lastname == week_a.tuesday[applylvl].lastname %}
-                                {% if user.is_staff %}    
-                                <! - - Barista Delete Button - - >
-                                    <div>
-                                        <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button"
-                                                data-item-type="accepted_application"
-                                                data-item-id="{{ week_a.tuesday[applylvl].id }}"
-                                                data-item-description="Barista: {{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}"
-                                                onclick="showDeletePopup(this)">
-                                                <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        <! - - Placeholder Row - - >
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                    {% endif %}
-                </td>
-                <td> </td>
-                <td>
-                    <! - - List of Baristas: Week A Thursday - - >
-                    {% if applylvl < week_a.thursday|length %}
-                        <p>{{ week_a.thursday[applylvl].firstname }}<br>{{ week_a.thursday[applylvl].lastname }}</p>
-                        <! - - To Delete if Barista: Accepted Application - - >
-                        {% for application in post_accept %}
-                            {% if application.firstname == week_a.thursday[applylvl].firstname and application.lastname == week_a.thursday[applylvl].lastname %}
-                                {% if user.is_staff %}    
-                                <! - - Barista Delete Button - - >
-                                    <div>
-                                        <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button"
-                                                data-item-type="accepted_application"
-                                                data-item-id="{{ week_a.thursday[applylvl].id }}"
-                                                data-item-description="Barista: {{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}"
-                                                onclick="showDeletePopup(this)">
-                                                <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        <! - - Placeholder Row - - >
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                    {% endif %}
-                </td>
-                <td> </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+            <span class="d-block d-md-none">
+              {{ datesWeekA['Monday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekA['Tuesday'] == today %} datetoday-selected {% endif %}"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekA['Tuesday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekA['Tuesday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekA['Wednesday'] == today %} datetoday-selected {% endif %} schedulegrayed"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekA['Wednesday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekA['Wednesday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekA['Thursday'] == today %} datetoday-selected {% endif %}"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekA['Thursday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekA['Thursday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekA['Friday'] == today %} datetoday-selected {% endif %} schedulegrayed"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekA['Friday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekA['Friday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <! - - Store Varied Applications : WEEK A - - >
+      {% set week_a = {'tuesday': [], 'thursday': []} %} {% for post in
+      post_accept %} {% if post.date_duty == 'Week A' %} {% set day =
+      post.date_day.lower() %} {% if day in week_a %} {% set _ =
+      week_a[day].append(post) %} {% endif %} {% endif %} {% endfor %}
 
+      <! - - Check Number of Applications - - >
+      <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
+      {% set max_entries = [week_a.tuesday|length, week_a.thursday|length,
+      4]|max %}
+
+      <! - - Update Rows on Number of Applications - - >
+      {% for applylvl in range(max_entries) %}
+      <tr>
+        <td></td>
+        <td>
+          <! - - List of Baristas: Week A Tuesday - - >
+          {% if applylvl < week_a.tuesday|length %}
+          <p>
+            {{ week_a.tuesday[applylvl].firstname }}<br />{{
+            week_a.tuesday[applylvl].lastname }}
+          </p>
+          <! - - To Delete if Barista: Accepted Application - - >
+          {% for application in post_accept %} {% if application.firstname ==
+          week_a.tuesday[applylvl].firstname and application.lastname ==
+          week_a.tuesday[applylvl].lastname %} {% if user.is_staff %}
+          <! - - Barista Delete Button - - >
+          <div>
+            <form
+              action="{{ url_for('views.delete_accept', id=application.id) }}"
+              method="POST"
+            >
+              <button
+                class="dashboarduseredit"
+                id="baristadelete"
+                type="button"
+                data-item-type="accepted_application"
+                data-item-id="{{ week_a.tuesday[applylvl].id }}"
+                data-item-description="Barista: {{ week_a.tuesday[applylvl].firstname }} {{ week_a.tuesday[applylvl].lastname }}"
+                onclick="showDeletePopup(this)"
+              >
+                <strong>Delete</strong>
+                <i class="fa fa-times" title="Remove"></i>
+              </button>
+            </form>
+          </div>
+          {% endif %} {% endif %} {% endfor %} {% else %}
+          <! - - Placeholder Row - - >
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          {% endif %}
+        </td>
+        <td></td>
+        <td>
+          <! - - List of Baristas: Week A Thursday - - >
+          {% if applylvl < week_a.thursday|length %}
+          <p>
+            {{ week_a.thursday[applylvl].firstname }}<br />{{
+            week_a.thursday[applylvl].lastname }}
+          </p>
+          <! - - To Delete if Barista: Accepted Application - - >
+          {% for application in post_accept %} {% if application.firstname ==
+          week_a.thursday[applylvl].firstname and application.lastname ==
+          week_a.thursday[applylvl].lastname %} {% if user.is_staff %}
+          <! - - Barista Delete Button - - >
+          <div>
+            <form
+              action="{{ url_for('views.delete_accept', id=application.id) }}"
+              method="POST"
+            >
+              <button
+                class="dashboarduseredit"
+                id="baristadelete"
+                type="button"
+                data-item-type="accepted_application"
+                data-item-id="{{ week_a.thursday[applylvl].id }}"
+                data-item-description="Barista: {{ week_a.thursday[applylvl].firstname }} {{ week_a.thursday[applylvl].lastname }}"
+                onclick="showDeletePopup(this)"
+              >
+                <strong>Delete</strong>
+                <i class="fa fa-times" title="Remove"></i>
+              </button>
+            </form>
+          </div>
+          {% endif %} {% endif %} {% endfor %} {% else %}
+          <! - - Placeholder Row - - >
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          {% endif %}
+        </td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
 <!-- WEEK B TABLE INPUTS-->
 <div class="dashboarduser-table">
-    <ul id="apply-barista">
-        <li>
-            <h3>{{ current_month }}</h3>
-            <span>
-                {{ current_day }}
+  <ul id="apply-barista">
+    <li>
+      <h3>{{ current_month }}</h3>
+      <span> {{ current_day }} </span>
+    </li>
+    <li id="week-desc">
+      <h6>
+        <strong class="{% if WeekBNow %} weektoday-selected {% endif %}"
+          >Week B</strong
+        >
+      </h6>
+      <p>Lunch : 1:30 PM<br />2:10 PM</p>
+    </li>
+  </ul>
+  <table class="table applysched-table">
+    <thead>
+      <tr>
+        <th class="schedulegrayed">MON</th>
+        <th>TUE</th>
+        <th class="schedulegrayed">WED</th>
+        <th>THU</th>
+        <th class="schedulegrayed">FRI</th>
+      </tr>
+      <tr>
+        <td>
+          <strong
+            class="{% if datesWeekB['Monday'] == today %} datetoday-selected {% endif %} schedulegrayed"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekB['Monday'].strftime('%d %B') }}
             </span>
-        </li>
-        <li id="week-desc">
-            <h6>
-                <strong class="
-                {% if WeekBNow %}
-                weektoday-selected
-                {% endif %}
-                ">Week B</strong>
-            </h6>
-            <p>Lunch : 1:30 PM<br>2:10 PM</p>
-        </li>
-    </ul>
-    <table class="table applysched-table">
-        <thead>
-            <tr>
-                <th class="schedulegrayed">MON</th>
-                <th>TUE</th>
-                <th class="schedulegrayed">WED</th>
-                <th>THU</th>
-                <th class="schedulegrayed">FRI</th>
-            </tr>
-            <tr>
-                <td>
-                    <strong class="{% if datesWeekB['Monday'] == today %}
-                    datetoday-selected
-                    {% endif %} schedulegrayed">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekB['Monday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekB['Monday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekB['Tuesday'] == today %}
-                    datetoday-selected
-                    {% endif %}">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekB['Tuesday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekB['Tuesday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekB['Wednesday'] == today %}
-                    datetoday-selected
-                    {% endif %} schedulegrayed">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekB['Wednesday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekB['Wednesday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekB['Thursday'] == today %}
-                    datetoday-selected
-                    {% endif %}">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekB['Thursday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekB['Thursday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-                <td>
-                    <strong class="{% if datesWeekB['Friday'] == today %}
-                    datetoday-selected
-                    {% endif %} schedulegrayed">
-                        <span class="d-none d-md-block">
-                            {{ datesWeekB['Friday'].strftime('%d %B') }}
-                        </span>
-                        <span class="d-block d-md-none">
-                            {{ datesWeekB['Friday'].strftime('%d') }}
-                        </span>
-                    </strong>
-                </td>
-            </tr>
-        </thead>
-        <tbody>
-            <! - - Store Varied Applications : WEEK B - - >
-            {% set week_b = {'tuesday': [], 'thursday': []} %}
-            {% for post in post_accept %}
-                {% if post.date_duty == 'Week B' %}
-                    {% set day = post.date_day.lower() %}
-                    {% if day in week_b %}
-                        {% set _ = week_b[day].append(post) %}
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-    
-            <! - - Check Number of Applications - - >
-            <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
-            {% set max_entries = [week_b.tuesday|length, week_b.thursday|length, 4]|max %}
-    
-            <! - - Update Rows on Number of Applications - - >
-            {% for applylvl in range(max_entries) %}
-            <tr>
-                <td> </td>
-                <td>
-                    <! - - List of Baristas: Week B Tuesday - - >
-                    {% if applylvl < week_b.tuesday|length %}
-                        <p>{{ week_b.tuesday[applylvl].firstname }}<br>{{ week_b.tuesday[applylvl].lastname }}</p>
-                        <! - - To Delete if Barista: Accepted Application - - >
-                        {% for application in post_accept %}
-                            {% if application.firstname == week_b.tuesday[applylvl].firstname and application.lastname == week_b.tuesday[applylvl].lastname %}
-                                {% if user.is_staff %}    
-                                <! - - Barista Delete Button - - >
-                                    <div>
-                                        <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button"
-                                                data-item-type="accepted_application"
-                                                data-item-id="{{ week_b.tuesday[applylvl].id }}"
-                                                data-item-description="Barista: {{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}"
-                                                onclick="showDeletePopup(this)">
-                                                <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                        {% else %}
-                        <! - - Placeholder Row - - >
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                    {% endif %}
-                </td>
-                <td> </td>
-                <td>
-                    <! - - List of Baristas: Week B Thursday - - >
-                    {% if applylvl < week_b.thursday|length %}
-                        <p>{{ week_b.thursday[applylvl].firstname }}<br>{{ week_b.thursday[applylvl].lastname }}</p>
-                        <! - - To Delete if Barista: Accepted Application - - >
-                        {% for application in post_accept %}
-                            {% if application.firstname == week_b.thursday[applylvl].firstname and application.lastname == week_b.thursday[applylvl].lastname %}
-                                {% if user.is_staff %}    
-                                <! - - Barista Delete Button - - >
-                                    <div>
-                                        <form action="{{ url_for('views.delete_accept', id=application.id) }}" method="POST">
-                                            <button class="dashboarduseredit" id="baristadelete" type="button"
-                                                data-item-type="accepted_application"
-                                                data-item-id="{{ week_b.thursday[applylvl].id }}"
-                                                data-item-description="Barista: {{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}"
-                                                onclick="showDeletePopup(this)">
-                                                <strong>Delete</strong> <i class="fa fa-times" title='Remove'></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                        {% else %}
-                        <! - - Placeholder Row - - >
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
-                    {% endif %}
-                </td>
-                <td> </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <span class="d-block d-md-none">
+              {{ datesWeekB['Monday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekB['Tuesday'] == today %} datetoday-selected {% endif %}"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekB['Tuesday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekB['Tuesday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekB['Wednesday'] == today %} datetoday-selected {% endif %} schedulegrayed"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekB['Wednesday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekB['Wednesday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekB['Thursday'] == today %} datetoday-selected {% endif %}"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekB['Thursday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekB['Thursday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+        <td>
+          <strong
+            class="{% if datesWeekB['Friday'] == today %} datetoday-selected {% endif %} schedulegrayed"
+          >
+            <span class="d-none d-md-block">
+              {{ datesWeekB['Friday'].strftime('%d %B') }}
+            </span>
+            <span class="d-block d-md-none">
+              {{ datesWeekB['Friday'].strftime('%d') }}
+            </span>
+          </strong>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <! - - Store Varied Applications : WEEK B - - >
+      {% set week_b = {'tuesday': [], 'thursday': []} %} {% for post in
+      post_accept %} {% if post.date_duty == 'Week B' %} {% set day =
+      post.date_day.lower() %} {% if day in week_b %} {% set _ =
+      week_b[day].append(post) %} {% endif %} {% endif %} {% endfor %}
+
+      <! - - Check Number of Applications - - >
+      <! - - Set Max to the Most Entries for Tuesday/Thursday/4 Placeholder Slots - - >
+      {% set max_entries = [week_b.tuesday|length, week_b.thursday|length,
+      4]|max %}
+
+      <! - - Update Rows on Number of Applications - - >
+      {% for applylvl in range(max_entries) %}
+      <tr>
+        <td></td>
+        <td>
+          <! - - List of Baristas: Week B Tuesday - - >
+          {% if applylvl < week_b.tuesday|length %}
+          <p>
+            {{ week_b.tuesday[applylvl].firstname }}<br />{{
+            week_b.tuesday[applylvl].lastname }}
+          </p>
+          <! - - To Delete if Barista: Accepted Application - - >
+          {% for application in post_accept %} {% if application.firstname ==
+          week_b.tuesday[applylvl].firstname and application.lastname ==
+          week_b.tuesday[applylvl].lastname %} {% if user.is_staff %}
+          <! - - Barista Delete Button - - >
+          <div>
+            <form
+              action="{{ url_for('views.delete_accept', id=application.id) }}"
+              method="POST"
+            >
+              <button
+                class="dashboarduseredit"
+                id="baristadelete"
+                type="button"
+                data-item-type="accepted_application"
+                data-item-id="{{ week_b.tuesday[applylvl].id }}"
+                data-item-description="Barista: {{ week_b.tuesday[applylvl].firstname }} {{ week_b.tuesday[applylvl].lastname }}"
+                onclick="showDeletePopup(this)"
+              >
+                <strong>Delete</strong>
+                <i class="fa fa-times" title="Remove"></i>
+              </button>
+            </form>
+          </div>
+          {% endif %} {% endif %} {% endfor %} {% else %}
+          <! - - Placeholder Row - - >
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          {% endif %}
+        </td>
+        <td></td>
+        <td>
+          <! - - List of Baristas: Week B Thursday - - >
+          {% if applylvl < week_b.thursday|length %}
+          <p>
+            {{ week_b.thursday[applylvl].firstname }}<br />{{
+            week_b.thursday[applylvl].lastname }}
+          </p>
+          <! - - To Delete if Barista: Accepted Application - - >
+          {% for application in post_accept %} {% if application.firstname ==
+          week_b.thursday[applylvl].firstname and application.lastname ==
+          week_b.thursday[applylvl].lastname %} {% if user.is_staff %}
+          <! - - Barista Delete Button - - >
+          <div>
+            <form
+              action="{{ url_for('views.delete_accept', id=application.id) }}"
+              method="POST"
+            >
+              <button
+                class="dashboarduseredit"
+                id="baristadelete"
+                type="button"
+                data-item-type="accepted_application"
+                data-item-id="{{ week_b.thursday[applylvl].id }}"
+                data-item-description="Barista: {{ week_b.thursday[applylvl].firstname }} {{ week_b.thursday[applylvl].lastname }}"
+                onclick="showDeletePopup(this)"
+              >
+                <strong>Delete</strong>
+                <i class="fa fa-times" title="Remove"></i>
+              </button>
+            </form>
+          </div>
+          {% endif %} {% endif %} {% endfor %} {% else %}
+          <! - - Placeholder Row - - >
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          {% endif %}
+        </td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>

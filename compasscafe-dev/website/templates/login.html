@@ -1,5 +1,5 @@
-{% extends "template.html" %}{% block title %}Login{% endblock %}
-{% block content %}
+{% extends "template.html" %}{% block title %}Login{% endblock %} {% block
+content %}
 
 <!-- Blank Space -->
 <section class="blankspace-test">
@@ -10,35 +10,44 @@
           <form method="POST">
             <h1>Hello!</h1>
             <h6>Log in to your account.</h6>
-            <br>
+            <br />
             <div class="form-group">
-                <label for="email">School Email</label>
-                <input 
-                    type="text" 
-                    id="email"
-                    name="email" 
-                    class="form-control" 
-                    placeholder="School Email [Required]"
-                    autocomplete="off" />
-                <br />
-                <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    class="form-control mb-2" 
-                    placeholder="Password [Required]"
-                    autocomplete="off" />
-                <! - - Show Password Checkbox - - >
-                <input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password
-                <br>
-                <br>
-                <div class="user-inuibtn" align="center">
-                    <button class="btn-primary" type="submit">Log In</button>
-                </div>
-                <br>
-                <div class="user-inuibtn" align="center">
-                  <a class="btn-secondary" href="/signup" type="button">No Account? <strong>Sign Up</strong></a>
+              <label for="email">School Email</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="School Email [Required]"
+                autocomplete="off"
+              />
+              <br />
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control mb-2"
+                placeholder="Password [Required]"
+                autocomplete="off"
+              />
+              <! - - Show Password Checkbox - - >
+              <input
+                type="checkbox"
+                id="showPassword"
+                onclick="togglePassword()"
+              />
+              Show Password
+              <br />
+              <br />
+              <div class="user-inuibtn" align="center">
+                <button class="btn-primary" type="submit">Log In</button>
+              </div>
+              <br />
+              <div class="user-inuibtn" align="center">
+                <a class="btn-secondary" href="/signup" type="button"
+                  >No Account? <strong>Sign Up</strong></a
+                >
               </div>
             </div>
           </form>

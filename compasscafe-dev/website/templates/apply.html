@@ -1,232 +1,286 @@
-{% extends "template.html" %}{% block title %}Apply{% endblock %}
-{% block content %}
-
+{% extends "template.html" %}{% block title %}Apply{% endblock %} {% block
+content %}
 
 <! - - Filter User - - >
 <form method="GET" action="{{ url_for('views.apply') }}">
-    {{ applyform.hidden_tag() }}
-    <div id="mobile-applyjsPopup" class="mobilefilterpopup">
-        <button id="filterPopClose" type="button"><i class="fa fa-times"></i></button> <!- - Close Button - ->
-        <div class="popup-content">
-            <div class="form-group mb-4">
-                <label for="schoolid">School ID</label>
-                <input type="text" name="schoolid" class="form-control" placeholder="00000" value="{{ request.args.get('schoolid', '') }}" size="32" data-maxlength="5" oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))">
-            </div>
-            <div class="form-group mb-4">
-                <label for="date_duty">Week</label>
-                <select name="date_duty" class="form-control">
-                    <option value="None" {% if request.args.get('date_duty') == 'None' %}selected{% endif %}>None</option>
-                    <option value="Week A" {% if request.args.get('date_duty') == 'Week A' %}selected{% endif %}>Week A</option>
-                    <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
-                </select>
-            </div>
-            <div class="form-group mb-4">
-                <label for="date_day">Day</label>
-                <select name="date_day" class="form-control">
-                    <option value="None" {% if request.args.get('date_day') == 'None' %}selected{% endif %}>None</option>
-                    <option value="Tuesday" {% if request.args.get('date_day') == 'Tuesday' %}selected{% endif %}>Tuesday</option>
-                    <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
-                </select>
-            </div>
-            <div class="form-group mb-4">
-                <label for="yearlevel">Year Level</label>
-                <select name="yearlevel" class="form-control">
-                    <option value="None" {% if request.args.get('yearlevel') == 'None' %}selected{% endif %}>None</option>
-                    <option value="11" {% if request.args.get('yearlevel') == '11' %}selected{% endif %}>Year 11</option>
-                    <option value="12" {% if request.args.get('yearlevel') == '12' %}selected{% endif %}>Year 12</option>
-                    <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <ul class="buttonclass">
-                    <li style="display: inline-block;" class="last-list">
-                        <button type="submit" class="btn-primary me-2" style="margin-bottom: 0;">Filter</button> <!- - Submit Filter Button - ->
-                    </li>
-                    <li style="display: inline-block;" class="last-list spacer">
-                        <a href="{{ url_for('views.apply') }}" class="btn-secondary">Clear Filters</a> <!- - Clear Filter Button - - >
-                    </li>
-                </ul>
-            </div>
-        </div>
+  {{ applyform.hidden_tag() }}
+  <div id="mobile-applyjsPopup" class="mobilefilterpopup">
+    <button id="filterPopClose" type="button">
+      <i class="fa fa-times"></i>
+    </button>
+    <!- - Close Button - ->
+    <div class="popup-content">
+      <div class="form-group mb-4">
+        <label for="schoolid">School ID</label>
+        <input
+          type="text"
+          name="schoolid"
+          class="form-control"
+          placeholder="00000"
+          value="{{ request.args.get('schoolid', '') }}"
+          size="32"
+          data-maxlength="5"
+          oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))"
+        />
+      </div>
+      <div class="form-group mb-4">
+        <label for="date_duty">Week</label>
+        <select name="date_duty" class="form-control">
+            <option value="None" {% if request.args.get('date_duty') == 'None' %}selected{% endif %}>None</option>
+            <option value="Week A" {% if request.args.get('date_duty') == 'Week A' %}selected{% endif %}>Week A</option>
+            <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
+        </select>
+      </div>
+      <div class="form-group mb-4">
+        <label for="date_day">Day</label>
+        <select name="date_day" class="form-control">
+            <option value="None" {% if request.args.get('date_day') == 'None' %}selected{% endif %}>None</option>
+            <option value="Tuesday" {% if request.args.get('date_day') == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+            <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
+        </select>
+      </div>
+      <div class="form-group mb-4">
+        <label for="yearlevel">Year Level</label>
+        <select name="yearlevel" class="form-control">
+            <option value="None" {% if request.args.get('yearlevel') == 'None' %}selected{% endif %}>None</option>
+            <option value="11" {% if request.args.get('yearlevel') == '11' %}selected{% endif %}>Year 11</option>
+            <option value="12" {% if request.args.get('yearlevel') == '12' %}selected{% endif %}>Year 12</option>
+            <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <ul class="buttonclass">
+          <li style="display: inline-block" class="last-list">
+            <button
+              type="submit"
+              class="btn-primary me-2"
+              style="margin-bottom: 0"
+            >
+              Filter
+            </button>
+            <!- - Submit Filter Button - ->
+          </li>
+          <li style="display: inline-block" class="last-list spacer">
+            <a href="{{ url_for('views.apply') }}" class="btn-secondary"
+              >Clear Filters</a
+            >
+            <!- - Clear Filter Button - - >
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </form>
 <! - - End of Filter User - - >
 
-
 <section class="beigespace-test">
-    <br>
-    <br>
+  <br />
+  <br />
   <div class="preload-fadein">
     <div class="row mb-4">
-        <div class="col-md-12 col-lg-9">
-            <h1>Lunch Schedules</h1>
-        </div>
-        <div class="head-directory col-md-12 col-lg-3 justify-content-end">
-            <a id="direct-selected">apply</a> / <a href="/home">home</a>
-        </div>
+      <div class="col-md-12 col-lg-9">
+        <h1>Lunch Schedules</h1>
+      </div>
+      <div class="head-directory col-md-12 col-lg-3 justify-content-end">
+        <a id="direct-selected">apply</a> / <a href="/home">home</a>
+      </div>
     </div>
-    <br>
+    <br />
 
     <div class="row">
+      <div class="col-xl-12 col-xxl-12">
+        <div id="posts">
+          {% if not user.is_staff %}
+          <h3 class="mb-4"><strong>Your Applications</strong></h3>
+          {% else %}
+          <h3 class="mb-4"><strong>All Applications</strong></h3>
 
-        <div class="col-xl-12 col-xxl-12">
-            <div id="posts">
-                {% if not user.is_staff %}
-                <h3 class="mb-4"><strong>Your Applications</strong></h3>
-                {% else %}
-                <h3 class="mb-4"><strong>All Applications</strong></h3>
-                
-                <! - - Filter User - - >
-                <div id="sortbuttons">
-                    <ul class="buttonclass">
+          <! - - Filter User - - >
+          <div id="sortbuttons">
+            <ul class="buttonclass">
+              <li>
+                <form method="GET" action="{{ url_for('views.apply') }}">
+                  {{ applyform.hidden_tag() }}
+                  <button id="applyPopBTN" class="btn-secondary" type="button">
+                    Filter
+                  </button>
+                  <!-- Pop Up Filter Button -->
+
+                  <div id="applyjsPopup" class="filterpopup">
+                    <div class="popup-content">
+                      <div class="form-group mb-4">
+                        <label for="schoolid">School ID</label>
+                        <input
+                          type="text"
+                          name="schoolid"
+                          class="form-control"
+                          placeholder="00000"
+                          value="{{ request.args.get('schoolid', '') }}"
+                          size="32"
+                          data-maxlength="5"
+                          oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))"
+                        />
+                      </div>
+                      <div class="form-group mb-4">
+                        <label for="date_duty">Week</label>
+                        <select name="date_duty" class="form-control">
+                            <option value="None" {% if request.args.get('date_duty') == 'None' %}selected{% endif %}>None</option>
+                            <option value="Week A" {% if request.args.get('date_duty') == 'Week A' %}selected{% endif %}>Week A</option>
+                            <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
+                        </select>
+                      </div>
+                      <div class="form-group mb-4">
+                        <label for="date_day">Day</label>
+                        <select name="date_day" class="form-control">
+                            <option value="None" {% if request.args.get('date_day') == 'None' %}selected{% endif %}>None</option>
+                            <option value="Tuesday" {% if request.args.get('date_day') == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+                            <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
+                        </select>
+                      </div>
+                      <div class="form-group mb-4">
+                        <label for="yearlevel">Year Level</label>
+                        <select name="yearlevel" class="form-control">
+                            <option value="None" {% if request.args.get('yearlevel') == 'None' %}selected{% endif %}>None</option>
+                            <option value="11" {% if request.args.get('yearlevel') == '11' %}selected{% endif %}>Year 11</option>
+                            <option value="12" {% if request.args.get('yearlevel') == '12' %}selected{% endif %}>Year 12</option>
+                            <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <ul class="buttonclass">
+                          <li style="display: inline-block" class="last-list">
+                            <button type="submit" class="btn-primary">
+                              Filter
+                            </button>
+                            <!- - Submit Filter Button - ->
+                          </li>
+                          <li style="display: inline-block" class="last-list">
+                            <a
+                              href="{{ url_for('views.apply') }}"
+                              class="btn-secondary"
+                              >Clear Filters</a
+                            >
+                            <!- - Clear Filter Button - - >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </li>
+            </ul>
+          </div>
+          <! - - End of Filter User - - >
+
+          {% endif %}
+          <br />
+
+          <div class="container">
+            <div class="row">
+              {% for post in post_pending.items %} {% if user.id == post.author
+              or user.is_staff %}
+              <!-- Pending Card -->
+              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <div class="card dashboarduser-table mb-4">
+                  <div class="card-body">
+                    <a href="/posts/{{ post.user.username }}"
+                      >{{ post.user.username }}</a
+                    >
+                    {% if user.id == post.author or user.is_staff %}
+                    <div class="btn-group" id="apply-delete">
+                      <button
+                        type="button"
+                        class="btn-secondary dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                      ></button>
+                      <ul class="dropdown-menu">
+                        <h6 class="dropdown-header">User Actions</h6>
                         <li>
-                            <form method="GET" action="{{ url_for('views.apply') }}">
-                                {{ applyform.hidden_tag() }}
-                                <button id="applyPopBTN" class="btn-secondary" type="button">Filter</button> <!-- Pop Up Filter Button -->
-
-                                <div id="applyjsPopup" class="filterpopup">
-                                    <div class="popup-content">
-                                        <div class="form-group mb-4">
-                                            <label for="schoolid">School ID</label>
-                                            <input type="text" name="schoolid" class="form-control" placeholder="00000" value="{{ request.args.get('schoolid', '') }}" size="32" data-maxlength="5" oninput="this.value = this.value.slice(0, this.getAttribute('data-maxlength'))">
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <label for="date_duty">Week</label>
-                                            <select name="date_duty" class="form-control">
-                                                <option value="None" {% if request.args.get('date_duty') == 'None' %}selected{% endif %}>None</option>
-                                                <option value="Week A" {% if request.args.get('date_duty') == 'Week A' %}selected{% endif %}>Week A</option>
-                                                <option value="Week B" {% if request.args.get('date_duty') == 'Week B' %}selected{% endif %}>Week B</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <label for="date_day">Day</label>
-                                            <select name="date_day" class="form-control">
-                                                <option value="None" {% if request.args.get('date_day') == 'None' %}selected{% endif %}>None</option>
-                                                <option value="Tuesday" {% if request.args.get('date_day') == 'Tuesday' %}selected{% endif %}>Tuesday</option>
-                                                <option value="Thursday" {% if request.args.get('date_day') == 'Thursday' %}selected{% endif %}>Thursday</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-4">
-                                            <label for="yearlevel">Year Level</label>
-                                            <select name="yearlevel" class="form-control">
-                                                <option value="None" {% if request.args.get('yearlevel') == 'None' %}selected{% endif %}>None</option>
-                                                <option value="11" {% if request.args.get('yearlevel') == '11' %}selected{% endif %}>Year 11</option>
-                                                <option value="12" {% if request.args.get('yearlevel') == '12' %}selected{% endif %}>Year 12</option>
-                                                <option value="13" {% if request.args.get('yearlevel') == '13' %}selected{% endif %}>Year 13</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <ul class="buttonclass">
-                                                <li style="display: inline-block;" class="last-list">
-                                                    <button type="submit" class="btn-primary">Filter</button> <!- - Submit Filter Button - ->
-                                                </li>
-                                                <li style="display: inline-block;" class="last-list">
-                                                    <a href="{{ url_for('views.apply') }}" class="btn-secondary">Clear Filters</a> <!- - Clear Filter Button - - >
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                          <a
+                            class="dropdown-item"
+                            onclick="showDeletePopup(this)"
+                            data-item-type="pending_application"
+                            data-item-id="{{ post.id }}"
+                            data-item-description="Applicant: {{ post.firstname }} {{ post.lastname }}"
+                          >
+                            Delete
+                          </a>
                         </li>
-                    </ul>
-                </div>
-                <! - - End of Filter User - - >
-                
-                {% endif %}
-                <br>
-
-                <div class="container">
-                    <div class="row">
-                        {% for post in post_pending.items %}
-                            {% if user.id == post.author or user.is_staff %}
-                            <!-- Pending Card -->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="card dashboarduser-table mb-4">
-                                        <div class="card-body">
-                                            <a href="/posts/{{ post.user.username }}">{{ post.user.username }}</a>
-                                            {% if user.id == post.author or user.is_staff %}
-                                            <div class="btn-group" id="apply-delete">
-                                                <button type="button" class="btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
-                                                <ul class="dropdown-menu">
-                                                    <h6 class="dropdown-header">User Actions</h6>
-                                                    <li>
-                                                        <a class="dropdown-item" 
-                                                            onclick="showDeletePopup(this)" 
-                                                            data-item-type="pending_application" 
-                                                            data-item-id="{{ post.id }}" 
-                                                            data-item-description="Applicant: {{ post.firstname }} {{ post.lastname }}">
-                                                            Delete
-                                                        </a>
-                                                    </li>
-                                                    {% if user.is_staff %}
-                                                    <li>
-                                                        <!-- Accept Button (Trigger the Confirmation Popup) -->
-                                                        <a
-                                                            class="dropdown-item accept-button" 
-                                                            onclick="showAcceptPopup(this)" 
-                                                            data-item-id="{{ post.id }}" 
-                                                            data-item-description="Applicant: {{ post.firstname }} {{ post.lastname }}">
-                                                            Accept
-                                                        </a>
-                                                    </li>
-                                                    {% endif %}
-                                                </ul>
-                                            </div>
-                                            {% endif %}
-                                            <div class="card-text">
-                                                <h3>{{ post.schoolid }}</h3>
-                                                <p><strong>{{ post.firstname }}<br>{{ post.lastname }}</strong></p>
-                                                <p><strong>{{ post.date_day }}, {{ post.date_duty }}</strong></p>
-                                                <p><strong>Year Level:</strong> {{ post.yearlevel }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- End of Pending Card -->
-                            {% endif %}
-                        {% endfor %}
+                        {% if user.is_staff %}
+                        <li>
+                          <!-- Accept Button (Trigger the Confirmation Popup) -->
+                          <a
+                            class="dropdown-item accept-button"
+                            onclick="showAcceptPopup(this)"
+                            data-item-id="{{ post.id }}"
+                            data-item-description="Applicant: {{ post.firstname }} {{ post.lastname }}"
+                          >
+                            Accept
+                          </a>
+                        </li>
+                        {% endif %}
+                      </ul>
                     </div>
-                    <div class="row pagination-row mb-4">
-                        <!-- Pagination -->
-                        {% for page in paginPages.pages %}
-                            {% if page.url and page.num %}
-                                {% if page.current %}
-                                    <a class="pagination-btn pgntnbtn-info mb-4 current" href="{{ page.url }}">{{ page.num }}</a>
-                                {% else %}
-                                    <a class="pagination-btn pgntnbtn-outline-info mb-4" href="{{ page.url }}">{{ page.num }}</a>
-                                {% endif %}
-                            {% else %}
-                                ...
-                            {% endif %}
-                        {% endfor %}
-                        <!-- End of Pagination -->
+                    {% endif %}
+                    <div class="card-text">
+                      <h3>{{ post.schoolid }}</h3>
+                      <p>
+                        <strong
+                          >{{ post.firstname }}<br />{{ post.lastname }}</strong
+                        >
+                      </p>
+                      <p>
+                        <strong
+                          >{{ post.date_day }}, {{ post.date_duty }}</strong
+                        >
+                      </p>
+                      <p><strong>Year Level:</strong> {{ post.yearlevel }}</p>
                     </div>
+                  </div>
                 </div>
-                
-                
-                
+              </div>
+              <!-- End of Pending Card -->
+              {% endif %} {% endfor %}
             </div>
-            {% if not user.is_staff %}
-            <br/>
-            <div id="btn-applynew">
-                <a href="/apply/submit_duty"><button type="button" class="btn-primary">
-                    <i class="fa fa-plus" aria-hidden="true"></i> New Application
-                </button></a>
+            <div class="row pagination-row mb-4">
+              <!-- Pagination -->
+              {% for page in paginPages.pages %} {% if page.url and page.num %}
+              {% if page.current %}
+              <a
+                class="pagination-btn pgntnbtn-info mb-4 current"
+                href="{{ page.url }}"
+                >{{ page.num }}</a
+              >
+              {% else %}
+              <a
+                class="pagination-btn pgntnbtn-outline-info mb-4"
+                href="{{ page.url }}"
+                >{{ page.num }}</a
+              >
+              {% endif %} {% else %} ... {% endif %} {% endfor %}
+              <!-- End of Pagination -->
             </div>
-            <br/>
-            {% endif %}
+          </div>
         </div>
-
-        <div class="col-xl-12 col-xxl-12 lunch-sched">
-            <h3 class="mb-4"><strong>Barista Roster</strong></h3>
-            {% include 'applytable.html' %}
+        {% if not user.is_staff %}
+        <br />
+        <div id="btn-applynew">
+          <a href="/apply/submit_duty"
+            ><button type="button" class="btn-primary">
+              <i class="fa fa-plus" aria-hidden="true"></i> New Application
+            </button></a
+          >
         </div>
+        <br />
+        {% endif %}
+      </div>
 
+      <div class="col-xl-12 col-xxl-12 lunch-sched">
+        <h3 class="mb-4"><strong>Barista Roster</strong></h3>
+        {% include 'applytable.html' %}
+      </div>
     </div>
   </div>
 </section>
-
-  
 
 {% endblock %}
